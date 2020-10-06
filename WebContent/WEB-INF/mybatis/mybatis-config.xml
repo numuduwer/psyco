@@ -12,7 +12,7 @@
 	
 	<mappers>
 		<mapper resource="/sql/testSQL.xml"/>
-		<mapper resource="/sql/CommunitySQL.xml"/>
+		<mapper resource="/sql/communitySQL.xml"/>
 	</mappers>
   	
   </configuration>
