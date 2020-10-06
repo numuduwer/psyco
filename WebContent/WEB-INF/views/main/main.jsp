@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1> 나는 메인이다.</h1>
+	<h1> 나는 노인이다.</h1>
 </body>
 </html>
