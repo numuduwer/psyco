@@ -4,10 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>커뮤니티 페이지</title>
 </head>
 <body>
-	<h1> 나는 메인이다.</h1>
-	<h2>테스트 2</h2>
+	<br />
+		<h1 align="center"> community </h1>
+	
+	
+	
+	
 </body>
 </html>

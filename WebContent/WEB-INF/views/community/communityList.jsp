@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1> 나는 메인이다.</h1>
-	<h2>테스트 2</h2>
+
 </body>
 </html>
