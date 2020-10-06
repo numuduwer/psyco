@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd"	
+>
+
+	 
+	 
+	  <context:component-scan base-package="com.three.psyco"/>
+	 
+
+		 <!--  DB세팅  -->
+	<!-- dataSource 설명
+		destroy-method : bean객체에 스코프가 끝났을 경우  (spring에서 application Context가 종료되었을경우 (전체 하나의 설정이 다 마쳤을경우)) 
+						 class 속성에 선언한 클래스의 close 메서드 호출
+	 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close"
+		p:driverClassName="oracle.jdbc.driver.OracleDriver"
+		p:url="jdbc:oracle:thin:@nullmaster.iptime.org:3000:ORCL"
+		p:username="global03"
+		p:password="global03"
+	/>
+	
+	<!--sqlSessionFactory을  Connection이라고 생각하자. -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="/WEB-INF/mybatis/mybatis-config.xml"/>
+	</bean>
+	
+	
+	
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+		
+	</bean>
+	 
+
+
+	 
+	<!--  이름 처리 용도 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"/>
+		<property name="suffix" value=".jsp"/>
+		<property name="order" value="1"/>
+	</bean>
+	 
+	 		
+
+</beans>
