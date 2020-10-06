@@ -1,5 +1,5 @@
 package com.three.psyco.model.dao;
 
-public interface CommunityDAO {
+public class CommunityDAOImpl {
 
 }
