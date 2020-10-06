@@ -17,6 +17,7 @@ public class MainBean {
 	private SqlSessionTemplate sqlSession = null;
 	
 	
+	
 	@RequestMapping("main.com")
 	public String main() {
 		System.out.println("controller 잘 연결 ");
