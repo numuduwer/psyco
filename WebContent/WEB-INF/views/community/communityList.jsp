@@ -11,6 +11,7 @@
 <body>
 	<br />
 	<h1 align="center">님 안녕하세요 </h1>
+
 	<%-- 게시글이 없을때 --%>
 	<c:if test="${count == 0}">
 		<h2 align="center">님 글 쓰세요</h2>
@@ -25,10 +26,12 @@
 		</table>
 	</c:if>
 	<%-- 게시글이 있을때 --%>
+	<c:if test="${category == 1}">
 	<c:if test="${count == 1}">
+	<h1 align="center"> 자유게시판 </h1>
 	<table>
 		<tr>
-			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com'"> 글쓰기 </button> </td>
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com?category=1'"> 글쓰기 </button> </td>
 		
 		</tr>
 		<tr>
@@ -54,12 +57,10 @@
 				</td>
 				<td><a href="mailto:${article.writer}">${article.writer}</a></td>
 				<td>${article.reg}</td>
-
-				
-			
 			</tr>
 		</c:forEach>
 	</table>
+	</c:if>
 	</c:if>
 	<br />
 	

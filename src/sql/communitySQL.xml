@@ -23,8 +23,8 @@
   	</select>
  	
  	<insert id="insertArticle" parameterType="communityDTO">
- 		insert into community(community_num, )
- 	
+ 		insert into community(community_num, subject,content,writer,grade,community_img,category,confirm,ref,re_step,re_level,reg)
+ 		values(community_seq.nextVal, #{subject},#{content},#{writer},#{grade},#{community_img},#{category},#{confirm},#{ref},#{re_step},#{re_level},sysdate)
  	</insert>
  	
  	

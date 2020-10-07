@@ -10,6 +10,7 @@ public class CommunityDTO {
 	private String writer;
 	private String grade;
 	private String community_img;
+	private String category;
 	private String confirm;
 	private int ref;
 	private int re_step;
@@ -52,6 +53,12 @@ public class CommunityDTO {
 	}
 	public void setCommunity_img(String community_img) {
 		this.community_img = community_img;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	public String getConfirm() {
 		return confirm;

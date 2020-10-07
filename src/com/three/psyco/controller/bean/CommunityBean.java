@@ -1,5 +1,6 @@
 package com.three.psyco.controller.bean;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -7,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.three.psyco.model.dto.CommunityDTO;
@@ -20,13 +25,17 @@ public class CommunityBean {
 	private CommunityServiceImpl communityService = null;
 	
 	@RequestMapping("community.com")
-	public String community() {
+	public String community(CommunityDTO dto, Model model) {
+		
+		
+		
 		
 		return "community/community";
 	}
 	
-	@RequestMapping("communityList.com")
-	public String communityList(String pageNum,Model model) throws SQLException {
+	@RequestMapping(value="communityList.com")
+	public String communityList(String pageNum,Model model, String category) throws SQLException {
+		
 		
 		
 		if(pageNum == null) {
@@ -60,6 +69,7 @@ public class CommunityBean {
 		model.addAttribute("articleList", articleList);
 		
 		model.addAttribute("count", count);
+		model.addAttribute("category", category);
 		
 		CommunityDTO dto = (CommunityDTO) articleList.get(0);
 		
@@ -75,9 +85,42 @@ public class CommunityBean {
 		return "community/communityForm";
 	}
 	
+	
+	
 	@RequestMapping("communityPro.com")
-	public String communityPro(CommunityDTO dto) throws Exception {
+	public String communityPro(CommunityDTO dto, MultipartHttpServletRequest request, String category) throws Exception {
 		communityService.insertArticleSv(dto);
+		
+		System.out.println(category);
+		
+		// - 파일 정보 꺼내기
+		MultipartFile mf = null;
+		
+		try { 
+			mf = request.getFile("img");
+			String path = request.getRealPath("save");
+			
+			
+			String orgName = mf.getOriginalFilename();					
+			String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
+			String ext = orgName.substring(orgName.lastIndexOf('.'));
+			long date = System.currentTimeMillis();
+			String newName = imgName+date+ext;
+			
+			
+			System.out.println(path);
+			System.out.println(mf.getOriginalFilename()); //이미지 원본 이름
+			String imgPath = path + "\\" + newName;  
+			System.out.println(imgPath);
+			File copyFile = new File(imgPath);
+			mf.transferTo(copyFile);
+			
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 		
 		return "community/communityPro";

@@ -10,31 +10,34 @@
 <body>
 	<br />
 		<h1 align="center"> community </h1>	
+		
 		<table>
 			<tr>
 				<td>
-					<button onclick="window.location='/psyco/communityList.com'"> 자유게시판 </button> <br/>
-				
+					<button onclick="window.location='/psyco/communityList.com?category=1'"> 자유게시판 </button> <br/>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<button onclick="window.location='/psyco/communityList.com?category=2'"> QnA </button> 
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<button onclick="window.location='/psyco/communityList.com'"> QnA </button> 
+					<button onclick="window.location='/psyco/communityList.com?category=3'"> 홍보 </button> <br/>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<button onclick="window.location='/psyco/communityList.com'"> 홍보 </button> <br/>
+					<button onclick="window.location='/psyco/communityList.com?category=4'"> 음식점추천 </button> <br/>
 				</td>
 			</tr>
-			<tr>
-				<td>
-					<button onclick="window.location='/psyco/communityList.com'"> 음식점추천 </button> <br/>
-				</td>
-			</tr>
-		
 		</table>
+		
 	
+	
+		
 	
 	
 </body>
