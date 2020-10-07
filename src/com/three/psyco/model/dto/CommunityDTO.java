@@ -4,7 +4,7 @@ import java.security.Timestamp;
 
 public class CommunityDTO {
 	
-	private int COMMUNITY_NU;
+	private int COMMUNITY_NUM;
 	private String CONTENT;
 	private String WRITER;
 	private String GRADE;
@@ -17,11 +17,11 @@ public class CommunityDTO {
 	
 	
 	
-	public int getCOMMUNITY_NU() {
-		return COMMUNITY_NU;
+	public int getCOMMUNITY_NUM() {
+		return COMMUNITY_NUM;
 	}
-	public void setCOMMUNITY_NU(int cOMMUNITY_NU) {
-		COMMUNITY_NU = cOMMUNITY_NU;
+	public void setCOMMUNITY_NUM(int cOMMUNITY_NUM) {
+		COMMUNITY_NUM = cOMMUNITY_NUM;
 	}
 	public String getCONTENT() {
 		return CONTENT;

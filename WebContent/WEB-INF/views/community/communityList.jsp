@@ -16,7 +16,7 @@
 		<h2 align="center">님 글 쓰세요</h2>
 		<table>
 			<tr>
-				<td> <button onclick="window.location='/spring/board/writeForm.com'"> 글쓰기 </button> </td>
+				<td> <button onclick="window.location='/psyco/communityForm.com'"> 글쓰기 </button> </td>
 			
 			</tr>
 			<tr>
@@ -77,13 +77,13 @@
 		</c:if>
 		
 		<c:if test="${startPage > pageBlock}">
-			<a href="/spring/board/list.git?pageNum=${startPage-pageBlock}" > &lt; </a>
+			<a href="/psyco/communityList.com?pageNum=${startPage-pageBlock}" > &lt; </a>
 		</c:if>
 		<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1" >
-			<a href="/spring/board/list.git?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+			<a href="/psyco/communityList.com?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
 		</c:forEach>
 		<c:if test="${endPage < pageCount}">
-			<a href="/spring/board/list.git?pageNum=${startPage+pageBlock}" > &gt; </a>
+			<a href="/psyco/communityList.com?pageNum=${startPage+pageBlock}" > &gt; </a>
 		</c:if>
 	
 	</c:if>

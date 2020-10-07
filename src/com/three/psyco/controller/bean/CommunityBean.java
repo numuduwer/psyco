@@ -63,7 +63,7 @@ public class CommunityBean {
 		
 	
 		
-		return "commnuity/commnuityList";
+		return "community/communityList";
 	}
 	
 	

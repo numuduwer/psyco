@@ -13,23 +13,23 @@
 		<table>
 			<tr>
 				<td>
-					<button onclick="window.location='/psyco/community/communityList'"> 자유게시판 </button> <br/>
+					<button onclick="window.location='/psyco/communityList.com'"> 자유게시판 </button> <br/>
 				
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<button onclick="window.location='/psyco/community/communityList'"> QnA </button> 
+					<button onclick="window.location='/psyco/communityList.com'"> QnA </button> 
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<button onclick="window.location='/psyco/community/communityList'"> 홍보 </button> <br/>
+					<button onclick="window.location='/psyco/communityList.com'"> 홍보 </button> <br/>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<button onclick="window.location='/psyco/community/communityList'"> 음식점추천 </button> <br/>
+					<button onclick="window.location='/psyco/communityList.com'"> 음식점추천 </button> <br/>
 				</td>
 			</tr>
 		
