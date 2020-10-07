@@ -20,7 +20,7 @@ public class CommunityDAOImpl implements CommunityDAO {
 
 	@Override
 	public void insertArticle(CommunityDTO dto) throws SQLException {
-		// TODO Auto-generated method stub
+		sqlSession.insert("community.insertArticle");
 		
 	}
 

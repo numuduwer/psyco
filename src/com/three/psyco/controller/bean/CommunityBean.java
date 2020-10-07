@@ -75,7 +75,13 @@ public class CommunityBean {
 		return "community/communityForm";
 	}
 	
-	
+	@RequestMapping("communityPro.com")
+	public String communityPro(CommunityDTO dto) throws Exception {
+		communityService.insertArticleSv(dto);
+		
+		
+		return "community/communityPro";
+	}
 	
 	
 	

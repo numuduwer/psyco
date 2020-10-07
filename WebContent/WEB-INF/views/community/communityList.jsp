@@ -47,10 +47,10 @@
 					<c:set var="wid" value="0" />
 					<c:if test="${article.re_level > 0}">
 						<c:set var="wid" value="${8 * article.re_level}" />
-						<img src="/spring/resources/img/tabImg.PNG" width="${wid}" />	
-						<img src="/spring/resources/img/replyImg.png" width="11" />
+						<img src="/psyco/resources/img/tabImg.PNG" width="${wid}" />	
+						<img src="/psyco/resources/img/replyImg.png" width="11" />
 					</c:if>
-					<a href="/spring/board/content.git?community_num=${article.community_num}&pageNum=${pageNum}" >${article.subject}</a>
+					<a href="/psyco/communityDetail.com?community_num=${article.community_num}&pageNum=${pageNum}" >${article.subject}</a>
 				</td>
 				<td><a href="mailto:${article.writer}">${article.writer}</a></td>
 				<td>${article.reg}</td>

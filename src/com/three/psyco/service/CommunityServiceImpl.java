@@ -18,7 +18,7 @@ public class CommunityServiceImpl implements CommunityService {
 
 	@Override
 	public void insertArticleSv(CommunityDTO dto) throws SQLException {
-		// TODO Auto-generated method stub
+		commnuityDAO.insertArticle(dto);
 		
 	}
 

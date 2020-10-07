@@ -16,12 +16,16 @@
   		<![CDATA[
   		select community_num,subject,content,writer,ref,re_step,re_level,reg,r
 		from (select community_num,subject,content,writer,ref,re_step,re_level,reg,rownum r
-		from (select community_num,subject,content,writer,ref,re_step,re_level,reg 
+		from (select community_num,subject,content,writer,ref,re_step,re_level,reg
 		from community order by ref desc, re_step asc) order by ref desc, re_step asc)
 		where r >= #{start} and r <= #{end}
 		]]>
   	</select>
- 
+ 	
+ 	<insert id="insertArticle" parameterType="communityDTO">
+ 		insert into community(community_num, )
+ 	
+ 	</insert>
  	
  	
  	
