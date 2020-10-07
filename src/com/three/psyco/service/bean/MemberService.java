@@ -1,4 +1,4 @@
-package com.three.psyco.service;
+package com.three.psyco.service.bean;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
