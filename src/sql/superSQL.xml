@@ -12,16 +12,14 @@
  		select count(*) from member
  	</select>
  	
- 	<select id="getMemberList" parameterType="hashMap" resultType="MemberDTO">
+ 	<select id="getMemberList" parameterType="hashmap" resultType="MemberDTO">
  		<![CDATA[
- 		SELECT rn, member_num, member_id, pw, name, birth, phonenum, gender, nickname, email, purchase_count, business_license, reg
-		FROM 
-  			(
-		SELECT /*+ index_desc(tbl_board pk_board)*/rownum rn, member_num, member_id, pw, name, birth, phonenum, gender, nickname, email, purchase_count, business_license, reg
+
+		SELECT /*+ index_desc(MEMBER MEMBER_SEQ)*/rownum rn, member_num, member_id, pw, name, birth, phonenum, gender, nickname, email, purchase_count, business_license, reg
 		FROM MEMBER
 		WHERE MEMBER_NUM >= #{start}
 		AND rownum <= #{end}
-		)
+	
 		]]>
  	</select>
  </mapper>

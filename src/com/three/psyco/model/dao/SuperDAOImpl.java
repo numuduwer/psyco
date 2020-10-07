@@ -30,7 +30,7 @@ public class SuperDAOImpl implements SuperDAO {
 		
 		List list = sqlSession.selectList("super.getMemberList", map);
 		
-		return null;
+		return list;
 	}
 	
 	

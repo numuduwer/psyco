@@ -47,18 +47,22 @@ public class SuperBean {
 		
 		
 		
-		List memberList =null;
+		
 		MemberDTO dto = null;
 		
-		int count = superService.getMemberCountSV();
+		List memberList =null;
 		
-		System.out.println("Controller 에서 count :"+ count);
 		
+		
+		int count = superService.getMemberCountSV();	
 		
 		if(count >0) {
 			memberList = superService.getMemberListSV(startRow, endRow);
 			
 		}
+		
+		System.out.println("count : " + count);
+		System.out.println("memberList size : " + memberList.size() );
 		
 		
 		number = count - (currPage-1) * pageSize;

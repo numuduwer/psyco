@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -8,14 +8,25 @@
 <title>Member 관리 페이지</title>
 </head>
 <body>
+
+<script>
+	function bye(){
+		var jbResult = confirm( '삭제 할래요? ' );	
+		document.write( jbResult );
+		
+		
+	}
+	
+	
+</script>
 	<h1>멤버 관리 페이지 </h1>
 	
-	<c:if test="$(count == 0)">
+	
+	<c:if test="${count == 0}">
 		<h2> 멤버가 없어요.</h2>
 	
 	</c:if>
-	
-	<c:if test="$(count > 0)">
+	<c:if test="${count > 0}">
 		<table>
 			<tr>
 				<td>no</td>
@@ -28,29 +39,30 @@
 				<td>nickName</td>
 				<td>email</td>
 				<td>purchase_count</td>
-				<td>License</td>
+		
 				<td>reg</td>
+				<td>삭제</td>
 			</tr>
 			
 			
 			<c:forEach var="article" items="${memberList}">
-				<tr>
-					<td>${number}</td>
-					<td>${article.member_num }</td>
-					
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-					
-				</tr>
-			</c:forEach>
+			<tr>
+				<td>${number} <c:set var="number" value="${number-1}" /> </td>
+		
+				<td>${article.member_id}</td>
+				<td>${article.pw}</td>
+				<td>${article.name}</td>
+				<td>${article.birth}</td>
+				<td>${article.phonenum}</td>
+				<td>${article.gender}</td>
+				<td>${article.nickname}</td>
+				<td>${article.purchase_count}</td>
+				<td>${article.business_license}</td>
+				<td>${article.reg}</td>
+				<td><input type="button" value='삭제' onclick='bye();'></td>
+			
+			</tr>
+		</c:forEach>
 		
 		</table>
 	</c:if>
@@ -70,13 +82,13 @@
 		</c:if>
 		
 		<c:if test="${startPage > pageBlock}">
-			<a href="/spring/board/list.git?pageNum=${startPage-pageBlock}" > &lt; </a>
+			<a href="/psyco/super/memberList.com?pageNum=${startPage-pageBlock}" > &lt; </a>
 		</c:if>
 		<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1" >
-			<a href="/spring/board/list.git?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+			<a href="/psyco/super/memberList.com?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
 		</c:forEach>
 		<c:if test="${endPage < pageCount}">
-			<a href="/spring/board/list.git?pageNum=${startPage+pageBlock}" > &gt; </a>
+			<a href="/psyco/super/memberList.com?pageNum=${startPage+pageBlock}" > &gt; </a>
 		</c:if>
 	
 	</c:if>
