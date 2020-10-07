@@ -7,10 +7,12 @@
   
 	<typeAliases>
 		<typeAlias type="com.three.psyco.model.dto.TestDTO" alias="TestDTO"/>
+		<typeAlias type="com.three.psyco.model.dto.MemberDTO" alias="memberDTO" />
 	</typeAliases>
 	
 	<mappers>
-		<mapper resource="/sql/testSQL.xml"/>
+		<mapper resource="/sql/testSQL.xml" />
+		<mapper resource="/sql/memberSQL.xml" />
 	</mappers>
   	
-  </configuration>
+</configuration>
