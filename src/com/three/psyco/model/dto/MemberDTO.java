@@ -5,7 +5,9 @@ import java.sql.Timestamp;
 public class MemberDTO {
 	
 	private int member_num;
-	private String memid;
+	private String member_id;
+
+
 	private String pw;
 	private String name;
 	private String birth;
@@ -13,10 +15,16 @@ public class MemberDTO {
 	private String phonenum;
 	private String gender;
 	private String nickname;
+	private String email;
 	private int purchase_count;
-	private int business_license;
 	
+	
+	private int business_license;
 	private Timestamp reg;
+	
+	
+	
+	
 
 	public int getMember_num() {
 		return member_num;
@@ -26,12 +34,12 @@ public class MemberDTO {
 		this.member_num = member_num;
 	}
 
-	public String getMemid() {
-		return memid;
+	public String getMember_id() {
+		return member_id;
 	}
 
-	public void setMemid(String memid) {
-		this.memid = memid;
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
 
 	public String getPw() {
@@ -81,6 +89,16 @@ public class MemberDTO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 
 	public int getPurchase_count() {
 		return purchase_count;

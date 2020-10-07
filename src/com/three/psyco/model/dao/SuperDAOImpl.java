@@ -22,6 +22,8 @@ public class SuperDAOImpl implements SuperDAO {
 
 	@Override
 	public List getMemberList(int start, int end) throws SQLException {
+		System.out.println("DAO 에서 start : " + start);
+		System.out.println("DAO 에서 end : " + end);
 		HashMap map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);

@@ -40,7 +40,7 @@ public class SuperBean {
 		int startRow = (currPage-1) * pageSize +1;
 		int endRow = currPage * pageSize;
 		
-		int number = 0; //(게시판에 보여죽기식 글번호 )
+		int number = 0; //(게시판에 보여주기식 글번호 )
 		
 		
 		
@@ -49,13 +49,28 @@ public class SuperBean {
 		
 		List memberList =null;
 		MemberDTO dto = null;
+		
 		int count = superService.getMemberCountSV();
+		
+		System.out.println("Controller 에서 count :"+ count);
+		
 		
 		if(count >0) {
 			memberList = superService.getMemberListSV(startRow, endRow);
 			
 		}
 		
+		
+		number = count - (currPage-1) * pageSize;
+		
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("pageSize", new Integer(pageSize));
+		model.addAttribute("currPage", new Integer(currPage));
+		model.addAttribute("startRow", new Integer(startRow));
+		model.addAttribute("endRow", new Integer(endRow));
+		model.addAttribute("number", new Integer(number));
+		model.addAttribute("memberList", memberList);
+		model.addAttribute("count", count);
 		
 		
 	
