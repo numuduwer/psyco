@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <!-- namespace : 내부에 쿼리태크 호출시 namespace속성명 쿼리태그 id값-->
+ 
+ <mapper namespace="super">
+ 	
+ 	
+ 	<select id="getMemberCount" resultType="int" >
+ 		select count(*) from member
+ 	</select>
+ 	
+ 	<select id="getMemberList" parameterType="hashMap" resultType="boardDTO">
+ 		<![CDATA[
+  		select NUM,WRITER,SUBJECT,EMAIL,CONTENT,PW,REG,READCOUNT,REF,RE_STEP,RE_LEVEL,r
+		from (select NUM,WRITER,SUBJECT,EMAIL,CONTENT,PW,REG,READCOUNT,REF,RE_STEP,RE_LEVEL,rownum r 
+		from (select NUM,WRITER,SUBJECT,EMAIL,CONTENT,PW,REG,READCOUNT,REF,RE_STEP,RE_LEVEL 
+		from springBoard order by ref desc, re_step asc) order by ref desc, re_step asc) where r >= #{start} and r <= #{end}
+		]]>
+ 	</select>
+ </mapper>
