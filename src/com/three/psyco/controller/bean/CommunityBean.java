@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-
+import com.three.psyco.model.dto.CommunityDTO;
 import com.three.psyco.service.CommunityServiceImpl;
 
 @EnableWebMvc
@@ -61,10 +61,26 @@ public class CommunityBean {
 		
 		model.addAttribute("count", count);
 		
-	
+		CommunityDTO dto = (CommunityDTO) articleList.get(0);
+		
+		
 		
 		return "community/communityList";
 	}
+	
+	
+	@RequestMapping("communityForm.com")
+	public String communityForm() {
+		
+		return "community/communityForm";
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

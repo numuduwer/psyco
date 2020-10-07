@@ -43,6 +43,9 @@ public class CommunityDAOImpl implements CommunityDAO {
 		map.put("end",end);
 		
 		List list = sqlSession.selectList("community.selectAll",map);
+		CommunityDTO dto = (CommunityDTO) list.get(0);
+		
+		
 		return list;
 	}
 

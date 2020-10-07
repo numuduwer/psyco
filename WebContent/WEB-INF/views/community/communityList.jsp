@@ -45,15 +45,15 @@
 				</td>
 				<td align="left">
 					<c:set var="wid" value="0" />
-					<c:if test="${article.RE_LEVEL > 0}">
-						<c:set var="wid" value="${8 * article.RE_LEVEL}" />
+					<c:if test="${article.re_level > 0}">
+						<c:set var="wid" value="${8 * article.re_level}" />
 						<img src="/spring/resources/img/tabImg.PNG" width="${wid}" />	
 						<img src="/spring/resources/img/replyImg.png" width="11" />
 					</c:if>
-					<a href="/spring/board/content.git?community_num=${article.COMMUNITY_NUM}&pageNum=${pageNum}" >${article.SUBJECT}</a>
+					<a href="/spring/board/content.git?community_num=${article.community_num}&pageNum=${pageNum}" >${article.subject}</a>
 				</td>
-				<td><a href="mailto:${article.WRITER}">${article.WRITER}</a></td>
-				<td>${article.REG}</td>
+				<td><a href="mailto:${article.writer}">${article.writer}</a></td>
+				<td>${article.reg}</td>
 
 				
 			
