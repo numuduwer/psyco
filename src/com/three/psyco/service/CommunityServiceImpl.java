@@ -32,14 +32,13 @@ public class CommunityServiceImpl implements CommunityService {
 	public int getArticleCountSv() throws SQLException {
 		
 		int count = commnuityDAO.getArticleCount();
-		
 		return count;
 	}
 
 	@Override
 	public List getArticlesSv(int start, int end) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List articles = commnuityDAO.getArticles(start, end);
+		return articles;
 	}
 
 	@Override

@@ -10,13 +10,13 @@
 
 <body>
 	<br />
-	<h1 align="center"> ${sessionScope.memId}님 안녕하세요 </h1>
+	<h1 align="center">님 안녕하세요 </h1>
 	<%-- 게시글이 없을때 --%>
 	<c:if test="${count == 0}">
-		<h2 align="center">${sessionScope.memId}님 글 쓰세요</h2>
+		<h2 align="center">님 글 쓰세요</h2>
 		<table>
 			<tr>
-				<td> <button onclick="window.location='/spring/board/writeForm.git'"> 글쓰기 </button> </td>
+				<td> <button onclick="window.location='/spring/board/writeForm.com'"> 글쓰기 </button> </td>
 			
 			</tr>
 			<tr>
@@ -28,10 +28,7 @@
 	<c:if test="${count == 1}">
 	<table>
 		<tr>
-			<td colspan="6" align="center"> <button onclick="window.location='/spring/board/myArticle.git'">내 글 보기 </button> </td>
-		</tr>
-		<tr>
-			<td colspan="6" align="center"> <button onclick="window.location='/spring/board/writeForm.git'"> 글쓰기 </button> </td>
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com'"> 글쓰기 </button> </td>
 		
 		</tr>
 		<tr>
@@ -39,8 +36,7 @@
 			<td>제  목</td>
 			<td>작성자</td>
 			<td>시  간</td>
-			<td>조회수</td>
-			
+
 		</tr>
 		<c:forEach var="article" items="${articleList}">
 			<tr>
@@ -49,16 +45,16 @@
 				</td>
 				<td align="left">
 					<c:set var="wid" value="0" />
-					<c:if test="${article.re_level > 0}">
-						<c:set var="wid" value="${8 * article.re_level}" />
+					<c:if test="${article.RE_LEVEL > 0}">
+						<c:set var="wid" value="${8 * article.RE_LEVEL}" />
 						<img src="/spring/resources/img/tabImg.PNG" width="${wid}" />	
 						<img src="/spring/resources/img/replyImg.png" width="11" />
 					</c:if>
-					<a href="/spring/board/content.git?num=${article.num}&pageNum=${pageNum}" >${article.subject}</a>
+					<a href="/spring/board/content.git?community_num=${article.COMMUNITY_NUM}&pageNum=${pageNum}" >${article.SUBJECT}</a>
 				</td>
-				<td><a href="mailto:${article.email}">${article.writer}</a></td>
-				<td>${article.reg}</td>
-				<td>${article.readcount}</td>
+				<td><a href="mailto:${article.WRITER}">${article.WRITER}</a></td>
+				<td>${article.REG}</td>
+
 				
 			
 			</tr>
