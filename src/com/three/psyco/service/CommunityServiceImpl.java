@@ -30,8 +30,10 @@ public class CommunityServiceImpl implements CommunityService {
 
 	@Override
 	public int getArticleCountSv() throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int count = commnuityDAO.getArticleCount();
+		
+		return count;
 	}
 
 	@Override

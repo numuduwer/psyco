@@ -31,8 +31,8 @@ public class CommunityDAOImpl implements CommunityDAO {
 
 	@Override
 	public int getArticleCount() throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		int count = sqlSession.selectOne("community.countAll");
+		return count;
 	}
 
 	@Override

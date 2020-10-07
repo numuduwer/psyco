@@ -61,16 +61,11 @@ public class CommunityBean {
 		
 		model.addAttribute("count", count);
 		
-		
-		
-		
-		
-		
-		
-		
+	
 		
 		return "commnuity/commnuityList";
 	}
+	
 	
 	
 	

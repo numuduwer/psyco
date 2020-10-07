@@ -6,7 +6,31 @@
  <!-- namespace : 내부에 쿼리태크 호출시 namespace속성명 쿼리태그 id값-->
  
  <mapper namespace="community">
- 		<select id="put" parameterType="CommunityDTO" resultType="int">
+ 	<select id="countAll" parameterType="CommunityDTO" resultType="int">
  		select count(*) from community
  	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
  </mapper>
