@@ -20,7 +20,36 @@ public class CommunityDAOImpl implements CommunityDAO {
 
 	@Override
 	public void insertArticle(CommunityDTO dto) throws SQLException {
-		sqlSession.insert("community.insertArticle");
+		// ref에 미리 시퀀스 번호 추적해서 다음 번호로 받아 추가하고 insert
+			int number = 0;
+			String numb = sqlSession.selectOne("community.maxNum");
+			if(numb != null) {
+				number = Integer.parseInt(numb) + 1;
+				
+			}else {
+				number = 1;
+			}
+			// 댓글 
+			
+			if(dto.getCommunity_num() != 0) {
+				// 이전 댓글 step 미리 올리기 
+				HashMap map = new HashMap();
+				map.put("ref", dto.getRef());
+				map.put("re_step", dto.getRe_step());
+				
+				sqlSession.update("community.updateRestep", map);
+				
+				dto.setRe_step(dto.getRe_step()+1);
+				dto.setRe_level(dto.getRe_level()+1);
+				
+			}else {
+				dto.setRef(number);
+				dto.setRe_level(0);
+				dto.setRe_step(0);
+			}
+			
+			
+		sqlSession.insert("community.insertArticle", dto);
 		
 	}
 

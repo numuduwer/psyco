@@ -5,6 +5,8 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -82,11 +84,16 @@ public class CommunityBean {
 	
 	
 	@RequestMapping("communityForm.com")
-	public String communityForm(String category, Model model) {
+	public String communityForm(HttpServletRequest request, Model model) {
 		
 		
 		
+		String category = request.getParameter("category");
+		String grade = request.getParameter("grade");
 		model.addAttribute("category", category);
+		model.addAttribute("grade", grade);
+		
+		
 	
 		return "community/communityForm";
 	}
@@ -98,61 +105,70 @@ public class CommunityBean {
 		
 		CommunityDTO dto = new CommunityDTO();
 		
-
-		
-		
-		
-		// - 파일 정보 꺼내기
-		MultipartFile mf = null;
-		
-		try { 
-			mf = request.getFile("img");
-			String path = request.getRealPath("save");
-			
-			String orgName = mf.getOriginalFilename();					
-			String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
-			String ext = orgName.substring(orgName.lastIndexOf('.'));
-			long date = System.currentTimeMillis();
-			String newName = imgName+date+ext;
-			
-			System.out.println(path);
-			System.out.println(mf.getOriginalFilename()); //이미지 원본 이름
-			String imgPath = path + "\\" + newName;
-			System.out.println(imgPath);
-			File copyFile = new File(imgPath);
-			mf.transferTo(copyFile);
-			
-			dto.setSubject(request.getParameter("subject"));
-			dto.setContent(request.getParameter("content"));
-			dto.setGrade(request.getParameter("grade"));
-			dto.setWriter(request.getParameter(newName));
-			dto.setCategory(request.getParameter("category"));
-//			dto.setConfirm(request.getParameter("confirm"));
-//			dto.setRef=Integer.parseInt(request.getParameter("ref"));
-//			dto.setRe_step=Integer.parseInt(request.getParameter("re_step"));
-//			dto.setRe_level=Integer.parseInt(request.getParameter("re_level"));
-			
-			
-		}catch(Exception e) {
-			e.printStackTrace();
+		if((Integer.parseInt)request.getParameter("category") == 1 || request.getParameter("category") == "2") {
+			communityPro1(dto, request);
 		}
 		
+		if(request.getParameter("category") == "3" || request.getParameter("category") == "4") {
+			// - 파일 정보 꺼내기
+			MultipartFile mf = null;
+			
+			try { 
+				mf = request.getFile("img");
+				String path = request.getRealPath("save");
+				
+				String orgName = mf.getOriginalFilename();					
+				String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
+				String ext = orgName.substring(orgName.lastIndexOf('.'));
+				long date = System.currentTimeMillis();
+				String newName = imgName+date+ext;
+				System.out.println(newName);
+				
+				System.out.println(path);
+				System.out.println(mf.getOriginalFilename()); //이미지 원본 이름
+				String imgPath = path + "\\" + newName;
+				System.out.println(imgPath);
+				File copyFile = new File(imgPath);
+				mf.transferTo(copyFile);
+				
+				dto.setSubject(request.getParameter("subject"));
+				dto.setContent(request.getParameter("content"));
+				dto.setGrade(request.getParameter("grade"));
+				dto.setWriter(request.getParameter("writer"));
+				dto.setCommunity_img(newName);
+				dto.setCategory(request.getParameter("category"));
+	
+	
+				
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		
-		
-		
-		
-		
-		
-		
-		
+
+	
 		
 		communityService.insertArticleSv(dto);
+		
+		}
 		
 		return "community/communityPro";
 	}
 	
 	
-	
+	public String communityPro1(CommunityDTO dto,HttpServletRequest request) throws SQLException {
+		
+		
+		String imgName = "asd";
+		long date = System.currentTimeMillis();
+		String newName = imgName+date;
+		
+		System.out.println(request.getParameter("grade"));
+		
+		communityService.insertArticleSv(dto);
+		
+		return "community/communityPro";
+	}
 	
 	
 	

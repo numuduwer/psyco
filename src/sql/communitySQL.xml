@@ -22,9 +22,19 @@
 		]]>
   	</select>
  	
+ 	 <select id="maxNum" resultType="String">
+   		select max(community_num) from community
+   </select>
+ 	
+ 	<update id="updateRestep" parameterType="hashmap">
+   		<![CDATA[
+   		update community set re_step=re_step+1 where ref=#{ref} and re_step > #{re_step}
+   		]]>
+   </update>
+ 	
  	<insert id="insertArticle" parameterType="communityDTO">
- 		insert into community(community_num, subject,content,writer,grade,community_img,category,ref,re_step,re_level,reg)
- 		values(community_seq.nextVal, #{subject},#{content},#{writer},#{grade},#{community_img},#{category},#{ref},#{re_step},#{re_level},sysdate)
+ 		insert into community(community_num,subject,content,writer,grade,community_img,category,ref,re_step,re_level,reg)
+ 		values(community_seq.nextVal,#{subject},#{content},#{writer},#{grade},#{community_img},#{category},#{ref},#{re_step},#{re_level},sysdate)
  	</insert>
  	
  	

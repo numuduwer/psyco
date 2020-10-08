@@ -31,10 +31,6 @@
 				</td>
 			</tr>
 			<tr>
-				<td>e-mail</td>
-				<td><input type="text" name="email"/></td>
-			</tr>
-			<tr>
 				<td>내용</td>
 				<td><textarea rows="20" cols="70" name="content"></textarea></td>
 			</tr>
