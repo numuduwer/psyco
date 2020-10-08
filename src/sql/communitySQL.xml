@@ -43,7 +43,7 @@
  	
  	
  	<select id="selectImg" parameterType="String" resultType="communityDTO">
-  		select community_img from community where category#{category}
+  		select community_img from community where category=#{value}
   	</select>
  	
  	

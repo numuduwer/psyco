@@ -85,6 +85,9 @@ public class CommunityDAOImpl implements CommunityDAO {
 	public List getArticlesImg(String category) throws SQLException{
 		
 		List getArticlesImg = sqlSession.selectList("community.selectImg",category);
+		
+
+
 		return getArticlesImg;
 	}
 

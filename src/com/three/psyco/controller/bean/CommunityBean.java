@@ -58,20 +58,29 @@ public class CommunityBean {
 		int number = 0; // 게시판에상의 글번호 뿌려줄 변수 미리 선언 (보여주기 식번호 ) 
 		
 		List articleList = null;
-		List viewImg = null;
+		List viewImg =  null;
 		
 		int count = communityService.getArticleCountSv(category);
 		System.out.println(count);
 		
 		if(count > 0) {
 			articleList = communityService.getArticlesSv(startRow, endRow, category);
-			viewImg = communityService.getArticlesImg(category);
-			for(int i=0; i<=viewImg.size(); i++) {
-				System.out.println(i);
-			}
+			
 		}
+		viewImg = communityService.getArticlesImg(category);
 		
+		String path = request.getRealPath("save");
+//		for(int i=0; i<=viewImg.size(); i++) {
+//			CommunityDTO dto = (CommunityDTO) viewImg.get(i);
+//			 	path = path + "\\" + dto.getCommunity_img();
+//			 	System.out.println(path);
+//		}
+		
+		for(int i=0; i<=viewImg.size(); i++) {
+			
+		}
 
+		model.addAttribute("path", viewImg);
 		
 		
 		number = count  - (currPage-1) *  pageSize;
@@ -87,7 +96,7 @@ public class CommunityBean {
 		
 		model.addAttribute("count", count);
 		model.addAttribute("category", category);
-		model.addAttribute("viewImg", viewImg);
+		
 		
 //		CommunityDTO dto = (CommunityDTO) articleList.get(0);
 
@@ -97,6 +106,8 @@ public class CommunityBean {
 	}
 	
 	
+
+
 	@RequestMapping("communityForm.com")
 	public String communityForm(CommunityDTO dto, HttpServletRequest request, Model model) {
 		

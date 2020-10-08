@@ -46,6 +46,7 @@ public class CommunityServiceImpl implements CommunityService {
 	public List getArticlesImg(String category) throws SQLException{
 		
 		List getArticlesImg = commnuityDAO.getArticlesImg(category);
+
 		
 		return getArticlesImg;
 	}

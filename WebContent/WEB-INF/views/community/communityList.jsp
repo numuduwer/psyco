@@ -103,6 +103,7 @@
 			<td>사 진</td>
 
 		</tr>
+		<c:forEach var="viewImg" items="${path}">
 		<c:forEach var="article" items="${articleList}">
 			<tr>
 				<td>${number}
@@ -119,8 +120,10 @@
 				</td>
 				<td><a href="mailto:${article.writer}">${article.writer}</a></td>
 				<td>${article.reg}</td>
+				<td>${viewImg.community_img}</td>
 				
 			</tr>
+		</c:forEach>
 		</c:forEach>
 	</table>
 	</c:if>
