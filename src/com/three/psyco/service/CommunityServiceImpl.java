@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.three.psyco.model.dao.CommunityDAO;
 import com.three.psyco.model.dao.CommunityDAOImpl;
 import com.three.psyco.model.dto.CommunityDTO;
 
@@ -42,9 +43,11 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public CommunityDTO getArticleSv(int num) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public CommunityDTO getArticleSv(int community_num) throws SQLException {
+		
+		CommunityDTO article = commnuityDAO.getArticle(community_num);
+		
+		return article;
 	}
 
 	@Override

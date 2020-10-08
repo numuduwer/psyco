@@ -37,7 +37,9 @@
  		values(community_seq.nextVal,#{subject},#{content},#{writer},#{grade},#{community_img},#{category},#{ref},#{re_step},#{re_level},sysdate)
  	</insert>
  	
- 	
+ 	<select id="selectOne" parameterType="int" resultType="communityDTO">
+ 		select * from community where community_num=#{value}
+ 	</select>
  	
  	
  	

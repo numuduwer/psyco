@@ -100,7 +100,7 @@ public class CommunityBean {
 	}
 	
 	
-	
+	// 글 저장
 	@RequestMapping("communityPro.com")
 	public String communityPro(MultipartHttpServletRequest request) throws Exception {
 		
@@ -137,42 +137,38 @@ public class CommunityBean {
 				}else {				
 					String orgName = mf.getOriginalFilename();					
 				
-				String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
-				String ext = orgName.substring(orgName.lastIndexOf('.'));
-				long date = System.currentTimeMillis();
-				String newName = imgName+date+ext;
-				String newName1 = "ads"+date;
-//				System.out.println(newName);
-//				System.out.println(newName1);
-//				
-//				System.out.println(path);
-//				System.out.println(mf.getOriginalFilename()); //이미지 원본 이름
-//				String imgPath = path + "\\" + newName;
-//				System.out.println(imgPath);
-//				File copyFile = new File(imgPath);
-//				mf.transferTo(copyFile);
-				
-				dto.setSubject(request.getParameter("subject"));
-				dto.setContent(request.getParameter("content"));
-				dto.setGrade(request.getParameter("grade"));
-				dto.setWriter(request.getParameter("writer"));
-				if(a != 1) {
-					dto.setCommunity_img(newName);
-				}else {
-					dto.setCommunity_img(newName1);
-				}
-				dto.setCategory(request.getParameter("category"));
-	
-	
+					String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
+					String ext = orgName.substring(orgName.lastIndexOf('.'));
+					long date = System.currentTimeMillis();
+					String newName = imgName+date+ext;
+					String newName1 = "ads"+date;
+	//				System.out.println(newName);
+	//				System.out.println(newName1);
+	//				
+	//				System.out.println(path);
+	//				System.out.println(mf.getOriginalFilename()); //이미지 원본 이름
+	//				String imgPath = path + "\\" + newName;
+	//				System.out.println(imgPath);
+	//				File copyFile = new File(imgPath);
+	//				mf.transferTo(copyFile);
+					
+					dto.setSubject(request.getParameter("subject"));
+					dto.setContent(request.getParameter("content"));
+					dto.setGrade(request.getParameter("grade"));
+					dto.setWriter(request.getParameter("writer"));
+					if(a != 1) {
+						dto.setCommunity_img(newName);
+					}else {
+						dto.setCommunity_img(newName1);
+					}
+					dto.setCategory(request.getParameter("category"));
+
 				}
 				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-		
-			
-	
-		
+
 		communityService.insertArticleSv(dto);
 		
 		
@@ -181,7 +177,21 @@ public class CommunityBean {
 	}
 	
 	
-
+	@RequestMapping("communityDetail.com")
+	public String communityDetail(String pageNum,int community_num, Model model) throws SQLException {
+		
+		
+		
+		CommunityDTO article = communityService.getArticleSv(community_num);
+		
+		
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("num", community_num);
+		model.addAttribute("article", article);
+		
+		
+		return "community/communityDetail";
+	}
 	
 	
 	

@@ -20,7 +20,7 @@ public interface CommunityDAO {
 	public List getArticles(int start, int end) throws SQLException;
 	
 	// 게시글 한개 정보 가져오기  (조회수 up 0) 
-	public CommunityDTO getArticle(int num) throws SQLException;
+	public CommunityDTO getArticle(int community_num) throws SQLException;
 	
 	// 게시글 한개 정보 가져오기 	(조회수 up x)
 	public CommunityDTO getArticleForUpdate(int num) throws SQLException;

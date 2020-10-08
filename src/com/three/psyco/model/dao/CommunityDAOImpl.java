@@ -79,9 +79,11 @@ public class CommunityDAOImpl implements CommunityDAO {
 	}
 
 	@Override
-	public CommunityDTO getArticle(int num) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public CommunityDTO getArticle(int community_num) throws SQLException {
+		
+		CommunityDTO article = sqlSession.selectOne("community.selectOne",community_num);
+		
+		return article;
 	}
 
 	@Override
