@@ -1,5 +1,6 @@
 package com.three.psyco.controller.bean;
 
+import java.awt.Image;
 import java.io.File;
 
 import java.sql.SQLException;
@@ -84,11 +85,11 @@ public class CommunityBean {
 	
 	
 	@RequestMapping("communityForm.com")
-	public String communityForm(HttpServletRequest request, Model model) {
+	public String communityForm(CommunityDTO dto, HttpServletRequest request, Model model) {
 		
 		
 		
-		String category = request.getParameter("category");
+		int category = Integer.parseInt(request.getParameter("category"));
 		String grade = request.getParameter("grade");
 		model.addAttribute("category", category);
 		model.addAttribute("grade", grade);
@@ -108,25 +109,48 @@ public class CommunityBean {
 		
 			// - 파일 정보 꺼내기
 			MultipartFile mf = null;
-			
+		if(request.getFile("img") == null) {
+
+		
+		}	
 			try { 
 				mf = request.getFile("img");
-				String path = request.getRealPath("save");				
-				String orgName = mf.getOriginalFilename();
+				String path = request.getRealPath("save");
+				if(request.getFile("img") == null) {
+					String orgName = "asd.asd";
+					String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
+					String ext = orgName.substring(orgName.lastIndexOf('.'));
+					long date = System.currentTimeMillis();
+					String newName = imgName+date+ext;
+					String newName1 = "ads"+date;
+					
+					dto.setSubject(request.getParameter("subject"));
+					dto.setContent(request.getParameter("content"));
+					dto.setGrade(request.getParameter("grade"));
+					dto.setWriter(request.getParameter("writer"));
+					if(a != 1) {
+						dto.setCommunity_img(newName);
+					}else {
+						dto.setCommunity_img(newName1);
+					}
+					dto.setCategory(request.getParameter("category"));
+				}else {				
+					String orgName = mf.getOriginalFilename();					
+				
 				String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
 				String ext = orgName.substring(orgName.lastIndexOf('.'));
 				long date = System.currentTimeMillis();
 				String newName = imgName+date+ext;
 				String newName1 = "ads"+date;
-				System.out.println(newName);
-				System.out.println(newName1);
-				
-				System.out.println(path);
-				System.out.println(mf.getOriginalFilename()); //이미지 원본 이름
-				String imgPath = path + "\\" + newName;
-				System.out.println(imgPath);
-				File copyFile = new File(imgPath);
-				mf.transferTo(copyFile);
+//				System.out.println(newName);
+//				System.out.println(newName1);
+//				
+//				System.out.println(path);
+//				System.out.println(mf.getOriginalFilename()); //이미지 원본 이름
+//				String imgPath = path + "\\" + newName;
+//				System.out.println(imgPath);
+//				File copyFile = new File(imgPath);
+//				mf.transferTo(copyFile);
 				
 				dto.setSubject(request.getParameter("subject"));
 				dto.setContent(request.getParameter("content"));
@@ -140,13 +164,13 @@ public class CommunityBean {
 				dto.setCategory(request.getParameter("category"));
 	
 	
-				
+				}
 				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
 		
-
+			
 	
 		
 		communityService.insertArticleSv(dto);
