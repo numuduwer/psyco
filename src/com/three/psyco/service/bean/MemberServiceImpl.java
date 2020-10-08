@@ -1,6 +1,8 @@
 package com.three.psyco.service.bean;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,6 +19,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,8 +34,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import com.three.psyco.model.dao.MemberDAOImpl;
+import com.three.psyco.model.dto.MemberDTO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -199,10 +213,109 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int existUserCheck(HashMap<String, String> MemberProfile) {
 		String email = MemberProfile.get("email");
-		System.out.println(email);
 		int count = memberDAO.existUserCheck(email);
-		System.out.println(count);
+		return count;
+	}
+	
+	@Override
+	public void psycoLogin(HashMap<String, String> MemberProfile) {
+		String email = MemberProfile.get("email");
+		MemberDTO dto = memberDAO.getMemberProfile(email);
 		
-		return 0;
+		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession httpSession = servletRequestAttribute.getRequest().getSession();
+		httpSession.setAttribute("memId", dto.getMember_Id());
+	}
+	
+	@Override
+	public MemberDTO setInfoFromNaver(HashMap<String, String> MemberProfile) {
+		MemberDTO dto = new MemberDTO();
+		dto.setName(MemberProfile.get("name"));
+		dto.setGender(MemberProfile.get("gender"));
+		dto.setNickname(MemberProfile.get("nickname"));
+		dto.setEmail(MemberProfile.get("email"));
+		return dto;
+	}
+	
+	@Override
+	public int insertMember(MemberDTO dto) {
+		int result = memberDAO.insertMember(dto);
+		return result;
+	}
+	
+	@Override
+	public int loginCheck(String member_Id, String pw) {
+		int count = memberDAO.loginCheck(member_Id, pw);
+		if (count == 1) {
+			ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+			HttpSession httpSession = servletRequestAttribute.getRequest().getSession();
+			httpSession.setAttribute("memId", member_Id);
+		}
+		return count;
+	}
+	
+	@Override
+	public String licenseLookup(String license_number) throws IOException {
+		String PostUrl = "https://teht.hometax.go.kr/wqAction.do?actionId=ATTABZAA001R08&screenId=UTEABAAA13&popupYn=false&realScreenId=";
+		String xmlRaw = "<map id=\"ATTABZAA001R08\"><pubcUserNo/><mobYn>N</mobYn><inqrTrgtClCd>1</inqrTrgtClCd><txprDscmNo>{parameter}</txprDscmNo><dongCode>15</dongCode><psbSearch>Y</psbSearch><map id=\"userReqInfoVO\"/></map>";
+		
+		// 사업장이 운영중인지 알려줄 메시지를 담아줄 변수 
+		String status = null;
+		
+		// 파싱
+		try {
+			
+			xmlRaw = xmlRaw.replace("{parameter}", license_number);
+			
+			String res = sendPost(PostUrl, xmlRaw);
+			System.out.println(res);
+			
+			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+			Document document = documentBuilder.parse(new ByteArrayInputStream(res.getBytes()));
+			
+			XPathFactory xPathFactory = XPathFactory.newInstance();
+			XPath xPath = xPathFactory.newXPath();
+			
+			status = (String)xPath.evaluate("//map/trtCntn", document, XPathConstants.STRING);
+			
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (XPathExpressionException e) {
+			e.printStackTrace();
+		}
+		
+		return status;
+	}
+	
+	private String sendPost(String targetUrl, String parameter) throws MalformedURLException, IOException {
+		URL url = new URL(targetUrl);
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		
+		con.setRequestMethod("POST");
+		con.setRequestProperty("Content-Type", "application/xml");
+		con.setRequestProperty("Accept", "application/xml");
+		
+		con.setDoOutput(true);// POST 파라미터 전달을 위한 설정
+		
+		// send post Request
+		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+		wr.writeBytes(parameter);
+		wr.flush();
+		wr.close();
+		
+		int responseCode = con.getResponseCode();
+		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+		
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+		
+		return response.toString();
 	}
 }
