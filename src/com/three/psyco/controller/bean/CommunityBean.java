@@ -1,6 +1,7 @@
 package com.three.psyco.controller.bean;
 
 import java.io.File;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -75,23 +76,31 @@ public class CommunityBean {
 		
 		
 		
+		
 		return "community/communityList";
 	}
 	
 	
 	@RequestMapping("communityForm.com")
-	public String communityForm() {
+	public String communityForm(String category, Model model) {
 		
+		
+		
+		model.addAttribute("category", category);
+	
 		return "community/communityForm";
 	}
 	
 	
 	
 	@RequestMapping("communityPro.com")
-	public String communityPro(CommunityDTO dto, MultipartHttpServletRequest request, String category) throws Exception {
-		communityService.insertArticleSv(dto);
+	public String communityPro(MultipartHttpServletRequest request) throws Exception {
 		
-		System.out.println(category);
+		CommunityDTO dto = new CommunityDTO();
+		
+
+		
+		
 		
 		// - 파일 정보 꺼내기
 		MultipartFile mf = null;
@@ -100,21 +109,28 @@ public class CommunityBean {
 			mf = request.getFile("img");
 			String path = request.getRealPath("save");
 			
-			
 			String orgName = mf.getOriginalFilename();					
 			String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
 			String ext = orgName.substring(orgName.lastIndexOf('.'));
 			long date = System.currentTimeMillis();
 			String newName = imgName+date+ext;
 			
-			
 			System.out.println(path);
 			System.out.println(mf.getOriginalFilename()); //이미지 원본 이름
-			String imgPath = path + "\\" + newName;  
+			String imgPath = path + "\\" + newName;
 			System.out.println(imgPath);
 			File copyFile = new File(imgPath);
 			mf.transferTo(copyFile);
 			
+			dto.setSubject(request.getParameter("subject"));
+			dto.setContent(request.getParameter("content"));
+			dto.setGrade(request.getParameter("grade"));
+			dto.setWriter(request.getParameter(newName));
+			dto.setCategory(request.getParameter("category"));
+//			dto.setConfirm(request.getParameter("confirm"));
+//			dto.setRef=Integer.parseInt(request.getParameter("ref"));
+//			dto.setRe_step=Integer.parseInt(request.getParameter("re_step"));
+//			dto.setRe_level=Integer.parseInt(request.getParameter("re_level"));
 			
 			
 		}catch(Exception e) {
@@ -122,6 +138,15 @@ public class CommunityBean {
 		}
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		communityService.insertArticleSv(dto);
 		
 		return "community/communityPro";
 	}

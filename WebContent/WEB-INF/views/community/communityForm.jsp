@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,8 @@
 			<input type="hidden" name="ref" value= "${ref}"/>
 			<input type="hidden" name="re_step" value= "${re_step}"/>
 			<input type="hidden" name="re_level" value= "${re_level}"/>
+			<input type="hidden" name="category" value= "${category}"/>
+			<input type="hidden" name="grade" value= "${grade}"/>
 		
 
 		<table>
@@ -35,10 +38,12 @@
 				<td>내용</td>
 				<td><textarea rows="20" cols="70" name="content"></textarea></td>
 			</tr>
+			<c:if test="${category == 3 || category == 2}">
 			<tr>
-				<td>내용</td>
+				<td>음식점 사진</td>
 				<td><input type="file" name="img"/></td>	
 			</tr>
+			</c:if>
 			<tr>
 				<td colspan="2">
 					<input type="submit" value="저장" /> 

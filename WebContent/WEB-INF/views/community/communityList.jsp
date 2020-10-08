@@ -27,11 +27,11 @@
 	</c:if>
 	<%-- 게시글이 있을때 --%>
 	<c:if test="${category == 1}">
-	<c:if test="${count == 1}">
+	<c:if test="${count >= 1}">
 	<h1 align="center"> 자유게시판 </h1>
 	<table>
 		<tr>
-			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com?category=1'"> 글쓰기 </button> </td>
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com?category=1&grade=11'"> 글쓰기 </button> </td>
 		
 		</tr>
 		<tr>
