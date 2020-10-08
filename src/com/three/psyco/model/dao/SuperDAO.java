@@ -12,5 +12,8 @@ public interface SuperDAO {
 	public List getMemberList(int start, int end) throws SQLException;
 
 
+	public int deleteMember(String id) throws SQLException;
+
+
 
 }

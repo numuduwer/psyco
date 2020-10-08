@@ -6,19 +6,26 @@
 <head>
 <meta charset="UTF-8">
 <title>Member 관리 페이지</title>
+
+
+<script>
+	
+	
+$("a").click(function(e){
+	event.stopPropagation();
+	
+});
+	
+</script>
+
+
+
 </head>
 <body>
 
-<script>
-	function bye(){
-		var jbResult = confirm( '삭제 할래요? ' );	
-		document.write( jbResult );
-		
-		
-	}
-	
-	
-</script>
+
+
+
 	<h1>멤버 관리 페이지 </h1>
 	
 	
@@ -59,7 +66,10 @@
 				<td>${article.purchase_count}</td>
 				<td>${article.business_license}</td>
 				<td>${article.reg}</td>
-				<td><input type="button" value='삭제' onclick='bye();'></td>
+				<td>
+					<a href="/psyco/super/sMemberDelete.com?pageNum=${pageNum}&id=${article.member_id}">삭제</a>
+					
+				</td>
 			
 			</tr>
 		</c:forEach>

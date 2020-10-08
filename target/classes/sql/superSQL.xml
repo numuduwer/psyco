@@ -22,6 +22,11 @@
 	
 		]]>
  	</select>
+ 	
+ 	
+ 	<select id="deleteMember" parameterType="String">
+ 		delete from MEMBER where MEMBER_ID =#{value}
+ 	</select>
  </mapper>
  
  

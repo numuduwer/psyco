@@ -1,6 +1,6 @@
 package com.three.psyco.controller.bean;
 
-import java.sql.SQLException;
+import java.sql.SQLException; 
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,23 +12,24 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.three.psyco.model.dao.SuperDAO;
 import com.three.psyco.model.dto.MemberDTO;
-import com.three.psyco.service.bean.SuperService;
+
+import com.three.psyco.service.bean.SuperServiceImpl;
 
 
 
-@EnableWebMvc
 @Controller
 @RequestMapping("/super/")
 public class SuperBean {
 	
-	@Autowired
-	private SqlSessionTemplate sqlSession = null;
-	
-	
-	@Autowired SuperService superService = null;
+
+	@Autowired 
+	private SuperServiceImpl superService = null;
+//	public void setSuperService(SuperServiceImpl superService) {
+//		this.superService = superService;
+//	}
 	
 	@RequestMapping("memberList")
-	public String memberList(String pageNum, Model model) throws SQLException {
+	public String memberList(String pageNum,  Model model) throws SQLException {
 		
 		
 		if(pageNum == null) {
@@ -41,11 +42,6 @@ public class SuperBean {
 		int endRow = currPage * pageSize;
 		
 		int number = 0; //(게시판에 보여주기식 글번호 )
-		
-		
-		
-		
-		
 		
 		
 		MemberDTO dto = null;
@@ -61,9 +57,8 @@ public class SuperBean {
 			
 		}
 		
-		System.out.println("count : " + count);
-		System.out.println("memberList size : " + memberList.size() );
 		
+	
 		
 		number = count - (currPage-1) * pageSize;
 		
@@ -76,10 +71,24 @@ public class SuperBean {
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("count", count);
 		
-		
-	
-		
 		return "super/sMemberList";
+	}
+	
+	
+	@RequestMapping("sMemberDelete")
+	public String sMemberDelete(String pageNum, String id, Model model) throws SQLException {
+		
+		int result = superService.deleteMemberSV(id);
+		
+		
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		
+		model.addAttribute("pageNum", pageNum);
+		return "redirect:/super/memberList.com";
+				
 	}
 	
 

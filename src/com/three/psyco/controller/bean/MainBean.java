@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.three.psyco.model.dto.TestDTO;
 
-@EnableWebMvc
+
 @Controller
 public class MainBean {
 	
