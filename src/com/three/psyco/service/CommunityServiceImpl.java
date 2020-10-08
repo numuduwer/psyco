@@ -30,16 +30,24 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public int getArticleCountSv() throws SQLException {
+	public int getArticleCountSv(String category) throws SQLException {
 		
-		int count = commnuityDAO.getArticleCount();
+		int count = commnuityDAO.getArticleCount(category);
 		return count;
 	}
 
 	@Override
-	public List getArticlesSv(int start, int end) throws SQLException {
-		List articles = commnuityDAO.getArticles(start, end);
+	public List getArticlesSv(int start, int end, String category) throws SQLException {
+		List articles = commnuityDAO.getArticles(start, end, category);
 		return articles;
+	}
+	
+	@Override
+	public List getArticlesImg(String category) throws SQLException{
+		
+		List getArticlesImg = commnuityDAO.getArticlesImg(category);
+		
+		return getArticlesImg;
 	}
 
 	@Override

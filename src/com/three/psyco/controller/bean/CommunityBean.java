@@ -29,8 +29,9 @@ public class CommunityBean {
 	private CommunityServiceImpl communityService = null;
 	
 	@RequestMapping("community.com")
-	public String community(CommunityDTO dto, Model model) {
-		
+	public String community(CommunityDTO dto, Model model,HttpServletRequest request) {
+		String category = request.getParameter("category");
+		model.addAttribute("category",category);
 		
 		
 		
@@ -38,7 +39,10 @@ public class CommunityBean {
 	}
 	
 	@RequestMapping(value="communityList.com")
-	public String communityList(String pageNum,Model model, String category) throws SQLException {
+	public String communityList(String pageNum,Model model,HttpServletRequest request) throws SQLException {
+		
+		
+		String category = request.getParameter("category");
 		
 		
 		
@@ -54,13 +58,22 @@ public class CommunityBean {
 		int number = 0; // 게시판에상의 글번호 뿌려줄 변수 미리 선언 (보여주기 식번호 ) 
 		
 		List articleList = null;
-			
+		List viewImg = null;
 		
-		int count = communityService.getArticleCountSv();
+		int count = communityService.getArticleCountSv(category);
+		System.out.println(count);
 		
 		if(count > 0) {
-			articleList = communityService.getArticlesSv(startRow, endRow);
+			articleList = communityService.getArticlesSv(startRow, endRow, category);
+			viewImg = communityService.getArticlesImg(category);
+			for(int i=0; i<=viewImg.size(); i++) {
+				System.out.println(i);
+			}
 		}
+		
+
+		
+		
 		number = count  - (currPage-1) *  pageSize;
 		
 		model.addAttribute("pageNum", pageNum);
@@ -74,10 +87,10 @@ public class CommunityBean {
 		
 		model.addAttribute("count", count);
 		model.addAttribute("category", category);
+		model.addAttribute("viewImg", viewImg);
 		
-		CommunityDTO dto = (CommunityDTO) articleList.get(0);
-		
-		
+//		CommunityDTO dto = (CommunityDTO) articleList.get(0);
+
 		
 		
 		return "community/communityList";
@@ -89,7 +102,7 @@ public class CommunityBean {
 		
 		
 		
-		int category = Integer.parseInt(request.getParameter("category"));
+		String category = request.getParameter("category");
 		String grade = request.getParameter("grade");
 		model.addAttribute("category", category);
 		model.addAttribute("grade", grade);
@@ -102,7 +115,7 @@ public class CommunityBean {
 	
 	// 글 저장
 	@RequestMapping("communityPro.com")
-	public String communityPro(MultipartHttpServletRequest request) throws Exception {
+	public String communityPro(MultipartHttpServletRequest request, Model model) throws Exception {
 		
 		CommunityDTO dto = new CommunityDTO();
 		int a = Integer.parseInt(request.getParameter("category"));
@@ -147,10 +160,10 @@ public class CommunityBean {
 	//				
 	//				System.out.println(path);
 	//				System.out.println(mf.getOriginalFilename()); //이미지 원본 이름
-	//				String imgPath = path + "\\" + newName;
-	//				System.out.println(imgPath);
-	//				File copyFile = new File(imgPath);
-	//				mf.transferTo(copyFile);
+					String imgPath = path + "\\" + newName;
+					System.out.println(imgPath);
+					File copyFile = new File(imgPath);
+					mf.transferTo(copyFile);
 					
 					dto.setSubject(request.getParameter("subject"));
 					dto.setContent(request.getParameter("content"));

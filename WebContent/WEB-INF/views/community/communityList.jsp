@@ -11,24 +11,14 @@
 <body>
 	<br />
 	<h1 align="center">님 안녕하세요 </h1>
-
-	<%-- 게시글이 없을때 --%>
+	
 	<c:if test="${count == 0}">
-		<h2 align="center">님 글 쓰세요</h2>
-		<table>
-			<tr>
-				<td> <button onclick="window.location='/psyco/communityForm.com'"> 글쓰기 </button> </td>
-			
-			</tr>
-			<tr>
-				<td> 게시글이 없습니다. </td>
-			</tr>
-		</table>
+
+		<h1 align="center">작성된 글이 없습니다.</h1>
 	</c:if>
-	<%-- 게시글이 있을때 --%>
+
 	<c:if test="${category == 1}">
-	<c:if test="${count >= 1}">
-	<h1 align="center"> 자유게시판 </h1>
+	<h1 align="center"> 자유게시판 페이지</h1>
 	<table>
 		<tr>
 			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com?category=1&grade=11'"> 글쓰기 </button> </td>
@@ -61,17 +51,117 @@
 		</c:forEach>
 	</table>
 	</c:if>
+	
+	<br />
+	<c:if test="${category == 2}">
+	<h1 align="center"> QnA 페이지</h1>
+	<table>
+		<tr>
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com?category=2&grade=11'"> 글쓰기 </button> </td>
+		
+		</tr>
+		<tr>
+			<td>No.</td>
+			<td>제  목</td>
+			<td>작성자</td>
+			<td>시  간</td>
+
+		</tr>
+		<c:forEach var="article" items="${articleList}">
+			<tr>
+				<td>${number}
+					<c:set var="number" value="${number-1}" />
+				</td>
+				<td align="left">
+					<c:set var="wid" value="0" />
+					<c:if test="${article.re_level > 0}">
+						<c:set var="wid" value="${8 * article.re_level}" />
+						<img src="/psyco/resources/img/tabImg.PNG" width="${wid}" />	
+						<img src="/psyco/resources/img/replyImg.png" width="11" />
+					</c:if>
+					<a href="/psyco/communityDetail.com?community_num=${article.community_num}&pageNum=${pageNum}" >${article.subject}</a>
+				</td>
+				<td><a href="mailto:${article.writer}">${article.writer}</a></td>
+				<td>${article.reg}</td>
+			</tr>
+		</c:forEach>
+	</table>
 	</c:if>
-	<c:if test="${category == 1}">
 	
-	
-	
-	
-	
-	
-	
+	<c:if test="${category == 3}">
+	<h1 align="center"> 홍보 페이지</h1>
+	<table>
+		<tr>
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com?category=3&grade=11'"> 글쓰기 </button> </td>
+		
+		</tr>
+		<tr>
+			<td>No.</td>
+			<td>제  목</td>
+			<td>작성자</td>
+			<td>시  간</td>
+			<td>사 진</td>
+
+		</tr>
+		<c:forEach var="article" items="${articleList}">
+			<tr>
+				<td>${number}
+					<c:set var="number" value="${number-1}" />
+				</td>
+				<td align="left">
+					<c:set var="wid" value="0" />
+					<c:if test="${article.re_level > 0}">
+						<c:set var="wid" value="${8 * article.re_level}" />
+						<img src="/psyco/resources/img/tabImg.PNG" width="${wid}" />	
+						<img src="/psyco/resources/img/replyImg.png" width="11" />
+					</c:if>
+					<a href="/psyco/communityDetail.com?community_num=${article.community_num}&pageNum=${pageNum}" >${article.subject}</a>
+				</td>
+				<td><a href="mailto:${article.writer}">${article.writer}</a></td>
+				<td>${article.reg}</td>
+				
+			</tr>
+		</c:forEach>
+	</table>
 	</c:if>
 	<br />
+	
+	<c:if test="${category == 4}">
+	<h1 align="center"> 음식점 추천 페이지</h1>
+	<table>
+		<tr>
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com?category=4&grade=11'"> 글쓰기 </button> </td>
+		
+		</tr>
+		<tr>
+			<td>No.</td>
+			<td>제  목</td>
+			<td>작성자</td>
+			<td>시  간</td>
+
+		</tr>
+		<c:forEach var="article" items="${articleList}">
+			<tr>
+				<td>${number}
+					<c:set var="number" value="${number-1}" />
+				</td>
+				<td align="left">
+					<c:set var="wid" value="0" />
+					<c:if test="${article.re_level > 0}">
+						<c:set var="wid" value="${8 * article.re_level}" />
+						<img src="/psyco/resources/img/tabImg.PNG" width="${wid}" />	
+						<img src="/psyco/resources/img/replyImg.png" width="11" />
+					</c:if>
+					<a href="/psyco/communityDetail.com?community_num=${article.community_num}&pageNum=${pageNum}" >${article.subject}</a>
+				</td>
+				<td><a href="mailto:${article.writer}">${article.writer}</a></td>
+				<td>${article.reg}</td>
+			</tr>
+		</c:forEach>
+	</table>
+	</c:if>
+
+	
 	
 	<%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
 	<div align="center">

@@ -7,8 +7,8 @@
  
  <mapper namespace="community">
  
- 	<select id="countAll" parameterType="communityDTO" resultType="int">
- 		select count(*) from community
+ 	<select id="countAll" parameterType="String" resultType="int">
+ 		select count(*) from community where category=#{value}
  	</select>
  	
  	
@@ -17,7 +17,7 @@
   		select community_num,subject,content,writer,ref,re_step,re_level,reg,r
 		from (select community_num,subject,content,writer,ref,re_step,re_level,reg,rownum r
 		from (select community_num,subject,content,writer,ref,re_step,re_level,reg
-		from community order by ref desc, re_step asc) order by ref desc, re_step asc)
+		from community where category=#{category} order by ref desc, re_step asc) order by ref desc, re_step asc)
 		where r >= #{start} and r <= #{end}
 		]]>
   	</select>
@@ -42,7 +42,9 @@
  	</select>
  	
  	
- 	
+ 	<select id="selectImg" parameterType="String" resultType="communityDTO">
+  		select community_img from community where category#{category}
+  	</select>
  	
  	
  	

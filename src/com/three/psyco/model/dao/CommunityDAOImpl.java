@@ -60,22 +60,32 @@ public class CommunityDAOImpl implements CommunityDAO {
 	}
 
 	@Override
-	public int getArticleCount() throws SQLException {
-		int count = sqlSession.selectOne("community.countAll");
+	public int getArticleCount(String category) throws SQLException {
+
+		
+		int count = sqlSession.selectOne("community.countAll", category);
 		return count;
 	}
 
 	@Override
-	public List getArticles(int start, int end) throws SQLException {
+	public List getArticles(int start, int end, String category) throws SQLException {
 		HashMap map = new HashMap();
 		map.put("start",start);
 		map.put("end",end);
+		map.put("category",category);
 		
 		List list = sqlSession.selectList("community.selectAll",map);
 		CommunityDTO dto = (CommunityDTO) list.get(0);
 		
 		
 		return list;
+	}
+	
+	@Override
+	public List getArticlesImg(String category) throws SQLException{
+		
+		List getArticlesImg = sqlSession.selectList("community.selectImg",category);
+		return getArticlesImg;
 	}
 
 	@Override
