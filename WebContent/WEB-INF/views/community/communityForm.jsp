@@ -34,7 +34,12 @@
 				<td>내용</td>
 				<td><textarea rows="20" cols="70" name="content"></textarea></td>
 			</tr>
-			<c:if test="${category == 3 || category == 2}">
+			<c:if test="${category == 1 || category == 2}">
+			<tr>
+				<td><input type="hidden" name="img" value="<img scr="img/beach.jpg"/>"/></td>	
+			</tr>
+			</c:if>
+			<c:if test="${category == 3 || category == 4}">
 			<tr>
 				<td>음식점 사진</td>
 				<td><input type="file" name="img"/></td>	
@@ -44,7 +49,7 @@
 				<td colspan="2">
 					<input type="submit" value="저장" /> 
 					<input type="reset" value="재작성" />
-					<input type="button" value="리스트보기"  onclick="window.location='/psyco/communityList.com'"/>
+					<input type="button" value="리스트보기"  onclick="window.location='/psyco/communityList.com?category=${category}'"/>
 				</td>
 			</tr>
 		</table>

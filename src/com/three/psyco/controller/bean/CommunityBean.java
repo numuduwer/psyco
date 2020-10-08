@@ -104,25 +104,22 @@ public class CommunityBean {
 	public String communityPro(MultipartHttpServletRequest request) throws Exception {
 		
 		CommunityDTO dto = new CommunityDTO();
+		int a = Integer.parseInt(request.getParameter("category"));
 		
-		if((Integer.parseInt)request.getParameter("category") == 1 || request.getParameter("category") == "2") {
-			communityPro1(dto, request);
-		}
-		
-		if(request.getParameter("category") == "3" || request.getParameter("category") == "4") {
 			// - 파일 정보 꺼내기
 			MultipartFile mf = null;
 			
 			try { 
 				mf = request.getFile("img");
-				String path = request.getRealPath("save");
-				
-				String orgName = mf.getOriginalFilename();					
+				String path = request.getRealPath("save");				
+				String orgName = mf.getOriginalFilename();
 				String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
 				String ext = orgName.substring(orgName.lastIndexOf('.'));
 				long date = System.currentTimeMillis();
 				String newName = imgName+date+ext;
+				String newName1 = "ads"+date;
 				System.out.println(newName);
+				System.out.println(newName1);
 				
 				System.out.println(path);
 				System.out.println(mf.getOriginalFilename()); //이미지 원본 이름
@@ -135,7 +132,11 @@ public class CommunityBean {
 				dto.setContent(request.getParameter("content"));
 				dto.setGrade(request.getParameter("grade"));
 				dto.setWriter(request.getParameter("writer"));
-				dto.setCommunity_img(newName);
+				if(a != 1) {
+					dto.setCommunity_img(newName);
+				}else {
+					dto.setCommunity_img(newName1);
+				}
 				dto.setCategory(request.getParameter("category"));
 	
 	
@@ -150,25 +151,13 @@ public class CommunityBean {
 		
 		communityService.insertArticleSv(dto);
 		
-		}
+		
 		
 		return "community/communityPro";
 	}
 	
 	
-	public String communityPro1(CommunityDTO dto,HttpServletRequest request) throws SQLException {
-		
-		
-		String imgName = "asd";
-		long date = System.currentTimeMillis();
-		String newName = imgName+date;
-		
-		System.out.println(request.getParameter("grade"));
-		
-		communityService.insertArticleSv(dto);
-		
-		return "community/communityPro";
-	}
+
 	
 	
 	
