@@ -8,7 +8,7 @@
 	<typeAliases>
 		
 		<typeAlias type="com.three.psyco.model.dto.MemberDTO" alias="MemberDTO"/>
-		
+		<typeAlias type="com.three.psyco.model.dto.ShopDTO" alias="ShopDTO"/>
 	</typeAliases>
 	
 	<mappers>

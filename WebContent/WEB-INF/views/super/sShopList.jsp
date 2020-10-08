@@ -26,36 +26,56 @@ $("a").click(function(e){
 
 
 
-	<h1> 관리 페이지 </h1>
+	<h1>SHOP 관리 페이지 </h1>
 	
 	
 	<c:if test="${count == 0}">
-		<h2> 멤버가 없어요.</h2>
+		<h2>가게가 없어요.</h2>
 	
 	</c:if>
 	<c:if test="${count > 0}">
 		<table>
 			<tr>
-	
+				<td>no</td>
+				<td>SHOP_NAME</td>
+				<td>SHOP_PHONE</td>
+				<td>OPERATING_TIME</td>
+				<td>ADDRESS</td>
+				
+				<td>ORIGIN</td>
+				<td>TAKEOUT</td>
+				<td>SHOP_IMG</td>
+				<td>LICENSE_NUMBER</td>
+				<td>REQUEST_TIME</td>
+				
+				<td>APPROVE_TIME</td>
+				<td>STATUS</td>
+				<td>APPROVE_STATUS</td>
+				<td>MEMBER_NUM</td>
+				<td>삭제</td>
 			</tr>
 			
 			
-			<c:forEach var="article" items="${memberList}">
+			<c:forEach var="article" items="${shopList}">
 			<tr>
 				<td>${number} <c:set var="number" value="${number-1}" /> </td>
-		
-				<td>${article.member_id}</td>
-				<td>${article.pw}</td>
-				<td>${article.name}</td>
-				<td>${article.birth}</td>
-				<td>${article.phonenum}</td>
-				<td>${article.gender}</td>
-				<td>${article.nickname}</td>
-				<td>${article.purchase_count}</td>
-				<td>${article.business_license}</td>
-				<td>${article.reg}</td>
+				<td>${article.shop_name}</td>
+				<td>${article.shop_phone}</td>
+				<td>${article.orperating_time}</td>
+				<td>${article.address}</td>
+				
+				<td>${article.origin}</td>
+				<td>${article.takeout}</td>
+				<td>${article.shop_img}</td>
+				<td>${article.license_number}</td>
+				<td>${article.request_time}</td>
+				
+				<td>${article.approve_time}</td>
+				<td>${article.status}</td>
+				<td>${article.approve_time}</td>
+				<td>${article.approve_status}</td>	
 				<td>
-					<a href="/psyco/super/delete.com?pageNum=${pageNum}&id=${article.member_id}&pageName=memberList">삭제</a>
+				<a href="/psyco/super/sShopDelete.com?pageNum=${pageNum}&shop_num=${article.shop_num}"></a>
 					
 				</td>
 			

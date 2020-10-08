@@ -22,22 +22,44 @@ public class SuperServiceImpl implements SuperService {
 		int count = superDAO.getMemberCount();
 		return count;
 	}
+	
 
 	@Override
-	public List getMemberListSV(int start, int end) throws SQLException {
+	public List getMemberListSV(int startRow, int endRow) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public int deleteSV(String pageName,String id) throws SQLException {
+		int result = superDAO.delete(pageName,id);
+			
 		
 		
-		List list = superDAO.getMemberList(start, end);
+		return result;
+	}
+
+	
+	
+	
+	@Override
+	public int getShopCountSV() throws SQLException {
+		int count = superDAO.getShopCount();
+		return count;
+	}
+
+	@Override
+	public List getShopListSV(int startRow, int endRow) throws SQLException {
+		List list = superDAO.getShoplist(startRow, endRow);
 		return list;
 	}
 
-	@Override
-	public int deleteMemberSV(String id) throws SQLException {
 
-			int result = superDAO.deleteMember(id);
-			
-			return result;
 
-	}
+
+	
+
+	
 
 }
