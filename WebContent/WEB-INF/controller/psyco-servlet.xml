@@ -11,7 +11,8 @@
 
 	 
 	 
-	  <context:component-scan base-package="com.three.psyco"/>
+	<context:component-scan base-package="com.three.psyco"/>
+	
 	 
 
 		 <!--  DB세팅  -->
