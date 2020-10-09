@@ -3,7 +3,7 @@ package com.three.psyco.model.dto;
 import java.security.Timestamp;
 
 public class CommunityDTO {
-	
+
 	private int community_num;
 	private String subject;
 	private String content;
@@ -91,9 +91,6 @@ public class CommunityDTO {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	
-	
-	
-	
+
 	
 }
