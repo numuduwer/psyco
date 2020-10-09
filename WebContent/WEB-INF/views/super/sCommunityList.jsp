@@ -5,26 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Member 관리 페이지</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<title>커뮤니티 & 헬프 관리 페이지</title>
+
+
 <script>
 	
 	
-function onClickItemDelete(memberNum){
-	var apiURL = '/psyco/super/deleteMember.com';
-	console.log(apiURL);
-
-	$.ajax({
-        type: 'POST',
-        url: apiURL,
-		data: {member_num : memberNum},
-        error: function (error) {
-            alert('data error');
-        }
-    });
+$("a").click(function(e){
+	event.stopPropagation();
 	
-	
-}
+});
 	
 </script>
 
@@ -36,39 +26,36 @@ function onClickItemDelete(memberNum){
 
 
 
-	<h1> 관리 페이지 </h1>
 	
 	
 	<c:if test="${count == 0}">
-		<h2> 멤버가 없어요.</h2>
+		<h2>글이 없어요.</h2>
 	
 	</c:if>
 	<c:if test="${count > 0}">
-	<h3> table</h3>
-	
 		<table>
-			<tr>	
-			<c:forEach var="article" items="${articleList}">
 			<tr>
-				<td>${number} <c:set var="number" value="${number-1}" /> </td>		
-				<td>${article.member_id}</td>
-				<td>${article.pw}</td>
-				<td>${article.name}</td>
-				<td>${article.birth}</td>
-				<td>${article.phonenum}</td>
-				<td>${article.gender}</td>
-				<td>${article.nickname}</td>
-				<td>${article.purchase_count}</td>
-				<td>${article.business_license}</td>
-				<td>${article.reg}</td>
-				<td>
+			
+			
+			<c:forEach var="article" items="${articleList}">
+			
+			<tr>
+				<td>${number} <c:set var="number" value="${number-1}" /> </td>
+				<td>${article.subject}</td>
 				
-					<a href="javascript:onClickItemDelete('${article.member_id}')" >삭제</a>				
-				</td>		
+				<td>${article.writer}</td>
+				<td>${article.grade}</td>
+				
+				<td>${article.community_img}</td>
+				<td>${article.confirm}</td>
+				<td><a href="/psyco/super/sShopDelete.com?pageNum=${pageNum}&shop_num=${article.community_num}">삭제</a></td>
+			
 			</tr>
-		</c:forEach>		
+		</c:forEach>
+		
 		</table>
 	</c:if>
+	
 	
 	<%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
 	<div align="center">

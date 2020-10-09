@@ -7,14 +7,9 @@ import org.springframework.stereotype.Service;
 
 public interface SuperService {
 	
-	int getMemberCountSV() throws SQLException;
-	List getMemberListSV(int startRow, int endRow) throws SQLException;
 	
-	
-	
-	public int getShopCountSV() throws SQLException;
-	public List getShopListSV(int startRow, int endRow) throws SQLException;
-	
+	public int getCountSV(String pageName) throws SQLException;
+	public List getListSV(String pageName, int startRow, int endRow) throws SQLException;
 	public int deleteSV(String pageName, String id) throws SQLException;
 
 }

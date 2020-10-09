@@ -6,9 +6,32 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript">
+
+$('#btn1').on('click', function(){
+    var form = {
+            name: "jamong",
+            age: 23
+    }
+    $.ajax({
+        url: "/psyco/main.com",
+        type: "POST",
+        data: form,
+        success: function(data){
+            $('#result').text(data);
+        },
+        error: function(){
+            alert("simpleWithObject err");
+        }
+    });
+});
+
+</script>
 <body>
 	<h1> 나는 메인이다.</h1>
-	<h2>테스트 2</h2>
-	<h3>테스트 3</h3>
+	<button id="bt1"></button>
+	<div id="result">
+	
+	</div>
 </body>
 </html>

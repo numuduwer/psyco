@@ -6,9 +6,10 @@
 <configuration>
   
 	<typeAliases>
-		
 		<typeAlias type="com.three.psyco.model.dto.MemberDTO" alias="MemberDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.ShopDTO" alias="ShopDTO"/>
+		<typeAlias type="com.three.psyco.model.dto.CommunityDTO" alias="CommunityDTO"/>
+		<typeAlias type="com.three.psyco.model.dto.TestDTO" alias="TestDTO"/>
 	</typeAliases>
 	
 	<mappers>

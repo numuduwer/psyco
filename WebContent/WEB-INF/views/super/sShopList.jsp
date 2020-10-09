@@ -36,27 +36,9 @@ $("a").click(function(e){
 	<c:if test="${count > 0}">
 		<table>
 			<tr>
-				<td>no</td>
-				<td>SHOP_NAME</td>
-				<td>SHOP_PHONE</td>
-				<td>OPERATING_TIME</td>
-				<td>ADDRESS</td>
-				
-				<td>ORIGIN</td>
-				<td>TAKEOUT</td>
-				<td>SHOP_IMG</td>
-				<td>LICENSE_NUMBER</td>
-				<td>REQUEST_TIME</td>
-				
-				<td>APPROVE_TIME</td>
-				<td>STATUS</td>
-				<td>APPROVE_STATUS</td>
-				<td>MEMBER_NUM</td>
-				<td>삭제</td>
-			</tr>
 			
 			
-			<c:forEach var="article" items="${shopList}">
+			<c:forEach var="article" items="${articleList}">
 			<tr>
 				<td>${number} <c:set var="number" value="${number-1}" /> </td>
 				<td>${article.shop_name}</td>
@@ -75,7 +57,7 @@ $("a").click(function(e){
 				<td>${article.approve_time}</td>
 				<td>${article.approve_status}</td>	
 				<td>
-				<a href="/psyco/super/sShopDelete.com?pageNum=${pageNum}&shop_num=${article.shop_num}"></a>
+				<a href="/psyco/super/sShopDelete.com?pageNum=${pageNum}&shop_num=${article.shop_num}">삭제</a>
 					
 				</td>
 			

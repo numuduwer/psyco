@@ -14,26 +14,39 @@ public class SuperDAOImpl implements SuperDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession = null;
 
-	@Override
-	public int getMemberCount() throws SQLException {
-		int count = sqlSession.selectOne("super.getMemberCount");
+
+
+	public int count(String pageName)throws SQLException {
+		int count= 0;
+		
+		if(pageName.equals("sMemberList"))  {
+			count = sqlSession.selectOne("super.getMemberCount");	
+		}else if(pageName.equals("sShopList")) {
+			count = sqlSession.selectOne("super.getShopCount");
+		}else if(pageName.equals("sCommunityList")) {
+			count = sqlSession.selectOne("super.getCommunityCount");
+		}
 		return count;
 	}
-
-	@Override
-	public List getMemberList(int start, int end) throws SQLException {
-
+	
+	public List List(String pageName, int startRow, int endRow) throws SQLException {
+		
 		HashMap map = new HashMap();
-		map.put("start", start);
-		map.put("end", end);
+		map.put("start", startRow);
+		map.put("end", endRow);
 		
-		List list = sqlSession.selectList("super.getMemberList", map);
-		
+		List list = null;
+
+		if(pageName.equals("sMemberList")) {
+			list = sqlSession.selectList("super.getMemberList", map);	
+		}else if(pageName.equals("sShopList")){
+			list = sqlSession.selectList("super.getShopList", map);	
+		}else if(pageName.equals("sCommunityList")){
+			list = sqlSession.selectList("super.sCommunityList", map);	
+		}	
 		return list;
 	}
 
-	
-	
 	
 	public int delete(String pageName, String id) throws SQLException {
 		int result = 0;
@@ -48,45 +61,11 @@ public class SuperDAOImpl implements SuperDAO {
 		}
 		return result;
 	}
-	
-	
-	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public int getShopCount() {
-		int count = sqlSession.selectOne("super.getShopCount");
-		return count;
-	}
-
-	public List getShoplist(int startRow, int endRow) throws SQLException {
-		HashMap map = new HashMap();
-		map.put("start", startRow);
-		map.put("end", endRow);
-		List list = sqlSession.selectList("super.getShopList", map);
+	public void deleteMember(String memberNum) {
+		System.out.println("dao memberId :" + memberNum);
+		sqlSession.update("super.deleteMember",memberNum);
 		
-		
-		return list;
 	}
-
-
-	
+		
 }

@@ -17,18 +17,6 @@ public class MainBean {
 	private SqlSessionTemplate sqlSession = null;
 	
 	
-	@RequestMapping("main.com")
-	public String main() {
-		System.out.println("controller 잘 연결 ");
-		
-		
-		TestDTO dto = new TestDTO();
-		dto.setNum(99);
-		dto.setWriter("99");
-		
-		int count = sqlSession.selectOne("test.put",dto);
-		System.out.println("count :" + count );
-		return "main/main";
-	}
+
 
 }
