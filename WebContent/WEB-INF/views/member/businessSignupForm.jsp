@@ -14,7 +14,6 @@
 				var text2 = $("#text2").val();
 				var text3 = $("#text3").val();
 				var allData = {"text1" : text1, "text2" : text2, "text3" : text3};
-				console.log("1");
 				
 				$.ajax({
 					url : "/psyco/member/licenseLookup.com",
