@@ -33,8 +33,6 @@ public class MemberShopBean {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
 		return "store/menuSignupForm";
 	}
 
