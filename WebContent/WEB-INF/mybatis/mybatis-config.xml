@@ -9,13 +9,15 @@
 		<typeAlias type="com.three.psyco.model.dto.MemberDTO" alias="MemberDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.ShopDTO" alias="ShopDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.CommunityDTO" alias="CommunityDTO"/>
+		<typeAlias type="com.three.psyco.model.dto.MemberShopDTO" alias="MemberShopDTO"/>
+		<typeAlias type="com.three.psyco.model.dto.MemberShopMenuDTO" alias="MemberMenuDTO"/>
+		<typeAlias type="com.three.psyco.model.dto.MidDTO" alias="MidDTO"/>
 	</typeAliases>
 	
 	<mappers>
-
 		<mapper resource="/sql/superSQL.xml"/>
-		
-
+		<mapper resource="/sql/memberShopSQL.xml"/>
+		<mapper resource="/sql/memberMenuSQL.xml"/>
 	</mappers>
   	
   </configuration>
