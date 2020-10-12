@@ -22,7 +22,6 @@ import com.three.psyco.model.dto.CommunityDTO;
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.MemberDTO;
 import com.three.psyco.model.dto.ShopDTO;
-import com.three.psyco.model.dto.TestDTO;
 import com.three.psyco.service.bean.CommonsServiceImpl;
 import com.three.psyco.service.bean.SuperServiceImpl;
 

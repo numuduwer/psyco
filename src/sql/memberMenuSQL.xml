@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="MemberMenu">
+  	<insert id="insertMenu" parameterType="MemberMenuDTO">
+  		insert into menu values(#{menu_num},#{menu_name},#{content},#{menu_img},#{price},#{category},#{season},#{sett},#{shop_num},sysdate)
+  	</insert>
+  	<select id="selectMenu" parameterType="int" resultType="MidDTO">
+  		select * from mid where big_num=#{value}
+  	</select> 
+  </mapper>
