@@ -104,4 +104,14 @@ public class MemberBean {
 		
 		return new ResponseEntity<String>(status, resHeaders, HttpStatus.CREATED);
 	}
+	
+	@RequestMapping("mapsTest.com")
+	public String mapTest() {
+		return "member/mapsTest";
+	}
+	
+	@RequestMapping("geoLocation.com")
+	public String geoLocation() {
+		return "member/geoLocation";
+	}
 }

@@ -307,6 +307,7 @@ public class MemberServiceImpl implements MemberService {
 		wr.close();
 		
 		int responseCode = con.getResponseCode();
+		System.out.println(responseCode);
 		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 		String inputLine;
 		StringBuffer response = new StringBuffer();
