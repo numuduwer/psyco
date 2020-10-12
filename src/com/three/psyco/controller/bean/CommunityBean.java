@@ -70,17 +70,15 @@ public class CommunityBean {
 		viewImg = communityService.getArticlesImg(category);
 		
 		String path = request.getRealPath("save");
-//		for(int i=0; i<=viewImg.size(); i++) {
-//			CommunityDTO dto = (CommunityDTO) viewImg.get(i);
+		for(int i=0; i<=viewImg.size()+1; i++) {
+			CommunityDTO dto = (CommunityDTO) viewImg.get(i);
 //			 	path = path + "\\" + dto.getCommunity_img();
-//			 	System.out.println(path);
-//		}
-		
-		for(int i=0; i<=viewImg.size(); i++) {
-			
+			 	System.out.println(path);
 		}
 
-		model.addAttribute("path", viewImg);
+		path = path + "\\";
+		model.addAttribute("path", path);
+		model.addAttribute("viewImg", viewImg);
 		
 		
 		number = count  - (currPage-1) *  pageSize;
