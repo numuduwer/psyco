@@ -23,6 +23,7 @@
  		<param-value>
  			/WEB-INF/controller/psyco-servlet.xml
  			/WEB-INF/controller/main-controller.xml
+ 			/WEB-INF/controller/super-controller.xml
  		</param-value>
  	</init-param>
  </servlet>

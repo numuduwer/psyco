@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <!-- namespace : 내부에 쿼리태크 호출시 namespace속성명 쿼리태그 id값-->
+ 
+ <mapper namespace="super">
+ 	
+ 	
+ 	<select id="getMemberCount" resultType="int" >
+ 		select count(*) from member
+ 	</select>
+ 	
+ 	<select id="getShopCount" resultType="int" >
+ 		select count(*) from shop
+ 	</select>
+ 	
+ 	<select id="getCommunityCount" resultType="int" >
+ 		select count(*) from community
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 	<select id="getMemberList" parameterType="hashmap" resultType="MemberDTO">
+ 		<![CDATA[
+		SELECT /*+ index_desc(MEMBER MEMBER_SEQ)*/rownum rn, member_num, member_id, pw, name, birth, phonenum, gender, nickname, email, purchase_count, business_license, reg
+		FROM MEMBER
+		WHERE MEMBER_NUM >= #{start}
+		AND rownum <= #{end}
+	
+		]]>
+ 	</select>
+ 	
+ 	<select id="getShopList" parameterType="hashmap" resultType="ShopDTO">
+ 		<![CDATA[
+		SELECT /*+ index_desc(SHOP SHOP_SEQ)*/rownum rn, SHOP_NUM ,SHOP_NAME ,SHOP_PHONE ,OPERATING_TIME ,ADDRESS , ORIGIN ,TAKEOUT ,SHOP_IMG ,LICENSE_NUMBER ,REQUEST_TIME ,APPROVE_TIME ,STATUS ,APPROVE_STATUS ,MEMBER_NUM
+		FROM shop 
+		WHERE SHOP_NUM >= #{start}
+		AND rownum <= #{end}	
+		]]>
+ 	</select>
+ 	
+ 	<select id="sCommunityList" parameterType="hashmap" resultType="CommunityDTO">
+ 		<![CDATA[
+		SELECT /*+ index_desc(COMMUNITY COMMUNITY_SEQ)*/rownum rn, community_num, SUBJECT , CONTENT , WRITER , GRADE , COMMUNITY_IMG , CATEGORY , CONFIRM ,REF , RE_STEP , RE_LEVEL , reg
+		FROM COMMUNITY
+		WHERE community_num >= #{start}
+		AND rownum <= #{end}
+		]]> 		
+ 	</select>
+ 	
+ 	
+ 		
+ 	<select id="deleteMember" parameterType="String">
+ 		delete from MEMBER where MEMBER_ID =#{value}
+ 	</select>
+ 	
+ </mapper>
+ 
+ 
