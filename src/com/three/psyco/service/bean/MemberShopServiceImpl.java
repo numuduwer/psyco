@@ -20,7 +20,6 @@ public class MemberShopServiceImpl implements MemberShopService {
 	@Override
 	public void insertMemberShops(MultipartHttpServletRequest request,int member_num,String status,String approve_status) throws SQLException {
 		MemberShopDTO dto=new MemberShopDTO();
-		int shop_num=member_num;
 		String shop_name=request.getParameter("shop_name");
 		String shop_phone=request.getParameter("shop_phone");
 		String operating_time=request.getParameter("operating_time");
@@ -51,7 +50,6 @@ public class MemberShopServiceImpl implements MemberShopService {
 		dto.setOrigin(origin);
 		dto.setApprove_status(approve_status);
 		dto.setMember_num(member_num);
-		dto.setShop_num(shop_num);
 		dto.setTakeout(takeout);
 		dto.setlicense_number(license_number);
 		dto.setStatus(status);

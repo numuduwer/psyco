@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="review">
+  	<insert id="insertReview" parameterType="ReviewDTO">
+  		insert into review values(review_seq.nextVal,#{writer},#{category},#{content},#{grade},#{confirm},#{ref},#{reply_content},#{shop_num},#{member_id},#{review_img},sysdate)
+  	</insert>
+  	<select id="getReview" parameterType="hashmap" resultType="ReviewDTO">
+  				<![CDATA[
+  					select B.*,r from (select A.*,rownum r from (select * from review where member_id=#{member_id} )A )B where r >=#{start}  and r <=#{end} 
+					]]>
+  	</select>
+  	
+  	<select id="getCount"  resultType="int">
+  		select count(*) from review
+  	</select>
+  </mapper>

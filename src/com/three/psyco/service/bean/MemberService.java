@@ -27,4 +27,6 @@ public interface MemberService {
 	public int loginCheck(String member_Id, String pw);
 	
 	public String licenseLookup(String license_number) throws IOException;
+	
+	public MemberDTO memberInfos(String session)throws Exception;
 }

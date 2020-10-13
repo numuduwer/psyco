@@ -14,6 +14,7 @@
 		<typeAlias type="com.three.psyco.model.dto.MidDTO" alias="MidDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.TestDTO" alias="TestDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.CommunityDTO" alias="CommunityDTO"/>
+		<typeAlias type="com.three.psyco.model.dto.ReviewDTO" alias="ReviewDTO"/>
 
 	</typeAliases>
 	
@@ -22,7 +23,7 @@
 		<mapper resource="/sql/memberShopSQL.xml"/>
 		<mapper resource="/sql/memberMenuSQL.xml"/>
 		<mapper resource="/sql/testSQL.xml"/>
-		<mapper resource="/sql/CommunitySQL.xml"/>
+		<mapper resource="/sql/reviewSQL.xml"/>
 
 
 

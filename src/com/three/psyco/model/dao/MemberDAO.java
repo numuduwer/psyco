@@ -11,4 +11,6 @@ public interface MemberDAO {
 	public int insertMember(MemberDTO dto);
 	
 	public int loginCheck(String member_Id, String pw);
+	
+	public MemberDTO memberInfo(String session)throws Exception;
 }

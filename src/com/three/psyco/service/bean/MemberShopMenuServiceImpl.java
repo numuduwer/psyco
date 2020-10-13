@@ -26,7 +26,6 @@ public class MemberShopMenuServiceImpl implements MemberShopMenuService {
 	@Override
 	public void insertMemberMenus(MultipartHttpServletRequest request,int shop_num) throws SQLException {
 			MemberShopMenuDTO dto=new MemberShopMenuDTO();
-			int menu_num=shop_num;
 			String menu_name=request.getParameter("menu_name");
 			String content=request.getParameter("content");
 			int price=Integer.parseInt((request.getParameter("price")));
@@ -55,7 +54,6 @@ public class MemberShopMenuServiceImpl implements MemberShopMenuService {
 			dto.setPrice(price);
 			dto.setSeason(season);
 			dto.setSett(sett);
-			dto.setMenu_num(menu_num);
 			dto.setShop_num(shop_num);
 			System.out.println(dto.getCategory());
 			memberShopMenuDAO.insertMemberMenu(dto);

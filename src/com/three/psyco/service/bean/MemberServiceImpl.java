@@ -319,4 +319,12 @@ public class MemberServiceImpl implements MemberService {
 		
 		return response.toString();
 	}
+
+		//멤버 정보 가져오기 -동윤-
+	@Override
+	public MemberDTO memberInfos(String session) throws Exception {
+		MemberDTO dto=memberDAO.memberInfo(session);
+		return null;
+	}
+	
 }

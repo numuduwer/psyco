@@ -41,5 +41,12 @@ public class MemberDAOImpl implements MemberDAO {
 		int count = sqlSession.selectOne("member.loginCheck", hMap);
 		return count;
 	}
+
+	//멤버 정보 가져오기 -동윤-
+	@Override
+	public MemberDTO memberInfo(String session) throws Exception {
+		sqlSession.selectOne("member.memberInfo",session);
+		return null;
+	}
 	
 }
