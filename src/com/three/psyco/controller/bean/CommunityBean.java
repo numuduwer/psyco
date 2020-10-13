@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.three.psyco.model.dao.CommunityDAO;
 import com.three.psyco.model.dto.CommunityDTO;
+import com.three.psyco.service.CommunityService;
 import com.three.psyco.service.CommunityServiceImpl;
 
 @EnableWebMvc
@@ -215,7 +218,74 @@ public class CommunityBean {
 		return "community/communityDetail";
 	}
 	
+	// 고객센터
+	@RequestMapping("help.com")
+	public String help(String pageNum, Model model, String category) throws SQLException{
+		
+		if (pageNum == null) pageNum = "1";
+		int pageSize = 10;
+		int currPage = Integer.parseInt(pageNum);
+		int startRow = (currPage -1) * pageSize + 1;
+		int endRow = currPage * pageSize;
+		int number = 0;	// 게시판 상의 글의 번호 띄어줄 변수
+		
+		List helpList = null;
+		
+		int count = communityService.getAskCountSv(category);
+		
+		if (count > 0) {
+			helpList = communityService.getAllAsks(startRow, endRow);
+		}
+		number = count - (currPage -1) * pageSize;
+		
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("pageSize", new Integer(pageSize));
+		model.addAttribute("currPage", new Integer(currPage));
+		model.addAttribute("startRow", new Integer(startRow));
+		model.addAttribute("endRow", new Integer(endRow));
+		model.addAttribute("number", new Integer(number));
+		model.addAttribute("helpList", helpList);
+		model.addAttribute("count", new Integer(count));
+		
+		return "community/help";
+	}
 	
+	
+	@RequestMapping("helpForm.com")
+	public String helpForm(@ModelAttribute("dto") CommunityDTO dto) throws SQLException {
+		return "community/helpForm";
+	}
+	
+	@RequestMapping("helpPro.com")
+	public String helpPro(CommunityDTO dto) throws SQLException{
+		
+
+		communityService.insertHelpSv(dto);
+		dto.setCommunity_img("0");
+		dto.setCategory("5");
+		dto.setGrade("0");
+		
+		return "community/helpPro";
+	}
+	
+	@RequestMapping("myHelpList.com")
+	public String myHelpList(String pageNum,Model model) throws SQLException {
+
+		return "community/myHelpList";
+	}
+	
+	@RequestMapping("HelpDetail.com")
+	public String HelpDetail(Model model, int community_num, String pageNum) throws SQLException {
+		
+		CommunityDTO article = communityService.getAskSv(community_num);
+		
+		
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("num", community_num);
+		model.addAttribute("article", article);
+		
+		return "community/HelpDetail";
+	}
 	
 	
 	

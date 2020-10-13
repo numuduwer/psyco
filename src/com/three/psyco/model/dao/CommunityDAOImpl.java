@@ -64,6 +64,7 @@ public class CommunityDAOImpl implements CommunityDAO {
 
 		
 		int count = sqlSession.selectOne("community.countAll", category);
+		
 		return count;
 	}
 
@@ -121,6 +122,48 @@ public class CommunityDAOImpl implements CommunityDAO {
 	public int getMyArticleCount(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int getAskCount(String category) throws SQLException {
+		int count = sqlSession.selectOne("community.helpCountAll", category);
+		
+		return count;
+	}
+
+	@Override
+	public CommunityDTO getAsk(int community_num) throws SQLException {
+		
+		CommunityDTO article = sqlSession.selectOne("community.selectOne",community_num);
+		
+		return article;
+	}
+
+	@Override
+	public List getAllAsk(int start, int end) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		
+		List list = sqlSession.selectList("community.helpList",map);
+		CommunityDTO dto = (CommunityDTO) list.get(0);
+		
+		
+		return list;
+	}
+
+	@Override
+	public void insertHelp(CommunityDTO dto) throws SQLException {
+		int number = 0;
+		String numb = sqlSession.selectOne("community.maxNum");
+		if(numb != null) {
+			number = Integer.parseInt(numb) + 1;
+		}else {
+			number = 1;
+		}
+		
+	sqlSession.insert("community.insertHelp", dto);
+	
 	}
 
 }

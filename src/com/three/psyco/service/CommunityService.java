@@ -37,5 +37,17 @@ public interface CommunityService {
 
 	int getMyArticleCountSv(String id) throws SQLException;
 	
+	// <고객센터>
+	// 문의 개수 검색
+	public int getAskCountSv(String category) throws SQLException;
+	
+	// 문의 리스트들만 전부 가져오기
+	public List getAllAsks(int start, int end) throws SQLException;
+	
+	// 문의 하나 가져오기
+	public CommunityDTO getAskSv(int community_num) throws SQLException;
+
+	public void insertHelpSv(CommunityDTO dto) throws SQLException;
+
 	
 }

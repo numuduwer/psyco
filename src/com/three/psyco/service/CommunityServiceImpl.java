@@ -25,7 +25,6 @@ public class CommunityServiceImpl implements CommunityService {
 
 	@Override
 	public Map getPageData(String pageNum) throws SQLException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -33,6 +32,7 @@ public class CommunityServiceImpl implements CommunityService {
 	public int getArticleCountSv(String category) throws SQLException {
 		
 		int count = commnuityDAO.getArticleCount(category);
+		
 		return count;
 	}
 
@@ -61,13 +61,11 @@ public class CommunityServiceImpl implements CommunityService {
 
 	@Override
 	public CommunityDTO getArticleForUpdateSv(int num) throws SQLException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public int updateArticleSv(CommunityDTO dto) throws SQLException {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -79,8 +77,36 @@ public class CommunityServiceImpl implements CommunityService {
 
 	@Override
 	public int getMyArticleCountSv(String id) throws SQLException {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int getAskCountSv(String category) throws SQLException {
+		int count = commnuityDAO.getAskCount(category);
+		
+		return count;
+	}
+
+	@Override
+	public List getAllAsks(int start, int end) throws SQLException {
+		
+		List asks = commnuityDAO.getAllAsk(start, end);
+		
+		return asks;
+	}
+
+	@Override
+	public CommunityDTO getAskSv(int community_num) throws SQLException {
+		
+		CommunityDTO article = commnuityDAO.getArticle(community_num);
+		
+		return article;
+	}
+	
+	@Override
+	public void insertHelpSv(CommunityDTO dto) throws SQLException {
+		
+		commnuityDAO.insertHelp(dto);
 	}
 
 }
