@@ -19,7 +19,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.three.psyco.model.dto.CommunityDTO;
-import com.three.psyco.service.CommunityServiceImpl;
+import com.three.psyco.service.bean.CommunityServiceImpl;
+import com.three.psyco.service.bean.MemberServiceImpl;
 
 @EnableWebMvc
 @Controller
@@ -110,11 +111,12 @@ public class CommunityBean {
 	public String communityForm(CommunityDTO dto, HttpServletRequest request, Model model) {
 		
 		
-		
+		String community_num = request.getParameter("community_num");
 		String category = request.getParameter("category");
 		String grade = request.getParameter("grade");
 		model.addAttribute("category", category);
 		model.addAttribute("grade", grade);
+		model.addAttribute("community_num", community_num);
 		
 		
 	
@@ -238,7 +240,9 @@ public class CommunityBean {
 	@RequestMapping("communityModifyPro.com")
 	public String communityModifyPro(MultipartHttpServletRequest request) throws SQLException {
 		
-	
+		
+		
+
 		
 		
 		CommunityDTO dto = new CommunityDTO();

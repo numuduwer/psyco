@@ -110,9 +110,9 @@ public class CommunityDAOImpl implements CommunityDAO {
 	@Override
 	public int updateArticle(CommunityDTO dto) throws SQLException {
 
-		
-		
-		return result;
+		sqlSession.update("community.update", dto);
+
+		return 0;
 	}
 
 	@Override

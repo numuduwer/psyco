@@ -9,6 +9,7 @@
 	http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	 
+	
 	 
 	<context:component-scan base-package="com.three.psyco"/>
 	 
@@ -57,6 +58,16 @@
 		<property name="maxUploadSize" value="-1" />
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
+
+
+	 
+
+	 
+	 
+	 		
+	 		
+	 		
+	 
 
 
 </beans>
