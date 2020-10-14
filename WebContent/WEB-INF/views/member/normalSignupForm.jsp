@@ -13,23 +13,6 @@
 		$(document).ready(function(){
 			IMP.init('imp29075190');
 		})
-		
-		function certification() {
-			
-			// IMP.certification(param, callback) 호출
-			IMP.certification({ // param
-				merchant_uid: "psyco20201013-000006"
-			}, function (rsp) { // callback
-				if (rsp.success) {
-			      
-			      
-			      
-			    } else {
-			      
-			    }
-			  });
-		}
-		
 	
 		function execDaumPostCode() {
 			new daum.Postcode({
@@ -102,13 +85,12 @@
 				<input type="password" name="pw_confirm" placeholder="비밀번호 재입력" /> <br />
 				<input type="text" name="name" placeholder="이름 입력" /> <br />
 				<input type="date" name="birth" /> <br />
-				<input type="text" name="phoneNum" placeholder="번호 입력" /> 
-				<input type="button" onclick="certification()" value="휴대폰 본인 인증"> <br>
+				<input type="text" name="phoneNum" placeholder="번호 입력" /> <br>
 				
 				<label for="male">남성</label>
 				<input type="radio" name="gender" id="male" value="M" />
 				<label for="female">여성</label>
-				<input type="radio" name="gender" id="female" value="F" /> <br />
+				<input type="radio" name="gender" id="female" value="F" /> <br>
 				<input type="text" name="nickname" placeholder="닉네임(활동 이름) 입력" /> <br />
 				<input type="text" name="email" placeholder="이메일 입력" /> <br />
 				

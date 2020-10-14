@@ -22,7 +22,7 @@
 		<mapper resource="/sql/memberShopSQL.xml"/>
 		<mapper resource="/sql/memberMenuSQL.xml"/>
 		<mapper resource="/sql/testSQL.xml"/>
-		
+		<mapper resource="/sql/memberSQL.xml"/>
 
 
 
