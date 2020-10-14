@@ -26,7 +26,7 @@
 	<br /><br />
 	
 	<%-- 게시글이 없을 때 --%>
-	<c:if test="${map.count == 0 }">
+	<c:if test="${count == 0 }">
 		<table>
 			<tr>
 				<td>
@@ -35,7 +35,7 @@
 			</tr>
 		</table>
 	</c:if>
-	<c:if test="${map.count > 0 }">
+	<c:if test="${count > 0 }">
 		<table>
 			<tr>
 				<td>No.</td>
@@ -44,11 +44,9 @@
 				<td>시  간</td>
 				<td>조회수</td>
 			</tr>
-			<c:forEach var="article" items="${map.helpList}">
+			<c:forEach var="article" items="${articleList}">
 				<tr>
-					<td>
-						${map.number}
-					</td>						
+					<td>${number} <c:set var="number" value="${number-1}" /> </td>				
 					<td align="left">
 					
 						<c:set var="wid" value="0"></c:set>
@@ -67,31 +65,31 @@
 		</table>
 	</c:if>
 	
-		<%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
-			<div align="center">
-			<c:if test="${map.count > 0}">
-				<fmt:parseNumber var="res" value="${map.count / map.pageSize}"  integerOnly="true"/>
-				<c:set var="pageCount" value="${res + (map.count % map.pageSize == 0 ? 0 : 1)}"  />
-				<c:set var="pageBlock" value="10" />
-				<fmt:parseNumber var="result" value="${(map.currPage-1)/pageBlock}" integerOnly="true" />
-				<fmt:parseNumber var="startPage" value="${result * pageBlock + 1}" />
-				<fmt:parseNumber var="endPage" value="${startPage + pageBlock - 1}" />
-				<c:if test="${endPage > pageCount}">
-					<c:set var="endPage" value="${pageCount}" />
-				</c:if>
-				
-				<c:if test="${startPage > pageBlock}">
-					<a href="/psyco/help.com?pageNum=${startPage-pageBlock}&category=${category}" > &lt; </a>
-				</c:if>
-				<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1" >
-					<a href="/psyco/help.com?pageNum=${i}&category=${category}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
-				</c:forEach>
-				<c:if test="${endPage < pageCount}">
-					<a href="/psyco/help.com?pageNum=${startPage+pageBlock}&category=${category}" > &gt; </a>
-				</c:if>
-			
-			</c:if>
-			</div>
+			<%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
+	<div align="center">
+	<c:if test="${count > 0}">
+		<fmt:parseNumber var="res" value="${count / pageSize}"  integerOnly="true"/>
+		<c:set var="pageCount" value="${res + (count % pageSize == 0 ? 0 : 1)}"  />
+		<c:set var="pageBlock" value="10" />
+		<fmt:parseNumber var="result" value="${(currPage-1)/pageBlock}" integerOnly="true" />
+		<fmt:parseNumber var="startPage" value="${result * pageBlock + 1}" />
+		<fmt:parseNumber var="endPage" value="${startPage + pageBlock - 1}" />
+		<c:if test="${endPage > pageCount}">
+			<c:set var="endPage" value="${pageCount}" />
+		</c:if>
+		
+		<c:if test="${startPage > pageBlock}">
+			<a href="/psyco/help.com?pageNum=${startPage-pageBlock}&category=${category}" > &lt; </a>
+		</c:if>
+		<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1" >
+			<a href="/psyco/help.com?pageNum=${i}&category=${category}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+		</c:forEach>
+		<c:if test="${endPage < pageCount}">
+			<a href="/psyco/help.com?pageNum=${startPage+pageBlock}&category=${category}" > &gt; </a>
+		</c:if>
+	
+	</c:if>
+	</div>
 	
 	
 </body>

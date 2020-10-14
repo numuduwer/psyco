@@ -160,7 +160,7 @@ public class CommunityDAOImpl implements CommunityDAO {
 		}
 		
 		@Override
-		public List getMyAsk(int start, int end, String category, String writer) throws SQLException {
+		public List getMyAsk(String category, String writer) throws SQLException {
 			HashMap hMap = new HashMap();
 			hMap.put("category", category);
 			hMap.put("writer", writer);

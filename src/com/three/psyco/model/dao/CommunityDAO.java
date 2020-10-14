@@ -51,6 +51,6 @@ public interface CommunityDAO {
 	public void insertHelp(CommunityDTO dto) throws SQLException;
 
 	// 내글 가져오기
-	public List getMyAsk(int start, int end, String category, String writer) throws SQLException;
+	public List getMyAsk(String category, String writer) throws SQLException;
 
 }

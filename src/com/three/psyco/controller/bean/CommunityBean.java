@@ -21,12 +21,17 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.three.psyco.model.dto.CommunityDTO;
+import com.three.psyco.model.dto.ListData;
+import com.three.psyco.service.bean.CommonsServiceImpl;
 import com.three.psyco.service.bean.CommunityServiceImpl;
 import com.three.psyco.service.bean.MemberServiceImpl;
 
 @EnableWebMvc
 @Controller
 public class CommunityBean {
+	
+	@Autowired
+	private CommonsServiceImpl commonsService = null;
 	
 	@Autowired
 	private CommunityServiceImpl communityService = null;
@@ -323,9 +328,11 @@ public class CommunityBean {
 			
 			
 			HashMap map = new HashMap();
-			map = communityService.abc(pageNum, category);
 			
-			model.addAttribute("map", map);
+			// map = communityService.abc(pageNum, category);
+			ListData data = communityService.abc(pageNum, category);
+			commonsService.setListDataToModel(model, data);
+			//model.addAttribute("map", map);
 			model.addAttribute("category", category);
 			model.addAttribute("pageNum", pageNum);
 			
@@ -352,7 +359,10 @@ public class CommunityBean {
 		
 		@RequestMapping("myHelpList.com")
 		public String myHelpList(String pageNum, String category, Model model) throws SQLException {
-			List list = communityService.getMyAskSv(category);
+			String writer = "ㅁ";
+			List list = communityService.getMyAskSv(category,writer);
+			
+			model.addAttribute("list",list);
 			
 			return "community/myHelpList";
 		}

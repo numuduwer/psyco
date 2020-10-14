@@ -15,6 +15,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.three.psyco.model.dao.CommunityDAO;
 import com.three.psyco.model.dao.CommunityDAOImpl;
 import com.three.psyco.model.dto.CommunityDTO;
+import com.three.psyco.model.dto.ListData;
 
 @Service
 public class CommunityServiceImpl implements CommunityService {
@@ -114,13 +115,17 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public List getMyAskSv(String category) throws SQLException {
+	public List getMyAskSv(String category,String id) throws SQLException {
 		
-		return null;
+		
+		
+		List myAsk = commnuityDAO.getMyAsk(category,id);
+		
+		return myAsk;
 	}
 	
-	@Override
-	public HashMap abc(String pageNum, String category) throws SQLException {
+	
+	public ListData abc(String pageNum, String category) throws SQLException {
 		
 		if (category == null) {
 			category = "5";
@@ -145,14 +150,16 @@ public class CommunityServiceImpl implements CommunityService {
 		helpList = commnuityDAO.getAllAsk(start, end, category);
 		number = count - (currPage -1) * pageSize;
 		
-		HashMap map = new HashMap();
-		map.put("helpList", helpList);
-		map.put("pageSize", pageSize);
-		map.put("currPage", currPage);
-		map.put("count", count);
-		map.put("number", number);
-		
-		return map;
+		ListData data  = new ListData();
+		data.setArticleList(helpList);
+		data.setCount(count);
+		data.setCurrPage(currPage);
+		data.setEndRow(end);
+		data.setNumber(number);
+		data.setPageNum( Integer.parseInt(pageNum));
+		data.setPageSize(pageSize);
+		data.setStartRow(start);
+		return data;
 	}
 
 }

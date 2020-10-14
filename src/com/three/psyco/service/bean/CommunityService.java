@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.three.psyco.model.dto.CommunityDTO;
+import com.three.psyco.model.dto.ListData;
 
 public interface CommunityService {
 	
@@ -48,8 +49,8 @@ public interface CommunityService {
 	public void insertHelpSv(CommunityDTO dto) throws SQLException;
 
 	// 내 문의 가져오기
-	public List getMyAskSv(String category) throws SQLException;
+	public List getMyAskSv(String category, String writer) throws SQLException;
 	
-	public HashMap abc(String pageNum, String category) throws SQLException;
+	public ListData abc(String pageNum, String category) throws SQLException;
 	
 }

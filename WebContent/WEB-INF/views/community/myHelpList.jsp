@@ -39,7 +39,7 @@
 			<td>조회수</td>
 			
 		</tr>
-		<c:forEach var="article" items="${articleList}">
+		<c:forEach var="article" items="${list}">
 			<tr>
 				<td>${number}
 					<c:set var="number" value="${number-1}" />
@@ -53,7 +53,7 @@
 					</c:if>
 					<a href="/psyco/myHelpDetail.com?num=${article.num}&pageNum=${pageNum}" >${article.subject}</a>
 				</td>
-				<td><a href="mailto:${article.email}">${article.writer}</a></td>
+				<td><a href="mailto:${article.writer}">${article.writer}</a></td>
 				<td>${article.reg}</td>
 				<td>${article.ref}</td>
 			</tr>
