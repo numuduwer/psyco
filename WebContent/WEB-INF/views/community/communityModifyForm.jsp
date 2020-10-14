@@ -32,6 +32,7 @@
 			<input type="hidden" name="community_num" value= "${community_num}"/>
 			<input type="hidden" name="category" value= "${category}"/>
 			
+			
 			<table>
 				<tr>
 					<td>작성자</td>
@@ -51,7 +52,7 @@
 					</tr>
 					<tr>
 		       			<th><img id="imgpreview" src="/psyco/save//${article.community_img}" width="100" height="100"></th>
-		       			<td><label>이미지 변경하기</label><input type="file" onchange="imagepreview(this);" name="community_img"/></td>
+		       			<td><label>이미지 변경하기</label><input type="file" onchange="imagepreview(this);" name="Newcommunity_img"/></td>
 					</tr>
 				</c:if>
 				<c:if test="${category == 1 || category == 2}">

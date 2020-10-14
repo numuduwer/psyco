@@ -229,16 +229,19 @@ public class CommunityBean {
 		
 		try {
 			
-			MultipartFile mf = null;
-			mf = request.getFile("community_img");
+			
+
 	
-				if(community_img == null) {
+				if(community_img != null) {
 					dto.setCommunity_img(getArticleImg.getCommunity_img());
 					dto.setSubject(subject);
 					dto.setCommunity_num(community_num);
 					dto.setContent(content);
-				}else if(community_img != null){
+				}else if(community_img == null){
+					MultipartFile mf = null;
+					mf = request.getFile("Newcommunity_img");
 					String orgName = mf.getOriginalFilename();
+					System.out.println(orgName + "dsa");
 					String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
 					String ext = orgName.substring(orgName.lastIndexOf('.'));
 					long date = System.currentTimeMillis();
