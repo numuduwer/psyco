@@ -126,5 +126,57 @@ public class CommunityDAOImpl implements CommunityDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	// 고객센터 
+
+		@Override
+		public List getAllAsk(int start, int end, String category) throws SQLException {
+			HashMap map = new HashMap();
+			
+			map.put("start", start);
+			map.put("end", end);
+			map.put("category", category);
+			
+			List list = sqlSession.selectList("community.helpList", map);
+			
+			return list;
+		}
+
+		@Override
+		public void insertHelp(CommunityDTO dto) throws SQLException {
+			int number = 0;
+			String numb = sqlSession.selectOne("community.maxNum");
+			if(numb != null) {
+				number = Integer.parseInt(numb) + 1;
+			}else {
+				number = 1;
+			}
+			dto.setCategory("5");
+			dto.setGrade("null");
+			dto.setCommunity_img("null");
+			
+		sqlSession.insert("community.insertHelp", dto);
+		
+		}
+		
+		@Override
+		public List getMyAsk(int start, int end, String category, String writer) throws SQLException {
+			HashMap hMap = new HashMap();
+			hMap.put("category", category);
+			hMap.put("writer", writer);
+			
+			List list = sqlSession.selectList("community.helpList", hMap);
+			
+			return list;
+		}
+
+
+		@Override
+		public int getAskCount(String category) throws SQLException {
+			
+			int count = sqlSession.selectOne("community.helpCountAll", category);
+			
+			return count;
+		}
 
 }

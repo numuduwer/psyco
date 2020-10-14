@@ -46,18 +46,13 @@
 					<td>내용</td>
 					<td><textarea rows="20" cols="70" name="content" >${article.content}</textarea></td>
 				</tr>
-				<c:if test="${category == 3 || category == 4}">
 					<tr>
 						<td>기존 이미지</td>
 					</tr>
 					<tr>
 		       			<th><img id="imgpreview" src="/psyco/save//${article.community_img}" width="100" height="100"></th>
-		       			<td><label>이미지 변경하기</label><input type="file" onchange="imagepreview(this);" name="Newcommunity_img"/></td>
+		       			<td><label>이미지 변경하기</label><input type="file" onchange="imagepreview(this);" name="community_img"/></td>
 					</tr>
-				</c:if>
-				<c:if test="${category == 1 || category == 2}">
-					<input type="hidden" name="community_img" value="${article.community_img}" />
-				</c:if>
 				<tr>												
 					<td colspan="2">
 						<input type="submit" value="수정" /> 

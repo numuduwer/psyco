@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.io.File;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -162,7 +164,11 @@ public class CommunityBean {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-		communityService.insertArticleSv(dto);
+
+			communityService.insertArticleSv(dto);
+
+
+
 		model.addAttribute("category",category);
 		model.addAttribute("pageNum",pageNum);
 		model.addAttribute("grade",grade);		
@@ -188,6 +194,7 @@ public class CommunityBean {
 		return "community/communityDetail";
 	}
 	
+	// 사진 변경 있어야하는 페이지(홍보,음식점추천)
 	@RequestMapping("communityModifyForm.com")
 	public String communityModifyForm(HttpServletRequest request, Model model,String pageNum) throws SQLException {
 		
@@ -205,63 +212,88 @@ public class CommunityBean {
 		return "community/communityModifyForm";
 	}
 	
-	
+	// 사진 변경 있어야하는 페이지(홍보,음식점추천)
 	@RequestMapping("communityModifyPro.com")
 	public String communityModifyPro(MultipartHttpServletRequest request,String pageNum,Model model) throws SQLException {
 		
 		
 		CommunityDTO dto = new CommunityDTO();
-		int a = Integer.parseInt(request.getParameter("category"));
+		String category = request.getParameter("category");
 		int community_num = Integer.parseInt(request.getParameter("community_num"));
-		String community_img = request.getParameter("community_img");
 		String subject = request.getParameter("subject");
 		String content = request.getParameter("content");
 		
 		
 		CommunityDTO getArticleImg = communityService.getArticleSv(community_num);
-		
-		if(request.getFile("Newcommunity_img") != null) {
-			
-		}
-		
-		
-		
-		
-		try {
-			
-			
 
-	
-				if(community_img != null) {
-					dto.setCommunity_img(getArticleImg.getCommunity_img());
-					dto.setSubject(subject);
-					dto.setCommunity_num(community_num);
-					dto.setContent(content);
-				}else if(community_img == null){
-					MultipartFile mf = null;
-					mf = request.getFile("Newcommunity_img");
-					String orgName = mf.getOriginalFilename();
-					System.out.println(orgName + "dsa");
-					String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
-					String ext = orgName.substring(orgName.lastIndexOf('.'));
-					long date = System.currentTimeMillis();
-					String newName = imgName+date+ext;
-					dto.setCommunity_img(newName);
-					dto.setSubject(subject);
-					dto.setCommunity_num(community_num);
-					dto.setContent(content);
-				}
-		}catch(Exception e) {
-			e.printStackTrace();
+		MultipartFile mf = null;
+		mf = request.getFile("community_img");
+		String orgName = mf.getOriginalFilename();
+		if(orgName == "") {
+			orgName = getArticleImg.getCommunity_img();
+			long date = System.currentTimeMillis();
+			dto.setCommunity_img(orgName);
+			dto.setSubject(subject);
+			dto.setCommunity_num(community_num);
+			dto.setContent(content);
+		}else {		
+			String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
+			String ext = orgName.substring(orgName.lastIndexOf('.'));
+			long date = System.currentTimeMillis();
+			String newName = imgName+date+ext;
+			dto.setCommunity_img(newName);
+			dto.setSubject(subject);
+			dto.setCommunity_num(community_num);
+			dto.setContent(content);
 		}
-			
 		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("category",category);
+
 
 		communityService.updateArticleSv(dto);
 		
-		
-		
 		return "community/communityModifyPro";
+	}
+	
+	
+	
+	@RequestMapping("communityModifyForm1.com")
+	public String communityModifyForm1(HttpServletRequest request,String pageNum,Model model) throws SQLException {
+		
+		int community_num = Integer.parseInt(request.getParameter("community_num"));
+		String category = request.getParameter("category");
+		
+		
+		CommunityDTO article = communityService.getArticleSv(community_num);
+		
+		model.addAttribute("community_num", community_num);
+		model.addAttribute("category", category);
+		model.addAttribute("article", article);
+		model.addAttribute("pageNum", pageNum);
+		
+		
+		
+		return "community/communityModifyForm1";
+	}
+	
+	@RequestMapping("communityModifyPro1.com")
+	public String communityModifyPro1(HttpServletRequest request,CommunityDTO dto,String pageNum,Model model) throws SQLException {
+		
+		String category = request.getParameter("category");
+		int community_num = Integer.parseInt(request.getParameter("community_num"));
+		
+		CommunityDTO getArticleImg = communityService.getArticleSv(community_num);
+		
+		dto.setCommunity_img(getArticleImg.getCommunity_img());
+		
+		communityService.updateArticleSv(dto);
+		
+		
+		model.addAttribute("category", category);
+		model.addAttribute("pageNum",pageNum);
+		
+		
+		return "community/communityModifyPro1";
 	}
 	
 	
@@ -284,7 +316,56 @@ public class CommunityBean {
 		return "community/communityDeletePro";
 	}
 	
+	// 고객센터---------------------------------------------------------------
 	
+		@RequestMapping("help.com")
+		public String help(String pageNum, Model model, String category) throws SQLException {
+			
+			HashMap map = new HashMap();
+			map = communityService.abc(pageNum, category);
+			
+			model.addAttribute("map", map);
+			
+			return "community/help";
+		}
+		
+		
+		@RequestMapping("helpForm.com")
+		public String helpForm(@ModelAttribute("dto") CommunityDTO dto) throws SQLException {
+			return "community/helpForm";
+		}
+		
+		@RequestMapping("helpPro.com")
+		public String helpPro(CommunityDTO dto) throws SQLException{
+			
+
+			communityService.insertHelpSv(dto);
+			dto.setCommunity_img("0");
+			dto.setCategory("5");
+			dto.setGrade("0");
+			
+			return "community/helpPro";
+		}
+		
+		@RequestMapping("myHelpList.com")
+		public String myHelpList(String pageNum, String category, Model model) throws SQLException {
+			List list = communityService.getMyAskSv(category);
+			
+			return "community/myHelpList";
+		}
+		
+		@RequestMapping("helpDetail.com")
+		public String helpDetail(Model model, int community_num, String pageNum) throws SQLException {
+			
+			CommunityDTO article = communityService.getAskSv(community_num);
+			
+			
+			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("num", community_num);
+			model.addAttribute("article", article);
+			
+			return "community/helpDetail";
+		}
 	
 	
 	

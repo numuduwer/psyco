@@ -1,11 +1,16 @@
 package com.three.psyco.service.bean;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.three.psyco.model.dao.CommunityDAO;
 import com.three.psyco.model.dao.CommunityDAOImpl;
@@ -83,6 +88,69 @@ public class CommunityServiceImpl implements CommunityService {
 	public int getMyArticleCountSv(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+//-------------------------------------------------------------------	
+/* 고객센터 */
+	
+	@Override
+	public int getAskCountSv(String category) throws SQLException {
+		int count = commnuityDAO.getAskCount(category);
+		
+		return count;
+	}
+
+	@Override
+	public CommunityDTO getAskSv(int community_num) throws SQLException {
+		
+		CommunityDTO article = commnuityDAO.getArticle(community_num);
+		
+		return article;
+	}
+	
+	@Override
+	public void insertHelpSv(CommunityDTO dto) throws SQLException {
+		
+		commnuityDAO.insertHelp(dto);
+	}
+
+	@Override
+	public List getMyAskSv(String category) throws SQLException {
+		
+		return null;
+	}
+	
+	@Override
+	public HashMap abc(String pageNum, String category) throws SQLException {
+		
+		if (category == null) {
+			category = "5";
+		}
+		
+		if (pageNum == null) pageNum = "1";
+		int pageSize = 10;
+		int currPage = Integer.parseInt(pageNum);
+		int start = (currPage -1) * pageSize + 1;
+		int end = currPage * pageSize;
+		int number = 0;	// 게시판 상의 글의 번호 띄어줄 변수
+		int count = 0;
+		
+		List helpList = null;
+		
+		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession session = servletRequestAttribute.getRequest().getSession();
+		String writer = (String) session.getAttribute("memId");
+		
+		count = commnuityDAO.getAskCount(category);
+		
+		helpList = commnuityDAO.getAllAsk(start, end, category);
+		number = count - (currPage -1) * pageSize;
+		
+		HashMap map = new HashMap();
+		map.put("helpList", helpList);
+		map.put("pageSize", currPage);
+		map.put("count", count);
+		
+		return map;
 	}
 
 }

@@ -59,7 +59,7 @@
 	<table>
 		<tr>
 			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com?category=2&grade=11&pageNum=${pageNum}'"> 글쓰기 </button> </td>
-		
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/help.com?category=5&grade=11&pageNum=${pageNum}'"> 고객센터 </button> </td>		
 		</tr>
 		<tr>
 			<td>No.</td>
