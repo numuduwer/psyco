@@ -21,6 +21,11 @@
 		<mapper resource="/sql/memberMenuSQL.xml"/>
 		<mapper resource="/sql/testSQL.xml"/>
 		<mapper resource="/sql/communitySQL.xml"/>
+		<mapper resource="/sql/memberSQL.xml"/>
+
+
+
+
 
 	</mappers>
   	

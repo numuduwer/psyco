@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
 @Controller
+@RequestMapping("/main/")
 public class MainBean {
 	
 	
@@ -20,10 +21,17 @@ public class MainBean {
 	@RequestMapping("main.com")
 	public String main() {
 		System.out.println("controller 잘 연결 ");
-		
-
 		return "main/main";
 	}
 
+	
+	@RequestMapping("test.com")
+	public String layout() {
+		System.out.println("controller 잘 연결 ");
+		
+
+		return "test";
+	}
+	
 
 }
