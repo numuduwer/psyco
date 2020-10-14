@@ -43,7 +43,7 @@ public class MemberBean {
 	@RequestMapping("naverLoginPro.com")
 	public String naverLoginPro() throws UnsupportedEncodingException {
 		String apiURL = memberService.naverLogin();
-		//System.out.println(apiURL);
+		System.out.println(apiURL);
 		return "redirect:" + apiURL;
 	}
 	
@@ -63,6 +63,20 @@ public class MemberBean {
 		}
 	}
 	
+	@RequestMapping("signup.com")
+	public String insertMember(MemberDTO dto, Model model) {
+		System.out.println(dto.getBirth());
+		int result = memberService.insertMember(dto);
+		model.addAttribute("result", result);
+		return "member/signupPro";
+	}
+	
+	@RequestMapping("logout.com")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "main/main";
+	}
+	
 	@RequestMapping("signupSelect.com")
 	public String signupSelect() {
 		return "member/signupSelect";
@@ -78,20 +92,6 @@ public class MemberBean {
 		return "member/businessSignupForm";
 	}
 	
-	@RequestMapping("signup.com")
-	public String insertMember(MemberDTO dto, Model model) {
-		System.out.println(dto.getBirth());
-		int result = memberService.insertMember(dto);
-		model.addAttribute("result", result);
-		return "member/signupPro";
-	}
-	
-	@RequestMapping("logout.com")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "main/main";
-	}
-	
 	@RequestMapping("licenseLookup.com")
 	public ResponseEntity<String> licenseLookup(String text1, String text2, String text3) throws IOException, ParseException {
 		String license_number = text1 + text2 + text3;
@@ -104,21 +104,4 @@ public class MemberBean {
 		
 		return new ResponseEntity<String>(status, resHeaders, HttpStatus.CREATED);
 	}
-	
-	@RequestMapping("mapsTest.com")
-	public String mapTest() {
-		return "member/mapsTest";
-	}
-	
-	@RequestMapping("geoLocation.com")
-	public String geoLocation() {
-		return "member/geoLocation";
-	}
-	
-
-	@RequestMapping("paymentTest.com")
-	public String paymentTest() {
-		return "member/paymentTest";
-	}
-
 }
