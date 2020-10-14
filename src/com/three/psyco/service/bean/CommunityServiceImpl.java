@@ -43,12 +43,12 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	@Override
-	public CommunityDTO getArticlesImg(int community_num) throws SQLException{
+	public CommunityDTO getArticleImg(int community_num) throws SQLException{
 		
-		CommunityDTO getArticlesImg = commnuityDAO.getArticlesImg(community_num);
+		CommunityDTO getArticleImg = commnuityDAO.getArticleImg(community_num);
 
 		
-		return getArticlesImg;
+		return getArticleImg;
 	}
 
 	@Override
@@ -68,14 +68,14 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public int updateArticleSv(CommunityDTO dto) throws SQLException {
 		
-		int result = commnuityDAO.updateArticle(dto);
+		commnuityDAO.updateArticle(dto);
 		
-		return result;
+		return 0;
 	}
 
 	@Override
 	public int deleteArticleSv(CommunityDTO dto) throws SQLException {
-		// TODO Auto-generated method stub
+		commnuityDAO.deleteArticle(dto);
 		return 0;
 	}
 

@@ -84,13 +84,13 @@ public class CommunityDAOImpl implements CommunityDAO {
 	}
 	
 	@Override
-	public CommunityDTO getArticlesImg(int community_num) throws SQLException{
+	public CommunityDTO getArticleImg(int community_num) throws SQLException{
 		
-		CommunityDTO getArticlesImg = sqlSession.selectOne("community.selectImg",community_num);
+		CommunityDTO getArticleImg = sqlSession.selectOne("community.selectImg",community_num);
 		
 
 
-		return getArticlesImg;
+		return getArticleImg;
 	}
 
 	@Override
@@ -110,14 +110,14 @@ public class CommunityDAOImpl implements CommunityDAO {
 	@Override
 	public int updateArticle(CommunityDTO dto) throws SQLException {
 
-		sqlSession.update("community.update", dto);
+		sqlSession.update("community.updateOne", dto);
 
 		return 0;
 	}
 
 	@Override
 	public int deleteArticle(CommunityDTO dto) throws SQLException {
-		// TODO Auto-generated method stub
+		sqlSession.delete("community.deleteOne", dto);
 		return 0;
 	}
 

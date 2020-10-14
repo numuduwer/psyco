@@ -16,7 +16,7 @@
 			<input type="hidden" name="re_level" value= "${re_level}"/>
 			<input type="hidden" name="category" value= "${category}"/>
 			<input type="hidden" name="grade" value= "${grade}"/>
-			<input type="hidden" name="defaultImg" value= "<img scr=img/beach.jpg >"/>
+			<input type="hidden" name="pageNum" value= "${pageNum}"/>
 		
 		<table>
 			<tr>

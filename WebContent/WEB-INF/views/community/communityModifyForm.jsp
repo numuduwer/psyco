@@ -28,14 +28,10 @@
 	<body>
 		<br/>
 		<h1 align="center"> modify article  </h1>
-			<form action="/psyco/communityModifyPro.com?pageNum=${pageNum}" method="post" enctype="multipart/form/data">
+			<form action="/psyco/communityModifyPro.com?pageNum=${pageNum}" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="community_num" value= "${community_num}"/>
 			<input type="hidden" name="category" value= "${category}"/>
-
 			
-
-		
-		
 			<table>
 				<tr>
 					<td>작성자</td>
@@ -49,20 +45,17 @@
 					<td>내용</td>
 					<td><textarea rows="20" cols="70" name="content" >${article.content}</textarea></td>
 				</tr>
-				<tr>
-					<td>비밀번호</td>
-					<td><input type="password" name="pw" /></td>
-				</tr>
 				<c:if test="${category == 3 || category == 4}">
 					<tr>
 						<td>기존 이미지</td>
 					</tr>
 					<tr>
 		       			<th><img id="imgpreview" src="/psyco/save//${article.community_img}" width="100" height="100"></th>
+		       			<td><label>이미지 변경하기</label><input type="file" onchange="imagepreview(this);" name="community_img"/></td>
 					</tr>
-					 <tr>
-		       			<td><label>이미지 변경하기</label><input type="file" id="idupload" onchange="imagepreview(this);" name="img" /></td>
-					</tr>
+				</c:if>
+				<c:if test="${category == 1 || category == 2}">
+					<input type="hidden" name="community_img" value="${article.community_img}" />
 				</c:if>
 				<tr>												
 					<td colspan="2">

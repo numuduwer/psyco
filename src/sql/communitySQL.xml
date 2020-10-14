@@ -14,9 +14,9 @@
  	
  	<select id="selectAll" parameterType="hashmap" resultType="communityDTO">
   		<![CDATA[
-  		select community_num,subject,content,writer,ref,re_step,re_level,reg,r
-		from (select community_num,subject,content,writer,ref,re_step,re_level,reg,rownum r
-		from (select community_num,subject,content,writer,ref,re_step,re_level,reg
+  		select community_num,subject,content,writer,community_img,ref,re_step,re_level,reg,r
+		from (select community_num,subject,content,writer,community_img,ref,re_step,re_level,reg,rownum r
+		from (select community_num,subject,content,writer,community_img,ref,re_step,re_level,reg
 		from community where category=#{category} order by ref desc, re_step asc) order by ref desc, re_step asc)
 		where r >= #{start} and r <= #{end}
 		]]>
@@ -42,12 +42,17 @@
  	</select>
   		
  	<select id="selectImg" parameterType="String" resultType="communityDTO">
-  		select community_img from community where category=#{value}
+  		select community_img from community where community_num=#{value}
   	</select>
  	
- 	
- 	
- 	
+
+ 	<update id="updateOne" parameterType="communityDTO" >
+   		update community set subject=#{subject}, content=#{content}, community_img=#{community_img} where community_num=#{community_num}
+   	</update>
+ 
+ 	<delete id="deleteOne" parameterType="communityDTO">
+ 		delete from community where community_num=#{community_num}
+ 	</delete>
  	
  	
  	

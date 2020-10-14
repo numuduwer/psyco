@@ -18,7 +18,7 @@ public interface CommunityService {
 	public int getArticleCountSv(String category) throws SQLException;
 	
 	// 이미지 가져오기
-	public CommunityDTO getArticlesImg(int community_num) throws SQLException;
+	public CommunityDTO getArticleImg(int community_num) throws SQLException;
 	
 	// 게시글 범위 지정 가져오기 
 	public List getArticlesSv(int start, int end, String category) throws SQLException;

@@ -56,30 +56,18 @@ public class CommunityBean {
 		int startRow = (currPage - 1)*pageSize +1;
 		int endRow = currPage * pageSize;
 		
-		int number = 0; // 게시판에상의 글번호 뿌려줄 변수 미리 선언 (보여주기 식번호 ) 
+		int number = 0;
 		
 		List articleList = null;
 		List viewImg =  null;
 		
 		int count = communityService.getArticleCountSv(category);
-		System.out.println(count);
 		
 		if(count > 0) {
 			articleList = communityService.getArticlesSv(startRow, endRow, category);
 						
 		}
 
-
-
-		
-		String path = request.getRealPath("save");
-//		for(int i=0; i<=viewImg.size()+1; i++) {
-//			CommunityDTO dto = (CommunityDTO) viewImg.get(i);
-////			 	path = path + "\\" + dto.getCommunity_img();
-//			 	System.out.println(path);
-//		}
-
-		model.addAttribute("viewImg", viewImg);
 		
 		
 		number = count  - (currPage-1) *  pageSize;
@@ -96,8 +84,6 @@ public class CommunityBean {
 		model.addAttribute("count", count);
 		model.addAttribute("category", category);
 		
-		
-//		CommunityDTO dto = (CommunityDTO) articleList.get(0);
 
 		
 		
@@ -108,7 +94,7 @@ public class CommunityBean {
 
 
 	@RequestMapping("communityForm.com")
-	public String communityForm(CommunityDTO dto, HttpServletRequest request, Model model) {
+	public String communityForm(CommunityDTO dto, HttpServletRequest request, Model model,String pageNum) {
 		
 		
 		String community_num = request.getParameter("community_num");
@@ -117,6 +103,7 @@ public class CommunityBean {
 		model.addAttribute("category", category);
 		model.addAttribute("grade", grade);
 		model.addAttribute("community_num", community_num);
+		model.addAttribute("pageNum", pageNum);
 		
 		
 	
@@ -126,20 +113,16 @@ public class CommunityBean {
 	
 	// 글 저장
 	@RequestMapping("communityPro.com")
-	public String communityPro(MultipartHttpServletRequest request, Model model) throws Exception {
+	public String communityPro(MultipartHttpServletRequest request, Model model,String pageNum,String grade) throws Exception {
 		
 		CommunityDTO dto = new CommunityDTO();
-		int a = Integer.parseInt(request.getParameter("category"));
+		int category = Integer.parseInt(request.getParameter("category"));
+		
 		
 			// - 파일 정보 꺼내기
 			MultipartFile mf = null;
-		if(request.getFile("img") == null) {
-
-		
-		}	
 			try { 
 				mf = request.getFile("img");
-				String path = request.getRealPath("save");
 				if(request.getFile("img") == null) {
 					String orgName = "asd.asd";
 					String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
@@ -147,14 +130,13 @@ public class CommunityBean {
 					long date = System.currentTimeMillis();
 					String newName = imgName+date+ext;
 					String newName1 = "ads"+date;
-					
 					dto.setSubject(request.getParameter("subject"));
 					dto.setContent(request.getParameter("content"));
 					dto.setGrade(request.getParameter("grade"));
 					dto.setWriter(request.getParameter("writer"));
-					if(a != 1) {
+					if(category == 3 || category == 4) {
 						dto.setCommunity_img(newName);
-					}else {
+					}else if(category == 1 || category == 2) {
 						dto.setCommunity_img(newName1);
 					}
 					dto.setCategory(request.getParameter("category"));
@@ -166,37 +148,24 @@ public class CommunityBean {
 					long date = System.currentTimeMillis();
 					String newName = imgName+date+ext;
 					String newName1 = "ads"+date;
-	//				System.out.println(newName);
-	//				System.out.println(newName1);
-	//				
-	//				System.out.println(path);
-	//				System.out.println(mf.getOriginalFilename()); //이미지 원본 이름
-					String imgPath = path + "\\" + newName;
-					System.out.println(imgPath);
-					File copyFile = new File(imgPath);
-					mf.transferTo(copyFile);
-					
 					dto.setSubject(request.getParameter("subject"));
 					dto.setContent(request.getParameter("content"));
 					dto.setGrade(request.getParameter("grade"));
 					dto.setWriter(request.getParameter("writer"));
-					if(a != 1) {
+					if(category == 3 || category == 4) {
 						dto.setCommunity_img(newName);
-					}else {
+					}else if(category == 1 || category == 2) {
 						dto.setCommunity_img(newName1);
 					}
 					dto.setCategory(request.getParameter("category"));
-
-				}
-				
+				}			
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-
 		communityService.insertArticleSv(dto);
-		
-		
-		
+		model.addAttribute("category",category);
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("grade",grade);		
 		return "community/communityPro";
 	}
 	
@@ -220,93 +189,72 @@ public class CommunityBean {
 	}
 	
 	@RequestMapping("communityModifyForm.com")
-	public String communityModifyForm(HttpServletRequest request, Model model) throws SQLException {
+	public String communityModifyForm(HttpServletRequest request, Model model,String pageNum) throws SQLException {
 		
 		int community_num = Integer.parseInt(request.getParameter("community_num"));
 		String category = request.getParameter("category");
 		
 		
 		CommunityDTO article = communityService.getArticleSv(community_num);
-//		CommunityDTO dto = communityService.getArticlesImg(community_num);  이미지 가져오는 메서드
 		
 		model.addAttribute("community_num", community_num);
 		model.addAttribute("category", category);
 		model.addAttribute("article", article);
+		model.addAttribute("pageNum", pageNum);
 		
 		return "community/communityModifyForm";
 	}
 	
 	
 	@RequestMapping("communityModifyPro.com")
-	public String communityModifyPro(MultipartHttpServletRequest request) throws SQLException {
-		
-		
-		
-
+	public String communityModifyPro(MultipartHttpServletRequest request,String pageNum,Model model) throws SQLException {
 		
 		
 		CommunityDTO dto = new CommunityDTO();
 		int a = Integer.parseInt(request.getParameter("category"));
+		int community_num = Integer.parseInt(request.getParameter("community_num"));
+		String community_img = request.getParameter("community_img");
+		String subject = request.getParameter("subject");
+		String content = request.getParameter("content");
 		
-			// - 파일 정보 꺼내기
+		
+		CommunityDTO getArticleImg = communityService.getArticleSv(community_num);
+		
+		if(request.getFile("Newcommunity_img") != null) {
+			
+		}
+		
+		
+		
+		
+		try {
+			
 			MultipartFile mf = null;
-		if(request.getFile("img") == null) {
-
-		
-		}	
-			try { 
-				mf = request.getFile("img");
-				String path = request.getRealPath("save");
-				if(request.getFile("img") == null) {
-					String orgName = "asd.asd";
+			mf = request.getFile("community_img");
+	
+				if(community_img == null) {
+					dto.setCommunity_img(getArticleImg.getCommunity_img());
+					dto.setSubject(subject);
+					dto.setCommunity_num(community_num);
+					dto.setContent(content);
+				}else if(community_img != null){
+					String orgName = mf.getOriginalFilename();
 					String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
 					String ext = orgName.substring(orgName.lastIndexOf('.'));
 					long date = System.currentTimeMillis();
 					String newName = imgName+date+ext;
-					String newName1 = "ads"+date;
-					
-					dto.setSubject(request.getParameter("subject"));
-					dto.setContent(request.getParameter("content"));
-					dto.setGrade(request.getParameter("grade"));
-					dto.setWriter(request.getParameter("writer"));
-					if(a == 3 || a == 4) {
-						dto.setCommunity_img(newName);
-					}else {
-						dto.setCommunity_img(newName1);
-					}
-					dto.setCategory(request.getParameter("category"));
-				}else {				
-					String orgName = mf.getOriginalFilename();					
-				
-					String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
-					String ext = orgName.substring(orgName.lastIndexOf('.'));
-					long date = System.currentTimeMillis();
-					String newName = imgName+date+ext;
-					String newName1 = "ads"+date;
-					
-					String imgPath = path + "\\" + newName;
-					System.out.println(imgPath);
-					File copyFile = new File(imgPath);
-					mf.transferTo(copyFile);
-					
-					dto.setSubject(request.getParameter("subject"));
-					dto.setContent(request.getParameter("content"));
-					dto.setGrade(request.getParameter("grade"));
-					dto.setWriter(request.getParameter("writer"));
-					if(a != 1) {
-						dto.setCommunity_img(newName);
-					}else {
-						dto.setCommunity_img(newName1);
-					}
-					dto.setCategory(request.getParameter("category"));
-
+					dto.setCommunity_img(newName);
+					dto.setSubject(subject);
+					dto.setCommunity_num(community_num);
+					dto.setContent(content);
 				}
-				
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+			
+		model.addAttribute("pageNum",pageNum);
 
-		int result = communityService.updateArticleSv(dto);
+		communityService.updateArticleSv(dto);
 		
 		
 		
@@ -314,9 +262,24 @@ public class CommunityBean {
 	}
 	
 	
+	@RequestMapping("communityDeleteForm.com")
+	public String communityDeleteForm(HttpServletRequest request,Model model,String pageNum) {
+		String community_num = request.getParameter("community_num");
+		model.addAttribute("community_num",community_num);
+		model.addAttribute("pageNum",pageNum);
+		
+		
+		return "community/communityDeleteForm";
+	}
 	
-	
-	
+	@RequestMapping("communityDeletePro.com")
+	public String communityDeletePro(CommunityDTO dto,String pageNum,Model model) throws SQLException {
+		
+		communityService.deleteArticleSv(dto);
+		model.addAttribute("pageNum",pageNum);
+		
+		return "community/communityDeletePro";
+	}
 	
 	
 	

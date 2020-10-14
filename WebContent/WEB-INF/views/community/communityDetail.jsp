@@ -15,7 +15,7 @@
 		<h1 align="center"> content </h1>
 		<table align="center">
 			<tr>
-				<td width="80">제 목</td>
+				<td width="80">제 목 </td>
 				<td colspan="20" align="center" > ${article.subject} </td>
 			</tr>
 			<br />
@@ -31,12 +31,12 @@
 			</tr>
 			<c:if test="${category == 3 || category == 4}">
 				<tr>
-					<td><img src="/psyco/save//${article.community_img}" width="500"></td>
+					<td><img src="/psyco/save//${article.community_img}" width="400"></td>
 				</tr>
 			</c:if>
 			<tr>
 				<td colspan="2"> 
-					<button onclick="window.location='/psyco/communityModifyForm.com?community_img=${community_img}&community_num=${community_num}&pageNum=${pageNum}&category=${category}'">수 정</button>
+					<button onclick="window.location='/psyco/communityModifyForm.com?&community_num=${community_num}&pageNum=${pageNum}&category=${category}'">수 정</button>
 					<button onclick="window.location='/psyco/communityDeleteForm.com?community_num=${community_num}&pageNum=${pageNum}'">삭 제</button>
 					<button onclick="window.location='/psyco/communityForm.com?community_num=${community_num}&ref=${article.ref}&re_step=${article.re_step}&re_level=${article.re_level}'">답 글</button>
 					<button onclick="window.location='/psyco/communityList.com?pageNum=${pageNum}'">리스트</button>
