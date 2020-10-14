@@ -115,19 +115,10 @@ public class MemberBean {
 		return "member/geoLocation";
 	}
 	
-	
-	
-	
-	////  레이아웃 테스트 //
-	
-	@RequestMapping("mypage.com")
-	public String mypageHeader() {
-		return "member/test";
+
+	@RequestMapping("paymentTest.com")
+	public String paymentTest() {
+		return "member/paymentTest";
 	}
-	
-	@RequestMapping("mypageList.com")
-	public String mypageList() {
-		return "member/mypageList";
-	}
-	
+
 }
