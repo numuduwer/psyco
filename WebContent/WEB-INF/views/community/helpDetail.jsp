@@ -13,19 +13,23 @@
 	<h1 align="center">Detail</h1>
 	<table>
 		<tr>
-			<td width="80">제 목</td>
-			<td colspan="20" align="center" > ${article.subject} </td>
+			<td width="80" align="center">제 목</td>
 		</tr>
 		<tr>
-			<td>작성 내용</td>
-			<td colspan="2"align="center" height="300">${article.content}   </td>
+			<td colspan="2" align="center"> ${article.subject} </td>
 		</tr>
 		<tr>
-			<td> posted by <a href="mailto:${article.writer}">${article.writer}</a> at ${article.reg} </td>
+			<td align="center">작성 내용</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center" height="300">${article.content}   </td>
+		</tr>
+		<tr>
+			<td colspan="50"> posted by <a href="mailto:${article.writer}">${article.writer}</a> at ${article.reg} </td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<button onclick="window.location.href='/psyco/myHelpList.com?pageNum=${pageNum}'">내 문의 리스트</button>
+				<button onclick="window.location.href='/psyco/help.com?category=5'">문의 리스트 돌아가기</button>
 			</td>
 		</tr>
 	</table>

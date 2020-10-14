@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.io.File;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -220,32 +221,12 @@ public class CommunityBean {
 	
 	// 고객센터
 	@RequestMapping("help.com")
-	public String help(String pageNum, Model model, String category) throws SQLException{
+	public String help(String pageNum, Model model, String category) throws SQLException {
 		
-		if (pageNum == null) pageNum = "1";
-		int pageSize = 10;
-		int currPage = Integer.parseInt(pageNum);
-		int startRow = (currPage -1) * pageSize + 1;
-		int endRow = currPage * pageSize;
-		int number = 0;	// 게시판 상의 글의 번호 띄어줄 변수
+		HashMap map = new HashMap();
+		map = communityService.abc(pageNum, category);
 		
-		List helpList = null;
-		
-		int count = communityService.getAskCountSv(category);
-		
-		if (count > 0) {
-			helpList = communityService.getAllAsks(startRow, endRow);
-		}
-		number = count - (currPage -1) * pageSize;
-		
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("pageSize", new Integer(pageSize));
-		model.addAttribute("currPage", new Integer(currPage));
-		model.addAttribute("startRow", new Integer(startRow));
-		model.addAttribute("endRow", new Integer(endRow));
-		model.addAttribute("number", new Integer(number));
-		model.addAttribute("helpList", helpList);
-		model.addAttribute("count", new Integer(count));
+		model.addAttribute("map", map);
 		
 		return "community/help";
 	}
@@ -269,13 +250,14 @@ public class CommunityBean {
 	}
 	
 	@RequestMapping("myHelpList.com")
-	public String myHelpList(String pageNum,Model model) throws SQLException {
-
+	public String myHelpList(String pageNum, String category, Model model) throws SQLException {
+		List list = communityService.getMyAskSv(category);
+		
 		return "community/myHelpList";
 	}
 	
-	@RequestMapping("HelpDetail.com")
-	public String HelpDetail(Model model, int community_num, String pageNum) throws SQLException {
+	@RequestMapping("helpDetail.com")
+	public String helpDetail(Model model, int community_num, String pageNum) throws SQLException {
 		
 		CommunityDTO article = communityService.getAskSv(community_num);
 		
@@ -284,7 +266,7 @@ public class CommunityBean {
 		model.addAttribute("num", community_num);
 		model.addAttribute("article", article);
 		
-		return "community/HelpDetail";
+		return "community/helpDetail";
 	}
 	
 	

@@ -18,7 +18,7 @@
 		</tr>
 		<tr>
 			<td>
-				<button onclick="window.location='/psyco/myHelpList.com'"> 내 문의 리스트 </button> <br/>
+				<button onclick="window.location='/psyco/myHelpList.com?category=5'"> 내 문의 리스트 </button> <br/>
 			</td>
 		</tr>
 	</table>
@@ -26,7 +26,7 @@
 	<br /><br />
 	
 	<%-- 게시글이 없을 때 --%>
-	<c:if test="${count == 0 }">
+	<c:if test="${map.count == 0 }">
 		<table>
 			<tr>
 				<td>
@@ -35,7 +35,7 @@
 			</tr>
 		</table>
 	</c:if>
-	<c:if test="${count > 0 }">
+	<c:if test="${map.count > 0 }">
 		<table>
 			<tr>
 				<td>No.</td>
@@ -44,11 +44,11 @@
 				<td>시  간</td>
 				<td>조회수</td>
 			</tr>
-			<c:forEach var="article" items="${helpList}">
+			<c:forEach var="article" items="${map.helpList}">
 				<tr>
 					<td>
-						${number}
-						<c:set var="number" value="${number -1}"></c:set>
+						<%-- ${number} --%>
+						<%-- <c:set var="number" value="${number -1}"></c:set> --%>
 					</td>
 					
 					<td align="left">
@@ -59,7 +59,6 @@
 							<img src="/psyco/resources/img/tabImg.PNG" width="${wid}" />
 							<img src="/psyco/resources/img/replyImg.png" width="11" />
 						</c:if>
-					
 						<a href="/psyco/helpDetail.com?community_num=${article.community_num}&pageNum=${pageNum}">${article.subject}</a>
 					</td>
 					<td><a href="mailto:${article.writer}">${article.writer}</a></td>
@@ -72,11 +71,11 @@
 	
 	<%-- 게시판 목록 페이지 번호 뷰어 --%>
 	<div align="center">
-		<c:if test="${count > 0}">
-			<fmt:parseNumber var="res" value="${count / pageSize}" integerOnly="true" />
-			<c:set var="pageCount" value="${res + (count % pageSize == 0 ? 0 : 1)}" />
+		<c:if test="${map.count > 0}">
+			<fmt:parseNumber var="res" value="${map.count / map.pageSize}" integerOnly="true" />
+			<c:set var="pageCount" value="${res + (map.count % map.pageSize == 0 ? 0 : 1)}" />
 			<c:set var="pageBlock" value="10" />
-			<fmt:parseNumber var="result" value="${(currPage-1)/pageBlock}" integerOnly="true" />
+			<fmt:parseNumber var="result" value="${(map.pageSize -1)/pageBlock}" integerOnly="true" />
 			<fmt:parseNumber var="startPage" value="${result * pageBlock + 1}" />
 			<fmt:parseNumber var="endPage" value="${startPage + pageBlock -1}" />
 			<c:if test="${endPage > pageCount}">

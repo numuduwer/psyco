@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:redirect url="help.com" />
+	<c:redirect url="help.com?category=5" />
 </body>
 </html>

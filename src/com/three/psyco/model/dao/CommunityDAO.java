@@ -36,23 +36,18 @@ public interface CommunityDAO {
 	// 게시글 삭제 
 	public int deleteArticle(CommunityDTO dto) throws SQLException;
 
-	int getMyArticleCount(String id) throws SQLException;
-
 	// 고객센터
 	
 	// 전체문의 개수 검색
 	public int getAskCount(String category) throws SQLException;
-		
-	// 문의 글 하나 가져오기
-	public CommunityDTO getAsk(int community_num) throws SQLException;
 	
-	// 문의 리스트 가져오기
-	public List getAllAsk(int start, int end) throws SQLException;
+	// 전체 문의글 가져오기
+	public List getAllAsk(int start, int end, String category) throws SQLException;
 	
 	// 문의글 저장	
 	public void insertHelp(CommunityDTO dto) throws SQLException;
 
-	
-	//
+	// 내글 가져오기
+	public List getMyAsk(int start, int end, String category, String writer) throws SQLException;
 	
 }

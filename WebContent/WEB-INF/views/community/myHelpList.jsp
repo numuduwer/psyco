@@ -18,24 +18,19 @@
 		<h2 align="center">${sessionScope.memId}님의 문의사항이 없습니다.</h2>
 		<table>
 			<tr>
-				<td> <button onclick="window.location='/psyco/community/helpForm.com'"> 문의 글쓰기 </button> </td>
-			
-			</tr>
-			<tr>
 				<td> 문의사항이 없습니다. </td>
 			</tr>
+			<tr>
+				<td> <button onclick="window.location='/psyco/helpForm.com'"> 문의 글쓰기 </button> </td>
+			</tr>
+			<tr>
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/help.com'">문의 리스트 보기 </button> </td>
+		</tr>
 		</table>
 	</c:if>
 	<%-- 게시글이 있을때 --%>
 	<c:if test="${count == 1}">
 	<table>
-		<tr>
-			<td colspan="6" align="center"> <button onclick="window.location='/psyco/community/myHelpList.com'">내 문의 글 보기 </button> </td>
-		</tr>
-		<tr>
-			<td colspan="6" align="center"> <button onclick="window.location='/psyco/community/helpForm.com'"> 글쓰기 </button> </td>
-		
-		</tr>
 		<tr>
 			<td>No.</td>
 			<td>제  목</td>
@@ -60,11 +55,16 @@
 				</td>
 				<td><a href="mailto:${article.email}">${article.writer}</a></td>
 				<td>${article.reg}</td>
-				<td>${article.readcount}</td>
-				
-			
+				<td>${article.ref}</td>
 			</tr>
 		</c:forEach>
+		<tr>
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/help.com'">문의 리스트 보기 </button> </td>
+		</tr>
+		<tr>
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/helpForm.com'"> 글쓰기 </button> </td>
+		
+		</tr>
 	</table>
 	</c:if>
 	<br />

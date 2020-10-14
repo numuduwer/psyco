@@ -16,7 +16,6 @@ public class CommunityDAOImpl implements CommunityDAO {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession = null;
-	
 
 	@Override
 	public void insertArticle(CommunityDTO dto) throws SQLException {
@@ -52,6 +51,23 @@ public class CommunityDAOImpl implements CommunityDAO {
 		sqlSession.insert("community.insertArticle", dto);
 		
 	}
+	@Override
+	public CommunityDTO getArticleForUpdate(int num) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int updateArticle(CommunityDTO dto) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteArticle(CommunityDTO dto) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	@Override
 	public Map getPageData(String pageNum) throws SQLException {
@@ -70,6 +86,7 @@ public class CommunityDAOImpl implements CommunityDAO {
 
 	@Override
 	public List getArticles(int start, int end, String category) throws SQLException {
+		
 		HashMap map = new HashMap();
 		map.put("start",start);
 		map.put("end",end);
@@ -91,7 +108,7 @@ public class CommunityDAOImpl implements CommunityDAO {
 
 		return getArticlesImg;
 	}
-
+	
 	@Override
 	public CommunityDTO getArticle(int community_num) throws SQLException {
 		
@@ -100,54 +117,17 @@ public class CommunityDAOImpl implements CommunityDAO {
 		return article;
 	}
 
-	@Override
-	public CommunityDTO getArticleForUpdate(int num) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	// 고객센터 
 
 	@Override
-	public int updateArticle(CommunityDTO dto) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteArticle(CommunityDTO dto) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getMyArticleCount(String id) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getAskCount(String category) throws SQLException {
-		int count = sqlSession.selectOne("community.helpCountAll", category);
-		
-		return count;
-	}
-
-	@Override
-	public CommunityDTO getAsk(int community_num) throws SQLException {
-		
-		CommunityDTO article = sqlSession.selectOne("community.selectOne",community_num);
-		
-		return article;
-	}
-
-	@Override
-	public List getAllAsk(int start, int end) throws SQLException {
+	public List getAllAsk(int start, int end, String category) throws SQLException {
 		HashMap map = new HashMap();
+		
 		map.put("start", start);
 		map.put("end", end);
+		map.put("category", category);
 		
-		List list = sqlSession.selectList("community.helpList",map);
-		CommunityDTO dto = (CommunityDTO) list.get(0);
-		
+		List list = sqlSession.selectList("community.helpList", map);
 		
 		return list;
 	}
@@ -161,9 +141,33 @@ public class CommunityDAOImpl implements CommunityDAO {
 		}else {
 			number = 1;
 		}
+		dto.setCategory("5");
+		dto.setGrade("null");
+		dto.setCommunity_img("null");
 		
 	sqlSession.insert("community.insertHelp", dto);
 	
 	}
+	
+	@Override
+	public List getMyAsk(int start, int end, String category, String writer) throws SQLException {
+		HashMap hMap = new HashMap();
+		hMap.put("category", category);
+		hMap.put("writer", writer);
+		
+		List list = sqlSession.selectList("community.helpList", hMap);
+		
+		return list;
+	}
+
+
+	@Override
+	public int getAskCount(String category) throws SQLException {
+		
+		int count = sqlSession.selectOne("community.helpCountAll", category);
+		
+		return count;
+	}
+
 
 }

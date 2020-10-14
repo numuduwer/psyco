@@ -1,11 +1,18 @@
 package com.three.psyco.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.three.psyco.model.dao.CommunityDAO;
 import com.three.psyco.model.dao.CommunityDAOImpl;
@@ -15,11 +22,11 @@ import com.three.psyco.model.dto.CommunityDTO;
 public class CommunityServiceImpl implements CommunityService {
 	
 	@Autowired
-	private CommunityDAOImpl commnuityDAO = null;
+	private CommunityDAOImpl communityDAO = null;
 
 	@Override
 	public void insertArticleSv(CommunityDTO dto) throws SQLException {
-		commnuityDAO.insertArticle(dto);
+		communityDAO.insertArticle(dto);
 		
 	}
 
@@ -31,21 +38,21 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public int getArticleCountSv(String category) throws SQLException {
 		
-		int count = commnuityDAO.getArticleCount(category);
+		int count = communityDAO.getArticleCount(category);
 		
 		return count;
 	}
 
 	@Override
 	public List getArticlesSv(int start, int end, String category) throws SQLException {
-		List articles = commnuityDAO.getArticles(start, end, category);
+		List articles = communityDAO.getArticles(start, end, category);
 		return articles;
 	}
 	
 	@Override
 	public List getArticlesImg(String category) throws SQLException{
 		
-		List getArticlesImg = commnuityDAO.getArticlesImg(category);
+		List getArticlesImg = communityDAO.getArticlesImg(category);
 
 		
 		return getArticlesImg;
@@ -54,7 +61,7 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public CommunityDTO getArticleSv(int community_num) throws SQLException {
 		
-		CommunityDTO article = commnuityDAO.getArticle(community_num);
+		CommunityDTO article = communityDAO.getArticle(community_num);
 		
 		return article;
 	}
@@ -80,25 +87,19 @@ public class CommunityServiceImpl implements CommunityService {
 		return 0;
 	}
 
+	/* 고객센터 */
+	
 	@Override
 	public int getAskCountSv(String category) throws SQLException {
-		int count = commnuityDAO.getAskCount(category);
+		int count = communityDAO.getAskCount(category);
 		
 		return count;
 	}
 
 	@Override
-	public List getAllAsks(int start, int end) throws SQLException {
-		
-		List asks = commnuityDAO.getAllAsk(start, end);
-		
-		return asks;
-	}
-
-	@Override
 	public CommunityDTO getAskSv(int community_num) throws SQLException {
 		
-		CommunityDTO article = commnuityDAO.getArticle(community_num);
+		CommunityDTO article = communityDAO.getArticle(community_num);
 		
 		return article;
 	}
@@ -106,7 +107,47 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public void insertHelpSv(CommunityDTO dto) throws SQLException {
 		
-		commnuityDAO.insertHelp(dto);
+		communityDAO.insertHelp(dto);
+	}
+
+	@Override
+	public List getMyAskSv(String category) throws SQLException {
+		
+		return null;
+	}
+	
+	@Override
+	public HashMap abc(String pageNum, String category) throws SQLException {
+		
+		if (category == null) {
+			category = "5";
+		}
+		
+		if (pageNum == null) pageNum = "1";
+		int pageSize = 10;
+		int currPage = Integer.parseInt(pageNum);
+		int start = (currPage -1) * pageSize + 1;
+		int end = currPage * pageSize;
+		int number = 0;	// 게시판 상의 글의 번호 띄어줄 변수
+		int count = 0;
+		
+		List helpList = null;
+		
+		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession session = servletRequestAttribute.getRequest().getSession();
+		String writer = (String) session.getAttribute("memId");
+		
+		count = communityDAO.getAskCount(category);
+		
+		helpList = communityDAO.getAllAsk(start, end, category);
+		number = count - (currPage -1) * pageSize;
+		
+		HashMap map = new HashMap();
+		map.put("helpList", helpList);
+		map.put("pageSize", currPage);
+		map.put("count", count);
+		
+		return map;
 	}
 
 }

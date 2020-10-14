@@ -1,6 +1,7 @@
 package com.three.psyco.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,13 +42,14 @@ public interface CommunityService {
 	// 문의 개수 검색
 	public int getAskCountSv(String category) throws SQLException;
 	
-	// 문의 리스트들만 전부 가져오기
-	public List getAllAsks(int start, int end) throws SQLException;
-	
 	// 문의 하나 가져오기
 	public CommunityDTO getAskSv(int community_num) throws SQLException;
 
+	// 문의 글 작성
 	public void insertHelpSv(CommunityDTO dto) throws SQLException;
 
+	// 내 문의 가져오기
+	public List getMyAskSv(String category) throws SQLException;
 	
+	public HashMap abc(String pageNum, String category) throws SQLException;
 }
