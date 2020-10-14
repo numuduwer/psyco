@@ -321,10 +321,13 @@ public class CommunityBean {
 		@RequestMapping("help.com")
 		public String help(String pageNum, Model model, String category) throws SQLException {
 			
+			
 			HashMap map = new HashMap();
 			map = communityService.abc(pageNum, category);
 			
 			model.addAttribute("map", map);
+			model.addAttribute("category", category);
+			model.addAttribute("pageNum", pageNum);
 			
 			return "community/help";
 		}

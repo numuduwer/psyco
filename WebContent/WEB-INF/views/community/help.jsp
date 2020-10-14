@@ -47,10 +47,8 @@
 			<c:forEach var="article" items="${map.helpList}">
 				<tr>
 					<td>
-						<%-- ${number} --%>
-						<%-- <c:set var="number" value="${number -1}"></c:set> --%>
-					</td>
-					
+						${map.number}
+					</td>						
 					<td align="left">
 					
 						<c:set var="wid" value="0"></c:set>
@@ -71,11 +69,11 @@
 	
 		<%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
 			<div align="center">
-			<c:if test="${count > 0}">
+			<c:if test="${map.count > 0}">
 				<fmt:parseNumber var="res" value="${map.count / map.pageSize}"  integerOnly="true"/>
-				<c:set var="pageCount" value="${res + (count % pageSize == 0 ? 0 : 1)}"  />
+				<c:set var="pageCount" value="${res + (map.count % map.pageSize == 0 ? 0 : 1)}"  />
 				<c:set var="pageBlock" value="10" />
-				<fmt:parseNumber var="result" value="${(currPage-1)/pageBlock}" integerOnly="true" />
+				<fmt:parseNumber var="result" value="${(map.currPage-1)/pageBlock}" integerOnly="true" />
 				<fmt:parseNumber var="startPage" value="${result * pageBlock + 1}" />
 				<fmt:parseNumber var="endPage" value="${startPage + pageBlock - 1}" />
 				<c:if test="${endPage > pageCount}">

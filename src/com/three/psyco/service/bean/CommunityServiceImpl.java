@@ -147,8 +147,10 @@ public class CommunityServiceImpl implements CommunityService {
 		
 		HashMap map = new HashMap();
 		map.put("helpList", helpList);
-		map.put("pageSize", currPage);
+		map.put("pageSize", pageSize);
+		map.put("currPage", currPage);
 		map.put("count", count);
+		map.put("number", number);
 		
 		return map;
 	}
