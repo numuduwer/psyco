@@ -16,17 +16,12 @@
 	</typeAliases>
 	
 	<mappers>
+		<mapper resource="/sql/memberSQL.xml"/>
+		<mapper resource="/sql/communitySQL.xml"/>
 		<mapper resource="/sql/superSQL.xml"/>
 		<mapper resource="/sql/memberShopSQL.xml"/>
 		<mapper resource="/sql/memberMenuSQL.xml"/>
 		<mapper resource="/sql/testSQL.xml"/>
-		<mapper resource="/sql/communitySQL.xml"/>
-		<mapper resource="/sql/memberSQL.xml"/>
-
-
-
-
-
 	</mappers>
   	
 </configuration>
