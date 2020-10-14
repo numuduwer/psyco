@@ -43,7 +43,7 @@ public class MemberBean {
 	@RequestMapping("naverLoginPro.com")
 	public String naverLoginPro() throws UnsupportedEncodingException {
 		String apiURL = memberService.naverLogin();
-		System.out.println(apiURL);
+		//System.out.println(apiURL);
 		return "redirect:" + apiURL;
 	}
 	
@@ -63,20 +63,6 @@ public class MemberBean {
 		}
 	}
 	
-	@RequestMapping("signup.com")
-	public String insertMember(MemberDTO dto, Model model) {
-		System.out.println(dto.getBirth());
-		int result = memberService.insertMember(dto);
-		model.addAttribute("result", result);
-		return "member/signupPro";
-	}
-	
-	@RequestMapping("logout.com")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "main/main";
-	}
-	
 	@RequestMapping("signupSelect.com")
 	public String signupSelect() {
 		return "member/signupSelect";
@@ -90,6 +76,20 @@ public class MemberBean {
 	@RequestMapping("businessSignupForm.com")
 	public String businessSignupForm() {
 		return "member/businessSignupForm";
+	}
+	
+	@RequestMapping("signup.com")
+	public String insertMember(MemberDTO dto, Model model) {
+		System.out.println(dto.getBirth());
+		int result = memberService.insertMember(dto);
+		model.addAttribute("result", result);
+		return "member/signupPro";
+	}
+	
+	@RequestMapping("logout.com")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "main/main";
 	}
 	
 	@RequestMapping("licenseLookup.com")
