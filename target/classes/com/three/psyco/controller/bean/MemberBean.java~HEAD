@@ -104,30 +104,4 @@ public class MemberBean {
 		
 		return new ResponseEntity<String>(status, resHeaders, HttpStatus.CREATED);
 	}
-	
-	@RequestMapping("mapsTest.com")
-	public String mapTest() {
-		return "member/mapsTest";
-	}
-	
-	@RequestMapping("geoLocation.com")
-	public String geoLocation() {
-		return "member/geoLocation";
-	}
-	
-	
-	
-	
-	////  레이아웃 테스트 //
-	
-	@RequestMapping("mypage.com")
-	public String mypageHeader() {
-		return "member/test";
-	}
-	
-	@RequestMapping("mypageList.com")
-	public String mypageList() {
-		return "member/mypageList";
-	}
-	
 }
