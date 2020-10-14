@@ -6,10 +6,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+
+import com.three.psyco.model.dao.SuperDAOImpl;
 import com.three.psyco.model.dto.ListData;
 
 @Service
 public class CommonsServiceImpl implements CommonsService {
+	
+	@Autowired
+	private SuperServiceImpl superService = null;
+	
+	
+	@Autowired
+	private ShopServiceImpl shopService = null;
+	
+	
 	public void setListDataToModel(Model model, ListData data) {
 		model.addAttribute("pageNum", data.getPageNum());
 		model.addAttribute("pageSize", data.getPageSize());
@@ -22,10 +33,7 @@ public class CommonsServiceImpl implements CommonsService {
 	}
 	
 	
-	public ListData getListData(String pageName, String pageNum,SuperService superService) throws SQLException {
-		
-		
-		
+	public ListData getListData(String pageName, String pageNum) throws SQLException {	
 		// 디폴트 값 설정 
 		if(pageNum == null) {
 			pageNum = "1";

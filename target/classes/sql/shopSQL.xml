@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <!-- namespace : 내부에 쿼리태크 호출시 namespace속성명 쿼리태그 id값-->
+ 
+ <mapper namespace="shop">
+ 	
+ 	<select id="getMyShopCount" parameterType="int" resultType="int" >
+ 		select count(*) from shop where MEMBER_NUM = #{value} 
+ 	</select>
+ 	
+ 	
+ 	
+ 	<select id="getMyShopList" parameterType="hashmap" resultType="ShopDTO">
+ 		<![CDATA[
+		SELECT /*+ index_desc(SHOP SHOP_SEQ)*/rownum rn, shop_num, shop_name, shop_phone, OPERATING_TIME, address, origin, takeout, shop_img, license_number, request_time, approve_time, status, approve_status, member_num  
+		FROM SHOP
+		WHERE SHOP_NUM >= #{start}
+		AND rownum <= #{end}
+		AND MEMBER_NUM = #{memNum}
+	
+		]]>
+ 	</select>
+ 
+ </mapper>
