@@ -9,6 +9,7 @@
 <title>후기 리스트</title>
 </head>
 <body>
+	<!-- member_id 를 이용하여 nickname을 가져와야함 -->
 	<br />
 	<h1 align="center"> board </h1>
 	<%-- 후기 없을때 --%>
@@ -24,12 +25,11 @@
 	<table>
 		<tr>
 			<td>No.</td>
-			<td>작성자</td>
 			<td>이미지</td>
+			<td>작성자</td>
 			<td>가게 이름</td>
 			<td>별점</td>
 			<td>시  간</td>
-			<td>내용</td>
 		</tr>
 		<c:forEach var="article" items="${articleList}">
 			<tr>
@@ -39,10 +39,12 @@
 				<td><img src="../review_img/'${article.review_img }'" width="80" height="100"></td>
 				<td>${article.writer}</td>
 				<td align="left">
-					<a href="/psyco/user/reviewDetail.com?num=${article.review_num}&pageNum=${pageNum}" >${article.content}</a>
+					<a href="/psyco/user/reviewDetail.com?num=${article.review_num}&pageNum=${pageNum}" >${article.shop_name}</a>
 				</td>
+				<td>${article.grade}</td>
 				<td>${article.reg}</td>
-				
+				<td>${article.reg}</td>
+				<td><input type="button" value="삭제" onclick="window.location='reviewDelete.com'"/></td>
 			</tr>
 		</c:forEach>
 	</table>

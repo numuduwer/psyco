@@ -15,4 +15,9 @@ public interface ReviewService {
 	public List getReviews(int startRow,int endRow,String member_id)throws SQLException;
 	
 	public int getReviewc()throws SQLException;
+	
+	public ReviewDTO getReviewDetails(int num) throws SQLException;
+	
+	public void updateReviews(MultipartHttpServletRequest request)throws SQLException;
+	
 }

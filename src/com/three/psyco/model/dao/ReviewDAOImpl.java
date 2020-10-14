@@ -18,7 +18,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession=null;
 	
-	//후기 등록
+	//후기 등록 memid-->writer = nickname / 가게 이름 = num 으로 뽑아와야함.
 	@Override
 	public void insertReview(ReviewDTO dto) throws SQLException {
 		
@@ -33,7 +33,6 @@ public class ReviewDAOImpl implements ReviewDAO {
 		map.put("start", startRow);
 		map.put("end", endRow);
 		map.put("member_id", "gogo");
-		System.out.println("endRow="+endRow);
 		list=sqlSession.selectList("review.getReview",map);
 		return list;
 	}
@@ -43,6 +42,18 @@ public class ReviewDAOImpl implements ReviewDAO {
 		int count = sqlSession.selectOne("review.getCount");
 		System.out.println("dao count : " + count);
 		return count;
+	}
+
+	@Override
+	public ReviewDTO getReviewDetail(int num) throws SQLException {
+		ReviewDTO dto=sqlSession.selectOne("review.getReivewDetail",num);
+		return dto;
+	}
+
+	@Override
+	public ReviewDTO updateReview(ReviewDTO dto) throws SQLException {
+		sqlSession.update("review.updateReview",dto);
+		return null;
 	}
 
 }

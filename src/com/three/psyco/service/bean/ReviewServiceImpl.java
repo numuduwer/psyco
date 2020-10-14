@@ -88,8 +88,60 @@ public class ReviewServiceImpl implements ReviewService {
 		
 	}
 
+	@Override
+	public ReviewDTO getReviewDetails(int num) throws SQLException {
+		ReviewDTO dto=reviewDAO.getReviewDetail(num);
+		return dto;
+	}
 
+		//ref , reply ,confirm 1 일 경우와 0일 경우 나눠야함!
+	@Override
+	public void updateReviews(MultipartHttpServletRequest request) throws SQLException {
+		ReviewDTO dto=new ReviewDTO();
+		int review_num=Integer.parseInt(request.getParameter("review_num"));
+		int ref=Integer.parseInt(request.getParameter("ref"));
+		int shop_num=Integer.parseInt(request.getParameter("shop_num"));
+		String writer=request.getParameter("writer");
+		String category=request.getParameter("category");
+		String content=request.getParameter("content");
+		String grade=request.getParameter("grade");
+		String confirm=request.getParameter("confirm");
+		String reply_content=request.getParameter("reply_content");
+		String member_id=request.getParameter("member_id");
+		String shop_name=request.getParameter("shop_name");
+		MultipartFile mf = request.getFile("review_img");
+		try {
+			String path=request.getRealPath("reivew_img");
+			System.out.println("path ="+path);
+			String orgName =mf.getOriginalFilename();
+			System.out.println("orgName ="+orgName);
+			String imgName =orgName.substring(0, orgName.lastIndexOf('.'));
+			System.out.println("imgName ="+imgName);
+			String ext = orgName.substring(orgName.lastIndexOf('.'));
+			System.out.println("ext ="+ext);
+			Long date=System.currentTimeMillis();
+			String newName=imgName+date+ext;
+			System.out.println("newName ="+newName);
+			String imgPath = path+"\\"+newName;
+			File file=new File(imgPath);
+			mf.transferTo(file);
+			dto.setReview_img(newName);
+			System.out.println("dto="+dto.getReview_img());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		dto.setCategory(category);
+		dto.setConfirm(confirm);
+		dto.setContent(content);
+		dto.setGrade(grade);
+		dto.setMember_id(member_id);
+		dto.setReview_num(review_num);
+		dto.setShop_name(shop_name);
+		dto.setShop_num(shop_num);
+		dto.setWriter(writer);
+		reviewDAO.updateReview(dto);
 
+	}
 
 
 }

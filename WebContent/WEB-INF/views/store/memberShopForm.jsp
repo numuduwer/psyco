@@ -6,6 +6,11 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
+<script>
+	function goBack(){ 
+		window.history.back();
+	}
+</script>
 <body>
 	<form action="/psyco/memberShopPro.com" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="member_num" value=1>

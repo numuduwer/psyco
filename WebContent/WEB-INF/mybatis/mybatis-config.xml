@@ -24,6 +24,7 @@
 		<mapper resource="/sql/memberMenuSQL.xml"/>
 		<mapper resource="/sql/testSQL.xml"/>
 		<mapper resource="/sql/reviewSQL.xml"/>
+		<mapper resource="/sql/memberSQL.xml"/>
 
 
 

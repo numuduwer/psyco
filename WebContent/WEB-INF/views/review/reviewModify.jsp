@@ -1,28 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리 뷰 폼!</title>
+<title>리뷰 수정폼</title>
 </head>
-<script type="text/javascript">
-	function goBack(){
-		window.history.back();
-	}
-</script>
 <body>
-	<!-- 가게 리뷰에 필요한 페이지  -->
-	<!--현재 접속한 세션을 불러와 넣어준다. shop_num 을 전페이지 에서부터 끌어온다  session 부분 nickname으로 바꿔야 할듯 ㅠ -->
-	<form action="/psyco/user/reviewPro.com" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="writer" value="${session}"/>
-	<input type="hidden" name="shop_num" value="${shop_num}"/>
-	
+<form action="reviewModifyPro.com" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="writer" value="${article.writer}"/>
+	<input type="hidden" name="shop_num" value="${article.shop_num}"/>
+	<input type="hidden" name="review_num" value="${article.review_num}"/>
+	<input type="hidden" name="ref" value="${article.ref}"/>
+	<input type="hidden" name="confirm" value="${article.confirm}"/>
+	<input type="hidden" name="reply_content" value="${article.reply_content}"/>
+	<input type="hidden" name="shop_name" value="${article.shop_name}"/>
+	<input type="hidden" name="member_id" value="${article.member_id}"/>
 		<table>
 			<tr>
 				<td>작성자</td>
-				<td>${session}</td>
+				<td>${article.writer}</td>
 				<td>
 					<select name="category">
 						<option value="0">없음</option>
@@ -41,9 +38,9 @@
 				</td>
 			</tr>
 			<tr>
-				<td><input type="file" name="review_img"/></td>
+				<td><input type="file" name="review_img" valuew="${article.review_img}"/></td>
 				<td>내용</td>
-				<td><input type="text" name="content"/></td>
+				<td><input type="text" name="content" value="${article.content}"/></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="확인"/></td>
@@ -51,6 +48,7 @@
 			</tr>
 		</table>
 	</form>
+	
 
 </body>
 </html>

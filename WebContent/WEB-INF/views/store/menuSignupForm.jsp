@@ -19,7 +19,9 @@
 		$.ajax({
 			url:"ajaxMenuSelect.com?bigname="+val,
 			type:"get",
+			dataType: "json",
 			success:function(result){
+				colose.log(result);
 			$("#midmenu").find("option").remove().end().append("<option value=0>선택</option>");	
 			$.each(result, function(i){
 				$("#midmenu").append("<option value='"+result[i]+"'>"+result[i]+"</option>")
@@ -34,7 +36,7 @@
 <body>
 	<!-- 나중에 히든 value 값변경  -->
 	<form action="/psyco/menuSignupPro.com" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="shop_num" value="1"/>
+		<input type="hidden" name="shop_num" value="${shop_num}"/>
 		<table>
 			<tr>
 				<td>메뉴 이름</td>

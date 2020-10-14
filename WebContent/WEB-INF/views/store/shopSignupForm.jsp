@@ -14,7 +14,7 @@
 <body>
 <!-- 히든값 value member_num으로 나중에 수정  -->
 	<form action="/psyco/shopSignupPro.com" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="member_num" value=2>
+		<input type="hidden" name="member_num" value="${member_num}">
 		<table>
 			<tr>
 				<td>가게이름</td>

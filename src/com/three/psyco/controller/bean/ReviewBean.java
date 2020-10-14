@@ -47,7 +47,7 @@ public class ReviewBean {
 		System.out.println(writer);
 		System.out.println(shop_num);
 		reviewService.insertReviews(request, shop_num, writer);
-		return "review/reviewPro";
+		return "review/reviewList";
 	}
 	//나의 후기 리스트
 
@@ -67,6 +67,34 @@ public class ReviewBean {
 		model.addAttribute("articleList", data.getArticleList());
 		System.out.println("getArticleList="+data.getArticleList());
 		return "/review/reviewList";
+	}
+	
+	//리스트 상세보기
+	@RequestMapping("reviewDetail.com")
+	public String reviewDetail(String pageNum,Model model,int num)throws SQLException {
+		
+		ReviewDTO article=reviewService.getReviewDetails(num);
+		model.addAttribute("article",article);
+		model.addAttribute("pageNum",pageNum);
+		return "review/reviewDetail";
+	}
+	
+	@RequestMapping("reviewModify.com")
+	public String reviewModify(int review_num,String pageNum,Model model)throws SQLException {
+		
+		ReviewDTO article=reviewService.getReviewDetails(review_num);
+		model.addAttribute("article",article);
+		model.addAttribute("pageNum",pageNum);
+		
+		
+		return "review/reviewModify";
+	}
+	@RequestMapping("reviewModifyPro.com")
+	public String reviewModifyPro(MultipartHttpServletRequest request)throws SQLException {
+		reviewService.updateReviews(request);
+		
+		
+		return "review/reviewDetail";
 	}
 	
 
