@@ -18,8 +18,6 @@
 				<td> 후기가 없습니다. </td>
 			</tr>
 		</table>
-		
-		#{articleList}
 	</c:if>
 	<%-- 후기 있을 때 --%>
 	<c:if test="${count > 0}">
@@ -27,10 +25,10 @@
 		<tr>
 			<td>No.</td>
 			<td>작성자</td>
+			<td>이미지</td>
 			<td>가게 이름</td>
 			<td>별점</td>
 			<td>시  간</td>
-			<td>이미지</td>
 			<td>내용</td>
 		</tr>
 		<c:forEach var="article" items="${articleList}">
@@ -38,18 +36,13 @@
 				<td>${number}
 					<c:set var="number" value="${number-1}" />
 				</td>
+				<td><img src="../review_img/'${article.review_img }'" width="80" height="100"></td>
+				<td>${article.writer}</td>
 				<td align="left">
-					<c:set var="wid" value="0" />
-					<c:if test="${article.re_level > 0}">
-						<c:set var="wid" value="${8 * article.re_level}" />
-						<img src="/psyco/resources/img/tabImg.PNG" width="${wid}" />	
-						<img src="/spring/resources/img/replyImg.png" width="11" />
-					</c:if>
-					<a href="/spring/board/content.git?num=${article.num}&pageNum=${pageNum}" >${article.subject}</a>
+					<a href="/psyco/user/reviewDetail.com?num=${article.review_num}&pageNum=${pageNum}" >${article.content}</a>
 				</td>
-				<td><a href="mailto:${article.email}">${article.writer}</a></td>
 				<td>${article.reg}</td>
-				<td>${article.readcount}</td>
+				
 			</tr>
 		</c:forEach>
 	</table>
@@ -70,13 +63,13 @@
 		</c:if>
 		
 		<c:if test="${startPage > pageBlock}">
-			<a href="/spring/board/list.git?pageNum=${startPage-pageBlock}" > &lt; </a>
+			<a href="/psyco/reivew/reivewList.com?pageNum=${startPage-pageBlock}" > &lt; </a>
 		</c:if>
 		<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1" >
-			<a href="/spring/board/list.git?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+			<a href="/psyco/reivew/reivewList.com?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
 		</c:forEach>
 		<c:if test="${endPage < pageCount}">
-			<a href="/spring/board/list.git?pageNum=${startPage+pageBlock}" > &gt; </a>
+			<a href="/psyco/reivew/reivewList.com?pageNum=${startPage+pageBlock}" > &gt; </a>
 		</c:if>
 	
 	</c:if>

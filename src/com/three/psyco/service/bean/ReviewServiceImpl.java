@@ -69,7 +69,7 @@ public class ReviewServiceImpl implements ReviewService {
 		dto.setGrade(grade);
 		dto.setReply_content("이용해주셔서 감사합니다.");
 		dto.setShop_num(Shop_num);
-		dto.setMember_id(member_id);
+		dto.setMember_id("gogo");
 		dto.setWriter(writer);
 		reviewDAO.insertReview(dto);
 	}

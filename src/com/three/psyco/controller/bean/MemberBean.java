@@ -114,4 +114,9 @@ public class MemberBean {
 	public String geoLocation() {
 		return "member/geoLocation";
 	}
+	
+	@RequestMapping("paymentTest.com")
+	public String paymentTest() {
+		return "member/paymentTest";
+	}
 }

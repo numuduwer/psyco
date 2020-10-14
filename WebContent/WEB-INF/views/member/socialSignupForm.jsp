@@ -18,9 +18,11 @@
 				<input type="hidden" name="gender" value="${memberProfile.gender}" />
 				<input type="hidden" name="nickname" value="${memberProfile.nickname}" />
 				<input type="hidden" name="email" value="${memberProfile.email}" />
-				<input type="text" name="member_Id" placeholder="아이디를 입력하세요" /> <br />
-				<input type="text" name="phoneNum" placeholder="휴대전화 번호를 입력하세요" /> <br />
-				<input type="date" name="birth" /> <br />
+				<input type="text" name="member_Id" placeholder="아이디를 입력하세요" /> <br>
+				<input type="text" name="phoneNum" placeholder="휴대전화 번호를 입력하세요" /> 
+				
+				<br>
+				<input type="date" name="birth" /> <br>
 				<input type="submit" value="회원가입" />
 			</form>
 		</div>

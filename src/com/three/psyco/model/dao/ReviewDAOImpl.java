@@ -18,6 +18,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession=null;
 	
+	//후기 등록
 	@Override
 	public void insertReview(ReviewDTO dto) throws SQLException {
 		
