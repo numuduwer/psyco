@@ -34,9 +34,6 @@ public class ShopDAOImpl implements ShopDAO {
 		map.put("id", id);
 		
 		
-		System.out.println("shopDAO pageName : " + pageName);
-		System.out.println("shopDAO id : " + id);
-		
 		
 		List list = null;
 		if(pageName.equals("shopList")) {
@@ -59,7 +56,7 @@ public class ShopDAOImpl implements ShopDAO {
 	@Override
 	public int updateShopData(ShopDTO dto) throws SQLException {
 		int result = 0; 
-	
+		System.out.println("dao shop_num : " +dto.getShop_num() );
 		result = sqlSession.update("shop.update", dto);
 		return result;
 	}

@@ -44,8 +44,7 @@ public class ShopBean {
 			id = (Integer)session.getAttribute("memNum");
 		
 		}
-		
-		System.out.println("shopList Controller id :" + id);
+	
 		ListData data = commonsService.getListData(pageName,pageNum,id,controllerName);
 		commonsService.setListDataToModel(model, data);
 		return "shop/shopList";
@@ -105,40 +104,31 @@ public class ShopBean {
 	public String shopModiyPro(MultipartHttpServletRequest request,  ShopDTO dto , String pageNum, Model model)throws SQLException{
 		
 		int result = 0;
+	
 		
 		// 파일 업로드 
 		String path = request.getRealPath("save");
-		MultipartFile mf = null;
-		String img = dto.getShop_img();
+	
+		
+	
 		try {
-			mf = request.getFile(img);
-			if(request.getFile(img) == null) {
-				String orgName = "asd.asd";
-				String imgName = orgName.substring(0, orgName.lastIndexOf('.'));
-				String ext = orgName.substring(orgName.lastIndexOf('.'));
-				long date = System.currentTimeMillis();
-				String newName = imgName + date + ext;
-				String imgPath = path + "\\" + newName;
-				
-				dto.setShop_img(newName);
-				
-			}else {
-				String orgName = mf.getOriginalFilename();					
+			MultipartFile mf = null;
+			mf = request.getFile("shop_img2");
+				String orgName = mf.getOriginalFilename();
+			
 				String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
 				String ext = orgName.substring(orgName.lastIndexOf('.'));
 				long date = System.currentTimeMillis();
 				String newName = imgName+date+ext;
-				String imgPath = path + "\\" + newName;
+				dto.setShop_img(newName);
+				String imgPath = path + "/"+newName ;
 				File copyFile = new File(imgPath);
 				mf.transferTo(copyFile);
-				
-				dto.setShop_img(newName);
-				
-			}
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 		
 		result = shopService.updateShopDataSV(dto);
 		model.addAttribute("result", result);

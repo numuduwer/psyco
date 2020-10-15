@@ -93,8 +93,7 @@ public class CommonsServiceImpl implements CommonsService {
 		if(pageName == null) {
 			pageName = "shopList";
 		}
-		System.out.println("commons Serrvice pageName : " + pageName);
-		System.out.println("commons Serrvice id : " + id);
+
 		// 페이징 처리 초기값
 		int pageSize = 10;
 		int currPage = Integer.parseInt(pageNum);	// 페이지 계산을 위해  형변환 

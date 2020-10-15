@@ -54,6 +54,7 @@ function onClickItemDelete(memberNum){
 				<td>${article.origin}</td>
 				<td>${article.takeout}</td>
 				<td>${article.shop_img}</td>
+				<td><img alt="" src="/psyco/save//${article.shop_img}"></td>
 				<td>${article.license_number}</td>	
 				<td>${article.request_time}</td>
 				
