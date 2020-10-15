@@ -28,6 +28,18 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
+	public MemberDTO getMemberProfileFromNum(int member_Num) {
+		MemberDTO dto = sqlSession.selectOne("getMemberProfileFromNum", member_Num);
+		return dto;
+	}
+	
+	@Override
+	public MemberDTO getMemberProfileFromId(String member_Id) {
+		MemberDTO dto = sqlSession.selectOne("member.getMemberProfileFromId", member_Id);
+		return dto;
+	}
+	
+	@Override
 	public int insertMember(MemberDTO dto) {
 		int result = sqlSession.insert("member.insertMember", dto);
 		return result;
@@ -38,8 +50,37 @@ public class MemberDAOImpl implements MemberDAO {
 		HashMap<String, String> hMap = new HashMap<String, String>();
 		hMap.put("member_Id", member_Id);
 		hMap.put("pw", pw);
+		
 		int count = sqlSession.selectOne("member.loginCheck", hMap);
 		return count;
 	}
 	
+	@Override
+	public int userDelete(String member_Id, String pw) {
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("member_Id", member_Id);
+		hMap.put("pw", pw);
+		
+		int result = sqlSession.delete("member.userDelete", hMap);
+		return result;
+	}
+	
+	@Override
+	public int modifySocialUserPro(int member_Num, String member_Id, String phoneNum, String birth) {
+		HashMap<Object, Object> hMap = new HashMap<Object, Object>();
+		hMap.put("member_Num", member_Num);
+		hMap.put("member_Id", member_Id);
+		hMap.put("phoneNum", phoneNum);
+		hMap.put("birth", birth);
+		
+		int result = sqlSession.update("member.modifySocialUserPro", hMap);
+		
+		return result;
+	}
+	
+	@Override
+	public int modifyNormalUserPro(MemberDTO dto) {
+		int result = sqlSession.update("member.modifyNormalUserPro", dto);
+		return result;
+	}
 }

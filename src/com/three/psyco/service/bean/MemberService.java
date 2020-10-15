@@ -27,4 +27,14 @@ public interface MemberService {
 	public int loginCheck(String member_Id, String pw);
 	
 	public String licenseLookup(String license_number) throws IOException;
+	
+	public int userDelete(String member_Id, String pw);
+	
+	public int userTypeCheck(String member_Num);
+	
+	public MemberDTO getMemberProfileFromNum(int member_Num);
+	
+	public int modifySocialUserPro(String phoneNum, String birth);
+	
+	public int modifyNormalUserPro(MemberDTO dto);
 }

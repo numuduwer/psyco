@@ -17,7 +17,7 @@
 	<c:if test="${count == 1}">
 		<script type="text/javascript">
 			alert('로그인 완료');
-			window.location.href='/psyco/main.com';
+			window.location.href='/psyco/main/main.com';
 		</script>
 	</c:if>
 </body>
