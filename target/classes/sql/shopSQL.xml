@@ -19,7 +19,7 @@
 		FROM SHOP
 		WHERE SHOP_NUM >= #{start}
 		AND rownum <= #{end}
-		AND MEMBER_NUM = #{memNum}
+		AND MEMBER_NUM = #{id}
 	
 		]]>
  	</select>

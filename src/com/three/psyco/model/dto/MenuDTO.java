@@ -14,7 +14,7 @@ public class MenuDTO {
 	private String sett;
 	private int shop_num;
 	private Timestamp reg;
-	
+
 	public int getMenu_num() {
 		return menu_num;
 	}

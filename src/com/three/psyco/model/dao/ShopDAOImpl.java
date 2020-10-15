@@ -34,6 +34,10 @@ public class ShopDAOImpl implements ShopDAO {
 		map.put("id", id);
 		
 		
+		System.out.println("shopDAO pageName : " + pageName);
+		System.out.println("shopDAO id : " + id);
+		
+		
 		List list = null;
 		if(pageName.equals("shopList")) {
 			list = sqlSession.selectList("shop.getMyShopList", map);	
