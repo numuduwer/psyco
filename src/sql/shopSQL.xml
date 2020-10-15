@@ -23,5 +23,10 @@
 	
 		]]>
  	</select>
+ 	
+ 	<select id="getShopData" parameterType="int" resultType="ShopDTO" >
+ 		select * from shop where SHOP_NUM = #{value} 
+ 	</select>
+ 	
  
  </mapper>

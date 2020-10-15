@@ -1,6 +1,7 @@
 package com.three.psyco.controller.bean;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.three.psyco.model.dto.ListData;
+import com.three.psyco.model.dto.ShopDTO;
 import com.three.psyco.service.bean.CommonsServiceImpl;
 import com.three.psyco.service.bean.ShopService;
 import com.three.psyco.service.bean.ShopServiceImpl;
@@ -22,12 +24,13 @@ public class ShopBean {
 	private ShopServiceImpl shopService = null;
 	@Autowired
 	private CommonsServiceImpl commonsService = null;
-	
 
 	
+	public static String controllerName = "shopBean";
 	
+		
 	@RequestMapping("shopList.com")
-	public String storeList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
+	public String storeList2(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
 		
 		int memNum = 0; 
 		
@@ -39,17 +42,24 @@ public class ShopBean {
 			memNum = (Integer)session.getAttribute("memNum");
 		
 		}
-		ListData data = shopService.getListData(pageName,pageNum,memNum);
-
-		model.addAttribute("pageNum", data.getPageNum());
-		model.addAttribute("pageSize", data.getPageSize());
-		model.addAttribute("currPage", data.getCurrPage());
-		model.addAttribute("startRow", data.getStartRow());
-		model.addAttribute("endRow", data.getEndRow());
-		model.addAttribute("number", data.getNumber());
-		model.addAttribute("articleList", data.getArticleList());
-		model.addAttribute("count", data.getCount());	
+		ListData data = commonsService.getListData(pageName,pageNum,memNum,controllerName);
+		commonsService.setListDataToModel(model, data);
+	
 		return "shop/shopList";
+	}
+	
+	@RequestMapping("shopDetail.com")
+	public String shopDetail(String shop_num, Model model) throws SQLException {
+		
+		if(shop_num == null) {
+			shop_num = "2";
+		}
+		int id = Integer.parseInt(shop_num);
+		
+		
+		ShopDTO shopData = shopService.getShopDataSV(id);
+		model.addAttribute("dto", shopData);
+		return "shop/shopDetail";
 	}
 
 }

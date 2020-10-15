@@ -8,41 +8,48 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.three.psyco.model.dto.ShopDTO;
+
 @Repository
 public class ShopDAOImpl implements ShopDAO {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession = null;
-
-	public int count(String pageName, int memNum) {
+	
+	// ShopList.jsp
+	@Override
+	public int count(String pageName, int memNum)throws SQLException {
 		int count = 0; 
-		
 		if(pageName.equals("shopList")) {
 			count = sqlSession.selectOne("shop.getMyShopCount",memNum);
 		}
 		return count;
 	}
-
+	
+	@Override
 	public List getList(String pageName, int memNum, int startRow, int endRow) throws SQLException {
-		System.out.println("DAO pageName : "+pageName);
-		System.out.println("DAO memNum : "+memNum);
-		System.out.println("DAO startRow : "+startRow);
-		System.out.println("DAO endRow : "+endRow);
-		
 		HashMap map = new HashMap();
 		map.put("start", startRow);
 		map.put("end", endRow);
 		map.put("memNum", memNum);
 		
 		
-		System.out.println(map.get("start"));
 		List list = null;
-
 		if(pageName.equals("shopList")) {
 			list = sqlSession.selectList("shop.getMyShopList", map);	
 		}
 		return list;
 	}
+	
+	
+	
+	// ShopDetail.jsp
+	@Override
+	public ShopDTO getShopData(int id ) throws SQLException {
+		ShopDTO data = sqlSession.selectOne("shop.getShopData", id);
+		return data;
+	}
+	
 	
 	
 	
