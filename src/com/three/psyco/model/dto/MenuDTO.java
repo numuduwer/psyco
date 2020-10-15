@@ -3,17 +3,18 @@ package com.three.psyco.model.dto;
 import java.sql.Timestamp;
 
 public class MenuDTO {
+
 	private int menu_num;
 	private String menu_name;
 	private String content;
 	private String menu_img;
 	private int price;
-	
 	private String category;
 	private String season;
 	private String sett;
 	private int shop_num;
 	private Timestamp reg;
+
 	public int getMenu_num() {
 		return menu_num;
 	}
@@ -74,10 +75,4 @@ public class MenuDTO {
 	public void setReg(Timestamp reg) {
 		this.reg = reg;
 	}
-	
-	
-	
-	
-	
-
 }
