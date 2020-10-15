@@ -85,10 +85,7 @@ public class CommonsServiceImpl implements CommonsService {
 	}
 	
 
-	
-
-
-	public ListData getListData(String pageName, String pageNum, int memNum, String controller) throws SQLException{
+	public ListData getListData(String pageName, String pageNum, int id, String controller) throws SQLException{
 		// 디폴트 값 설정 
 		if(pageNum == null) {
 			pageNum = "1";
@@ -96,7 +93,6 @@ public class CommonsServiceImpl implements CommonsService {
 		if(pageName == null) {
 			pageName = "shopList";
 		}
-		
 		// 페이징 처리 초기값
 		int pageSize = 10;
 		int currPage = Integer.parseInt(pageNum);	// 페이지 계산을 위해  형변환 
@@ -108,13 +104,13 @@ public class CommonsServiceImpl implements CommonsService {
 		int count = 0;
 		
 		// 글 갯수 불러오기 
-		if(pageName.equals("shopList")) {
-			count =  shopDAO.count(pageName,memNum);
+		if(controller.equals("shopBean")) {
+			count = shopDAO.count(pageName, id);
 		}
 		
 	
 		if(count >0) {
-			articleList = shopDAO.getList(pageName, memNum,startRow, endRow);	
+			articleList = shopDAO.getList(pageName, id,startRow, endRow);	
 		}
 		
 		number = count - (currPage-1) * pageSize;

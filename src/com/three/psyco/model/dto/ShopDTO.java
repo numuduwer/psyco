@@ -101,7 +101,7 @@ public class ShopDTO {
 		return approve_status;
 	}
 	public void setApprove_status(String approve_status) {
-		approve_status = approve_status;
+		this.approve_status = approve_status;
 	}
 	public int getMember_num() {
 		return member_num;

@@ -22,6 +22,13 @@ public class ShopServiceImpl implements ShopService {
 		ShopDTO data = shopDAO.getShopData(id);
 		return data;
 	}
+	@Override
+	public int updateShopDataSV(ShopDTO dto) throws SQLException {
+		int result = 0 ;	
+		shopDAO.updateShopData(dto);
+		result = 1;
+		return result;
+	}
 	
 	
 	

@@ -27,16 +27,18 @@ public class ShopDAOImpl implements ShopDAO {
 	}
 	
 	@Override
-	public List getList(String pageName, int memNum, int startRow, int endRow) throws SQLException {
+	public List getList(String pageName, int id, int startRow, int endRow) throws SQLException {
 		HashMap map = new HashMap();
 		map.put("start", startRow);
 		map.put("end", endRow);
-		map.put("memNum", memNum);
+		map.put("id", id);
 		
 		
 		List list = null;
 		if(pageName.equals("shopList")) {
 			list = sqlSession.selectList("shop.getMyShopList", map);	
+		}else if(pageName.equals("menuList")){
+			list = sqlSession.selectList("shop.getMenuList", map);
 		}
 		return list;
 	}
@@ -48,6 +50,14 @@ public class ShopDAOImpl implements ShopDAO {
 	public ShopDTO getShopData(int id ) throws SQLException {
 		ShopDTO data = sqlSession.selectOne("shop.getShopData", id);
 		return data;
+	}
+	
+	@Override
+	public int updateShopData(ShopDTO dto) throws SQLException {
+		int result = 0; 
+	
+		result = sqlSession.update("shop.update", dto);
+		return result;
 	}
 	
 	

@@ -5,19 +5,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>menu 리스트 페이지</title>
+<title>Member 관리 페이지</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	
+	
+function onClickItemDelete(memberNum){
+	var apiURL = '/psyco/super/deleteMember.com';
+	console.log(apiURL);
 
+	$.ajax({
+        type: 'POST',
+        url: apiURL,
+		data: {member_num : memberNum},
+        error: function (error) {
+            alert('data error');
+        }
+    });	
+}	
+</script>
 </head>
 <body>
 
 
 
 
-	<h1> Menu 리스트 페이지 </h1>
+	<h1> Shop 리스트 페이지 </h1>
 	
 	
 	<c:if test="${count == 0}">
-		<h2> 메뉴가 없어요.</h2>
+		<h2> 가게가 없어요.</h2>
 	
 	</c:if>
 	<c:if test="${count > 0}">
@@ -29,17 +46,21 @@
 			<tr>
 				<td>${number} <c:set var="number" value="${number-1}" /> </td>	
 		
-				<td>${article.menu_name}</td> 
-				<td>${article.content}</td>
-				<td>${article.menu_img}</td>
-				<td>${article.price}</td>
+			<td><a href="/psyco/shop/shopDetail.com" >${article.shop_name}</a></td> 
+				<td>${article.shop_phone}</td>
+				<td>${article.operating_time}</td>
+				<td>${article.address}</td>
 				
-				<td>${article.category}</td>
-				<td>${article.season}</td>
-				<td>${article.sett}</td>
-				<td>${article.shop_num}</td>	
-				<td>${article.reg}</td>
-					
+				<td>${article.origin}</td>
+				<td>${article.takeout}</td>
+				<td>${article.shop_img}</td>
+				<td>${article.license_number}</td>	
+				<td>${article.request_time}</td>
+				
+				<td>${article.approve_time}</td>
+				<td>${article.status}</td>
+				<td>${article.approve_status}</td>	
+				<td>${article.member_num}</td>		
 					
 			</tr>
 		</c:forEach>		

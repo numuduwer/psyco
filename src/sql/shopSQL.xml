@@ -24,9 +24,29 @@
 		]]>
  	</select>
  	
+ 	<select id="getMenuList" parameterType="hashmap" resultType="MenuDTO">
+ 		<![CDATA[
+		SELECT /*+ index_desc(MENU MENU_SEQ)*/rownum rn, MENU_NUM, MENU_NAME, CONTENT, MENU_IMG, MENU_IMG, PRICE, CATEGORY, SEASON, SETT, SHOP_NUM, REG 
+		FROM MENU
+		WHERE MENU_NUM >= #{start}
+		AND rownum <= #{end}
+		AND SHOP_NUM = #{id}
+	
+		]]>
+ 	</select>
+ 	
+ 	
+ 	
  	<select id="getShopData" parameterType="int" resultType="ShopDTO" >
  		select * from shop where SHOP_NUM = #{value} 
  	</select>
  	
+ 	
+ 	<update id="update" parameterType="ShopDTO" >
+		update shop set shop_name=#{shop_name}, shop_phone=#{shop_phone}, operating_time=#{operating_time}, address=#{address}, origin=#{origin}, takeout=#{takeout}, shop_img=#{shop_img}, license_number=#{license_number}, status=#{status}, approve_status=#{approve_status}, member_num=#{member_num} 
+  		 where shop_num=#{shop_num}
+ 	</update>
  
+ 
+
  </mapper>

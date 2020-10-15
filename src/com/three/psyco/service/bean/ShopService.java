@@ -6,5 +6,6 @@ import com.three.psyco.model.dto.ShopDTO;
 
 public interface ShopService {
 	public ShopDTO getShopDataSV(int id) throws SQLException ;
+	public int updateShopDataSV(ShopDTO dto) throws SQLException;
 
 }

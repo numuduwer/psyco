@@ -6,6 +6,7 @@
 <configuration>
   
 	<typeAliases>
+		<typeAlias type="com.three.psyco.model.dto.MenuDTO" alias="MenuDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.MemberDTO" alias="MemberDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.ShopDTO" alias="ShopDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.CommunityDTO" alias="CommunityDTO"/>
