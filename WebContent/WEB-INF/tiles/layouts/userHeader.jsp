@@ -11,8 +11,8 @@
         <div class="mypage_menu">
             <h3>My 정보</h3>
             <ul class="mypage_menu_list">
-                <li><a href="#">개인정보수정</a></li>
-                <li><a href="#">회원탈퇴</a></li>
+                <li><a href="/psyco/user/modifyInputPw.com">개인정보수정</a></li>
+                <li><a href="/psyco/user/userDeleteForm.com">회원탈퇴</a></li>
             </ul>
         </div>
 
