@@ -34,10 +34,10 @@ public class MemberBean {
 	}
 	
 	@RequestMapping("loginCheck.com")
-	public String loginCheck(String member_Id, String pw, Model model) {
+	public String loginCheck(String member_Id, String pw, Model model, HttpSession session) {
 		int count = memberService.loginCheck(member_Id, pw);
 		model.addAttribute("count", count);
-		return "member/login";
+		return "member/loginCheck";
 	}
 	
 	@RequestMapping("naverLoginPro.com")
@@ -115,10 +115,11 @@ public class MemberBean {
 		return "member/geoLocation";
 	}
 	
-
 	@RequestMapping("paymentTest.com")
 	public String paymentTest() {
 		return "member/paymentTest";
 	}
+	
+	
 
 }
