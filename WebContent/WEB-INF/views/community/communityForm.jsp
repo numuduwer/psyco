@@ -6,6 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script>
+
+		function imagepreview(input){
+		       if(input.files && input.files[0]){
+		           var filerd = new FileReader();
+		           filerd.onload=function(e){
+		               $('#imgpreview').attr('src', e.target.result);
+		           };
+		           filerd.readAsDataURL(input.files[0]);
+		       }
+		     }
+
+</script>
 </head>
 <body>
 <br/>
@@ -43,7 +57,10 @@
 			<c:if test="${category == 3 || category == 4}">
 			<tr>
 				<td>음식점 사진</td>
-				<td><input type="file" name="img"/></td>	
+			<tr>
+		       	<th><img id="imgpreview" src="/psyco/save//${article.community_img}" width="100" height="100"></th>
+		       	<td><label>이미지 변경하기</label><input type="file" onchange="imagepreview(this);" name="img"/></td>
+			</tr>	
 			</tr>
 			</c:if>
 			<tr>

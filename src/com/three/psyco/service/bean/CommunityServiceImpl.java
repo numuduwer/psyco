@@ -115,13 +115,45 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public List getMyAskSv(String category,String id) throws SQLException {
+	public ListData getMyAskSv(String pageNum, String category) throws SQLException {
 		
 		
+		if (category == null) {
+			category = "5";
+		}
 		
-		List myAsk = commnuityDAO.getMyAsk(category,id);
+		if (pageNum == null) pageNum = "1";
+		int pageSize = 10;
+		int currPage = Integer.parseInt(pageNum);
+		int start = (currPage -1) * pageSize + 1;
+		int end = currPage * pageSize;
+		int number = 0;	// 게시판 상의 글의 번호 띄어줄 변수
+		int count = 0;
 		
-		return myAsk;
+		List myHelpList = null;
+		
+		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession session = servletRequestAttribute.getRequest().getSession();
+//		String writer = (String) session.getAttribute("memId");
+		String writer = "asd";
+		
+		count = commnuityDAO.getMyAskCount(category,writer);
+		
+		myHelpList = commnuityDAO.getMyAsk(start,end,category,writer);
+		
+		number = count - (currPage -1) * pageSize;
+		
+		ListData data  = new ListData();
+		data.setArticleList(myHelpList);
+		data.setCount(count);
+		data.setCurrPage(currPage);
+		data.setEndRow(end);
+		data.setNumber(number);
+		data.setPageNum(Integer.parseInt(pageNum));
+		data.setPageSize(pageSize);
+		data.setStartRow(start);
+		
+		return data;
 	}
 	
 	
@@ -160,6 +192,14 @@ public class CommunityServiceImpl implements CommunityService {
 		data.setPageSize(pageSize);
 		data.setStartRow(start);
 		return data;
+	}
+
+	@Override
+	public int getMyAskCount(String category, String writer) throws SQLException {
+		
+		int count = commnuityDAO.getMyAskCount(category, writer);
+		
+		return count;
 	}
 
 }

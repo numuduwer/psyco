@@ -18,7 +18,7 @@
 		</tr>
 		<tr>
 			<td>
-				<button onclick="window.location='/psyco/myHelpList.com?category=5'"> 내 문의 리스트 </button> <br/>
+				<button onclick="window.location='/psyco/myHelpList.com?category=5&pageNum=1'"> 내 문의 리스트 </button> <br/>
 			</td>
 		</tr>
 	</table>

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSessionException;
 
 import com.three.psyco.model.dto.CommunityDTO;
+import com.three.psyco.model.dto.ListData;
 
 public interface CommunityDAO {
 	
@@ -51,6 +52,10 @@ public interface CommunityDAO {
 	public void insertHelp(CommunityDTO dto) throws SQLException;
 
 	// 내글 가져오기
-	public List getMyAsk(String category, String writer) throws SQLException;
+	public List getMyAsk(int start, int end, String category, String writer) throws SQLException;
+	
+	public int getMyAskCount(String category, String writer) throws SQLException;
+	
+	
 
 }

@@ -160,12 +160,14 @@ public class CommunityDAOImpl implements CommunityDAO {
 		}
 		
 		@Override
-		public List getMyAsk(String category, String writer) throws SQLException {
-			HashMap hMap = new HashMap();
-			hMap.put("category", category);
-			hMap.put("writer", writer);
+		public List getMyAsk(int start, int end, String category, String writer) throws SQLException {
+			HashMap map = new HashMap();
+			map.put("start", start);
+			map.put("end", end);
+			map.put("category", category);
+			map.put("writer", writer);
 			
-			List list = sqlSession.selectList("community.helpList", hMap);
+			List list = sqlSession.selectList("community.myHelpList", map);
 			
 			return list;
 		}
@@ -175,6 +177,18 @@ public class CommunityDAOImpl implements CommunityDAO {
 		public int getAskCount(String category) throws SQLException {
 			
 			int count = sqlSession.selectOne("community.helpCountAll", category);
+			
+			return count;
+		}
+
+		@Override
+		public int getMyAskCount(String category, String writer) throws SQLException {
+			HashMap map = new HashMap();
+			map.put("category", category);
+			map.put("writer", writer);
+			
+			
+			int count = sqlSession.selectOne("community.myHelpCount", map);
 			
 			return count;
 		}

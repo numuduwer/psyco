@@ -53,7 +53,6 @@ public class CommunityBean {
 		String category = request.getParameter("category");
 		
 		
-		
 		if(pageNum == null) {
 			pageNum = "1";
 		}
@@ -123,10 +122,11 @@ public class CommunityBean {
 	public String communityPro(MultipartHttpServletRequest request, Model model,String pageNum,String grade) throws Exception {
 		
 		CommunityDTO dto = new CommunityDTO();
-		int category = Integer.parseInt(request.getParameter("category"));
+		String category = request.getParameter("category");
 		
 		
 			// - 파일 정보 꺼내기
+		String path = request.getRealPath("save");
 			MultipartFile mf = null;
 			try { 
 				mf = request.getFile("img");
@@ -137,17 +137,19 @@ public class CommunityBean {
 					long date = System.currentTimeMillis();
 					String newName = imgName+date+ext;
 					String newName1 = "ads"+date;
+					String imgPath = path + "\\" + newName;
+					String imgPath1 = path + "\\" + newName1;
 					dto.setSubject(request.getParameter("subject"));
 					dto.setContent(request.getParameter("content"));
 					dto.setGrade(request.getParameter("grade"));
 					dto.setWriter(request.getParameter("writer"));
-					if(category == 3 || category == 4) {
+					if(Integer.parseInt(request.getParameter("category")) == 3 || Integer.parseInt(request.getParameter("category")) == 4) {
 						dto.setCommunity_img(newName);
-					}else if(category == 1 || category == 2) {
+					}else if(Integer.parseInt(request.getParameter("category")) == 1 || Integer.parseInt(request.getParameter("category")) == 2) {
 						dto.setCommunity_img(newName1);
 					}
 					dto.setCategory(request.getParameter("category"));
-				}else {				
+				}else {	
 					String orgName = mf.getOriginalFilename();					
 				
 					String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
@@ -155,13 +157,17 @@ public class CommunityBean {
 					long date = System.currentTimeMillis();
 					String newName = imgName+date+ext;
 					String newName1 = "ads"+date;
+					String imgPath = path + "\\" + newName;
+					System.out.println(imgPath);
+					File copyFile = new File(imgPath);
+					mf.transferTo(copyFile);
 					dto.setSubject(request.getParameter("subject"));
 					dto.setContent(request.getParameter("content"));
 					dto.setGrade(request.getParameter("grade"));
 					dto.setWriter(request.getParameter("writer"));
-					if(category == 3 || category == 4) {
+					if(Integer.parseInt(request.getParameter("category")) == 3 || Integer.parseInt(request.getParameter("category")) == 4) {
 						dto.setCommunity_img(newName);
-					}else if(category == 1 || category == 2) {
+					}else if(Integer.parseInt(request.getParameter("category")) == 1 || Integer.parseInt(request.getParameter("category")) == 2) {
 						dto.setCommunity_img(newName1);
 					}
 					dto.setCategory(request.getParameter("category"));
@@ -326,7 +332,6 @@ public class CommunityBean {
 		@RequestMapping("help.com")
 		public String help(String pageNum, Model model, String category) throws SQLException {
 			
-			
 			HashMap map = new HashMap();
 			
 			// map = communityService.abc(pageNum, category);
@@ -359,10 +364,12 @@ public class CommunityBean {
 		
 		@RequestMapping("myHelpList.com")
 		public String myHelpList(String pageNum, String category, Model model) throws SQLException {
-			String writer = "ㅁ";
-			List list = communityService.getMyAskSv(category,writer);
 			
-			model.addAttribute("list",list);
+			ListData list = communityService.getMyAskSv(pageNum,category);
+			commonsService.setListDataToModel(model,list);
+
+			model.addAttribute("pageNum",pageNum);
+			model.addAttribute("category",category);
 			
 			return "community/myHelpList";
 		}

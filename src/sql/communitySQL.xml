@@ -77,10 +77,17 @@
  	
  	<select id="myHelpList" parameterType="hashmap" resultType="communityDTO">
 		<![CDATA[
-  		select * from community where category=#{category} and writer=#{writer}
+  		select community_num,subject,content,writer,ref,re_step,re_level,reg,r
+		from (select community_num,subject,content,writer,ref,re_step,re_level,reg,rownum r
+		from (select community_num,subject,content,writer,ref,re_step,re_level,reg
+		from community where category=#{category} and writer=#{writer} order by ref desc, re_step asc) order by ref desc, re_step asc)
+		where r >= #{start} and r <= #{end}
 		]]>
  	</select>
  	
+ 	<select id="myHelpCount" parameterType="hashmap" resultType="int">
+ 		select count(*) from community where category=#{category} and writer=#{writer}
+ 	</select>
  	
  	
  	

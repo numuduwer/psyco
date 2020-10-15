@@ -49,8 +49,10 @@ public interface CommunityService {
 	public void insertHelpSv(CommunityDTO dto) throws SQLException;
 
 	// 내 문의 가져오기
-	public List getMyAskSv(String category, String writer) throws SQLException;
+	public ListData getMyAskSv(String pageNum,String category) throws SQLException;
 	
 	public ListData abc(String pageNum, String category) throws SQLException;
+	
+	public int getMyAskCount(String category, String writer) throws SQLException;
 	
 }
