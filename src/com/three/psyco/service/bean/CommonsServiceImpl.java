@@ -6,10 +6,28 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.Controller;
+
+import com.three.psyco.controller.bean.ShopBean;
+import com.three.psyco.model.dao.ShopDAOImpl;
+import com.three.psyco.model.dao.SuperDAOImpl;
 import com.three.psyco.model.dto.ListData;
 
 @Service
 public class CommonsServiceImpl implements CommonsService {
+	
+	@Autowired
+	private SuperServiceImpl superService = null;
+	
+	
+	@Autowired
+	private ShopServiceImpl shopService = null;
+	
+	
+	@Autowired
+	private ShopDAOImpl shopDAO = null;
+
+	
 	public void setListDataToModel(Model model, ListData data) {
 		model.addAttribute("pageNum", data.getPageNum());
 		model.addAttribute("pageSize", data.getPageSize());
@@ -20,12 +38,8 @@ public class CommonsServiceImpl implements CommonsService {
 		model.addAttribute("articleList", data.getArticleList());
 		model.addAttribute("count", data.getCount());
 	}
-	
-	
-	public ListData getListData(String pageName, String pageNum,SuperService superService) throws SQLException {
-		
-		
-		
+
+	public ListData getListData(String pageName, String pageNum) throws SQLException {
 		// 디폴트 값 설정 
 		if(pageNum == null) {
 			pageNum = "1";
@@ -57,6 +71,50 @@ public class CommonsServiceImpl implements CommonsService {
 		
 		number = count - (currPage-1) * pageSize;
 
+		ListData data = new ListData();
+		
+		data.setArticleList(articleList);
+		data.setCount(count);
+		data.setCurrPage(currPage);
+		data.setEndRow(endRow);
+		data.setNumber(number);
+		data.setPageNum( Integer.parseInt(pageNum));
+		data.setPageSize(pageSize);
+		data.setStartRow(startRow);
+		return data;
+	}
+	
+
+	public ListData getListData(String pageName, String pageNum, int id, String controller) throws SQLException{
+		// 디폴트 값 설정 
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		if(pageName == null) {
+			pageName = "shopList";
+		}
+		// 페이징 처리 초기값
+		int pageSize = 10;
+		int currPage = Integer.parseInt(pageNum);	// 페이지 계산을 위해  형변환 
+		int startRow = (currPage-1) * pageSize +1;
+		int endRow = currPage * pageSize;
+		int number = 0; //(게시판에 보여주기식 글번호 )
+		List articleList = null;
+		
+		int count = 0;
+		
+		// 글 갯수 불러오기 
+		if(controller.equals("shopBean")) {
+			count = shopDAO.count(pageName, id);
+		}
+		
+	
+		if(count >0) {
+			articleList = shopDAO.getList(pageName, id,startRow, endRow);	
+		}
+		
+		number = count - (currPage-1) * pageSize;
+
 		
 		ListData data = new ListData();
 		
@@ -69,8 +127,11 @@ public class CommonsServiceImpl implements CommonsService {
 		data.setPageSize(pageSize);
 		data.setStartRow(startRow);
 		return data;
-		
 	}
+	
+	
+	
+	
 
 
 
