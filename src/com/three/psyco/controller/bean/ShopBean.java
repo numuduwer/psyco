@@ -35,17 +35,18 @@ public class ShopBean {
 	@RequestMapping("shopList.com")
 	public String storeList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
 		
-		int memNum = 0; 
-		
-		
+		int id = 0;
+
 		if (session.getAttribute("memNum") == null) {
 			// table에 있는 값 아무거나 찍어줌 
-			memNum =2;
+			id =2;
 		}else { 
-			memNum = (Integer)session.getAttribute("memNum");
+			id = (Integer)session.getAttribute("memNum");
 		
 		}
-		ListData data = commonsService.getListData(pageName,pageNum,memNum,controllerName);
+		
+		System.out.println("shopList Controller id :" + id);
+		ListData data = commonsService.getListData(pageName,pageNum,id,controllerName);
 		commonsService.setListDataToModel(model, data);
 		return "shop/shopList";
 	}
