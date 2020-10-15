@@ -23,6 +23,7 @@
 	<table>
 		<tr>
 			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com?category=1&grade=11&pageNum=${pageNum}'"> 글쓰기 </button> </td>
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityMyArticle.com?category=1&grade=11&pageNum=${pageNum}'"> 내가 작성한 자유게시판 글 보러가기 </button> </td>
 		
 		</tr>
 		<tr>
@@ -59,7 +60,8 @@
 	<table>
 		<tr>
 			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com?category=2&grade=11&pageNum=${pageNum}'"> 글쓰기 </button> </td>
-			<td colspan="6" align="center"> <button onclick="window.location='/psyco/help.com?category=5&grade=11&pageNum=1'"> 고객센터 </button> </td>		
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/help.com?category=5&grade=11&pageNum=1'"> 고객센터 </button> </td>	
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityMyArticle.com?category=2&grade=11&pageNum=${pageNum}'"> 내가 작성한 QnA 글 보러가기 </button> </td>	
 		</tr>
 		<tr>
 			<td>No.</td>
@@ -94,6 +96,7 @@
 	<table>
 		<tr>
 			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com?category=3&grade=11&pageNum=${pageNum}'"> 글쓰기 </button> </td>
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityMyArticle.com?category=3&grade=11&pageNum=${pageNum}'"> 내가 작성한 홍보 글 보러가기 </button> </td>
 		
 		</tr>
 		<tr>
@@ -134,7 +137,7 @@
 	<table>
 		<tr>
 			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com?category=4&grade=11&pageNum=${pageNum}'"> 글쓰기 </button> </td>
-		
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityMyArticle.com?category=4&grade=11&pageNum=${pageNum}'"> 내가 작성한 음식점 추천 글 보러가기 </button> </td>
 		</tr>
 		<tr>
 			<td>No.</td>

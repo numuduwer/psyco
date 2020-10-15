@@ -31,6 +31,8 @@
 			<input type="hidden" name="category" value= "${category}"/>
 			<input type="hidden" name="grade" value= "${grade}"/>
 			<input type="hidden" name="pageNum" value= "${pageNum}"/>
+			<input type="hidden" name="category" value= "${category}"/>
+			<input type="hidden" name="community_num" value= "${community_num}"/>
 		
 		<table>
 			<tr>
@@ -46,7 +48,7 @@
 				</c:if>
 				<c:if test="${community_num != null}">
 					<td>
-						<input type="text" name="subject" value="[답글]"/>				
+						<input type="radio" name="subject" value="[답글]" checked/>	답글		
 					</td>
 				</c:if>
 			</tr>

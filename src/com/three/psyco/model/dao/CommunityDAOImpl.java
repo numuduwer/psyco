@@ -25,12 +25,11 @@ public class CommunityDAOImpl implements CommunityDAO {
 			String numb = sqlSession.selectOne("community.maxNum");
 			if(numb != null) {
 				number = Integer.parseInt(numb) + 1;
-				
+				dto.setCommunity_num(number);
 			}else {
 				number = 1;
 			}
 			// 댓글 
-			
 			if(dto.getCommunity_num() != 0) {
 				// 이전 댓글 step 미리 올리기 
 				HashMap map = new HashMap();
@@ -41,6 +40,7 @@ public class CommunityDAOImpl implements CommunityDAO {
 				
 				dto.setRe_step(dto.getRe_step()+1);
 				dto.setRe_level(dto.getRe_level()+1);
+
 				
 			}else {
 				dto.setRef(number);

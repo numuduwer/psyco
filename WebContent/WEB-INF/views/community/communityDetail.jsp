@@ -35,6 +35,10 @@
 				</tr>
 			</c:if>
 			<tr>
+				<td>댓글</td>
+				<td colspan="2"align="center" height="300">${article.content}   </td>
+			</tr>
+			<tr>
 				<td colspan="2"> 
 				<c:if test="${category == 1 || category == 2}">
 					<button onclick="window.location='/psyco/communityModifyForm1.com?&community_num=${community_num}&pageNum=${pageNum}&category=${category}'">수 정</button>
@@ -43,7 +47,7 @@
 					<button onclick="window.location='/psyco/communityModifyForm.com?&community_num=${community_num}&pageNum=${pageNum}&category=${category}'">수 정</button>
 				</c:if>
 					<button onclick="window.location='/psyco/communityDeleteForm.com?community_num=${community_num}&pageNum=${pageNum}'">삭 제</button>
-					<button onclick="window.location='/psyco/communityForm.com?community_num=${community_num}&ref=${article.ref}&re_step=${article.re_step}&re_level=${article.re_level}'">답 글</button>
+					<button onclick="window.location='/psyco/communityForm.com?community_num=${community_num}&ref=${article.ref}&re_step=${article.re_step}&re_level=${article.re_level}&category=6'">답 글</button>
 					<button onclick="window.location='/psyco/communityList.com?pageNum=${pageNum}'">리스트</button>
 				 </td>
 			</tr>

@@ -117,11 +117,7 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public ListData getMyAskSv(String pageNum, String category) throws SQLException {
 		
-		
-		if (category == null) {
-			category = "5";
-		}
-		
+
 		if (pageNum == null) pageNum = "1";
 		int pageSize = 10;
 		int currPage = Integer.parseInt(pageNum);
