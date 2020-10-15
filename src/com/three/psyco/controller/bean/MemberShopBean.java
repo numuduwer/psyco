@@ -22,7 +22,7 @@ public class MemberShopBean {
 	@RequestMapping("shopSignupForm")
 	public String shopSignForm() {
 		
-		return "store/shopSignupForm";
+		return "member/shopSignupForm";
 	}
 	@RequestMapping("shopSignupPro")
 	public String shopSignPro(MultipartHttpServletRequest request,int member_num) {
