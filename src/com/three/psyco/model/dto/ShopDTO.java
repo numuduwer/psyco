@@ -7,7 +7,7 @@ public class ShopDTO {
 	private int shop_num;
 	private String shop_name;
 	private String shop_phone;
-	private String orperating_time;
+	private String operating_time;
 	private String address;
 	
 	
@@ -42,11 +42,12 @@ public class ShopDTO {
 	public void setShop_phone(String shop_phone) {
 		this.shop_phone = shop_phone;
 	}
-	public String getOrperating_time() {
-		return orperating_time;
+	
+	public String getOperating_time() {
+		return operating_time;
 	}
-	public void setOrperating_time(String orperating_time) {
-		this.orperating_time = orperating_time;
+	public void setOperating_time(String operating_time) {
+		this.operating_time = operating_time;
 	}
 	public String getAddress() {
 		return address;
@@ -100,7 +101,7 @@ public class ShopDTO {
 		return approve_status;
 	}
 	public void setApprove_status(String approve_status) {
-		approve_status = approve_status;
+		this.approve_status = approve_status;
 	}
 	public int getMember_num() {
 		return member_num;

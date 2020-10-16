@@ -5,19 +5,19 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>로그인 체크하는 페이지</title>
+	<title>수정 되었는지 알림만 띄워주는 페이지</title>
 </head>
 <body>
-	<c:if test="${count == 0}">
+	<c:if test="${result == 1}">
 		<script type="text/javascript">
-			alert('아이디 또는 패스워드가 일치하지 않습니다.');
-			history.go(-1);
+			alert('가입이 완료 되었습니다.');
+			window.location.href='/psyco/shop/shopList.com';
 		</script>
 	</c:if>
-	<c:if test="${count == 1}">
+	<c:if test="${result != 1}">
 		<script type="text/javascript">
-			alert('로그인 완료');
-			window.location.href='/psyco/main/main.com';
+			alert('오류 발생');
+			window.location.href='/psyco/shop/shopList.com';
 		</script>
 	</c:if>
 </body>
