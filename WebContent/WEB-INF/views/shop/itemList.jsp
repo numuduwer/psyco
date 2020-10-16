@@ -51,6 +51,7 @@ $('#btn1').on('click', function(){
 				<td>한마디</td>
 				<td>세트메뉴 or 1인</td>
 				<td>결제 진행여부</td>
+				<td>상품 판매여부</td>
 			</tr>
 			<c:forEach var="article" items="${articleList}">
 			<tr>
@@ -63,7 +64,7 @@ $('#btn1').on('click', function(){
 				<td>${article.comment1}</td>
 				<td>${article.sett}</td>
 				<td>${article.progress_status}</td>
-				<td><button onclick="window.location='/psyco/item/buy.com?item_num=${article.item_num}'">결제하기</button></td>
+				<td>${article.selling_status}</td>
 			</tr>
 		</c:forEach>		
 		</table>

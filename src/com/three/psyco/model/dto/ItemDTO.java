@@ -15,11 +15,18 @@ public class ItemDTO {
 	private String progress_status;
 	private int maxPrice;
 	private int minPrice;
-	private String aution_unit;
+	private String auction_unit;
 	private String sett;
-	private String comment;
+	private String comment1;
 	private int menu_num;
+	private int mem_num;
 	
+	public int getMem_num() {
+		return mem_num;
+	}
+	public void setMem_num(int mem_num) {
+		this.mem_num = mem_num;
+	}
 	public int getItem_num() {
 		return item_num;
 	}
@@ -86,11 +93,11 @@ public class ItemDTO {
 	public void setMinPrice(int minPrice) {
 		this.minPrice = minPrice;
 	}
-	public String getAution_unit() {
-		return aution_unit;
+	public String getAuction_unit() {
+		return auction_unit;
 	}
-	public void setAution_unit(String aution_unit) {
-		this.aution_unit = aution_unit;
+	public void setAuction_unit(String auction_unit) {
+		this.auction_unit = auction_unit;
 	}
 	public String getSett() {
 		return sett;
@@ -98,11 +105,11 @@ public class ItemDTO {
 	public void setSett(String sett) {
 		this.sett = sett;
 	}
-	public String getComment() {
-		return comment;
+	public String getComment1() {
+		return comment1;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setComment1(String comment1) {
+		this.comment1 = comment1;
 	}
 	public int getMenu_num() {
 		return menu_num;

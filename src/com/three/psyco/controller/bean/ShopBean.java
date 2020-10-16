@@ -28,8 +28,10 @@ public class ShopBean {
 	@Autowired
 	private CommonsServiceImpl commonsService = null;
 
+
 	
 	public static String controllerName = "shopBean";
+	
 	
 		
 	@RequestMapping("shopList.com")
@@ -146,7 +148,24 @@ public class ShopBean {
 	}
 	
 	
-	
+	@RequestMapping("itemList.com")
+	public String itemList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
+		
+		int id = 0;
+
+		if (session.getAttribute("memNum") == null) {
+			// table에 있는 값 아무거나 찍어줌 
+			id =2;
+		}else { 
+			id = (Integer)session.getAttribute("memNum");
+		
+		}
+		
+		System.out.println("itemList Controller id :" + id);
+		ListData data = shopService.getItemList(pageName,pageNum,id);
+		commonsService.setListDataToModel(model, data);
+		return "shop/shopList";
+	}
 	
 	
 	

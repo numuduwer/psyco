@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  <mapper namespace="item">
+  
+  
+  	<select id="countAll" resultType="int">
+  		select count(*) from item
+  	</select> 
+  	
+  	<select id="itemList" resultType="ItemDTO">
+  		<![CDATA[
+  		select ITEM_NUM,ITEM_NAME,CONTENT,AMOUNT,STARTDATE,ENDDATE,DISCOUNT_CYCLE,SELLING_STATUS,
+  		PROGRESS_STATUS,MAXPRICE,MINPRICE,AUCTION_UNIT,SETT,COMMENT1,MENU_NUM,mem_num,rownum r from item	
+  		]]>
+  	</select>
+  	
+  	<select id="getItemOne" parameterType="int" resultType="ItemDTO">
+  		select * from item where item_num=#{value}
+  	</select>
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  </mapper>
