@@ -60,6 +60,12 @@ public class ShopDAOImpl implements ShopDAO {
 		result = sqlSession.update("shop.update", dto);
 		return result;
 	}
+
+	public void  deleteShop(int shopNum) {
+		System.out.println("dao shopNum : " + shopNum);
+		sqlSession.delete("shop.deleteShop", shopNum);
+		
+	}
 	
 	
 	

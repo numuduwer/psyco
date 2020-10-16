@@ -30,6 +30,13 @@ public class ShopServiceImpl implements ShopService {
 		return result;
 	}
 	
+	public void deleteListSV(int shopNum) {
+		// TODO Auto-generated method stub
+		System.out.println("Service shopNum :" + shopNum);
+		shopDAO.deleteShop(shopNum);
+		
+	}
+	
 	
 	
 	
