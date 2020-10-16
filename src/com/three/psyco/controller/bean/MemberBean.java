@@ -120,5 +120,6 @@ public class MemberBean {
 	public String paymentTest() {
 		return "member/paymentTest";
 	}
+	
 
 }

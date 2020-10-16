@@ -24,4 +24,6 @@
   	<select id="loginCheck" parameterType="hashmap" resultType="_int">
   		select count(*) from member where member_Id=#{member_Id} and pw=#{pw}
   	</select>
+  	
+  	
   </mapper>

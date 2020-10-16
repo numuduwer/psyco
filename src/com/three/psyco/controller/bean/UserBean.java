@@ -12,6 +12,9 @@ public class UserBean {
 		return "user/myPageList";
 	}
 	
-
-	
+	@RequestMapping("zzim.com")
+	public String zzim() {
+		
+		return "user/zzim";
+	}
 }

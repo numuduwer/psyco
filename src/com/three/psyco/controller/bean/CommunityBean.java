@@ -22,8 +22,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.three.psyco.model.dao.CommunityDAO;
 import com.three.psyco.model.dto.CommunityDTO;
-import com.three.psyco.service.CommunityService;
-import com.three.psyco.service.CommunityServiceImpl;
+import com.three.psyco.service.bean.CommunityService;
+import com.three.psyco.service.bean.CommunityServiceImpl;
 
 @EnableWebMvc
 @Controller

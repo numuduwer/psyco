@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="user">
+  
+  	<insert id="insertZzim" parameterType="zzimDTO" >
+  		insert into zzim values(#{zzim_num}, #{member_num}, #{menu_num}, #{item_num})
+  	</insert>
+  	
+  	<delete id = "deleteZzim" parameterType="zzimDTO">
+  		delete from zzim where zzim_num=#{zzim_num}
+  	</delete>
+  	
+  	<select id="getZzimList" parameterType="hashmap" resultType="zzimDTO">
+  		<![CDATA[
+		SELECT zzim_num, member_num, menu_num, item_num
+		]]>
+  	</select>
+  	
+  	<select id="myZzimCheck" parameterType="int" resultMap="zzimDTO">
+  		select count(*) from zzim where member_num=#{member_num}
+  	</select>
+  </mapper>

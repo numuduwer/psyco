@@ -1,4 +1,4 @@
-package com.three.psyco.service;
+package com.three.psyco.service.bean;
 
 import java.sql.SQLException;
 import java.util.HashMap;
