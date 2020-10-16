@@ -225,6 +225,7 @@ public class MemberServiceImpl implements MemberService {
 		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		HttpSession httpSession = servletRequestAttribute.getRequest().getSession();
 		httpSession.setAttribute("memId", dto.getMember_Id());
+		httpSession.setAttribute("memNum", dto.getMember_Num());
 	}
 	
 	@Override
@@ -247,9 +248,12 @@ public class MemberServiceImpl implements MemberService {
 	public int loginCheck(String member_Id, String pw) {
 		int count = memberDAO.loginCheck(member_Id, pw);
 		if (count == 1) {
+			MemberDTO dto = memberDAO.getMemberProfileFromId(member_Id);
+			
 			ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 			HttpSession httpSession = servletRequestAttribute.getRequest().getSession();
 			httpSession.setAttribute("memId", member_Id);
+			httpSession.setAttribute("memNum", dto.getMember_Num());
 		}
 		return count;
 	}
@@ -318,5 +322,55 @@ public class MemberServiceImpl implements MemberService {
 		in.close();
 		
 		return response.toString();
+	}
+	
+	@Override
+	public int userDelete(String member_Id, String pw) {
+		
+		int result = memberDAO.userDelete(member_Id, pw);
+		return result;
+	}
+	
+	@Override
+	public int userTypeCheck(String member_Id) {
+		MemberDTO dto = memberDAO.getMemberProfileFromId(member_Id);
+		if (dto.getPw() == "0") {	// 소셜 로그인으로 가입한 아이디 일 때
+			return 0;
+		} else {
+			return 1;
+		}
+	}
+	
+	@Override
+	public MemberDTO getMemberProfileFromNum(int member_Num) {
+		MemberDTO dto = memberDAO.getMemberProfileFromNum(member_Num);
+		return dto;
+	}
+	
+	@Override
+	public int modifySocialUserPro(String phoneNum, String birth) {
+		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession httpSession = servletRequestAttribute.getRequest().getSession();
+		
+		int member_Num = (int) httpSession.getAttribute("memNum");
+		String member_Id = (String) httpSession.getAttribute("memId");
+		
+		int result = memberDAO.modifySocialUserPro(member_Num, member_Id, phoneNum, birth);
+		
+		return result;
+	}
+	
+	@Override
+	public int modifyNormalUserPro(MemberDTO dto) {
+		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession httpSession = servletRequestAttribute.getRequest().getSession();
+		
+		int member_Num = (int) httpSession.getAttribute("memNum");
+		String member_Id = (String) httpSession.getAttribute("memId");
+		
+		dto.setMember_Num(member_Num);
+		int result = memberDAO.modifyNormalUserPro(dto);
+		
+		return result;
 	}
 }

@@ -12,6 +12,14 @@
   		select * from member where email=#{value}
   	</select>
   	
+  	<select id="getMemberProfileFromId" parameterType="string" resultType="memberDTO">
+  		select * from member where member_Id=#{member_Id}
+  	</select>
+  	
+  	<select id="getMemberProfileFromNum" parameterType="int" resultType="memberDTO">
+  		select * from member where member_Num=#{member_Num}
+  	</select>
+  	
   	<insert id="insertMember" parameterType="memberDTO">
   		<if test="pw == null">
   			insert into member(member_num, member_Id, name, birth, phonenum, gender, nickname, email, purchase_count, business_license) values(member_seq.nextval, #{member_Id}, #{name}, #{birth}, #{phoneNum}, #{gender}, #{nickname}, #{email}, #{purchase_count}, #{business_license})
@@ -25,5 +33,15 @@
   		select count(*) from member where member_Id=#{member_Id} and pw=#{pw}
   	</select>
   	
+  	<delete id="userDelete" parameterType="hashmap">
+  		delete from member where member_Id=#{member_Id} and pw=#{pw}
+  	</delete>
   	
+  	<update id="modifySocialUserPro" parameterType="hashmap">
+  		update member set phoneNum=#{phoneNum}, birth=#{birth} where member_Num=#{member_Num} and member_Id=#{member_Id}
+  	</update>
+  	
+  	<update id="modifyNormalUserPro" parameterType="memberDTO">
+  		update member set pw=#{pw}, name=#{name}, birth=#{birth}, phoneNum=#{phoneNum}, gender=#{gender}, nickname=#{nickname}, email=#{email} where member_Num=#{member_Num} and member_Id=#{member_Id}
+  	</update>
   </mapper>

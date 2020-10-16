@@ -34,16 +34,16 @@ public class MemberBean {
 	}
 	
 	@RequestMapping("loginCheck.com")
-	public String loginCheck(String member_Id, String pw, Model model) {
+	public String loginCheck(String member_Id, String pw, Model model, HttpSession session) {
 		int count = memberService.loginCheck(member_Id, pw);
 		model.addAttribute("count", count);
-		return "member/login";
+		return "member/loginCheck";
 	}
 	
 	@RequestMapping("naverLoginPro.com")
 	public String naverLoginPro() throws UnsupportedEncodingException {
 		String apiURL = memberService.naverLogin();
-		System.out.println(apiURL);
+		//System.out.println(apiURL);
 		return "redirect:" + apiURL;
 	}
 	
@@ -63,20 +63,6 @@ public class MemberBean {
 		}
 	}
 	
-	@RequestMapping("signup.com")
-	public String insertMember(MemberDTO dto, Model model) {
-		System.out.println(dto.getBirth());
-		int result = memberService.insertMember(dto);
-		model.addAttribute("result", result);
-		return "member/signupPro";
-	}
-	
-	@RequestMapping("logout.com")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "main/main";
-	}
-	
 	@RequestMapping("signupSelect.com")
 	public String signupSelect() {
 		return "member/signupSelect";
@@ -90,6 +76,20 @@ public class MemberBean {
 	@RequestMapping("businessSignupForm.com")
 	public String businessSignupForm() {
 		return "member/businessSignupForm";
+	}
+	
+	@RequestMapping("signup.com")
+	public String insertMember(MemberDTO dto, Model model) {
+		System.out.println(dto.getBirth());
+		int result = memberService.insertMember(dto);
+		model.addAttribute("result", result);
+		return "member/signupPro";
+	}
+	
+	@RequestMapping("logout.com")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "main/main";
 	}
 	
 	@RequestMapping("licenseLookup.com")
@@ -115,11 +115,9 @@ public class MemberBean {
 		return "member/geoLocation";
 	}
 	
-
 	@RequestMapping("paymentTest.com")
 	public String paymentTest() {
 		return "member/paymentTest";
 	}
-	
 
 }

@@ -6,6 +6,7 @@
 <configuration>
   
 	<typeAliases>
+		<typeAlias type="com.three.psyco.model.dto.MenuDTO" alias="MenuDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.MemberDTO" alias="MemberDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.ShopDTO" alias="ShopDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.CommunityDTO" alias="CommunityDTO"/>
@@ -30,10 +31,7 @@
 		<mapper resource="/sql/communitySQL.xml"/>
 
 		<mapper resource="/sql/memberSQL.xml"/>
-
-
-
-
+		<mapper resource="/sql/shopSQL.xml"/>
 	</mappers>
   	
 </configuration>
