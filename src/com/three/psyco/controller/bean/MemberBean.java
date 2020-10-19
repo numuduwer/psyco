@@ -2,6 +2,7 @@ package com.three.psyco.controller.bean;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.three.psyco.model.dto.MemberDTO;
 import com.three.psyco.service.bean.MemberServiceImpl;
@@ -120,6 +122,22 @@ public class MemberBean {
 		return "member/paymentTest";
 	}
 	
-	
+	@RequestMapping("shopSignupForm.com")
+	public String shopSignupForm(String license_number, Model model) {
+		model.addAttribute("license_number", license_number);
+		return "member/shopSignupForm";
+	}
 
+	@RequestMapping("shopSignupPro.com")
+	public String shopSignPro(MultipartHttpServletRequest request,int member_num) {
+		String status ="0";
+		String approve_status="0";
+		
+		try {
+			memberService.insertMemberShops(request,member_num,status,approve_status);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "member/menuSignupForm";
+	}
 }
