@@ -167,7 +167,10 @@ public class ShopBean {
 		
 	}
 	
-	
+	@RequestMapping("itemEnrollment.com")
+	public String itemEnrollment() {
+		return "shop/itemEnrollmentForm";
+	}
 	
 
 		
