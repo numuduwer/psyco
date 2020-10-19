@@ -16,8 +16,10 @@ public interface ReviewService {
 	
 	public int getReviewc()throws SQLException;
 	
-	public ReviewDTO getReviewDetails(int num) throws SQLException;
+	public ReviewDTO getReviewDetails(int review_num) throws SQLException;
 	
-	public void updateReviews(MultipartHttpServletRequest request)throws SQLException;
+	public int updateReviews(MultipartHttpServletRequest request)throws SQLException;
+	
+	public String deleteReviews(int review_num)throws SQLException;
 	
 }

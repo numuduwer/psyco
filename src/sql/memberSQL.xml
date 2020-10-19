@@ -29,4 +29,8 @@
   	<select id="memberInfo" parameterType="String" resultType="MemberDTO">
   		select * from member where member_id=#{value}
   	</select>
+  	<!-- 멤버 닉네임 가져오기 동윤 -->
+  	<select id="getNickName" parameterType="String" resultType="String">
+  		select nickname from member where member_in=#{value}
+  	</select>
   </mapper>

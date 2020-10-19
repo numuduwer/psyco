@@ -48,5 +48,13 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.selectOne("member.memberInfo",session);
 		return null;
 	}
+
+	//멤버 닉네임 가져오기
+	@Override
+	public String getNickName(String session) throws Exception {
+		String nickname=sqlSession.selectOne("member.getNickName",session);
+		return nickname;
+		
+	}
 	
 }

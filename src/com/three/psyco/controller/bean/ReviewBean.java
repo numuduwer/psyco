@@ -35,18 +35,24 @@ public class ReviewBean {
 	
 	//후기 등록!	
 	@RequestMapping("reviewForm.com") //,int Shop_num 페이지 붙일땐 필요
-	public String reviewForm(HttpServletRequest request,Model model) {
-		HttpSession session=request.getSession();	
+	public String reviewForm(HttpServletRequest request,Model model,int item_num)throws Exception {
+		//int shop_num=Integer.getInteger(request.getParameter("shop_num"));
+		HttpSession sessions=request.getSession();
+		String session=(String)sessions.getAttribute("memId");
+		//String nickname=memberService.getNickNames(session); 붙일때 풀기
+		String nicknames="gogo";
+		model.addAttribute("nickname", nicknames);
 		model.addAttribute("session", session);
-		//model.addAttribute("Shop_num", Shop_num);
+		//나중에 필요
+		model.addAttribute("item_num", 3);
 		return "review/reviewForm";
 	}
-	// 아직 보류
+	//페이지 설정 다시해야할 듯 ! JSP
 	@RequestMapping("reviewPro.com")
-	public String reviewPro(MultipartHttpServletRequest request,String writer,int shop_num,Model model)throws Exception {
+	public String reviewPro(MultipartHttpServletRequest request,String writer,int item_num,Model model)throws Exception {
 		System.out.println(writer);
-		System.out.println(shop_num);
-		reviewService.insertReviews(request, shop_num, writer);
+		System.out.println(item_num);
+		reviewService.insertReviews(request, item_num, writer);
 		return "review/reviewList";
 	}
 	//나의 후기 리스트
@@ -66,19 +72,19 @@ public class ReviewBean {
 		model.addAttribute("count", data.getCount());
 		model.addAttribute("articleList", data.getArticleList());
 		System.out.println("getArticleList="+data.getArticleList());
-		return "/review/reviewList";
+		return "review/reviewList";
 	}
 	
 	//리스트 상세보기
 	@RequestMapping("reviewDetail.com")
-	public String reviewDetail(String pageNum,Model model,int num)throws SQLException {
+	public String reviewDetail(String pageNum,Model model,int review_num)throws SQLException {
 		
-		ReviewDTO article=reviewService.getReviewDetails(num);
+		ReviewDTO article=reviewService.getReviewDetails(review_num);
 		model.addAttribute("article",article);
 		model.addAttribute("pageNum",pageNum);
 		return "review/reviewDetail";
 	}
-	
+	//리스트 수정
 	@RequestMapping("reviewModify.com")
 	public String reviewModify(int review_num,String pageNum,Model model)throws SQLException {
 		
@@ -90,11 +96,23 @@ public class ReviewBean {
 		return "review/reviewModify";
 	}
 	@RequestMapping("reviewModifyPro.com")
-	public String reviewModifyPro(MultipartHttpServletRequest request)throws SQLException {
-		reviewService.updateReviews(request);
+	public String reviewModifyPro(MultipartHttpServletRequest request,int review_num,String pageNum,Model model)throws SQLException {
+		int result=reviewService.updateReviews(request);
+		model.addAttribute("review_num",review_num);
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("result",result);
 		
 		
-		return "review/reviewDetail";
+		return "review/reviewModifyPro";
+	}
+	@RequestMapping("reviewDelete.com")
+	public String reviewDelete(int review_num,String pageNum,Model model)throws SQLException {
+		System.out.println("review_num1="+review_num);
+		String res=reviewService.deleteReviews(review_num);
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("res",res);
+		return "review/reviewDelete";
+		
 	}
 	
 

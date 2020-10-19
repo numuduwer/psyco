@@ -5,23 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>수정 모디</title>
+<title>Insert title here</title>
 </head>
-
 <body>
-	<c:if test="${result == 1}">
+	<c:if test="${res ne 'null'}">
 		<script>
-			alert("수정완료");
-			window.location.href='/psyco/user/reviewDetail.com?review_num=${review_num}&pageNum=${pageNum}';
+			alert("삭제완료");
+			window.location.href='/psyco/user/reviewList.com?pageNum=${pageNum}';
 		</script>		
 	</c:if>
-	<c:if test="${result != 1}">
+	<c:if test="${res eq 'null'}">
 		<script type="text/javascript">
 			alert('오류 발생');
-			window.location.href='/psyco/user/reviewDetail.com?review_num=${review_num}&pageNum=${pageNum}';
+			window.location.href='/psyco/user/reviewList.com?pageNum=${pageNum}';
 		</script>
 	</c:if>
-
 
 </body>
 </html>

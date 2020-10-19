@@ -16,13 +16,14 @@
 	<!-- 가게 리뷰에 필요한 페이지  -->
 	<!--현재 접속한 세션을 불러와 넣어준다. shop_num 을 전페이지 에서부터 끌어온다  session 부분 nickname으로 바꿔야 할듯 ㅠ -->
 	<form action="/psyco/user/reviewPro.com" method="post" enctype="multipart/form-data">
-	<input type="hidden" name="writer" value="${session}"/>
-	<input type="hidden" name="shop_num" value="${shop_num}"/>
+	<input type="hidden" name="writer" value="${nickname}"/>
+	<input type="hidden" name="item_num" value="${item_num}">
+	
 	
 		<table>
 			<tr>
 				<td>작성자</td>
-				<td>${session}</td>
+				<td>${nickname}</td>
 				<td>
 					<select name="category">
 						<option value="0">없음</option>

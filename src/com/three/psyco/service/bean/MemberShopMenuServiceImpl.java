@@ -34,7 +34,7 @@ public class MemberShopMenuServiceImpl implements MemberShopMenuService {
 			String sett=request.getParameter("sett");
 			MultipartFile mf = request.getFile("menu_img");
 			try {
-				String path=request.getRealPath("menu_img");
+				String path=request.getRealPath("save");
 				System.out.println("path ="+path);
 				String orgName =mf.getOriginalFilename();
 				String imgName =orgName.substring(0, orgName.lastIndexOf('.'));

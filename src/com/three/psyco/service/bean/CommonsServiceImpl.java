@@ -19,7 +19,7 @@ public class CommonsServiceImpl implements CommonsService {
 	@Autowired
 	private SuperService superService = null;
 	@Autowired
-	private ReviewService reviewService = null;
+	private ReviewServiceImpl reviewService = null;
 	
 	public void setListDataToModel(Model model, ListData data) {
 		model.addAttribute("pageNum", data.getPageNum());
@@ -84,7 +84,7 @@ public class CommonsServiceImpl implements CommonsService {
 	public ListData getrListData(String pageNum,Model model) throws SQLException {
 		//String member_id =(String)RequestContextHolder.getRequestAttributes().getAttribute("memId", RequestAttributes.SCOPE_SESSION);
 		// 디폴트 값 설정 
-		String member_id = "kimshin";
+		String member_id ="gogo";
 		if(pageNum == null) {
 			pageNum = "1";
 		}

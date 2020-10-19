@@ -48,7 +48,7 @@
 				<td><input type="text" name="license_number"/></td>
 			</tr>
 			<input type="submit" value="작성 완료">
-			<input type="button" value="뒤로가기" onclick>
+			<input type="button" value="뒤로가기" onclick="goBack();">
 		</table>
 	</form>
 

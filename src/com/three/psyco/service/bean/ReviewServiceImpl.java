@@ -27,7 +27,7 @@ public class ReviewServiceImpl implements ReviewService {
 	
 //	후기 등록
 	@Override
-	public void insertReviews(MultipartHttpServletRequest request, int Shop_num, String writer) throws SQLException {
+	public void insertReviews(MultipartHttpServletRequest request, int item_num, String writer) throws SQLException {
 		ReviewDTO dto=new ReviewDTO();
 		//memberDAO에서 writer의 고유번호를 들고옴 그리고 set으로 담아준다.
 		int ref =0;
@@ -43,7 +43,7 @@ public class ReviewServiceImpl implements ReviewService {
 		String reply_content=request.getParameter("reply_content");
 		MultipartFile mf =request.getFile("review_img");
 		try {
-			String path=request.getRealPath("review_img");
+			String path=request.getRealPath("save");
 			System.out.println("path ="+path);
 			String orgName=mf.getOriginalFilename();
 			System.out.println("orgName ="+orgName);
@@ -68,7 +68,7 @@ public class ReviewServiceImpl implements ReviewService {
 		dto.setCategory(category);
 		dto.setGrade(grade);
 		dto.setReply_content("이용해주셔서 감사합니다.");
-		dto.setShop_num(Shop_num);
+		dto.setItem_num(item_num);
 		dto.setMember_id("gogo");
 		dto.setWriter(writer);
 		reviewDAO.insertReview(dto);
@@ -89,18 +89,18 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public ReviewDTO getReviewDetails(int num) throws SQLException {
-		ReviewDTO dto=reviewDAO.getReviewDetail(num);
+	public ReviewDTO getReviewDetails(int review_num) throws SQLException {
+		ReviewDTO dto=reviewDAO.getReviewDetail(review_num);
 		return dto;
 	}
 
 		//ref , reply ,confirm 1 일 경우와 0일 경우 나눠야함!
 	@Override
-	public void updateReviews(MultipartHttpServletRequest request) throws SQLException {
+	public int updateReviews(MultipartHttpServletRequest request) throws SQLException {
 		ReviewDTO dto=new ReviewDTO();
 		int review_num=Integer.parseInt(request.getParameter("review_num"));
 		int ref=Integer.parseInt(request.getParameter("ref"));
-		int shop_num=Integer.parseInt(request.getParameter("shop_num"));
+		int item_num=Integer.parseInt(request.getParameter("item_num"));
 		String writer=request.getParameter("writer");
 		String category=request.getParameter("category");
 		String content=request.getParameter("content");
@@ -108,10 +108,10 @@ public class ReviewServiceImpl implements ReviewService {
 		String confirm=request.getParameter("confirm");
 		String reply_content=request.getParameter("reply_content");
 		String member_id=request.getParameter("member_id");
-		String shop_name=request.getParameter("shop_name");
+		String item_name=request.getParameter("item_name");
 		MultipartFile mf = request.getFile("review_img");
 		try {
-			String path=request.getRealPath("reivew_img");
+			String path=request.getRealPath("save");
 			System.out.println("path ="+path);
 			String orgName =mf.getOriginalFilename();
 			System.out.println("orgName ="+orgName);
@@ -136,12 +136,21 @@ public class ReviewServiceImpl implements ReviewService {
 		dto.setGrade(grade);
 		dto.setMember_id(member_id);
 		dto.setReview_num(review_num);
-		dto.setShop_name(shop_name);
-		dto.setShop_num(shop_num);
+		dto.setItem_name(item_name);
+		dto.setItem_num(item_num);
 		dto.setWriter(writer);
-		reviewDAO.updateReview(dto);
-
+		int result=reviewDAO.updateReview(dto);
+		return result;
 	}
+
+	@Override
+	public String deleteReviews(int review_num) throws SQLException {
+		System.out.println("review_num2="+review_num);
+		String res=reviewDAO.deleteReview(review_num);
+		return res;
+	}
+	
+	
 
 
 }

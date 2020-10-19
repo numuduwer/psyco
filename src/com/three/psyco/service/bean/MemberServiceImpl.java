@@ -326,5 +326,12 @@ public class MemberServiceImpl implements MemberService {
 		MemberDTO dto=memberDAO.memberInfo(session);
 		return null;
 	}
+
+	@Override
+	public String getNickNames(String session) throws Exception {
+		String nickname ="";
+		nickname=memberDAO.getNickName(session);
+		return nickname;
+	}
 	
 }

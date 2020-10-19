@@ -9,16 +9,13 @@
 <title>Insert title here</title>
 </head>
 <script type="text/javascript"></script>
-<script>
-	function goBack(){ 
-		window.history.back();
-	}
+
 </script>
 <body>
 	<table>
 		<tr>
 			<td rowspan="2">${article.review_img}</td>
-			<td>${article.shop_name} ${article.grade} ${article.category}</td>		
+			<td>${article.item_name} ${article.grade} ${article.category}</td>		
 			<td>${article.reg}</td>
 		</tr>
 		<tr>
@@ -26,8 +23,8 @@
 		</tr>
 		<tr>
 			<td><input type="button" value="수정" onclick="window.location='reviewModify.com?review_num=${article.review_num}&pageNum=${pageNum}'"/></td>
-			<td><input type="button" value="삭제" onclick="window.location='reviewDelete.com'"/></td>
-			<td><input type="button" value="뒤로가기" onclick/></td>
+			<td><input type="button" value="삭제" onclick="window.location='reviewDelete.com?review_num=${article.review_num}&pageNum=${pageNum}'"/></td>
+			<td><input type="button" value="리스트 가기" onclick="window.location='reviewList.com?review_num=${article.review_num}&pageNum=${pageNum}'"/></td>
 		</tr>
 	</table>
 

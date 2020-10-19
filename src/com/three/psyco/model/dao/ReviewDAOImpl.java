@@ -30,10 +30,12 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public List getReview(int startRow,int endRow,String member_id ) throws SQLException {
 		List list=new ArrayList();
 		HashMap map = new HashMap();
+		System.out.println("member_id=="+member_id);
 		map.put("start", startRow);
 		map.put("end", endRow);
-		map.put("member_id", "gogo");
+		map.put("member_id", member_id);
 		list=sqlSession.selectList("review.getReview",map);
+		System.out.println("list==="+list);
 		return list;
 	}
 
@@ -45,15 +47,24 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public ReviewDTO getReviewDetail(int num) throws SQLException {
-		ReviewDTO dto=sqlSession.selectOne("review.getReivewDetail",num);
+	public ReviewDTO getReviewDetail(int review_num) throws SQLException {
+		ReviewDTO dto=sqlSession.selectOne("review.getReivewDetail",review_num);
 		return dto;
 	}
 
 	@Override
-	public ReviewDTO updateReview(ReviewDTO dto) throws SQLException {
-		sqlSession.update("review.updateReview",dto);
-		return null;
+	public int updateReview(ReviewDTO dto) throws SQLException {
+		int result=sqlSession.update("review.updateReview",dto);
+		
+		return result;
+	}
+
+	@Override
+	public String deleteReview(int review_num) throws SQLException {
+		System.out.println("review_num3="+review_num);
+		String res=sqlSession.selectOne("review.deleteReview",review_num);
+		System.out.println(res);
+		return res;
 	}
 
 }

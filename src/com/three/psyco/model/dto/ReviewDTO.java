@@ -12,19 +12,14 @@ public class ReviewDTO {
 	private String confirm;
 	private int ref;
 	private String reply_content;
-	private int shop_num;
+	private int item_num;
 	private String member_id;
 	private String review_img;
 	private Timestamp reg;
-	private String shop_name;
+	private String item_name;
 	
 	
-	public String getShop_name() {
-		return shop_name;
-	}
-	public void setShop_name(String shop_name) {
-		this.shop_name = shop_name;
-	}
+
 	public String getMember_id() {
 		return member_id;
 	}
@@ -79,11 +74,17 @@ public class ReviewDTO {
 	public void setReply_content(String reply_content) {
 		this.reply_content = reply_content;
 	}
-	public int getShop_num() {
-		return shop_num;
+	public int getItem_num() {
+		return item_num;
 	}
-	public void setShop_num(int shop_num) {
-		this.shop_num = shop_num;
+	public void setItem_num(int item_num) {
+		this.item_num = item_num;
+	}
+	public String getItem_name() {
+		return item_name;
+	}
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
 	}
 	public String getReview_img() {
 		return review_img;

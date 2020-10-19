@@ -13,4 +13,6 @@ public interface MemberDAO {
 	public int loginCheck(String member_Id, String pw);
 	
 	public MemberDTO memberInfo(String session)throws Exception;
+	
+	public String getNickName(String session)throws Exception;
 }

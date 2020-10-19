@@ -15,8 +15,10 @@ public interface ReviewDAO {
 
 	public int getCount() throws SQLException ;
 	
-	public ReviewDTO getReviewDetail(int num) throws SQLException;
+	public ReviewDTO getReviewDetail(int review_num) throws SQLException;
 	
-	public ReviewDTO updateReview(ReviewDTO dto)throws SQLException;
+	public int updateReview(ReviewDTO dto)throws SQLException;
+	
+	public String deleteReview(int review_num)throws SQLException;
 	
 }

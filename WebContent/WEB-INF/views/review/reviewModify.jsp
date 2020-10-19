@@ -7,14 +7,14 @@
 <title>리뷰 수정폼</title>
 </head>
 <body>
-<form action="reviewModifyPro.com" method="post" enctype="multipart/form-data">
+<form action="reviewModifyPro.com?pageNum=${pageNum}" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="writer" value="${article.writer}"/>
-	<input type="hidden" name="shop_num" value="${article.shop_num}"/>
+	<input type="hidden" name="item_num" value="${article.item_num}"/>
 	<input type="hidden" name="review_num" value="${article.review_num}"/>
 	<input type="hidden" name="ref" value="${article.ref}"/>
 	<input type="hidden" name="confirm" value="${article.confirm}"/>
 	<input type="hidden" name="reply_content" value="${article.reply_content}"/>
-	<input type="hidden" name="shop_name" value="${article.shop_name}"/>
+	<input type="hidden" name="item_name" value="${article.item_name}"/>
 	<input type="hidden" name="member_id" value="${article.member_id}"/>
 		<table>
 			<tr>
