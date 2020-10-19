@@ -8,8 +8,7 @@
 </head>
 <body>
 	<h1>shop정보 수정하는 페이지</h1>
-	<h2>${article.approve_status}</h2>
-	<form action="/psyco/shop/shopModifyPro.com?pageNum=${pageNum}" method="post">
+	<form action="/psyco/shop/shopModifyPro.com?pageNum=${pageNum}" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="shop_num" value="${article.shop_num}" />
 		<input type="hidden" name="takeout" value="${article.takeout}" />
 		<input type="hidden" name="address" value="${article.address}" />
@@ -18,6 +17,7 @@
 		<input type="hidden" name="approve_time" value="${article.approve_time}" />
 		<input type="hidden" name="member_num" value="${article.member_num}" />
 		<input type="hidden" name="approve_status" value="${article.approve_status}" />
+		<input type="hidden" name="shop_img" value="${article.shop_img}" />
 		
 		<table>
 			<tr>
@@ -42,7 +42,7 @@
 			</tr>
 			<tr>
 				<td>가게 사진 </td>
-				<td><input type="file" name="shop_img" value="${article.shop_img}" /></td>
+				<td><input type="file" name="shop_img2"  /></td>
 			
 			</tr>
 			<tr>

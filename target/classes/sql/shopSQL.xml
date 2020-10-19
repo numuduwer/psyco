@@ -11,6 +11,10 @@
  		select count(*) from shop where MEMBER_NUM = #{value} 
  	</select>
  	
+ 	<select id="getMyMenuCount" parameterType="int" resultType="int" >
+ 		select count(*) from menu where SHOP_NUM = #{value} 
+ 	</select>
+ 	
  	
  	
  	<select id="getMyShopList" parameterType="hashmap" resultType="ShopDTO">
@@ -46,6 +50,10 @@
 		update shop set shop_name=#{shop_name}, shop_phone=#{shop_phone}, operating_time=#{operating_time}, address=#{address}, origin=#{origin}, takeout=#{takeout}, shop_img=#{shop_img}, license_number=#{license_number}, status=#{status}, approve_status=#{approve_status}, member_num=#{member_num} 
   		 where shop_num=#{shop_num}
  	</update>
+ 	
+ 	<delete id="deleteShop" parameterType="int">
+ 		delete from shop where shop_num =#{value}
+ 	</delete>
  
  
 

@@ -26,6 +26,8 @@ public class CommonsServiceImpl implements CommonsService {
 	
 	@Autowired
 	private ShopDAOImpl shopDAO = null;
+	
+	
 
 	
 	public void setListDataToModel(Model model, ListData data) {
@@ -85,16 +87,15 @@ public class CommonsServiceImpl implements CommonsService {
 	}
 	
 
-	public ListData getListData(String pageName, String pageNum, int id, String controller) throws SQLException{
+	public ListData getListData(String pageName, String pageNum, int shop_num, String controller) throws SQLException{
 		// 디폴트 값 설정 
 		if(pageNum == null) {
 			pageNum = "1";
 		}
-		if(pageName == null) {
-			pageName = "shopList";
-		}
-		System.out.println("commons Serrvice pageName : " + pageName);
-		System.out.println("commons Serrvice id : " + id);
+		
+		System.out.println("menuList Service pageName : " + pageName);
+		System.out.println("menuList Service shopNum : " + shop_num);
+
 		// 페이징 처리 초기값
 		int pageSize = 10;
 		int currPage = Integer.parseInt(pageNum);	// 페이지 계산을 위해  형변환 
@@ -107,12 +108,15 @@ public class CommonsServiceImpl implements CommonsService {
 		
 		// 글 갯수 불러오기 
 		if(controller.equals("shopBean")) {
-			count = shopDAO.count(pageName, id);
+			count = shopDAO.count(pageName, shop_num);
 		}
-		
+		System.out.println("commons Service count : " + count);
 	
 		if(count >0) {
-			articleList = shopDAO.getList(pageName, id,startRow, endRow);	
+
+				articleList = shopDAO.getList(pageName, shop_num,startRow, endRow);
+			
+			
 		}
 		
 		number = count - (currPage-1) * pageSize;
