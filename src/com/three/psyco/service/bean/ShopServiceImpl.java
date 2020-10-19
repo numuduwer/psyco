@@ -7,10 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+<<<<<<< HEAD
 import com.three.psyco.model.dao.ItemDAOImpl;
+=======
+import com.three.psyco.model.dao.MenuDAOImpl;
+>>>>>>> master
 import com.three.psyco.model.dao.ShopDAOImpl;
 import com.three.psyco.model.dto.ItemDTO;
 import com.three.psyco.model.dto.ListData;
+import com.three.psyco.model.dto.MenuDTO;
 import com.three.psyco.model.dto.ShopDTO;
 
 @Service
@@ -20,12 +25,17 @@ public class ShopServiceImpl implements ShopService {
 	private ShopDAOImpl shopDAO = null;
 	
 	@Autowired
+<<<<<<< HEAD
 	private ItemDAOImpl itemDAO = null;
+=======
+	private MenuDAOImpl menuDAO = null;
+	
+>>>>>>> master
 
 	@Override
-	public ShopDTO getShopDataSV(int id) throws SQLException {
+	public ShopDTO getShopDataSV(int shop_num) throws SQLException {
 		
-		ShopDTO data = shopDAO.getShopData(id);
+		ShopDTO data = shopDAO.getShopData(shop_num);
 		return data;
 	}
 	@Override
@@ -36,6 +46,7 @@ public class ShopServiceImpl implements ShopService {
 		return result;
 	}
 	
+<<<<<<< HEAD
 	public ListData getItemList(String pageName, String pageNum, int id) throws SQLException{
 		// 디폴트 값 설정 
 		if(pageNum == null) {
@@ -110,6 +121,38 @@ public class ShopServiceImpl implements ShopService {
 	
 	
 	
+=======
+	public void deleteListSV(int id, String name) {
+		if(name.equals("shopNum")){
+			shopDAO.deleteShop(id);
+		}else if(name.equals("menuNum")){
+			menuDAO.deleteMenu(id);
+		}
+	}
+	
+	public MenuDTO getMenuDataSV(int shop_num) throws SQLException {
+		MenuDTO data = menuDAO.getMenuData(shop_num);
+		return data;
+	}
+	public int  updateMenuDataSV(MenuDTO dto) {
+		System.out.println("------service------");
+		System.out.println("menu modifyPro dto menu_num : " + dto.getMenu_num());
+		System.out.println("menu modifyPro dto menu_name : " + dto.getMenu_name());
+		System.out.println("menu modifyPro dto content : " + dto.getContent());
+		System.out.println("menu modifyPro dto menu_img : " + dto.getMenu_img());
+		System.out.println("menu modifyPro dto price : " + dto.getPrice());
+		
+		System.out.println("menu modifyPro dto category : " + dto.getCategory());
+		System.out.println("menu modifyPro dto season : " + dto.getSeason());
+		System.out.println("menu modifyPro dto SETT : " + dto.getSett());
+		System.out.println("menu modifyPro dto shop_num : " + dto.getShop_num());
+		System.out.println("menu modifyPro dto reg : " + dto.getReg());
+		int result = 0;
+		result =  menuDAO.updateMenuData(dto);
+		return result;
+	}
+	
+>>>>>>> master
 	
 	
 	

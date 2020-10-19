@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <!-- namespace : 내부에 쿼리태크 호출시 namespace속성명 쿼리태그 id값-->
+ 
+ <mapper namespace="menu">
+ 	
+ 
+ 	<select id="getMenuData" parameterType="int" resultType="menuDTO" >
+ 		select * from menu where MENU_NUM = #{value} 
+ 	</select>
+ 	
+ 	
+ 	<update id="update" parameterType="menuDTO" >
+		UPDATE menu set MENU_NAME =#{menu_name}, CONTENT =#{content}, MENU_IMG =#{menu_img}, PRICE =#{price}, CATEGORY =#{category}, SEASON =#{season}, SETT =#{sett}, SHOP_NUM =#{shop_num}, REG = #{reg} 
+  		 where menu_num= #{menu_num}
+ 	</update>
+ 	
+ 	 <delete id="deleteShop" parameterType="int">
+ 		delete from menu where menu_num =#{value}
+ 	</delete>
+ 	
+
+ 
+
+ </mapper>

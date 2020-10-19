@@ -4,6 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   
 <configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
   
 	<typeAliases>
 		<typeAlias type="com.three.psyco.model.dto.MenuDTO" alias="MenuDTO"/>
@@ -26,6 +30,7 @@
 		<mapper resource="/sql/testSQL.xml"/>
 		<mapper resource="/sql/shopSQL.xml"/>
 		<mapper resource="/sql/itemSQL.xml"/>
+		<mapper resource="/sql/menuSQL.xml"/>
 	</mappers>
   	
 </configuration>

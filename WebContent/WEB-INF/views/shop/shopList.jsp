@@ -10,18 +10,31 @@
 <script>
 	
 	
-function onClickItemDelete(memberNum){
-	var apiURL = '/psyco/super/deleteMember.com';
-	console.log(apiURL);
+function onClickItemDelete(shopNum){
+	
+	var msg = confirm("삭제하시겠습니까? ");
+	if(msg == true){
+		var apiURL = '/psyco/shop/deleteShop.com';
+		console.log(apiURL);
 
-	$.ajax({
-        type: 'POST',
-        url: apiURL,
-		data: {member_num : memberNum},
-        error: function (error) {
-            alert('data error');
-        }
-    });	
+		$.ajax({
+	        type: 'POST',
+	        url: apiURL,
+			data: {shop_num : shopNum},
+			success:function (shop_num) {
+				var myobj = document.getElementById(shopNum);
+				myobj.remove();
+	        },
+	        error: function (error) {
+	            alert('data error');
+	        }
+	    });	
+	}else{
+		alert('삭제 취소하셨습니다, ')
+	}
+	
+	
+
 }	
 </script>
 </head>
@@ -43,10 +56,9 @@ function onClickItemDelete(memberNum){
 		<table>
 			<tr>	
 			<c:forEach var="article" items="${articleList}">
-			<tr>
+			<tr id = "${article.shop_num}"}>
 				<td>${number} <c:set var="number" value="${number-1}" /> </td>	
-		
-			<td><a href="/psyco/shop/shopDetail.com" >${article.shop_name}</a></td> 
+			<td><a href="/psyco/shop/shopDetail.com?shop_num=${article.shop_num}" >${article.shop_name}</a></td> 
 				<td>${article.shop_phone}</td>
 				<td>${article.operating_time}</td>
 				<td>${article.address}</td>
@@ -54,14 +66,17 @@ function onClickItemDelete(memberNum){
 				<td>${article.origin}</td>
 				<td>${article.takeout}</td>
 				<td>${article.shop_img}</td>
+				<td><img alt="" src="/psyco/save//${article.shop_img}"></td>
 				<td>${article.license_number}</td>	
-				<td>${article.request_time}</td>
-				
+				<td>${article.request_time}</td>	
 				<td>${article.approve_time}</td>
 				<td>${article.status}</td>
 				<td>${article.approve_status}</td>	
-				<td>${article.member_num}</td>		
-					
+				<td>${article.member_num}</td>	
+				<td><a href="javascript:onClickItemDelete('${article.shop_num}')" >삭제</a>	
+				
+							
+				</td>	
 			</tr>
 		</c:forEach>		
 		</table>
