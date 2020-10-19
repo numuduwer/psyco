@@ -2,8 +2,10 @@ package com.three.psyco.controller.bean;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.three.psyco.model.dto.ItemDTO;
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.MenuDTO;
 import com.three.psyco.model.dto.ShopDTO;
 import com.three.psyco.service.bean.CommonsServiceImpl;
+import com.three.psyco.service.bean.ItemServiceImpl;
 import com.three.psyco.service.bean.ShopService;
 import com.three.psyco.service.bean.ShopServiceImpl;
 
@@ -31,22 +35,30 @@ public class ShopBean {
 	private ShopServiceImpl shopService = null;
 	@Autowired
 	private CommonsServiceImpl commonsService = null;
+	@Autowired
+	private ItemServiceImpl itemService = null;
+
 
 	
 	public static String controllerName = "shopBean";
 
 	
+	
 		
 	@RequestMapping("shopList.com")
 	public String storeList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
-		
-		int memNum = 0;
 		pageName = "shopList";
+		int memNum = 0;
+
+		pageName = "shopList";
+
 		if (session.getAttribute("memNum") == null) {
 			System.out.println("session이 nulll 입니다.");
 		}else { 
 			 memNum= (Integer)session.getAttribute("memNum");
-		}
+
+		}	
+
 		ListData data = commonsService.getListData(pageName,pageNum,memNum,controllerName);
 		commonsService.setListDataToModel(model, data);
 		return "shop/shopList";
@@ -56,29 +68,40 @@ public class ShopBean {
 	public String shopDetail(int shop_num, Model model) throws SQLException {
 		ShopDTO shopData = shopService.getShopDataSV(shop_num);
 		model.addAttribute("article", shopData);
-		model.addAttribute("shop_num", shop_num);
 		return "shop/shopDetail";
 	}
 	
 	@RequestMapping("shopModify.com")
-	public String shopModify(String shop_num, Model model) throws SQLException {
-
-		int id = Integer.parseInt(shop_num);
+	public String shopModify(int shop_num, Model model) throws SQLException {
+		int id = shop_num;
 		ShopDTO shopData = shopService.getShopDataSV(id);
 
 		model.addAttribute("article", shopData);
-		model.addAttribute("shop_num", shop_num);
+		model.addAttribute("shop_num", id);
 		return "shop/shopModify";
 		
 	}
 
 	@RequestMapping("menuModifyPro.com")
-	public String menuModifyPro(MultipartHttpServletRequest request,MenuDTO dto, Model model) throws SQLException{
-		String pageName = "menuList";
+	public String menuModifyPro(MultipartHttpServletRequest request,String pageNum,  Model model) throws SQLException{
+		MenuDTO dto = new MenuDTO();
+		
+		
+		dto.setMenu_num(Integer.parseInt(request.getParameter("menu_num")));
+		dto.setMenu_name(request.getParameter("menu_name"));
+		dto.setContent(request.getParameter("content"));
+		dto.setPrice(Integer.parseInt(request.getParameter("price")));
+		
+		dto.setCategory(request.getParameter("category"));
+		dto.setSeason(request.getParameter("season"));
+		dto.setSett(request.getParameter("sett"));
+		dto.setShop_num(Integer.parseInt(request.getParameter("shop_num")));
+		
+		
+	
+	
+		System.out.println(" controller 잘 연결 ");
 		int result = 0; 
-		System.out.println("잘연");
-		
-		
 		String path = request.getRealPath("save");
 		try {
 			MultipartFile mf = null;
@@ -96,15 +119,16 @@ public class ShopBean {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-	
 		
+
 		
 		result = shopService.updateMenuDataSV(dto);
 		model.addAttribute("shopNum", dto.getShop_num());
 		model.addAttribute("result", result);
 		return "shop/menuModifyPro";
 	}
-	
+
+
 	
 	@RequestMapping("shopModifyPro.com")
 	public String shopModiyPro(MultipartHttpServletRequest request,  ShopDTO dto , String pageName, Model model)throws SQLException{
@@ -147,8 +171,10 @@ public class ShopBean {
 ////////////////////// 메뉴  마이페이지 ///////////////////
 	
 	@RequestMapping("menuList.com")
-	public String menuList(String pageName, int shop_num,String pageNum,  Model model) throws SQLException {
-		pageName = "menuList";
+
+	public String menuList(int shop_num,String pageNum,  Model model) throws SQLException {
+		String pageName = "menuList";
+
 		ListData data = commonsService.getListData(pageName,pageNum,shop_num,controllerName);
 		commonsService.setListDataToModel(model, data);
 		return "shop/menuList";
@@ -164,8 +190,6 @@ public class ShopBean {
 	
 	
 	
-	
-
 	@RequestMapping(value="deleteMenu.com", method = RequestMethod.POST)
 	@ResponseBody
 	void deleteMenu(@RequestParam("menu_num") int menuNum) {
@@ -174,6 +198,55 @@ public class ShopBean {
 		String name = "menuNum";
 		shopService.deleteListSV(menuNum, name);
 		
+	}
+	
+	
+	
+	///////////////// item ///////////// 
+
+	@RequestMapping("itemList.com")
+	public String itemList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
+		
+		int id = 123;
+	
+		
+		System.out.println("itemList Controller id :" + id);
+		ListData data = shopService.getItemList(pageName,pageNum,id);
+		commonsService.setListDataToModel(model, data);
+		return "shop/itemList";
+	}
+	
+	
+	// buy페이지에서 만들어놓은 해당 구매 상품 정보 가져오는거 사용
+	@RequestMapping("itemDetail.com")
+	public String itemDetail(int item_num,Model model,String pageNum) throws SQLException {
+		System.out.println("item_num : " + item_num);
+		ItemDTO article = shopService.getItemOne(item_num, pageNum, model);
+		model.addAttribute("article",article);
+		
+		return "shop/itemDetail";
+	}
+	
+	@RequestMapping("itemModifyForm.com")
+	public String itemModifyForm(int item_num,Model model,String pageNum) throws SQLException {
+		
+		ItemDTO article = shopService.getItemOne(item_num, pageNum, model);
+		model.addAttribute("article",article);
+		
+		return "shop/itemModifyForm";
+	}
+	
+	@RequestMapping("itemModifyPro.com")
+	public String itemModifyPro(Model model, HttpServletRequest request,ItemDTO dto) throws SQLException {
+		
+		String startDate = request.getParameter("startDate1") +" "+ request.getParameter("startDate2") + ":00";
+		dto.setStartDate(Timestamp.valueOf(startDate));
+		String endDate = request.getParameter("endDate1") + " " + request.getParameter("endDate2") + ":00";
+		dto.setEndDate(Timestamp.valueOf(endDate));
+		
+		shopService.itemModifyAticle(dto,model);
+		
+		return "shop/itemModifyPro";
 	}
 	
 	@RequestMapping("itemEnrollment.com")
