@@ -82,7 +82,6 @@ public class MemberBean {
 	
 	@RequestMapping("signup.com")
 	public String insertMember(MemberDTO dto, Model model) {
-		System.out.println(dto.getBirth());
 		int result = memberService.insertMember(dto);
 		model.addAttribute("result", result);
 		return "member/signupPro";

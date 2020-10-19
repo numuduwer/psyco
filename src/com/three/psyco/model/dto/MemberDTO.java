@@ -15,6 +15,7 @@ public class MemberDTO {
 	private String email;
 	private int purchase_count;
 	private int business_license;
+	private String license_number;
 	private Timestamp reg;
 	
 	public int getMember_Num() {
@@ -83,12 +84,19 @@ public class MemberDTO {
 	public void setBusiness_license(int business_license) {
 		this.business_license = business_license;
 	}
+	public String getLicense_number() {
+		return license_number;
+	}
+	public void setLicense_number(String license_number) {
+		this.license_number = license_number;
+	}
 	public Timestamp getReg() {
 		return reg;
 	}
 	public void setReg(Timestamp reg) {
 		this.reg = reg;
 	}
+
 	
 	
 }
