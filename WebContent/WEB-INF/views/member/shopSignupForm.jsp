@@ -13,7 +13,7 @@
 </script>
 <body>
 <!-- 히든값 value member_num으로 나중에 수정  -->
-	<form action="/psyco/shopSignupPro.com" method="post" enctype="multipart/form-data">
+	<form action="/psyco/member/shopSignupPro.com" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="member_num" value=2>
 		<table>
 			<tr>
@@ -46,7 +46,7 @@
 			</tr>
 			<tr>
 				<td>사업자 번호</td>
-				<td><input type="text" name="license_number"/></td>
+				<td><input type="text" name="license_number" value="${license_number}" readonly/></td>
 			</tr>
 			<tr>
 				<td><input type="button" value="뒤로가기" onclick="goBack();"></td>

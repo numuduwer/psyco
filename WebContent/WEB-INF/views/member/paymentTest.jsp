@@ -45,6 +45,7 @@
 						}
 					}).done(function(data){
 						// 가맹점 서버 결제 API 성공시 로직
+						
 					})
 				} else {
 					var msg = "결재가 실패하였습니다.";

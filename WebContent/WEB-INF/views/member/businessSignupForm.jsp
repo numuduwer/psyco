@@ -39,6 +39,14 @@
 	</script>
 </head>
 <body>
+	
+	<script>
+		function licenseNumber(){
+			var license_number = document.getElementById("text1").value + "-" + document.getElementById("text2").value + "-" + document.getElementById("text3").value;
+			window.location.href='/psyco/member/normalSignupForm.com?license_number=' + license_number;
+		}
+	</script>
+
 	<div id="wrap">
 		<form>
 			<div class="group">
@@ -46,8 +54,9 @@
 				<input type="button" value="유효성 검사"  id="checkBtn">
 				<br />
 				<span id="chkMsg"></span>
-				<input type="button" id="nextBtn" value="다음" onclick="window.location.href=''" disabled />
+				<input type="button" id="nextBtn" value="다음" onclick="licenseNumber()" disabled>
 			</div>
+			
 		</form>
 	</div>
 </body>

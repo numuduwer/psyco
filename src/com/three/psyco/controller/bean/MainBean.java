@@ -23,14 +23,12 @@ public class MainBean {
 		System.out.println("controller 잘 연결 ");
 		return "main/main";
 	}
-
 	
-	@RequestMapping("test.com")
-	public String layout() {
-		System.out.println("controller 잘 연결 ");
+	@RequestMapping("content.com")
+	public String content() {
 		
-
-		return "test";
+		System.out.println("controller 잘 연결 ");
+		return "main/content";
 	}
 	
 
