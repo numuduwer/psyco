@@ -9,19 +9,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:if test="${result == 1}">
 		<script type="text/javascript">
-			alert('수정이 완료되었습니다.');
-			window.location='/psyco/shop/itemDetail.com?pageNum=${pageNum}&item_num=${item_num}';
+			alert('삭제가 완료되었습니다.');
+			window.location='/psyco/shop/itemList.com?${pageNum}';
 		</script>
-	</c:if>
-	
-	<c:if test="${result == 0}">
-		<script type="text/javascript">
-			alert('수정 오류입니다.');
-			history.go(-1)
-		</script>
-	</c:if>
+
 
 </body>
 </html>

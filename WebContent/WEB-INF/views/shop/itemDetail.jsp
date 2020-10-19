@@ -57,7 +57,7 @@
 			<tr>
 				<td colspan="2"> 
 					<button onclick="window.location='/psyco/shop/itemModifyForm.com?pageNum=${pageNum}&item_num=${item_num}'">수정 하로 가기</button>
-					<button onclick="window.location='/psyco/shop/itemDeleteForm.com?community_num=${community_num}&pageNum=${pageNum}&item_num=${item_num}'">삭 제</button>
+					<button onclick="window.location='/psyco/shop/itemDeleteForm.com?pageNum=${pageNum}&item_num=${item_num}'">삭 제</button>
 					<button onclick="window.location='/psyco/shop/itemForm.com?pageNum=${pageNum}'">답 글</button>
 					<button onclick="window.location='/psyco/shop/itemList.com?pageNum=1'">돌아가기</button>
 				 </td>
