@@ -41,14 +41,12 @@ public class ShopBean {
 	public String storeList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
 		
 		int memNum = 0;
-
+		pageName = "shopList";
 		if (session.getAttribute("memNum") == null) {
 			System.out.println("session이 nulll 입니다.");
 		}else { 
 			 memNum= (Integer)session.getAttribute("memNum");
 		}
-		System.out.println("shopList controller  memNum :" + memNum );
-	
 		ListData data = commonsService.getListData(pageName,pageNum,memNum,controllerName);
 		commonsService.setListDataToModel(model, data);
 		return "shop/shopList";
@@ -75,33 +73,43 @@ public class ShopBean {
 	}
 
 	@RequestMapping("menuModifyPro.com")
-	public String menuModifyPro(MenuDTO dto, Model model) throws SQLException{
-		
-		
-		System.out.println(" controller 잘 연결 ");
+	public String menuModifyPro(MultipartHttpServletRequest request,MenuDTO dto, Model model) throws SQLException{
+		String pageName = "menuList";
 		int result = 0; 
+		System.out.println("잘연");
 		
-		System.out.println("menu modifyPro dto menu_num : " + dto.getMenu_num());
-		System.out.println("menu modifyPro dto menu_name : " + dto.getMenu_name());
-		System.out.println("menu modifyPro dto content : " + dto.getContent());
-		System.out.println("menu modifyPro dto menu_img : " + dto.getMenu_img());
-		System.out.println("menu modifyPro dto price : " + dto.getPrice());
 		
-		System.out.println("menu modifyPro dto category : " + dto.getCategory());
-		System.out.println("menu modifyPro dto season : " + dto.getSeason());
-		System.out.println("menu modifyPro dto SETT : " + dto.getSett());
-		System.out.println("menu modifyPro dto shop_num : " + dto.getShop_num());
-		System.out.println("menu modifyPro dto reg : " + dto.getReg());
+		String path = request.getRealPath("save");
+		try {
+			MultipartFile mf = null;
+			mf = request.getFile("menu_img");
+				String orgName = mf.getOriginalFilename();
+				String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
+				String ext = orgName.substring(orgName.lastIndexOf('.'));
+				long date = System.currentTimeMillis();
+				String newName = imgName+date+ext;
+				dto.setMenu_img(newName);
+				String imgPath = path + "/"+newName ;
+				File copyFile = new File(imgPath);
+				mf.transferTo(copyFile);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	
+		
 		
 		result = shopService.updateMenuDataSV(dto);
+		model.addAttribute("shopNum", dto.getShop_num());
 		model.addAttribute("result", result);
-		
 		return "shop/menuModifyPro";
 	}
 	
 	
 	@RequestMapping("shopModifyPro.com")
-	public String shopModiyPro(MultipartHttpServletRequest request,  ShopDTO dto , String pageNum, Model model)throws SQLException{
+	public String shopModiyPro(MultipartHttpServletRequest request,  ShopDTO dto , String pageName, Model model)throws SQLException{
+		
+		pageName = "shopList";
 		
 		int result = 0;
 		String path = request.getRealPath("save");
@@ -123,14 +131,13 @@ public class ShopBean {
 		}
 		result = shopService.updateShopDataSV(dto);
 		model.addAttribute("result", result);
-		return "shop/shopModifyPro";
+		model.addAttribute("pageName", pageName);
+		return "shop/shopList";
 	}
 	
 	@RequestMapping(value="deleteShop.com", method = RequestMethod.POST)
 	@ResponseBody
 	void deleteShop(@RequestParam("shop_num") int shopNum) {
-		System.out.println("잘연결");
-		System.out.println(shopNum);
 		String name = "shopNum";
 		shopService.deleteListSV(shopNum, name);
 		
@@ -141,20 +148,22 @@ public class ShopBean {
 	
 	@RequestMapping("menuList.com")
 	public String menuList(String pageName, int shop_num,String pageNum,  Model model) throws SQLException {
-		
-		
+		pageName = "menuList";
 		ListData data = commonsService.getListData(pageName,pageNum,shop_num,controllerName);
 		commonsService.setListDataToModel(model, data);
 		return "shop/menuList";
 	}
 		
 	@RequestMapping("menuModify.com")
-	public String menuModify(int menu_num, Model model) throws SQLException {
+	public String menuModify(int menu_num,String pageName, Model model) throws SQLException {
+		pageName = "menuList";
 		MenuDTO menuData = shopService.getMenuDataSV(menu_num);
 		model.addAttribute("article", menuData);
-		model.addAttribute("menu_num", menu_num);
 		return "shop/menuModify";
 	}
+	
+	
+	
 	
 
 	@RequestMapping(value="deleteMenu.com", method = RequestMethod.POST)
