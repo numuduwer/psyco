@@ -18,6 +18,7 @@
 		<input type="hidden" name="member_num" value="${article.member_num}" />
 		<input type="hidden" name="approve_status" value="${article.approve_status}" />
 		<input type="hidden" name="shop_img" value="${article.shop_img}" />
+		<input type="hidden" name="pageName" value="${article.shop_img}" />
 		
 		<table>
 			<tr>
