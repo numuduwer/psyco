@@ -68,42 +68,6 @@ public class ShopBean {
 		return "shop/shopModify";
 		
 	}
-
-	@RequestMapping("menuModifyPro.com")
-	public String menuModifyPro(MultipartHttpServletRequest request,String pageNum,  Model model) throws SQLException{
-		MenuDTO dto = new MenuDTO();
-		
-	
-	
-		System.out.println(" controller 잘 연결 ");
-		int result = 0; 
-		String path = request.getRealPath("save");
-		try {
-			MultipartFile mf = null;
-			mf = request.getFile("menu_img");
-				String orgName = mf.getOriginalFilename();
-				String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
-				String ext = orgName.substring(orgName.lastIndexOf('.'));
-				long date = System.currentTimeMillis();
-				String newName = imgName+date+ext;
-				dto.setMenu_img(newName);
-				String imgPath = path + "/"+newName ;
-				File copyFile = new File(imgPath);
-				mf.transferTo(copyFile);
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		
-		
-		result = shopService.updateMenuDataSV(dto);
-		model.addAttribute("result", result);
-		model.addAttribute("shop_num", dto.getShop_num());
-		return "shop/menuModifyPro";
-	}
-
-
 	
 	@RequestMapping("shopModifyPro.com")
 	public String shopModiyPro(MultipartHttpServletRequest request,  ShopDTO dto , String pageNum, Model model)throws SQLException{
@@ -134,8 +98,6 @@ public class ShopBean {
 	@RequestMapping(value="deleteShop.com", method = RequestMethod.POST)
 	@ResponseBody
 	void deleteShop(@RequestParam("shop_num") int shopNum) {
-		System.out.println("잘연결");
-		System.out.println(shopNum);
 		String name = "shopNum";
 		shopService.deleteListSV(shopNum, name);
 		
@@ -159,15 +121,36 @@ public class ShopBean {
 		return "shop/menuModify";
 	}
 	
-	
-	
-	
+	@RequestMapping("menuModifyPro.com")
+	public String menuModifyPro(MultipartHttpServletRequest request,String pageNum,  Model model) throws SQLException{
+		MenuDTO dto = new MenuDTO();
+		int result = 0; 
+		String path = request.getRealPath("save");
+		try {
+			MultipartFile mf = null;
+			mf = request.getFile("menu_img");
+				String orgName = mf.getOriginalFilename();
+				String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
+				String ext = orgName.substring(orgName.lastIndexOf('.'));
+				long date = System.currentTimeMillis();
+				String newName = imgName+date+ext;
+				dto.setMenu_img(newName);
+				String imgPath = path + "/"+newName ;
+				File copyFile = new File(imgPath);
+				mf.transferTo(copyFile);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		result = shopService.updateMenuDataSV(dto);
+		model.addAttribute("result", result);
+		model.addAttribute("shop_num", dto.getShop_num());
+		return "shop/menuModifyPro";
+	}
 
 	@RequestMapping(value="deleteMenu.com", method = RequestMethod.POST)
 	@ResponseBody
 	void deleteMenu(@RequestParam("menu_num") int menuNum) {
-		System.out.println("잘연결");
-		System.out.println(menuNum);
 		String name = "menuNum";
 		shopService.deleteListSV(menuNum, name);
 		
