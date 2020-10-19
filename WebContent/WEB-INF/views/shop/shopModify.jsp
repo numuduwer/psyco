@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>shop정보 수정하는 페이지</h1>
-	<form action="/psyco/shop/shopModifyPro.com" method="post">
+	<form action="/psyco/shop/shopModifyPro.com" method="post"  enctype="multipart/form-data">
 		<input type="hidden" name="shop_num" value="${article.shop_num}" />
 		<input type="hidden" name="takeout" value="${article.takeout}" />
 		<input type="hidden" name="address" value="${article.address}" />

@@ -69,6 +69,41 @@ public class ShopBean {
 		
 	}
 
+	@RequestMapping("menuModifyPro.com")
+	public String menuModifyPro(MultipartHttpServletRequest request,String pageNum,  Model model) throws SQLException{
+		MenuDTO dto = new MenuDTO();
+		
+	
+	
+		System.out.println(" controller 잘 연결 ");
+		int result = 0; 
+		String path = request.getRealPath("save");
+		try {
+			MultipartFile mf = null;
+			mf = request.getFile("menu_img");
+				String orgName = mf.getOriginalFilename();
+				String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
+				String ext = orgName.substring(orgName.lastIndexOf('.'));
+				long date = System.currentTimeMillis();
+				String newName = imgName+date+ext;
+				dto.setMenu_img(newName);
+				String imgPath = path + "/"+newName ;
+				File copyFile = new File(imgPath);
+				mf.transferTo(copyFile);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		result = shopService.updateMenuDataSV(dto);
+		model.addAttribute("result", result);
+		model.addAttribute("shop_num", dto.getShop_num());
+		return "shop/menuModifyPro";
+	}
+
+
 	
 	@RequestMapping("shopModifyPro.com")
 	public String shopModiyPro(MultipartHttpServletRequest request,  ShopDTO dto , String pageNum, Model model)throws SQLException{
@@ -124,29 +159,6 @@ public class ShopBean {
 		return "shop/menuModify";
 	}
 	
-	@RequestMapping("menuModifyPro.com")
-	public String menuModifyPro( MenuDTO dto,  String pageNum, Model model) throws SQLException{
-
-		System.out.println(" controller 잘 연결 ");
-		int result = 0; 
-		System.out.println("menu modifyPro dto menu_num : " + dto.getMenu_num());
-		System.out.println("menu modifyPro dto menu_name : " + dto.getMenu_name());
-		System.out.println("menu modifyPro dto content : " + dto.getContent());
-		System.out.println("menu modifyPro dto menu_img : " + dto.getMenu_img());
-		System.out.println("menu modifyPro dto price : " + dto.getPrice());
-		
-		System.out.println("menu modifyPro dto category : " + dto.getCategory());
-		System.out.println("menu modifyPro dto season : " + dto.getSeason());
-		System.out.println("menu modifyPro dto SETT : " + dto.getSett());
-		System.out.println("menu modifyPro dto shop_num : " + dto.getShop_num());
-		System.out.println("menu modifyPro dto reg : " + dto.getReg());
-		
-		result = shopService.updateMenuDataSV(dto);
-		model.addAttribute("result", result);
-		model.addAttribute("shop_num", dto.getShop_num());
-		return "shop/menuModifyPro";
-	}
-
 	
 	
 	
