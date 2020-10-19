@@ -86,6 +86,18 @@ public class ShopBean {
 	public String menuModifyPro(MultipartHttpServletRequest request,String pageNum,  Model model) throws SQLException{
 		MenuDTO dto = new MenuDTO();
 		
+		
+		dto.setMenu_num(Integer.parseInt(request.getParameter("menu_num")));
+		dto.setMenu_name(request.getParameter("menu_name"));
+		dto.setContent(request.getParameter("content"));
+		dto.setPrice(Integer.parseInt(request.getParameter("price")));
+		
+		dto.setCategory(request.getParameter("category"));
+		dto.setSeason(request.getParameter("season"));
+		dto.setSett(request.getParameter("sett"));
+		dto.setShop_num(Integer.parseInt(request.getParameter("shop_num")));
+		
+		
 	
 	
 		System.out.println(" controller 잘 연결 ");
@@ -176,6 +188,21 @@ public class ShopBean {
 		return "shop/menuModify";
 	}
 	
+	
+	
+	@RequestMapping(value="deleteMenu.com", method = RequestMethod.POST)
+	@ResponseBody
+	void deleteMenu(@RequestParam("menu_num") int menuNum) {
+		System.out.println("잘연결");
+		System.out.println(menuNum);
+		String name = "menuNum";
+		shopService.deleteListSV(menuNum, name);
+		
+	}
+	
+	
+	
+	///////////////// item ///////////// 
 
 	@RequestMapping("itemList.com")
 	public String itemList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
@@ -222,19 +249,10 @@ public class ShopBean {
 		return "shop/itemModifyPro";
 	}
 	
-	
-
-	@RequestMapping(value="deleteMenu.com", method = RequestMethod.POST)
-	@ResponseBody
-	void deleteMenu(@RequestParam("menu_num") int menuNum) {
-		System.out.println("잘연결");
-		System.out.println(menuNum);
-		String name = "menuNum";
-		shopService.deleteListSV(menuNum, name);
-		
+	@RequestMapping("itemEnrollment.com")
+	public String itemEnrollment() {
+		return "shop/itemEnrollmentForm";
 	}
-	
-	
 	
 
 		

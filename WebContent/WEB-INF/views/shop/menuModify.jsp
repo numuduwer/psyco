@@ -8,11 +8,8 @@
 </head>
 <body>
 	<h1> Menu 수정하는 페이지</h1>
-<<<<<<< HEAD
-	<form action="/psyco/shop/menuModifyPro.com" method="post" enctype="multipart/form-data" >
-=======
+
 	<form action="/psyco/shop/menuModifyPro.com?pageNum=${pageNum}" method="post" enctype="multipart/form-data"  >
->>>>>>> a602d9af5c41c617a76432d51d5815beb13d4e85
 		<input type="hidden" name="menu_num" value="${article.menu_num}" />
 		<input type="hidden" name="category" value="${article.category}" />
 		<input type="hidden" name="sett" value="${article.sett}" />
@@ -29,11 +26,7 @@
 			</tr>
 			<tr>
 				<td>메뉴 이미지 </td>
-<<<<<<< HEAD
 				<td><input type="file" name="menu_img" value="${article.menu_img}" /></td>
-=======
-				<td><input type="file" name="menu_img" value="ddd"></td>
->>>>>>> a602d9af5c41c617a76432d51d5815beb13d4e85
 			</tr>
 			<tr>
 				<td>메뉴 가격 </td>
