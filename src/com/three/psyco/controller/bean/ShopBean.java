@@ -31,8 +31,6 @@ public class ShopBean {
 	private ShopServiceImpl shopService = null;
 	@Autowired
 	private CommonsServiceImpl commonsService = null;
-
-	
 	public static String controllerName = "shopBean";
 
 	
@@ -40,15 +38,13 @@ public class ShopBean {
 	@RequestMapping("shopList.com")
 	public String storeList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
 		pageName = "shopList";
+		System.out.println("잘연결");
 		int memNum = 0;
-
 		if (session.getAttribute("memNum") == null) {
 			System.out.println("session이 nulll 입니다.");
 		}else { 
 			 memNum= (Integer)session.getAttribute("memNum");
-
 		}
-
 		ListData data = commonsService.getListData(pageName,pageNum,memNum,controllerName);
 		commonsService.setListDataToModel(model, data);
 		return "shop/shopList";
@@ -73,33 +69,10 @@ public class ShopBean {
 	}
 
 	@RequestMapping("menuModifyPro.com")
-	public String menuModifyPro(MultipartHttpServletRequest request,MenuDTO dto, Model model) throws SQLException{
+	public String menuModifyPro(MenuDTO dto, Model model) throws SQLException{
 		String pageName = "menuList";
 		int result = 0; 
 		System.out.println("잘연");
-		
-		
-		String path = request.getRealPath("save");
-		try {
-			MultipartFile mf = null;
-			mf = request.getFile("menu_img");
-				String orgName = mf.getOriginalFilename();
-				String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
-				String ext = orgName.substring(orgName.lastIndexOf('.'));
-				long date = System.currentTimeMillis();
-				String newName = imgName+date+ext;
-				dto.setMenu_img(newName);
-				String imgPath = path + "/"+newName ;
-				File copyFile = new File(imgPath);
-				mf.transferTo(copyFile);
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	
-		
-		
-		result = shopService.updateMenuDataSV(dto);
 		model.addAttribute("shopNum", dto.getShop_num());
 		model.addAttribute("result", result);
 		return "shop/menuModifyPro";
