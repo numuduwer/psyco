@@ -18,13 +18,25 @@ public class ShopDAOImpl implements ShopDAO {
 	
 	// ShopList.jsp
 	@Override
-	public int count(String pageName, int memNum)throws SQLException {
+	public int count(String pageName, int id)throws SQLException {
 		int count = 0; 
+		
+		System.out.println("menuList DAO pageName : " + pageName);
+		System.out.println("menuList DAO shopNum : " + id);
+		
 		if(pageName.equals("shopList")) {
-			count = sqlSession.selectOne("shop.getMyShopCount",memNum);
+			count = sqlSession.selectOne("shop.getMyShopCount",id);
+		}else if(pageName.equals("menuList")) {
+			
+			count = sqlSession.selectOne("shop.getMyMenuCount", id);
+			System.out.println("menuList sql count : " + count);
 		}
+		
 		return count;
 	}
+	
+	
+	
 	
 	@Override
 	public List getList(String pageName, int id, int startRow, int endRow) throws SQLException {
@@ -33,8 +45,7 @@ public class ShopDAOImpl implements ShopDAO {
 		map.put("end", endRow);
 		map.put("id", id);
 		
-		
-		
+
 		List list = null;
 		if(pageName.equals("shopList")) {
 			list = sqlSession.selectList("shop.getMyShopList", map);	
@@ -44,25 +55,20 @@ public class ShopDAOImpl implements ShopDAO {
 		return list;
 	}
 	
-	
-	
-	// ShopDetail.jsp
 	@Override
-	public ShopDTO getShopData(int id ) throws SQLException {
-		ShopDTO data = sqlSession.selectOne("shop.getShopData", id);
+	public ShopDTO getShopData(int shop_num) throws SQLException {
+		ShopDTO data = sqlSession.selectOne("shop.getShopData", shop_num);
 		return data;
 	}
 	
 	@Override
 	public int updateShopData(ShopDTO dto) throws SQLException {
 		int result = 0; 
-		System.out.println("dao shop_num : " +dto.getShop_num() );
 		result = sqlSession.update("shop.update", dto);
 		return result;
 	}
 
 	public void  deleteShop(int shopNum) {
-		System.out.println("dao shopNum : " + shopNum);
 		sqlSession.delete("shop.deleteShop", shopNum);
 		
 	}

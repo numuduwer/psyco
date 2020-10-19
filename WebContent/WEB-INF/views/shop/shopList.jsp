@@ -58,7 +58,7 @@ function onClickItemDelete(shopNum){
 			<c:forEach var="article" items="${articleList}">
 			<tr id = "${article.shop_num}"}>
 				<td>${number} <c:set var="number" value="${number-1}" /> </td>	
-			<td><a href="/psyco/shop/shopDetail.com" >${article.shop_name}</a></td> 
+			<td><a href="/psyco/shop/shopDetail.com?shop_num=${article.shop_num}" >${article.shop_name}</a></td> 
 				<td>${article.shop_phone}</td>
 				<td>${article.operating_time}</td>
 				<td>${article.address}</td>
@@ -73,7 +73,9 @@ function onClickItemDelete(shopNum){
 				<td>${article.status}</td>
 				<td>${article.approve_status}</td>	
 				<td>${article.member_num}</td>	
-				<td><a href="javascript:onClickItemDelete('${article.shop_num}')" >삭제</a>				
+				<td><a href="javascript:onClickItemDelete('${article.shop_num}')" >삭제</a>	
+				
+							
 				</td>	
 			</tr>
 		</c:forEach>		

@@ -11,6 +11,10 @@
  		select count(*) from shop where MEMBER_NUM = #{value} 
  	</select>
  	
+ 	<select id="getMyMenuCount" parameterType="int" resultType="int" >
+ 		select count(*) from menu where SHOP_NUM = #{value} 
+ 	</select>
+ 	
  	
  	
  	<select id="getMyShopList" parameterType="hashmap" resultType="ShopDTO">
