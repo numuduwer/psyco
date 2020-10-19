@@ -41,11 +41,14 @@ public class ShopBean {
 	public String storeList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
 		pageName = "shopList";
 		int memNum = 0;
+
 		if (session.getAttribute("memNum") == null) {
 			System.out.println("session이 nulll 입니다.");
 		}else { 
 			 memNum= (Integer)session.getAttribute("memNum");
-		}	
+
+		}
+
 		ListData data = commonsService.getListData(pageName,pageNum,memNum,controllerName);
 		commonsService.setListDataToModel(model, data);
 		return "shop/shopList";
@@ -68,9 +71,44 @@ public class ShopBean {
 		return "shop/shopModify";
 		
 	}
+
+	@RequestMapping("menuModifyPro.com")
+	public String menuModifyPro(MultipartHttpServletRequest request,MenuDTO dto, Model model) throws SQLException{
+		String pageName = "menuList";
+		int result = 0; 
+		System.out.println("잘연");
+		
+		
+		String path = request.getRealPath("save");
+		try {
+			MultipartFile mf = null;
+			mf = request.getFile("menu_img");
+				String orgName = mf.getOriginalFilename();
+				String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
+				String ext = orgName.substring(orgName.lastIndexOf('.'));
+				long date = System.currentTimeMillis();
+				String newName = imgName+date+ext;
+				dto.setMenu_img(newName);
+				String imgPath = path + "/"+newName ;
+				File copyFile = new File(imgPath);
+				mf.transferTo(copyFile);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	
+		
+		
+		result = shopService.updateMenuDataSV(dto);
+		model.addAttribute("shopNum", dto.getShop_num());
+		model.addAttribute("result", result);
+		return "shop/menuModifyPro";
+	}
+
 	@RequestMapping("shopModifyPro.com")
-	public String shopModiyPro(MultipartHttpServletRequest request,  ShopDTO dto , String pageNum, Model model)throws SQLException{
+	public String shopModiyPro(MultipartHttpServletRequest request,  ShopDTO dto , String pageName, Model model)throws SQLException{
+		
+		pageName = "shopList";
 		
 		int result = 0;
 		String path = request.getRealPath("save");
@@ -92,7 +130,8 @@ public class ShopBean {
 		}
 		result = shopService.updateShopDataSV(dto);
 		model.addAttribute("result", result);
-		return "shop/shopModifyPro";
+		model.addAttribute("pageName", pageName);
+		return "shop/shopList";
 	}
 	
 	@RequestMapping(value="deleteShop.com", method = RequestMethod.POST)
@@ -115,12 +154,14 @@ public class ShopBean {
 	}
 		
 	@RequestMapping("menuModify.com")
-	public String menuModify(int menu_num, Model model) throws SQLException {
+	public String menuModify(int menu_num,String pageName, Model model) throws SQLException {
+		pageName = "menuList";
 		MenuDTO menuData = shopService.getMenuDataSV(menu_num);
 		model.addAttribute("article", menuData);
 		return "shop/menuModify";
 	}
 	
+
 	@RequestMapping("menuModifyPro.com")
 	public String menuModifyPro(MultipartHttpServletRequest request,String pageNum,  Model model) throws SQLException{
 		MenuDTO dto = new MenuDTO();
