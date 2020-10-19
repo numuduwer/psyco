@@ -9,8 +9,9 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('input:button[id="btn1"]').click(function(){
+				
 				var options = 'width=500, height=600, top=30, left=30, resizeable=yes, scrollbars=yes, location=no';
-				window.open('', '', options);
+				window.open('/psyco/shop/menuList.com', 'selectMenu', options);
 			})
 		});
 	</script>
