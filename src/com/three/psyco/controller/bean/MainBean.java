@@ -26,6 +26,7 @@ public class MainBean {
 	
 	@RequestMapping("content.com")
 	public String content() {
+		
 		System.out.println("controller 잘 연결 ");
 		return "main/content";
 	}
