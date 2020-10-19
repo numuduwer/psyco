@@ -4,26 +4,27 @@ import java.sql.Timestamp;
 
 public class ItemDTO {
 	
-	private int item_num;
+	private Integer item_num;
 	private String item_name;
 	private String content;
-	private int amount;
+	private Integer amount;
 	private Timestamp startDate;
 	private Timestamp endDate;
-	private int discount_cycle;
+	private Integer discount_cycle;
 	private String selling_status;
 	private String progress_status;
-	private int maxPrice;
-	private int minPrice;
-	private String aution_unit;
+	private Integer maxPrice;
+	private Integer minPrice;
+	private String auction_unit;
 	private String sett;
-	private String comment;
-	private int menu_num;
+	private String comment1;
+	private Integer menu_num;
+	private Integer mem_num;
 	
-	public int getItem_num() {
+	public Integer getItem_num() {
 		return item_num;
 	}
-	public void setItem_num(int item_num) {
+	public void setItem_num(Integer item_num) {
 		this.item_num = item_num;
 	}
 	public String getItem_name() {
@@ -38,10 +39,10 @@ public class ItemDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getAmount() {
+	public Integer getAmount() {
 		return amount;
 	}
-	public void setAmount(int amount) {
+	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
 	public Timestamp getStartDate() {
@@ -56,10 +57,10 @@ public class ItemDTO {
 	public void setEndDate(Timestamp endDate) {
 		this.endDate = endDate;
 	}
-	public int getDiscount_cycle() {
+	public Integer getDiscount_cycle() {
 		return discount_cycle;
 	}
-	public void setDiscount_cycle(int discount_cycle) {
+	public void setDiscount_cycle(Integer discount_cycle) {
 		this.discount_cycle = discount_cycle;
 	}
 	public String getSelling_status() {
@@ -74,23 +75,23 @@ public class ItemDTO {
 	public void setProgress_status(String progress_status) {
 		this.progress_status = progress_status;
 	}
-	public int getMaxPrice() {
+	public Integer getMaxPrice() {
 		return maxPrice;
 	}
-	public void setMaxPrice(int maxPrice) {
+	public void setMaxPrice(Integer maxPrice) {
 		this.maxPrice = maxPrice;
 	}
-	public int getMinPrice() {
+	public Integer getMinPrice() {
 		return minPrice;
 	}
-	public void setMinPrice(int minPrice) {
+	public void setMinPrice(Integer minPrice) {
 		this.minPrice = minPrice;
 	}
-	public String getAution_unit() {
-		return aution_unit;
+	public String getAuction_unit() {
+		return auction_unit;
 	}
-	public void setAution_unit(String aution_unit) {
-		this.aution_unit = aution_unit;
+	public void setAuction_unit(String auction_unit) {
+		this.auction_unit = auction_unit;
 	}
 	public String getSett() {
 		return sett;
@@ -98,16 +99,23 @@ public class ItemDTO {
 	public void setSett(String sett) {
 		this.sett = sett;
 	}
-	public String getComment() {
-		return comment;
+	public String getComment1() {
+		return comment1;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setComment1(String comment1) {
+		this.comment1 = comment1;
 	}
-	public int getMenu_num() {
+	public Integer getMenu_num() {
 		return menu_num;
 	}
-	public void setMenu_num(int menu_num) {
+	public void setMenu_num(Integer menu_num) {
 		this.menu_num = menu_num;
 	}
+	public Integer getMem_num() {
+		return mem_num;
+	}
+	public void setMem_num(Integer mem_num) {
+		this.mem_num = mem_num;
+	}
+
 }

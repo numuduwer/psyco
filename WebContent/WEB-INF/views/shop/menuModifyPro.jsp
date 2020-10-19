@@ -11,13 +11,21 @@
 	<c:if test="${result == 1}">
 		<script type="text/javascript">
 			alert('수정 성공 .');
+<<<<<<< HEAD
+			window.location.href='/psyco/shop/menuList.com?shop_num=${shopNum}';
+=======
 			window.location.href='/psyco/shop/menuList.com?shop_num=${shop_num}';
+>>>>>>> a602d9af5c41c617a76432d51d5815beb13d4e85
 		</script>
 	</c:if>
 	<c:if test="${result != 1}">
 		<script type="text/javascript">
 			alert('오류 발생');
+<<<<<<< HEAD
+			window.location.href='/psyco/shop/menuList.com?shop_num=${shopNum}';
+=======
 			window.location.href='/psyco/shop/menuList.com?shop_num=${shop_num}';
+>>>>>>> a602d9af5c41c617a76432d51d5815beb13d4e85
 		</script>
 	</c:if>
 </body>

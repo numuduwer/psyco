@@ -3,6 +3,7 @@ package com.three.psyco.model.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.three.psyco.model.dto.ItemDTO;
 import com.three.psyco.model.dto.ShopDTO;
 
 public interface ShopDAO {
