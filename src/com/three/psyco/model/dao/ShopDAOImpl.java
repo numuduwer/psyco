@@ -21,15 +21,10 @@ public class ShopDAOImpl implements ShopDAO {
 	public int count(String pageName, int id)throws SQLException {
 		int count = 0; 
 		
-		System.out.println("menuList DAO pageName : " + pageName);
-		System.out.println("menuList DAO shopNum : " + id);
-		
 		if(pageName.equals("shopList")) {
 			count = sqlSession.selectOne("shop.getMyShopCount",id);
 		}else if(pageName.equals("menuList")) {
-			
 			count = sqlSession.selectOne("shop.getMyMenuCount", id);
-			System.out.println("menuList sql count : " + count);
 		}
 		
 		return count;
