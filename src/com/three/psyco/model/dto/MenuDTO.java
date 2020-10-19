@@ -4,21 +4,23 @@ import java.sql.Timestamp;
 
 public class MenuDTO {
 
-	private int menu_num;
+	private Integer menu_num;
 	private String menu_name;
 	private String content;
 	private String menu_img;
-	private int price;
+	private Integer price;
+
 	private String category;
 	private String season;
 	private String sett;
-	private int shop_num;
+	private Integer shop_num;
 	private Timestamp reg;
 
-	public int getMenu_num() {
+	public Integer getMenu_num() {
+
 		return menu_num;
 	}
-	public void setMenu_num(int menu_num) {
+	public void setMenu_num(Integer menu_num) {
 		this.menu_num = menu_num;
 	}
 	public String getMenu_name() {
@@ -39,10 +41,10 @@ public class MenuDTO {
 	public void setMenu_img(String menu_img) {
 		this.menu_img = menu_img;
 	}
-	public int getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 	public String getCategory() {
@@ -63,10 +65,10 @@ public class MenuDTO {
 	public void setSett(String sett) {
 		this.sett = sett;
 	}
-	public int getShop_num() {
+	public Integer getShop_num() {
 		return shop_num;
 	}
-	public void setShop_num(int shop_num) {
+	public void setShop_num(Integer shop_num) {
 		this.shop_num = shop_num;
 	}
 	public Timestamp getReg() {
