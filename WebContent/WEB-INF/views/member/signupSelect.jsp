@@ -7,6 +7,7 @@
 	<title>회원가입 선택 페이지</title>
 </head>
 <body>
+
 	<div id="wrap">
 		<div>
 			<input type="button" value="일반 회원가입" onclick="window.location.href='/psyco/member/normalSignupForm.com'" /> <br />

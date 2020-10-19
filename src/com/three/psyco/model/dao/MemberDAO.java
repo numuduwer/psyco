@@ -1,6 +1,9 @@
 package com.three.psyco.model.dao;
 
+import java.sql.SQLException;
+
 import com.three.psyco.model.dto.MemberDTO;
+import com.three.psyco.model.dto.MemberShopDTO;
 
 public interface MemberDAO {
 	
@@ -21,4 +24,6 @@ public interface MemberDAO {
 	public int modifySocialUserPro(int member_Num, String member_Id, String phoneNum, String birth);
 	
 	public int modifyNormalUserPro(MemberDTO dto);
+	
+	public void insertMemberShop(MemberShopDTO dto)throws SQLException;
 }

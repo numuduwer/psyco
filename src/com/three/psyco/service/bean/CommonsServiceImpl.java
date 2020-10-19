@@ -96,9 +96,6 @@ public class CommonsServiceImpl implements CommonsService {
 		if(pageNum == null) {
 			pageNum = "1";
 		}
-		
-		System.out.println("menuList Service pageName : " + pageName);
-		System.out.println("menuList Service shopNum : " + shop_num);
 
 		// 페이징 처리 초기값
 		int pageSize = 10;
@@ -114,13 +111,8 @@ public class CommonsServiceImpl implements CommonsService {
 		if(controller.equals("shopBean")) {
 			count = shopDAO.count(pageName, shop_num);
 		}
-		System.out.println("commons Service count : " + count);
-	
 		if(count >0) {
-
 				articleList = shopDAO.getList(pageName, shop_num,startRow, endRow);
-			
-			
 		}
 		
 		
@@ -174,10 +166,8 @@ public class CommonsServiceImpl implements CommonsService {
 		}
 		
 		number = count - (currPage-1) * pageSize;
-
 		
 		ListData data = new ListData();
-		
 		data.setArticleList(articleList);
 		data.setCount(count);
 		data.setCurrPage(currPage);

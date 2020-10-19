@@ -3,6 +3,7 @@ package com.three.psyco.service.bean;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -13,6 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -34,6 +36,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -41,6 +45,7 @@ import org.xml.sax.SAXException;
 
 import com.three.psyco.model.dao.MemberDAOImpl;
 import com.three.psyco.model.dto.MemberDTO;
+import com.three.psyco.model.dto.MemberShopDTO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -240,6 +245,9 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public int insertMember(MemberDTO dto) {
+		if (dto.getLicense_number() == "") {
+			dto.setLicense_number("0");
+		}
 		int result = memberDAO.insertMember(dto);
 		return result;
 	}
@@ -372,5 +380,54 @@ public class MemberServiceImpl implements MemberService {
 		int result = memberDAO.modifyNormalUserPro(dto);
 		
 		return result;
+	}
+	
+	@Override
+	public void insertMemberShops(MultipartHttpServletRequest request,int member_num,String status,String approve_status) throws SQLException {
+		MemberShopDTO dto=new MemberShopDTO();
+		int shop_num=member_num;
+		String shop_name=request.getParameter("shop_name");
+		String shop_phone=request.getParameter("shop_phone");
+		String operating_time=request.getParameter("operating_time");
+		String address=request.getParameter("address");
+		String origin=request.getParameter("origin");
+		String takeout=request.getParameter("takeout");
+		String license_number=request.getParameter("license_number");
+		MultipartFile mf = request.getFile("shop_img");
+		try {
+			String path=request.getRealPath("shop_img");
+			System.out.println("path ="+path);
+			String orgName =mf.getOriginalFilename();
+			String imgName =orgName.substring(0, orgName.lastIndexOf('.'));
+			String ext = orgName.substring(orgName.lastIndexOf('.'));
+			Long date=System.currentTimeMillis();
+			String newName=imgName+date+ext;
+			String imgPath = path+"\\"+newName;
+			File file=new File(imgPath);
+			mf.transferTo(file);
+			dto.setShop_img(newName);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		dto.setShop_name(shop_name);
+		dto.setShop_phone(shop_phone);
+		dto.setOperating_time(operating_time);
+		dto.setAddress(address);
+		dto.setOrigin(origin);
+		dto.setApprove_status(approve_status);
+		dto.setMember_num(member_num);
+		dto.setShop_num(shop_num);
+		dto.setTakeout(takeout);
+		dto.setlicense_number(license_number);
+		dto.setStatus(status);
+		
+		System.out.println(dto.getShop_img()+"1");
+		System.out.println(dto.getShop_name()+"1");
+		System.out.println(dto.getShop_num()+"1");
+		System.out.println(dto.getShop_phone()+"1");
+		System.out.println(dto.getStatus()+"1");
+		
+		memberDAO.insertMemberShop(dto);
+		
 	}
 }
