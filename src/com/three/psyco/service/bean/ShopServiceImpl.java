@@ -118,6 +118,8 @@ public class ShopServiceImpl implements ShopService {
 		
 		model.addAttribute("pageNum",pageNum);
 		model.addAttribute("result",result);
+		model.addAttribute("item_num",item_num);
+		
 		
 		return result;
 	}

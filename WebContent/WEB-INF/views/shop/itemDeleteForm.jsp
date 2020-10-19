@@ -16,7 +16,7 @@
 				</tr>
 				<tr>
 					<td><input type="submit" value="삭제"/></td>	
-					<td><input type="button" value="삭제취소" onclick="window.location='/psyco/shop/itemDeletePro.com?pageNum=${pageNum}'"/></td>
+					<td><input type="button" value="삭제취소" onclick="window.location='/psyco/shop/itemDetail.com?item_num=${item_num}'"/></td>
 				</tr>
 			
 			</table>

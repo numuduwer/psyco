@@ -12,7 +12,7 @@
 	<c:if test="${result == 1}">
 		<script type="text/javascript">
 			alert('수정이 완료되었습니다.');
-			window.location='/psyco/shop/itemDetail.com?pageNum=${pageNum}&item_num=${item_num}';
+			window.location='/psyco/shop/itemDetail.com?item_num=${item_num}';
 		</script>
 	</c:if>
 	

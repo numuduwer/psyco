@@ -201,8 +201,10 @@ public class ShopBean {
 	
 	
 	@RequestMapping("itemDeleteForm.com")
-	public String itemDeleteForm() {
+	public String itemDeleteForm(String pageNum,Model model,int item_num) {
 		
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("item_num",item_num);
 		
 		return "shop/itemDeleteForm";
 	}
