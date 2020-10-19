@@ -22,10 +22,10 @@
   	
   	<insert id="insertMember" parameterType="memberDTO">
   		<if test="pw == null">
-  			insert into member(member_num, member_Id, name, birth, phonenum, gender, nickname, email, purchase_count, business_license) values(member_seq.nextval, #{member_Id}, #{name}, #{birth}, #{phoneNum}, #{gender}, #{nickname}, #{email}, #{purchase_count}, #{business_license})
+  			insert into member(member_num, member_Id, name, birth, phonenum, gender, nickname, email, purchase_count, business_license, license_number) values(member_seq.nextval, #{member_Id}, #{name}, #{birth}, #{phoneNum}, #{gender}, #{nickname}, #{email}, #{purchase_count}, #{business_license}, #{license_number})
   		</if>
   		<if test="pw != null">
-  			insert into member(member_num, member_Id, pw, name, birth, phonenum, gender, nickname, email, purchase_count, business_license) values(member_seq.nextval, #{member_Id}, #{pw}, #{name}, #{birth}, #{phoneNum}, #{gender}, #{nickname}, #{email}, #{purchase_count}, #{business_license})
+  			insert into member(member_num, member_Id, pw, name, birth, phonenum, gender, nickname, email, purchase_count, business_license, license_number) values(member_seq.nextval, #{member_Id}, #{pw}, #{name}, #{birth}, #{phoneNum}, #{gender}, #{nickname}, #{email}, #{purchase_count}, #{business_license}, #{license_number})
   		</if>
   	</insert>
   	
