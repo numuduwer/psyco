@@ -16,6 +16,9 @@ public interface ItemDAO {
 	public int count1(int id)throws SQLException;
 	
 	public List getItemList(int id, int startRow, int endRow)throws SQLException;
+
+
+	int itemModifyAticle(ItemDTO dto);
 	
 	
 	

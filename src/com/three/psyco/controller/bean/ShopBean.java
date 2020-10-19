@@ -2,8 +2,10 @@ package com.three.psyco.controller.bean;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.three.psyco.model.dto.ItemDTO;
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.ShopDTO;
 import com.three.psyco.service.bean.CommonsServiceImpl;
+import com.three.psyco.service.bean.ItemServiceImpl;
 import com.three.psyco.service.bean.ShopService;
 import com.three.psyco.service.bean.ShopServiceImpl;
 
@@ -27,6 +31,8 @@ public class ShopBean {
 	private ShopServiceImpl shopService = null;
 	@Autowired
 	private CommonsServiceImpl commonsService = null;
+	@Autowired
+	private ItemServiceImpl itemService = null;
 
 
 	
@@ -151,21 +157,63 @@ public class ShopBean {
 	@RequestMapping("itemList.com")
 	public String itemList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
 		
-		int id = 0;
-
-		if (session.getAttribute("memNum") == null) {
-			// table에 있는 값 아무거나 찍어줌 
-			id =2;
-		}else { 
-			id = (Integer)session.getAttribute("memNum");
-		
-		}
+		int id = 123;
+	
 		
 		System.out.println("itemList Controller id :" + id);
 		ListData data = shopService.getItemList(pageName,pageNum,id);
 		commonsService.setListDataToModel(model, data);
-		return "shop/shopList";
+		return "shop/itemList";
 	}
+	
+	
+	// buy페이지에서 만들어놓은 해당 구매 상품 정보 가져오는거 사용
+	@RequestMapping("itemDetail.com")
+	public String itemDetail(int item_num,Model model,String pageNum) throws SQLException {
+		System.out.println("item_num : " + item_num);
+		ItemDTO article = shopService.getItemOne(item_num, pageNum, model);
+		model.addAttribute("article",article);
+		
+		return "shop/itemDetail";
+	}
+	
+	@RequestMapping("itemModifyForm.com")
+	public String itemModifyForm(int item_num,Model model,String pageNum) throws SQLException {
+		
+		ItemDTO article = shopService.getItemOne(item_num, pageNum, model);
+		model.addAttribute("article",article);
+		
+		return "shop/itemModifyForm";
+	}
+	
+	@RequestMapping("itemModifyPro.com")
+	public String itemModifyPro(Model model, HttpServletRequest request,ItemDTO dto) throws SQLException {
+		
+		String startDate = request.getParameter("startDate1") +" "+ request.getParameter("startDate2") + ":00";
+		dto.setStartDate(Timestamp.valueOf(startDate));
+		String endDate = request.getParameter("endDate1") + " " + request.getParameter("endDate2") + ":00";
+		dto.setEndDate(Timestamp.valueOf(endDate));
+		
+		shopService.itemModifyAticle(dto,model);
+		
+		return "shop/itemModifyPro";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

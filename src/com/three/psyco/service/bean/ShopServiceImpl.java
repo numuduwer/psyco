@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.three.psyco.model.dao.ItemDAOImpl;
 import com.three.psyco.model.dao.ShopDAOImpl;
+import com.three.psyco.model.dto.ItemDTO;
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.ShopDTO;
 
@@ -56,7 +58,7 @@ public class ShopServiceImpl implements ShopService {
 		
 	
 		count = itemDAO.count1(id);
-		
+		System.out.println("MyItemListcount : " + count);
 	
 		if(count >0) {
 			articleList = itemDAO.getItemList(id,startRow, endRow);	
@@ -79,6 +81,34 @@ public class ShopServiceImpl implements ShopService {
 		
 		return data;
 	}
+	
+	@Override
+	public ItemDTO getItemOne(int item_num, String pageNum, Model model) throws SQLException {
+		String pageName = "itemOne";
+		System.out.println("itemOne Service : " + pageName);
+		ItemDTO article = itemDAO.getItemOne(item_num);
+		
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("item_num",item_num);
+		
+		return article;
+	}
+	
+	@Override
+	public int itemModifyAticle(ItemDTO dto, Model model) {
+		
+		int result = itemDAO.itemModifyAticle(dto);
+		
+		model.addAttribute("result",result);
+		
+		return result;
+	}
+	
+	
 	
 	
 	

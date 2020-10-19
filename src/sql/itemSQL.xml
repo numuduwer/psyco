@@ -14,7 +14,7 @@
   	<select id="itemList" resultType="ItemDTO">
   		<![CDATA[
   		select ITEM_NUM,ITEM_NAME,CONTENT,AMOUNT,STARTDATE,ENDDATE,DISCOUNT_CYCLE,SELLING_STATUS,
-  		PROGRESS_STATUS,MAXPRICE,MINPRICE,AUCTION_UNIT,SETT,COMMENT1,MENU_NUM,mem_num,rownum r from item	
+  		PROGRESS_STATUS,MAXPRICE,MINPRICE,AUCTION_UNIT,SETT,COMMENT1,MENU_NUM,mem_num,rownum r from item
   		]]>
   	</select>
   	
@@ -26,9 +26,31 @@
   	
   	
   	
+  	<!-- 사장님이 등록한 역경매 상품 전부 긁어오기.(판매중아니여도 가져오기) -->
+  	<select id="itemOneCount" parameterType="int" resultType="int">
+  		select count(*) from item where mem_num=#{value}
+  	</select>
+  	
+  	<select id="getMyItemList" parameterType="hashmap" resultType="ItemDTO">
+  		<![CDATA[
+		SELECT rownum rn, ITEM_NUM,ITEM_NAME,CONTENT,AMOUNT,STARTDATE,ENDDATE,DISCOUNT_CYCLE,SELLING_STATUS,
+		PROGRESS_STATUS,MAXPRICE,MINPRICE,AUCTION_UNIT,SETT,COMMENT1,MENU_NUM,mem_num  
+		FROM item
+		WHERE rownum >= #{startRow}
+		AND rownum <= #{endRow}
+		AND MEM_NUM = #{mem_num}
+  		]]>
+  	</select>
   	
   	
   	
+  	<!-- 해당 역경매 상품 수정 -->
+  	<update id="itemModifyAticle" parameterType="ItemDTO">
+  		update item set item_name=#{item_name}, selling_status=#{selling_status},
+  		amount=#{amount},discount_cycle=#{discount_cycle},comment1=#{comment1},
+  		auction_unit=#{auction_unit},startDate=#{startDate},endDate=#{endDate},sett=#{sett}
+  		where item_num=#{item_num}
+  	</update>
   	
   	
   	

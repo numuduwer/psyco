@@ -21,7 +21,8 @@ public class ItemDAOImpl implements ItemDAO {
 		int count = sqlSession.selectOne("item.countAll");
 		return count;
 	}
-
+	
+	// main 페이지 경매상품 전부 뿌려주기
 	@Override
 	public List getList(String pageName) throws SQLException {
 		
@@ -30,6 +31,8 @@ public class ItemDAOImpl implements ItemDAO {
 		
 		return list;
 	}
+	
+	
 
 
 	@Override
@@ -40,23 +43,38 @@ public class ItemDAOImpl implements ItemDAO {
 		
 		return dto;
 	}
-
+	
+	
+	// 사장님 역경매 등록 해놓은것들 전부 가져오기.
 	@Override
 	public int count1(int id) throws SQLException {
-		
-		
+
 		int count = sqlSession.selectOne("item.itemOneCount",id);
-		
+		System.out.println("count : " + count);
 		return count;
 	}
-
+	
+	@Override
 	public List getItemList(int id, int startRow, int endRow) {
 		
-		List list = sqlSession.selectList("item.itemList");
+		HashMap map = new HashMap();
+		map.put("mem_num", id);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		
+		List list = sqlSession.selectList("item.getMyItemList",map);
 		
 		return list;
 	}
 	
+	@Override
+	public int itemModifyAticle(ItemDTO dto) {
+		
+		int result = sqlSession.update("item.itemModifyAticle",dto);
+		
+		return result;
+	}
+
 	
 	
 	
