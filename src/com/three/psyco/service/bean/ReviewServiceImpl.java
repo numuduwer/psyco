@@ -26,8 +26,8 @@ public class ReviewServiceImpl implements ReviewService {
 	private ReviewDAOImpl reviewDAO=null;
 	
 //	후기 등록
-	@Override
-	public void insertReviews(MultipartHttpServletRequest request, int item_num, String writer) throws SQLException {
+	@Override //member_id 값 수정해야함 !! 나중에 붙일때
+	public int insertReviews(MultipartHttpServletRequest request, int item_num, String writer) throws SQLException {
 		ReviewDTO dto=new ReviewDTO();
 		//memberDAO에서 writer의 고유번호를 들고옴 그리고 set으로 담아준다.
 		int ref =0;
@@ -71,12 +71,15 @@ public class ReviewServiceImpl implements ReviewService {
 		dto.setItem_num(item_num);
 		dto.setMember_id("gogo");
 		dto.setWriter(writer);
-		reviewDAO.insertReview(dto);
+		int result=reviewDAO.insertReview(dto);
+		System.out.println("result2=="+result);
+		return result;
 	}
 
 	// 후기 리스트
 	@Override
 	public List getReviews(int startRow,int endRow,String member_id) throws SQLException {
+		System.out.println("startRow : " +startRow);
 		List list=reviewDAO.getReview(startRow,endRow,member_id);
 		return list;
 	}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="buy">
+  <select id="buyCount" resultType="int">
+  	select count(*) from buy
+  </select>
+  <select id="buyList" resultType="hashmap" parameterType="BuyDTO">
+  <![CDATA[
+  	SELECT B.*,r FROM (SELECT A.*,rownum r FROM (select bu.*,it.item_name,me.menu_img from buy bu inner join item it on bu.item_num=it.item_num inner join menu me on bu.menu_num=me.menu_num WHERE member_num = #{member_num} )A)B WHERE r >=#{start} AND r <=#{end}
+  	]]>
+  </select>
+  </mapper>

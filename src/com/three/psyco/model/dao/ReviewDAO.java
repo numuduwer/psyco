@@ -9,7 +9,7 @@ import com.three.psyco.model.dto.ReviewDTO;
 
 public interface ReviewDAO {
 	
-	public void insertReview(ReviewDTO dto)throws SQLException;
+	public int insertReview(ReviewDTO dto)throws SQLException;
 
 	public List getReview(int startRow,int endRow,String member_id)throws SQLException;
 

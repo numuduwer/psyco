@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+
+<tiles-definitions>
+
+	<!--  메인 레이아웃 -->	
+	<definition name= "main" template="/WEB-INF/tiles/layouts/mainLayout.jsp">
+		<put-attribute name="tile_header" value="/WEB-INF/tiles/layouts/mainHeader.jsp"/> 
+		<put-attribute name="tile_footer" value="/WEB-INF/tiles/layouts/footer.jsp"/>	
+	</definition>
+	
+	
+	<definition name= "main/*" extends="main">
+		<put-attribute name="tile_body" value="/WEB-INF/views/main/{1}.jsp"/>
+	</definition>
+	
+	
+
+	<!--  user 레이아웃 -->	
+	<definition name= "userMypage" template="/WEB-INF/tiles/layouts/userLayout.jsp">
+		<put-attribute name="tile_header" value="/WEB-INF/tiles/layouts/mainHeader.jsp"/> 
+		<put-attribute name="tile_userHeader" value="/WEB-INF/tiles/layouts/userHeader.jsp"/> 
+		<put-attribute name="tile_footer" value="/WEB-INF/tiles/layouts/footer.jsp"/>	
+	</definition>
+	
+	
+	<definition name= "user/*" extends="userMypage">
+		<put-attribute name="tile_body" value="/WEB-INF/views/user/{1}.jsp"/>
+	</definition>
+	
+	
+	<!--  shop  레이아웃 -->	
+	<definition name= "shopMypage" template="/WEB-INF/tiles/layouts/shopLayout.jsp">
+		<put-attribute name="tile_header" value="/WEB-INF/tiles/layouts/mainHeader.jsp"/> 
+		<put-attribute name="tile_shopHeader" value="/WEB-INF/tiles/layouts/shopHeader.jsp"/> 
+		<put-attribute name="tile_footer" value="/WEB-INF/tiles/layouts/footer.jsp"/>	
+	</definition>
+	
+	
+	<definition name= "shop/*" extends="shopMypage">
+		<put-attribute name="tile_body" value="/WEB-INF/views/shop/{1}.jsp"/>
+	</definition>
+
+
+
+	
+ </tiles-definitions>

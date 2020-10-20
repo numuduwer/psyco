@@ -39,25 +39,25 @@ private CommonsServiceImpl commonsService = null;
 //////// 리스트 뽑기  /////////
 	@RequestMapping("memberList")
 	public String memberList(String pageName, String pageNum,  Model model) throws SQLException {		
-		ListData data = commonsService.getListData(pageName,pageNum,superService);
+		ListData data = commonsService.getListData(pageName,pageNum);
 		commonsService.setListDataToModel(model, data);
 		return "/super/sMemberList";
 	}
 	@RequestMapping("shopList")
 	public String shopList(String pageName, String pageNum,  Model model) throws SQLException {
-		ListData data = commonsService.getListData(pageName,pageNum,superService);
+		ListData data = commonsService.getListData(pageName,pageNum);
 		commonsService.setListDataToModel(model, data);
 		return "/super/sShopList";
 	}
 	@RequestMapping("helpList")
 	public String helpList(String pageName, String pageNum,  Model model) throws SQLException {
-		ListData data = commonsService.getListData(pageName,pageNum,superService);
+		ListData data = commonsService.getListData(pageName,pageNum);
 		commonsService.setListDataToModel(model, data);
 		return "/super/sHelpList";
 	}
 	@RequestMapping("communityList")
 	public String communityList(String pageName, String pageNum,  Model model) throws SQLException {
-		ListData data = commonsService.getListData(pageName,pageNum,superService);
+		ListData data = commonsService.getListData(pageName,pageNum);
 		commonsService.setListDataToModel(model, data);
 		return "/super/sCommunityList";
 	}

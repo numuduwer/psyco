@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,9 +78,15 @@
 	</script>
 </head>
 <body>
+	<c:if test="${param.license_number != null}">
+		<div>
+			사업자 번호 : <c:out value="${param.license_number}"></c:out>
+		</div>
+	</c:if>
 	<div id="wrap">
 		<div>
 			<form action="/psyco/member/signup.com" method="post">
+			<input type="hidden" name="license_number" value="${param.license_number}">
 				<input type="text" name="member_Id" placeholder="아이디를 입력" /> <br />
 				<input type="password" name="pw" placeholder="비밀번호를 입력" /> <br />
 				<input type="password" name="pw_confirm" placeholder="비밀번호 재입력" /> <br />

@@ -20,9 +20,10 @@ public class ReviewDAOImpl implements ReviewDAO {
 	
 	//후기 등록 memid-->writer = nickname / 가게 이름 = num 으로 뽑아와야함.
 	@Override
-	public void insertReview(ReviewDTO dto) throws SQLException {
-		
-		sqlSession.insert("review.insertReview",dto);
+	public int insertReview(ReviewDTO dto) throws SQLException {
+		int result=0;
+		result=sqlSession.insert("review.insertReview",dto);
+		return result;
 	}
 
 	//멤버 후기 가져오기

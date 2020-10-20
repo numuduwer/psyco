@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <!-- namespace : 내부에 쿼리태크 호출시 namespace속성명 쿼리태그 id값-->
+ 
+ <mapper namespace="shop">
+ 	
+ 	<select id="getMyShopCount" parameterType="int" resultType="int" >
+ 		select count(*) from shop where MEMBER_NUM = #{value} 
+ 	</select>
+ 	
+ 	<select id="getMyMenuCount" parameterType="int" resultType="int" >
+ 		select count(*) from menu where SHOP_NUM = #{value} 
+ 	</select>
+ 	
+ 	
+ 	
+ 	<select id="getMyShopList" parameterType="hashmap" resultType="ShopDTO">
+ 		<![CDATA[
+		SELECT /*+ index_desc(SHOP SHOP_SEQ)*/rownum rn, shop_num, shop_name, shop_phone, OPERATING_TIME, address, origin, takeout, shop_img, license_number, request_time, approve_time, status, approve_status, member_num  
+		FROM SHOP
+		WHERE SHOP_NUM >= #{start}
+		AND rownum <= #{end}
+		AND MEMBER_NUM = #{id}
+	
+		]]>
+ 	</select>
+ 	
+ 	<select id="getMenuList" parameterType="hashmap" resultType="MenuDTO">
+ 		<![CDATA[
+		SELECT /*+ index_desc(MENU MENU_SEQ)*/rownum rn, MENU_NUM, MENU_NAME, CONTENT, MENU_IMG, MENU_IMG, PRICE, CATEGORY, SEASON, SETT, SHOP_NUM, REG 
+		FROM MENU
+		WHERE MENU_NUM >= #{start}
+		AND rownum <= #{end}
+		AND SHOP_NUM = #{id}
+	
+		]]>
+ 	</select>
+ 	
+ 	
+ 	
+ 	<select id="getShopData" parameterType="int" resultType="ShopDTO" >
+ 		select * from shop where SHOP_NUM = #{value} 
+ 	</select>
+ 	
+ 	
+ 	<update id="update" parameterType="ShopDTO" >
+		update shop set shop_name=#{shop_name}, shop_phone=#{shop_phone}, operating_time=#{operating_time}, address=#{address}, origin=#{origin}, takeout=#{takeout}, shop_img=#{shop_img}, license_number=#{license_number}, status=#{status}, approve_status=#{approve_status}, member_num=#{member_num} 
+  		 where shop_num=#{shop_num}
+ 	</update>
+ 	
+ 	<delete id="deleteShop" parameterType="int">
+ 		delete from shop where shop_num =#{value}
+ 	</delete>
+ 
+ 
+
+ </mapper>

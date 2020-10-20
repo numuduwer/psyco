@@ -2,6 +2,7 @@ package com.three.psyco.controller.bean;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.three.psyco.model.dto.MemberDTO;
 import com.three.psyco.service.bean.MemberServiceImpl;
@@ -34,16 +36,16 @@ public class MemberBean {
 	}
 	
 	@RequestMapping("loginCheck.com")
-	public String loginCheck(String member_Id, String pw, Model model) {
+	public String loginCheck(String member_Id, String pw, Model model, HttpSession session) {
 		int count = memberService.loginCheck(member_Id, pw);
 		model.addAttribute("count", count);
-		return "member/login";
+		return "member/loginCheck";
 	}
 	
 	@RequestMapping("naverLoginPro.com")
 	public String naverLoginPro() throws UnsupportedEncodingException {
 		String apiURL = memberService.naverLogin();
-		System.out.println(apiURL);
+		//System.out.println(apiURL);
 		return "redirect:" + apiURL;
 	}
 	
@@ -63,20 +65,6 @@ public class MemberBean {
 		}
 	}
 	
-	@RequestMapping("signup.com")
-	public String insertMember(MemberDTO dto, Model model) {
-		System.out.println(dto.getBirth());
-		int result = memberService.insertMember(dto);
-		model.addAttribute("result", result);
-		return "member/signupPro";
-	}
-	
-	@RequestMapping("logout.com")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "main/main";
-	}
-	
 	@RequestMapping("signupSelect.com")
 	public String signupSelect() {
 		return "member/signupSelect";
@@ -92,6 +80,19 @@ public class MemberBean {
 		return "member/businessSignupForm";
 	}
 	
+	@RequestMapping("signup.com")
+	public String insertMember(MemberDTO dto, Model model) {
+		int result = memberService.insertMember(dto);
+		model.addAttribute("result", result);
+		return "member/signupPro";
+	}
+	
+	@RequestMapping("logout.com")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "main/main";
+	}
+	
 	@RequestMapping("licenseLookup.com")
 	public ResponseEntity<String> licenseLookup(String text1, String text2, String text3) throws IOException, ParseException {
 		String license_number = text1 + text2 + text3;
@@ -102,7 +103,7 @@ public class MemberBean {
 		HttpHeaders resHeaders = new HttpHeaders();
 		resHeaders.add("content-Type", "application/json;charset=UTF-8");
 		
-		return new ResponseEntity<String>(status, resHeaders, HttpStatus.CREATED);
+		return new ResponseEntity<String>(status, resHeaders, HttpStatus.CREATED); 
 	}
 	
 	@RequestMapping("mapsTest.com")
@@ -118,5 +119,24 @@ public class MemberBean {
 	@RequestMapping("paymentTest.com")
 	public String paymentTest() {
 		return "member/paymentTest";
+	}
+	
+	@RequestMapping("shopSignupForm.com")
+	public String shopSignupForm(String license_number, Model model) {
+		model.addAttribute("license_number", license_number);
+		return "member/shopSignupForm";
+	}
+
+	@RequestMapping("shopSignupPro.com")
+	public String shopSignPro(MultipartHttpServletRequest request,int member_num) {
+		String status ="0";
+		String approve_status="0";
+		
+		try {
+			memberService.insertMemberShops(request,member_num,status,approve_status);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "member/menuSignupForm";
 	}
 }

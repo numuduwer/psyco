@@ -1,23 +1,23 @@
 package com.three.psyco.model.dto;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class CommunityDTO {
-
+	
 	private int community_num;
 	private String subject;
 	private String content;
 	private String writer;
 	private String grade;
-	
 	private String community_img;
 	private String category;
 	private String confirm;
 	private int ref;
 	private int re_step;
 	private int re_level;
-	
 	private Timestamp reg;
+	
+	
 	public int getCommunity_num() {
 		return community_num;
 	}
@@ -54,6 +54,12 @@ public class CommunityDTO {
 	public void setCommunity_img(String community_img) {
 		this.community_img = community_img;
 	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	public String getConfirm() {
 		return confirm;
 	}
@@ -85,12 +91,16 @@ public class CommunityDTO {
 		this.reg = reg;
 	}
 	
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

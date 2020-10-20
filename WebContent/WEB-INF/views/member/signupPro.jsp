@@ -11,13 +11,13 @@
 	<c:if test="${result == 1}">
 		<script type="text/javascript">
 			alert('가입이 완료 되었습니다.');
-			window.location.href='/psyco/main.com';
+			window.location.href='/psyco/main/main.com';
 		</script>
 	</c:if>
 	<c:if test="${result != 1}">
 		<script type="text/javascript">
 			alert('오류 발생');
-			window.location.href='psyco/main.com';
+			window.location.href='psyco/main/main.com';
 		</script>
 	</c:if>
 </body>
