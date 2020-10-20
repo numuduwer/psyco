@@ -14,7 +14,7 @@
  	
  	
  	<update id="update" parameterType="menuDTO" >
-		UPDATE menu set MENU_NAME =#{menu_name}, CONTENT =#{content}, MENU_IMG =#{menu_img}, PRICE =#{price}, CATEGORY =#{category}, SEASON =#{season}, SETT =#{sett}, SHOP_NUM =#{shop_num}, REG = #{reg} 
+		UPDATE menu set MENU_NAME =#{menu_name}, CONTENT =#{content}, MENU_IMG =#{menu_img}, PRICE =#{price}, CATEGORY =#{category}, SEASON =#{season}, SETT =#{sett}, SHOP_NUM =#{shop_num}, REG = sysdate 
   		 where menu_num= #{menu_num}
  	</update>
  	

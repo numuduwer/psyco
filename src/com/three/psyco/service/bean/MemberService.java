@@ -2,9 +2,11 @@ package com.three.psyco.service.bean;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import org.json.simple.parser.ParseException;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.three.psyco.model.dto.MemberDTO;
 
@@ -37,4 +39,6 @@ public interface MemberService {
 	public int modifySocialUserPro(String phoneNum, String birth);
 	
 	public int modifyNormalUserPro(MemberDTO dto);
+	
+	public void insertMemberShops(MultipartHttpServletRequest request,int member_num,String status,String approve_status)throws SQLException;
 }

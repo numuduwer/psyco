@@ -1,6 +1,4 @@
 @charset "UTF-8";
-
-@charset "UTF-8";
 :root {
   /* Color */
   --color-white: #ffffff;
@@ -139,8 +137,15 @@ header {
 section {
   display: flex;
   margin: 0 auto;
+
   align-items: center;
   border: solid 1px red;
+  justify-content : center;
+}
+
+#buy_info{
+	display: flex;
+	 width: 1000px;
 }
 
 /* 콘텐츠1  배너화면    */
@@ -271,6 +276,128 @@ section {
   color: black;
 }
 
+/*  콘텐츠1. 왼쪽 (사진, 지도)*/
+.buy_info {
+  width: 50%;
+  display: flex;
+
+}
+
+.buy_img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  height: 1000px;
+
+  border-right: solid 1px red;
+}
+.buy_img .card_img {
+  margin: 0 auto;
+  width: 450px;
+  height: 450px;
+}
+.map {
+  background-color: var(--color-black);
+  margin: 0 auto;
+  width: 450px;
+  height: 450px;
+}
+
+
+/*  콘텐츠2. 오른쪽 (상품 정보)*/
+.buy_content {
+  flex-basis: 50%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.buy_title {
+  display: flex;
+  justify-content: center;
+  border-bottom: 3px solid var(--color-black);
+}
+.shop_title {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+.shop_title ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+.shop_title li {
+  font-size: var(--font-small);
+  color: var(--color-dark-grey);
+}
+
+.buy_detail {
+  padding: 20px 30px;
+  background-color: var(--color-light-white);
+  height: 250px;
+}
+.buy_detail ul {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  padding: 15px 0;
+}
+.buy_detail li {
+  color: var(--color-grey);
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.buy_price {
+  padding: 30px;
+}
+.buy_price ul {
+  display: flex;
+  list-style: none;
+  justify-content: space-around;
+}
+
+.buy_price li {
+  font-size: var(--font-medium);
+  font-weight: 400;
+}
+.nprice {
+  color: var(--color-white);
+}
+.price_percent {
+  padding: 8px 0;
+  font-weight: var(--weight-semi-bold);
+  color: red;
+}
+.now_price li {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.buy_btn {
+  margin: auto;
+  width: 70%;
+  line-height: 60px;
+  border-style: none;
+  background-color: var(--color-grey);
+}
+.buy_btn h2 {
+  color: var(--color-light-white);
+}
+
+.buy_btn:hover {
+  background-color: var(--color-light-grey);
+}
+section .buy_info {
+  display: flex;
+  margin: 0 auto;
+  width: 98%;
+  align-items: center;
+  border: solid 1px red;
+}
+
 /* footer */
 footer {
   height: 200px;
@@ -278,4 +405,3 @@ footer {
   background-color: var(--color-dark-white);
 }
 /*# sourceMappingURL=style.css.map */
-
