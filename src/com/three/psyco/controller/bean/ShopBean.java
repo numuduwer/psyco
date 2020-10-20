@@ -81,50 +81,6 @@ public class ShopBean {
 		
 	}
 
-	@RequestMapping("menuModifyPro.com")
-	public String menuModifyPro(MultipartHttpServletRequest request,String pageNum,  Model model) throws SQLException{
-		MenuDTO dto = new MenuDTO();
-		
-		
-		dto.setMenu_num(Integer.parseInt(request.getParameter("menu_num")));
-		dto.setMenu_name(request.getParameter("menu_name"));
-		dto.setContent(request.getParameter("content"));
-		dto.setPrice(Integer.parseInt(request.getParameter("price")));
-		
-		dto.setCategory(request.getParameter("category"));
-		dto.setSeason(request.getParameter("season"));
-		dto.setSett(request.getParameter("sett"));
-		dto.setShop_num(Integer.parseInt(request.getParameter("shop_num")));
-		
-		
-	
-	
-		System.out.println(" controller 잘 연결 ");
-		int result = 0; 
-		String path = request.getRealPath("save");
-		try {
-			MultipartFile mf = null;
-			mf = request.getFile("menu_img");
-				String orgName = mf.getOriginalFilename();
-				String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
-				String ext = orgName.substring(orgName.lastIndexOf('.'));
-				long date = System.currentTimeMillis();
-				String newName = imgName+date+ext;
-				dto.setMenu_img(newName);
-				String imgPath = path + "/"+newName ;
-				File copyFile = new File(imgPath);
-				mf.transferTo(copyFile);
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		result = shopService.updateMenuDataSV(dto);
-		model.addAttribute("shopNum", dto.getShop_num());
-		model.addAttribute("result", result);
-		return "shop/menuModifyPro";
-	}
-
 	@RequestMapping("shopModifyPro.com")
 	public String shopModiyPro(MultipartHttpServletRequest request,  ShopDTO dto , String pageName, Model model)throws SQLException{
 		
@@ -181,10 +137,22 @@ public class ShopBean {
 		model.addAttribute("article", menuData);
 		return "shop/menuModify";
 	}
-
+	
 	@RequestMapping("menuModifyPro.com")
-	public String menuModifyPro1(MultipartHttpServletRequest request,String pageNum,  Model model) throws SQLException{
+	public String menuModifyPro(MultipartHttpServletRequest request,String pageNum,  Model model) throws SQLException{
 		MenuDTO dto = new MenuDTO();
+		
+		dto.setMenu_num(Integer.parseInt(request.getParameter("menu_num")));
+		dto.setMenu_name(request.getParameter("menu_name"));
+		dto.setContent(request.getParameter("content"));
+		dto.setPrice(Integer.parseInt(request.getParameter("price")));
+		
+		dto.setCategory(request.getParameter("category"));
+		dto.setSeason(request.getParameter("season"));
+		dto.setSett(request.getParameter("sett"));
+		dto.setShop_num(Integer.parseInt(request.getParameter("shop_num")));
+	
+		System.out.println(" controller 잘 연결 ");
 		int result = 0; 
 		String path = request.getRealPath("save");
 		try {
@@ -203,9 +171,10 @@ public class ShopBean {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 		result = shopService.updateMenuDataSV(dto);
+		model.addAttribute("shopNum", dto.getShop_num());
 		model.addAttribute("result", result);
-		model.addAttribute("shop_num", dto.getShop_num());
 		return "shop/menuModifyPro";
 	}
 
