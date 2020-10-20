@@ -14,6 +14,7 @@
 		<tr>
 			<td>
 				<button onclick="window.location='/psyco/communityForm.com?category=${category}'"> 글 작성하기 </button> <br/>
+				<button onclick="window.location='/psyco/communityList.com?category=${category}'"> 돌아가기 </button> <br/>
 			</td>
 		</tr>
 	</table>
@@ -37,22 +38,22 @@
 				<td>제  목</td>
 				<td>작성자</td>
 				<td>작성 시간</td>
+				<c:if test="${category == 3 || category == 4 }">
+				<td>사진</td>
+				</c:if>
 			</tr>
 			<c:forEach var="article" items="${articleList}">
 				<tr>
 					<td>${number} <c:set var="number" value="${number-1}" /> </td>				
 					<td align="left">
 					
-						<c:set var="wid" value="0"></c:set>
-						<c:if test="${article.re_level > 0}">
-							<c:set var="wid" value="${8 * article.re_level }"></c:set>
-							<img src="/psyco/resources/img/tabImg.PNG" width="${wid}" />
-							<img src="/psyco/resources/img/replyImg.png" width="11" />
-						</c:if>
-						<a href="/psyco/helpDetail.com?community_num=${article.community_num}&pageNum=${pageNum}">${article.subject}</a>
+						<a href="/psyco/communityDetail.com?community_num=${article.community_num}&pageNum=${pageNum}&category=${category}">${article.subject}</a>
 					</td>
 					<td><a href="mailto:${article.writer}">${article.writer}</a></td>
 					<td><fmt:formatDate value="${article.reg}" type="both"/></td>
+				<c:if test="${category == 3 || category == 4 }">
+					<td><img src="/psyco/save//${article.community_img}" width=100></td>				
+				</c:if>
 				</tr>
 			</c:forEach>
 		</table>
@@ -72,13 +73,13 @@
 		</c:if>
 		
 		<c:if test="${startPage > pageBlock}">
-			<a href="/psyco/myHelpList.com?pageNum=${startPage-pageBlock}&category=${category}" > &lt; </a>
+			<a href="/psyco/communityMyArticle.com?pageNum=${startPage-pageBlock}&category=${category}" > &lt; </a>
 		</c:if>
 		<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1" >
-			<a href="/psyco/myHelpList.com?pageNum=${i}&category=${category}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+			<a href="/psyco/communityMyArticle.com?pageNum=${i}&category=${category}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
 		</c:forEach>
 		<c:if test="${endPage < pageCount}">
-			<a href="/psyco/myHelpList.com?pageNum=${startPage+pageBlock}&category=${category}" > &gt; </a>
+			<a href="/psyco/communityMyArticle.com?pageNum=${startPage+pageBlock}&category=${category}" > &gt; </a>
 		</c:if>
 	
 	</c:if>

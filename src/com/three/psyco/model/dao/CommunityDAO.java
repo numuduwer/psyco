@@ -14,9 +14,6 @@ public interface CommunityDAO {
 	// 게시글 저장	
 	public void insertArticle(CommunityDTO dto) throws SQLException;
 	
-	// 페이지 관련 정보 가져오기 
-	public Map getPageData(String pageNum) throws SQLException;
-	
 	// 전체글 개수 검색
 	public int getArticleCount(String category) throws SQLException;
 	

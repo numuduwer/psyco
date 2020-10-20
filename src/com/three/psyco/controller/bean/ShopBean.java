@@ -181,6 +181,7 @@ public class ShopBean {
 	public String itemModifyForm(int item_num,Model model,String pageNum) throws SQLException {
 		
 		ItemDTO article = shopService.getItemOne(item_num, pageNum, model);
+		System.out.println(article.getStartDate());
 		model.addAttribute("article",article);
 		
 		return "shop/itemModifyForm";

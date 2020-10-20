@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,15 +96,12 @@ public class CommunityServiceImpl implements CommunityService {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-				commnuityDAO.insertArticle(dto)
+		
+			commnuityDAO.insertArticle(dto);
 		}
 	}
 
-	@Override
-	public Map getPageData(String pageNum) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public int getArticleCountSv(String category) throws SQLException {
@@ -142,11 +140,68 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public int updateArticleSv(CommunityDTO dto) throws SQLException {
+	public int updateArticleSv(MultipartHttpServletRequest request,String pageNum,Model model) throws SQLException {
 		
+		CommunityDTO dto = new CommunityDTO();
+		String category = request.getParameter("category");
+		int community_num = Integer.parseInt(request.getParameter("community_num"));
+		String subject = request.getParameter("subject");
+		String content = request.getParameter("content");
+		
+		
+		CommunityDTO getArticleImg = commnuityDAO.getArticle(community_num);
+		String path = request.getRealPath("save");
+		try {
+			MultipartFile mf = null;
+			mf = request.getFile("community_img");
+			String orgName = mf.getOriginalFilename();
+			if(orgName == "") {
+				orgName = getArticleImg.getCommunity_img();
+				long date = System.currentTimeMillis();
+				dto.setCommunity_img(orgName);
+				dto.setSubject(subject);
+				dto.setCommunity_num(community_num);
+				dto.setContent(content);
+			}else {		
+				String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
+				String ext = orgName.substring(orgName.lastIndexOf('.'));
+				long date = System.currentTimeMillis();
+				String newName = imgName+date+ext;
+				String imgPath = path + "\\" + newName;
+				System.out.println(imgPath);
+				File copyFile = new File(imgPath);
+				mf.transferTo(copyFile);
+				dto.setCommunity_img(newName);
+				dto.setSubject(subject);
+				dto.setCommunity_num(community_num);
+				dto.setContent(content);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("category",category);
 		commnuityDAO.updateArticle(dto);
 		
 		return 0;
+	}
+	
+	public void updateArticleSv1(HttpServletRequest request,CommunityDTO dto,String pageNum,Model model) throws SQLException {
+		
+		String category = request.getParameter("category");
+		int community_num = Integer.parseInt(request.getParameter("community_num"));
+		
+		CommunityDTO getArticleImg = commnuityDAO.getArticle(community_num);
+		
+		dto.setCommunity_img(getArticleImg.getCommunity_img());
+		
+		
+		
+		model.addAttribute("category", category);
+		model.addAttribute("pageNum",pageNum);
+		
+		commnuityDAO.updateArticle(dto);
+		
 	}
 
 	@Override
@@ -206,6 +261,7 @@ public class CommunityServiceImpl implements CommunityService {
 		count = commnuityDAO.getMyAskCount(category,writer);
 		
 		myHelpList = commnuityDAO.getMyAsk(start,end,category,writer);
+		
 		
 		number = count - (currPage -1) * pageSize;
 		
@@ -267,5 +323,7 @@ public class CommunityServiceImpl implements CommunityService {
 		
 		return count;
 	}
+
+	
 
 }

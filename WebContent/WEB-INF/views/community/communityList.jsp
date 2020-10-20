@@ -40,12 +40,6 @@
 					<c:set var="number" value="${number-1}" />
 				</td>
 				<td align="left">
-					<c:set var="wid" value="0" />
-					<c:if test="${article.re_level > 0}">
-						<c:set var="wid" value="${8 * article.re_level}" />
-						<img src="/psyco/resources/img/tabImg.PNG" width="${wid}" />	
-						<img src="/psyco/resources/img/replyImg.png" width="11" />
-					</c:if>
 					<a href="/psyco/communityDetail.com?community_num=${article.community_num}&pageNum=${pageNum}&category=1" >${article.subject}</a>
 				</td>
 				<td><a href="mailto:${article.writer}">${article.writer}</a></td>
@@ -78,12 +72,6 @@
 					<c:set var="number" value="${number-1}" />
 				</td>
 				<td align="left">
-					<c:set var="wid" value="0" />
-					<c:if test="${article.re_level > 0}">
-						<c:set var="wid" value="${8 * article.re_level}" />
-						<img src="/psyco/resources/img/tabImg.PNG" width="${wid}" />	
-						<img src="/psyco/resources/img/replyImg.png" width="11" />
-					</c:if>
 					<a href="/psyco/communityDetail.com?community_num=${article.community_num}&pageNum=${pageNum}&category=2" >${article.subject}</a>
 				</td>
 				<td><a href="mailto:${article.writer}">${article.writer}</a></td>
@@ -151,12 +139,6 @@
 					<c:set var="number" value="${number-1}" />
 				</td>
 				<td align="left">
-					<c:set var="wid" value="0" />
-					<c:if test="${article.re_level > 0}">
-						<c:set var="wid" value="${8 * article.re_level}" />
-						<img src="/psyco/resources/img/tabImg.PNG" width="${wid}" />	
-						<img src="/psyco/resources/img/replyImg.png" width="11" />
-					</c:if>
 					<a href="/psyco/communityDetail.com?community_num=${article.community_num}&pageNum=${pageNum}&category=4" >${article.subject}</a>
 				</td>
 				<td><a href="mailto:${article.writer}">${article.writer}</a></td>
