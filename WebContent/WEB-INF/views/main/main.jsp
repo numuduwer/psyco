@@ -37,6 +37,7 @@ $('#btn1').on('click', function(){
         </div>
         <div id="new__box">
 
+
             <div class="new_content">
                 신메뉴
             </div>

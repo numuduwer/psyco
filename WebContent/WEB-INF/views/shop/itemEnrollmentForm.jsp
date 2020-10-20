@@ -7,17 +7,27 @@
 	<title>경매 등록</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$('input:button[id="btn1"]').click(function(){
-				
-				var options = 'width=500, height=600, top=30, left=30, resizeable=yes, scrollbars=yes, location=no';
-				window.open('/psyco/shop/menuList.com', 'selectMenu', options);
-			})
-		});
+		function selectMenu(memNum) {
+			
+			var options = 'width=500, height=600, top=30, left=30, resizeable=yes, scrollbars=yes, location=no';
+			window.open('', 'pop', options);
+			
+			var form = document.frm;
+			form.action = "/psyco/shop/menuList.com";
+			form.method = "post";
+			form.target = 'pop';
+			form.submit();
+			
+			
+			/* var options = 'width=500, height=600, top=30, left=30, resizeable=yes, scrollbars=yes, location=no';
+			window.open('/psyco/shop/menuList.com', 'selectMenu', options); */
+			
+		}
+	
 	</script>
 </head>
 <body>
-	<form>
+	<form name="frm">
 		<div id="wrap">
 			<!-- 
 				넘어가는 값 : item_name, content, amount, startDate, endDate, discount_cycle, maxPrice, minPrice, aution_unit, sett, comment, menu_num
@@ -28,7 +38,7 @@
 			<label for="content">CONTENT(경매 내용)</label> <br>
 			<textarea rows="15" cols="25" name="CONTENT" id="CONTENT"></textarea> <br>
 			<label for="menu_name">MENU</label>
-			<input type="button" id="btn1" value="메뉴선택"><br>
+			<input type="button" id="btn1" value="메뉴선택" onclick="javascript:selectMenu(${sessionScope.memNum})"><br>
 			<input type="text" id="menu_name" readonly> <br>
 			<label for="menu_price">PRICE</label> <br>
 			<input type="text" id="menu_price" readonly> <br>
@@ -37,9 +47,9 @@
 			<label for="amount">AMOUNT</label> <br>
 			<input type="text" name="amount" id="amount"> <br>
 			<label for="startDate">경매 시작 일</label> <br>
-			<input type="date" name="startDate" id="startDate"> <br>
+			<input type="date" name="startDate1" id="startDate1"> <input type="time" name="startDate2" id="startDate2">  <br>
 			<label for="endDate">경매 종료 일</label> <br>
-			<input type="date" name="endDate" id="endDate"> <br>
+			<input type="date" name="endDate1" id="endDate1"> <input type="time" name="endDate2" id="endDate2"><br>
 			<label for="aution_unit">AUTION_UNIT(경매 단위)</label> <br>
 			<input type="text" name="aution_unit" id="aution_unit"> <br>
 			<label for="maxPrice">최대가격</label> <br>

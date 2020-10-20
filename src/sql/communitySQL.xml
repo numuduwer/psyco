@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <!-- namespace : 내부에 쿼리태크 호출시 namespace속성명 쿼리태그 id값-->
+ 
+ <mapper namespace="community">
+ 
+ 	<select id="countAll" parameterType="String" resultType="int">
+ 		select count(*) from community where category=#{value}
+ 	</select>
+ 	
+ 	
+ 	<select id="selectAll" parameterType="hashmap" resultType="communityDTO">
+  		<![CDATA[
+  		select community_num,subject,content,writer,community_img,ref,re_step,re_level,reg,r
+		from (select community_num,subject,content,writer,community_img,ref,re_step,re_level,reg,rownum r
+		from (select community_num,subject,content,writer,community_img,ref,re_step,re_level,reg
+		from community where category=#{category} order by ref desc, re_step asc) order by ref desc, re_step asc)
+		where r >= #{start} and r <= #{end}
+		]]>
+  	</select>
+ 	
+ 	 <select id="maxNum" resultType="String">
+   		select max(community_num) from community
+   </select>
+ 	
+ 	<update id="updateRestep" parameterType="hashmap">
+   		<![CDATA[
+   		update community set re_step=re_step+1 where ref=#{ref} and re_step > #{re_step}
+   		]]>
+   </update>
+ 	
+ 	<insert id="insertArticle" parameterType="communityDTO">
+ 		insert into community(community_num,subject,content,writer,grade,community_img,category,ref,re_step,re_level,reg)
+ 		values(community_seq.nextVal,#{subject},#{content},#{writer},#{grade},#{community_img},#{category},#{ref},#{re_step},#{re_level},sysdate)
+ 	</insert>
+ 	
+ 	<select id="selectOne" parameterType="int" resultType="communityDTO">
+ 		select * from community where community_num=#{value}
+ 	</select>
+  		
+ 	<select id="selectImg" parameterType="String" resultType="communityDTO">
+  		select community_img from community where community_num=#{value}
+  	</select>
+ 	
+
+ 	<update id="updateOne" parameterType="communityDTO" >
+   		update community set subject=#{subject}, content=#{content}, community_img=#{community_img} where community_num=#{community_num}
+   	</update>
+ 
+ 	<delete id="deleteOne" parameterType="communityDTO">
+ 		delete from community where community_num=#{community_num}
+ 	</delete>
+ 	
+ 	<!-- 고객센터 -->
+ 	
+ 	<select id="helpCountAll" parameterType="String" resultType="int">
+ 		select count(*) from community where category = #{category}
+ 	</select>
+ 	
+	<select id="helpList" parameterType="hashmap" resultType="communityDTO">
+  		<![CDATA[
+  		select community_num,subject,content,writer,ref,re_step,re_level,reg,r
+		from (select community_num,subject,content,writer,ref,re_step,re_level,reg,rownum r
+		from (select community_num,subject,content,writer,ref,re_step,re_level,reg
+		from community where category=#{category} order by ref desc, re_step asc) order by ref desc, re_step asc)
+		where r >= #{start} and r <= #{end}
+		]]>
+  	</select>
+  	
+ 	<insert id="insertHelp" parameterType="communityDTO">
+ 		insert into community(community_num,subject,content,writer,grade,community_img,category,ref,re_step,re_level,reg)
+ 		values(community_seq.nextVal,#{subject},#{content}, #{writer}, #{grade}, #{community_img}, #{category}, #{ref}, #{re_step}, #{re_level},sysdate)
+ 	</insert>
+ 	
+ 	<select id="myHelpList" parameterType="hashmap" resultType="communityDTO">
+		<![CDATA[
+  		select community_num,subject,content,writer,ref,re_step,re_level,reg,r
+		from (select community_num,subject,content,writer,ref,re_step,re_level,reg,rownum r
+		from (select community_num,subject,content,writer,ref,re_step,re_level,reg
+		from community where category=#{category} and writer=#{writer} order by ref desc, re_step asc) order by ref desc, re_step asc)
+		where r >= #{start} and r <= #{end}
+		]]>
+ 	</select>
+ 	
+ 	<select id="myHelpCount" parameterType="hashmap" resultType="int">
+ 		select count(*) from community where category=#{category} and writer=#{writer}
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ </mapper>
