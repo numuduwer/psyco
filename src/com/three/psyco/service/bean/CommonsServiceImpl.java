@@ -21,9 +21,8 @@ public class CommonsServiceImpl implements CommonsService {
 	@Autowired
 	private SuperServiceImpl superService = null;
 	
-	
 	@Autowired
-	private ShopServiceImpl shopService = null;
+	private ShopServiceImpl ShopService = null;
 	
 	
 	@Autowired
@@ -178,7 +177,6 @@ public class CommonsServiceImpl implements CommonsService {
 		data.setStartRow(startRow);
 		return data;
 	}
-	
 	
 	
 	

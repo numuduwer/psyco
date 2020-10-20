@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.service.bean.CommonsServiceImpl;
+import com.three.psyco.service.bean.MainServiceImpl;
 
 
 
@@ -23,6 +24,9 @@ public class MainBean {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession = null;
+	
+	@Autowired
+	private MainServiceImpl mainService = null;
 	
 	@Autowired
 	public static String controller = "mainBean";
@@ -40,9 +44,19 @@ public class MainBean {
 	
 
 	@RequestMapping("content.com")
-	public String content() {
-		
+	public String content(Model model) throws SQLException {
+		// 나중에 페이지 콘텐트 페이지 전 페이지랑 연결되면 매개변수 item_num 이랑 shop_num 받아야함.
 		System.out.println("controller 잘 연결 ");
+		
+		// 임의로 값 지정해서 테스트
+		int item_num = 23;
+		int shop_num = 1233;
+		
+		
+		mainService.getContentInfo(item_num,model);
+		mainService.getContentImg(shop_num,model);
+		
+		
 		return "main/content";
 	}
 	

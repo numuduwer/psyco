@@ -58,8 +58,10 @@
   		delete from item where item_num=#{item_num}
   	</delete>
   	
-  	
-  	
+  	<!-- content 에서 해당가게 진행중인 역경매상품 뿌려줄 리스트 가져오기 -->
+  	 	<select id="getContentInfo" parameterType="int" resultType="ItemDTO">
+		SELECT * from item where item_num=#{value}
+  	</select>
   	
   	
   	

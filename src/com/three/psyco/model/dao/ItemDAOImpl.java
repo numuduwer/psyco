@@ -84,7 +84,13 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	
-	
+	@Override
+	public ItemDTO getContentInfo(int item_num) {
+		
+		ItemDTO item = sqlSession.selectOne("item.getContentInfo",item_num);
+		
+		return item;
+	}
 	
 	
 	

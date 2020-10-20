@@ -21,6 +21,8 @@ public interface ItemDAO {
 	public int itemModifyAticle(ItemDTO dto);
 
 	public int itemDeleteAticle(int item_num);
+
+	public ItemDTO getContentInfo(int item_num);
 	
 	
 	

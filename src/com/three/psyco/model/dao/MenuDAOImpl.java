@@ -1,6 +1,8 @@
 package com.three.psyco.model.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,14 @@ public class MenuDAOImpl implements MenuDAO {
 
 	public void deleteMenu(int id) {
 		sqlSession.delete("shop.deleteShop", id);
+	}
+
+	public List getContentImg(int shop_num) {
+		
+
+		List list = sqlSession.selectList("menu.getContentImgList",shop_num);
+		
+		return list;
 	}
 
 	
