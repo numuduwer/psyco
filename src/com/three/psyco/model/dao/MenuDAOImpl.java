@@ -1,6 +1,7 @@
 package com.three.psyco.model.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,16 @@ public class MenuDAOImpl implements MenuDAO {
 		sqlSession.delete("shop.deleteShop", id);
 	}
 
+	@Override
+	public List<MenuDTO> getMyMenuListFromShopNum(List<Integer> myShop_ShopNumList) {
+		List<MenuDTO> menuList = sqlSession.selectList("shop.getMyMenuListFromShopNum", myShop_ShopNumList);
+		return menuList;
+	}
 	
+	@Override
+	public MenuDTO getMenuInfoFromMenuNum(int menu_num) throws SQLException {
+		MenuDTO menu = sqlSession.selectOne("menu.getMenuInfoFromMenuNum", menu_num);
+		return menu;
+	}
 
 }

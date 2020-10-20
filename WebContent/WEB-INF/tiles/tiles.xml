@@ -41,8 +41,10 @@
 	<definition name= "shop/*" extends="shopMypage">
 		<put-attribute name="tile_body" value="/WEB-INF/views/shop/{1}.jsp"/>
 	</definition>
-
-
-
 	
+	<definition name= "item/*" extends="shopMypage">
+		<put-attribute name="tile_body" value="/WEB-INF/views/item/{1}.jsp"/>
+	</definition>
+
+		
  </tiles-definitions>
