@@ -37,20 +37,12 @@ public class MainBean {
 		
 		return "main/main";
 	}
+	
 
-	
-	
-	
-	
-	
-	
-	
-	@RequestMapping("test.com")
-	public String layout() {
+	@RequestMapping("content.com")
+	public String content() {
 		System.out.println("controller 잘 연결 ");
-		
-
-		return "test";
+		return "main/content";
 	}
 	
 	

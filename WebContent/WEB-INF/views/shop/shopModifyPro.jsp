@@ -10,7 +10,7 @@
 <body>
 	<c:if test="${result == 1}">
 		<script type="text/javascript">
-			alert('가입이 완료 되었습니다.');
+			alert('수정 성공 .');
 			window.location.href='/psyco/shop/shopList.com';
 		</script>
 	</c:if>

@@ -12,11 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.three.psyco.model.dto.ItemDTO;
 import com.three.psyco.model.dto.ListData;
+import com.three.psyco.model.dto.MenuDTO;
 import com.three.psyco.model.dto.ShopDTO;
 import com.three.psyco.service.bean.CommonsServiceImpl;
 import com.three.psyco.service.bean.ItemServiceImpl;
@@ -37,123 +41,142 @@ public class ShopBean {
 
 	
 	public static String controllerName = "shopBean";
+
 	
 	
 		
 	@RequestMapping("shopList.com")
 	public String storeList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
-		
-		int id = 0;
+		pageName = "shopList";
+		int memNum = 0;
+
+		pageName = "shopList";
 
 		if (session.getAttribute("memNum") == null) {
-			// table에 있는 값 아무거나 찍어줌 
-			id =2;
+			System.out.println("session이 nulll 입니다.");
 		}else { 
-			id = (Integer)session.getAttribute("memNum");
-		
-		}
-		
-		System.out.println("shopList Controller id :" + id);
-		ListData data = commonsService.getListData(pageName,pageNum,id,controllerName);
+			 memNum= (Integer)session.getAttribute("memNum");
+
+		}	
+
+		ListData data = commonsService.getListData(pageName,pageNum,memNum,controllerName);
 		commonsService.setListDataToModel(model, data);
 		return "shop/shopList";
 	}
 	
-	
-	@RequestMapping("menuList.com")
-	public String menuList(String pageName, String shop_num, String pageNum,  Model model) throws SQLException {
-		if(shop_num == null) {
-			shop_num = "2";
-		}
-		if(pageName == null) {
-			pageName = "menuList";
-		}
-		
-		int id = Integer.parseInt(shop_num);
-		ListData data = commonsService.getListData(pageName,pageNum,id,controllerName);
-		commonsService.setListDataToModel(model, data);
-		return "shop/menuList";
-	}
-	
-	
-	
-	
-	
 	@RequestMapping("shopDetail.com")
-	public String shopDetail(String shop_num, Model model) throws SQLException {
-		
-		if(shop_num == null) {
-			shop_num = "2";
-		}
-		int id = Integer.parseInt(shop_num);
-
-		ShopDTO shopData = shopService.getShopDataSV(id);
-
+	public String shopDetail(int shop_num, Model model) throws SQLException {
+		ShopDTO shopData = shopService.getShopDataSV(shop_num);
 		model.addAttribute("article", shopData);
-		model.addAttribute("shop_num", shop_num);
 		return "shop/shopDetail";
 	}
 	
-	
 	@RequestMapping("shopModify.com")
-	public String shopModify(String shop_num, Model model) throws SQLException {
-
-		int id = Integer.parseInt(shop_num);
+	public String shopModify(int shop_num, Model model) throws SQLException {
+		int id = shop_num;
 		ShopDTO shopData = shopService.getShopDataSV(id);
 
 		model.addAttribute("article", shopData);
-		model.addAttribute("shop_num", shop_num);
+		model.addAttribute("shop_num", id);
 		return "shop/shopModify";
 		
-		
 	}
+
+	@RequestMapping("menuModifyPro.com")
+	public String menuModifyPro(MultipartHttpServletRequest request,String pageNum,  Model model) throws SQLException{
+		MenuDTO dto = new MenuDTO();
+		
 	
 	
-	@RequestMapping("shopModifyPro.com")
-	public String shopModiyPro(MultipartHttpServletRequest request,  ShopDTO dto , String pageNum, Model model)throws SQLException{
-		
-		int result = 0;
-		
-		// 파일 업로드 
+		System.out.println(" controller 잘 연결 ");
+		int result = 0; 
 		String path = request.getRealPath("save");
-		MultipartFile mf = null;
-		String img = dto.getShop_img();
 		try {
-			mf = request.getFile(img);
-			if(request.getFile(img) == null) {
-				String orgName = "asd.asd";
-				String imgName = orgName.substring(0, orgName.lastIndexOf('.'));
-				String ext = orgName.substring(orgName.lastIndexOf('.'));
-				long date = System.currentTimeMillis();
-				String newName = imgName + date + ext;
-				String imgPath = path + "\\" + newName;
-				
-				dto.setShop_img(newName);
-				
-			}else {
-				String orgName = mf.getOriginalFilename();					
+			MultipartFile mf = null;
+			mf = request.getFile("menu_img");
+				String orgName = mf.getOriginalFilename();
 				String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
 				String ext = orgName.substring(orgName.lastIndexOf('.'));
 				long date = System.currentTimeMillis();
 				String newName = imgName+date+ext;
-				String imgPath = path + "\\" + newName;
+				dto.setMenu_img(newName);
+				String imgPath = path + "/"+newName ;
 				File copyFile = new File(imgPath);
 				mf.transferTo(copyFile);
-				
-				dto.setShop_img(newName);
-				
-			}
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
+
+		
+		result = shopService.updateMenuDataSV(dto);
+		model.addAttribute("shopNum", dto.getShop_num());
+		model.addAttribute("result", result);
+		return "shop/menuModifyPro";
+	}
+
+
+	
+	@RequestMapping("shopModifyPro.com")
+	public String shopModiyPro(MultipartHttpServletRequest request,  ShopDTO dto , String pageName, Model model)throws SQLException{
+		
+		pageName = "shopList";
+		
+		int result = 0;
+		String path = request.getRealPath("save");
+		try {
+			MultipartFile mf = null;
+			mf = request.getFile("shop_img2");
+				String orgName = mf.getOriginalFilename();
+				String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
+				String ext = orgName.substring(orgName.lastIndexOf('.'));
+				long date = System.currentTimeMillis();
+				String newName = imgName+date+ext;
+				dto.setShop_img(newName);
+				String imgPath = path + "/"+newName ;
+				File copyFile = new File(imgPath);
+				mf.transferTo(copyFile);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		result = shopService.updateShopDataSV(dto);
 		model.addAttribute("result", result);
-		return "shop/shopModifyPro";
+		model.addAttribute("pageName", pageName);
+		return "shop/shopList";
+	}
+	
+	@RequestMapping(value="deleteShop.com", method = RequestMethod.POST)
+	@ResponseBody
+	void deleteShop(@RequestParam("shop_num") int shopNum) {
+		String name = "shopNum";
+		shopService.deleteListSV(shopNum, name);
+		
 	}
 	
 	
+////////////////////// 메뉴  마이페이지 ///////////////////
+	
+	@RequestMapping("menuList.com")
+
+	public String menuList(int shop_num,String pageNum,  Model model) throws SQLException {
+		String pageName = "menuList";
+
+		ListData data = commonsService.getListData(pageName,pageNum,shop_num,controllerName);
+		commonsService.setListDataToModel(model, data);
+		return "shop/menuList";
+	}
+		
+	@RequestMapping("menuModify.com")
+	public String menuModify(int menu_num,String pageName, Model model) throws SQLException {
+		pageName = "menuList";
+		MenuDTO menuData = shopService.getMenuDataSV(menu_num);
+		model.addAttribute("article", menuData);
+		return "shop/menuModify";
+	}
+	
+
 	@RequestMapping("itemList.com")
 	public String itemList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
 		
@@ -200,7 +223,6 @@ public class ShopBean {
 		return "shop/itemModifyPro";
 	}
 	
-	
 	@RequestMapping("itemDeleteForm.com")
 	public String itemDeleteForm(String pageNum,Model model,int item_num) {
 		
@@ -209,15 +231,23 @@ public class ShopBean {
 		
 		return "shop/itemDeleteForm";
 	}
+
+	@RequestMapping(value="deleteMenu.com", method = RequestMethod.POST)
+	@ResponseBody
+	void deleteMenu(@RequestParam("menu_num") int menuNum) {
+		System.out.println("잘연결");
+		System.out.println(menuNum);
+		String name = "menuNum";
+		shopService.deleteListSV(menuNum, name);
+		
+	}
 	
 	@RequestMapping("itemDeletePro.com")
 	public String itemDeletePro(int item_num,String pageNum, Model model) {
-	
 		shopService.itemDeleteAticle(item_num,pageNum,model);
 		
 		return "shop/itemDeletePro";
 	}
-	
 	
 	
 	

@@ -30,49 +30,303 @@ $('#btn1').on('click', function(){
 </script>
 <body>
 	
-	<h1> 나는 메인이다.</h1>
-	
-	
-	<c:if test="${count == 0}">
-		<h2> 가게가 없어요.</h2>
-	
-	</c:if>
-	<c:if test="${count > 0}">
-	<h3> table</h3>
-	
-		<table>
-	
-			<tr>
-				<td>NO.1</td>
-				<td>수량</td>
-				<td>음식 이름</td>
-				<td>할인 주기</td>
-				<td>경매 단위</td>
-				<td>한마디</td>
-				<td>세트메뉴 or 1인</td>
-				<td>결제 진행여부</td>
-			</tr>
-			<c:forEach var="article" items="${articleList}">
-			<tr>
-				<td>${number} <c:set var="number" value="${number-1}" /> </td>	
-		
-				<td>${article.amount}</td> 
-				<td><a href="/psyco/main/shopDetail.com" >${article.item_name}</a></td>
-				<td>${article.discount_cycle}</td>
-				<td>${article.auction_unit}</td>				
-				<td>${article.comment1}</td>
-				<td>${article.sett}</td>
-				<td>${article.progress_status}</td>
-				<td><button onclick="window.location='/psyco/item/buy.com?item_num=${article.item_num}'">결제하기</button></td>
-			</tr>
-		</c:forEach>		
-		</table>
-	</c:if>
+    <!--  검색베너  & 신메뉴 , 랭킹미리보기 -->
+    <section id="banner_section">
+        <div id="banner">
+            검색창 & 아이디어 소개
+        </div>
+        <div id="new__box">
 
-	<button id="bt1"></button>
-	<div id="result">
-	
-	</div>
+
+            <div class="new_content">
+                신메뉴
+            </div>
+            <div class="rank_content">
+                랭킹
+            </div>
+        </div>
+    </section>
+    <!-- 경매 카테고리 -->
+    <section id="category">
+        <ul>
+            <li><a href="">1인 메뉴</a></li>
+            <li><a href="">세트 메뉴</a></li>
+        </ul>
+
+    </section>
+
+    <!-- 경매 상품 -->
+    <section class="item-section">
+        <div class="card-container">
+            <div class="card">
+                <img src="/psyco/resources/img/item/one/1.jpg" alt="" class="card_img">
+                <div class="card_content">
+                    <h3>김밥천국</h3>
+                    <h2>제육덮밥</h2>
+                    <ul>
+                        <li>시작일</li>
+                        <li>2010.10.18</li>
+                    </ul>
+                    <ul>
+                        <li>자동 할인시간 </li>
+                        <li>30분</li>
+                    </ul>
+                    <ul>
+                        <li>시작 가격</li>
+                        <li>5000원</li>
+                    </ul>
+
+                    <ul class="sale">
+                        <li class="sale_item">8% &darr;</li>
+                        <li>(현재 400원 할인)</li>
+                    </ul>
+                    <ul class="price">
+                        <li>
+                            현재가격
+                        </li>
+                        <li class="price_data">
+                            4000원
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="card">
+                <img src="/psyco/resources/img/item/one/2.jpg" alt="" class="card_img">
+                <div class="card_content">
+                    <h3>김밥천국</h3>
+                    <h2>제육덮밥</h2>
+                    <ul>
+                        <li>시작일</li>
+                        <li>2010.10.18</li>
+                    </ul>
+                    <ul>
+                        <li>자동 할인시간 </li>
+                        <li>30분</li>
+                    </ul>
+                    <ul>
+                        <li>시작 가격</li>
+                        <li>5000원</li>
+                    </ul>
+
+                    <ul class="sale">
+                        <li class="sale_item">8% &darr;</li>
+                        <li>(현재 400원 할인)</li>
+                    </ul>
+                    <ul class="price">
+                        <li>
+                            현재가격
+                        </li>
+                        <li class="price_data">
+                            4000원
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="card">
+                <img src="/psyco/resources/img/item/one/3.jpg" alt="" class="card_img">
+                <div class="card_content">
+                    <h3>김밥천국</h3>
+                    <h2>제육덮밥</h2>
+                    <ul>
+                        <li>시작일</li>
+                        <li>2010.10.18</li>
+                    </ul>
+                    <ul>
+                        <li>자동 할인시간 </li>
+                        <li>30분</li>
+                    </ul>
+                    <ul>
+                        <li>시작 가격</li>
+                        <li>5000원</li>
+                    </ul>
+
+                    <ul class="sale">
+                        <li class="sale_item">8% &darr;</li>
+                        <li>(현재 400원 할인)</li>
+                    </ul>
+                    <ul class="price">
+                        <li>
+                            현재가격
+                        </li>
+                        <li class="price_data">
+                            4000원
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="card">
+                <img src="/psyco/resources/img/item/one/4.jpg" alt="" class="card_img">
+                <div class="card_content">
+                    <h3>김밥천국</h3>
+                    <h2>제육덮밥</h2>
+                    <ul>
+                        <li>시작일</li>
+                        <li>2010.10.18</li>
+                    </ul>
+                    <ul>
+                        <li>자동 할인시간 </li>
+                        <li>30분</li>
+                    </ul>
+                    <ul>
+                        <li>시작 가격</li>
+                        <li>5000원</li>
+                    </ul>
+
+                    <ul class="sale">
+                        <li class="sale_item">8% &darr;</li>
+                        <li>(현재 400원 할인)</li>
+                    </ul>
+                    <ul class="price">
+                        <li>
+                            현재가격
+                        </li>
+                        <li class="price_data">
+                            4000원
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="card">
+                <img src="/psyco/resources/img/item/one/5.png" alt="" class="card_img">
+                <div class="card_content">
+                    <h3>김밥천국</h3>
+                    <h2>제육덮밥</h2>
+                    <ul>
+                        <li>시작일</li>
+                        <li>2010.10.18</li>
+                    </ul>
+                    <ul>
+                        <li>자동 할인시간 </li>
+                        <li>30분</li>
+                    </ul>
+                    <ul>
+                        <li>시작 가격</li>
+                        <li>5000원</li>
+                    </ul>
+
+                    <ul class="sale">
+                        <li class="sale_item">8% &darr;</li>
+                        <li>(현재 400원 할인)</li>
+                    </ul>
+                    <ul class="price">
+                        <li>
+                            현재가격
+                        </li>
+                        <li class="price_data">
+                            4000원
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="card">
+                <img src="/psyco/resources/img/item/one/6.jpg" alt="" class="card_img">
+                <div class="card_content">
+                    <h3>김밥천국</h3>
+                    <h2>제육덮밥</h2>
+                    <ul>
+                        <li>시작일</li>
+                        <li>2010.10.18</li>
+                    </ul>
+                    <ul>
+                        <li>자동 할인시간 </li>
+                        <li>30분</li>
+                    </ul>
+                    <ul>
+                        <li>시작 가격</li>
+                        <li>5000원</li>
+                    </ul>
+
+                    <ul class="sale">
+                        <li class="sale_item">8% &darr;</li>
+                        <li>(현재 400원 할인)</li>
+                    </ul>
+                    <ul class="price">
+                        <li>
+                            현재가격
+                        </li>
+                        <li class="price_data">
+                            4000원
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="card">
+                <img src="/psyco/resources/img/item/one/7.jpg" alt="" class="card_img">
+                <div class="card_content">
+                    <h3>김밥천국</h3>
+                    <h2>제육덮밥</h2>
+                    <ul>
+                        <li>시작일</li>
+                        <li>2010.10.18</li>
+                    </ul>
+                    <ul>
+                        <li>자동 할인시간 </li>
+                        <li>30분</li>
+                    </ul>
+                    <ul>
+                        <li>시작 가격</li>
+                        <li>5000원</li>
+                    </ul>
+
+                    <ul class="sale">
+                        <li class="sale_item">8% &darr;</li>
+                        <li>(현재 400원 할인)</li>
+                    </ul>
+                    <ul class="price">
+                        <li>
+                            현재가격
+                        </li>
+                        <li class="price_data">
+                            4000원
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="card">
+                <img src="/psyco/resources/img/item/one/8.jpg" alt="" class="card_img">
+                <div class="card_content">
+                    <h3>김밥천국</h3>
+                    <h2>제육덮밥</h2>
+                    <ul>
+                        <li>시작일</li>
+                        <li>2010.10.18</li>
+                    </ul>
+                    <ul>
+                        <li>자동 할인시간 </li>
+                        <li>30분</li>
+                    </ul>
+                    <ul>
+                        <li>시작 가격</li>
+                        <li>5000원</li>
+                    </ul>
+
+                    <ul class="sale">
+                        <li class="sale_item">8% &darr;</li>
+                        <li>(현재 400원 할인)</li>
+                    </ul>
+                    <ul class="price">
+                        <li>
+                            현재가격
+                        </li>
+                        <li class="price_data">
+                            4000원
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </section>
 
 </body>
 </html>
