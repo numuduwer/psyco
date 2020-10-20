@@ -103,7 +103,7 @@ public class MemberBean {
 		HttpHeaders resHeaders = new HttpHeaders();
 		resHeaders.add("content-Type", "application/json;charset=UTF-8");
 		
-		return new ResponseEntity<String>(status, resHeaders, HttpStatus.CREATED);
+		return new ResponseEntity<String>(status, resHeaders, HttpStatus.CREATED); 
 	}
 	
 	@RequestMapping("mapsTest.com")

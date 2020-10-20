@@ -25,7 +25,8 @@ public class ShopServiceImpl implements ShopService {
 	
 	@Autowired
 	private ItemDAOImpl itemDAO = null;
-
+	
+	@Autowired
 	private MenuDAOImpl menuDAO = null;
 	
 
@@ -52,8 +53,6 @@ public class ShopServiceImpl implements ShopService {
 		if(pageName == null) {
 			pageName = "itemList";
 		}
-		System.out.println("commons Serrvice pageName : " + pageName);
-		System.out.println("commons Serrvice id : " + id);
 		// 페이징 처리 초기값
 		int pageSize = 10;
 		int currPage = Integer.parseInt(pageNum);	// 페이지 계산을 위해  형변환 
@@ -140,8 +139,8 @@ public class ShopServiceImpl implements ShopService {
 		}
 	}
 	
-	public MenuDTO getMenuDataSV(int shop_num) throws SQLException {
-		MenuDTO data = menuDAO.getMenuData(shop_num);
+	public MenuDTO getMenuDataSV(int menu_num) throws SQLException {
+		MenuDTO data = menuDAO.getMenuData(menu_num);
 		return data;
 	}
 	public int  updateMenuDataSV(MenuDTO dto) {
