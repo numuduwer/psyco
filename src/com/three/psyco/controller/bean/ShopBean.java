@@ -248,32 +248,48 @@ public class ShopBean {
 	public String itemModifyForm(int item_num,Model model,String pageNum) throws SQLException {
 		
 		ItemDTO article = shopService.getItemOne(item_num, pageNum, model);
+		System.out.println(article.getStartDate());
 		model.addAttribute("article",article);
 		
 		return "shop/itemModifyForm";
 	}
 	
 	@RequestMapping("itemModifyPro.com")
-	public String itemModifyPro(Model model, HttpServletRequest request,ItemDTO dto) throws SQLException {
+	public String itemModifyPro(Model model, HttpServletRequest request,ItemDTO dto,int item_num) throws SQLException {
 		
 		String startDate = request.getParameter("startDate1") +" "+ request.getParameter("startDate2") + ":00";
 		dto.setStartDate(Timestamp.valueOf(startDate));
 		String endDate = request.getParameter("endDate1") + " " + request.getParameter("endDate2") + ":00";
 		dto.setEndDate(Timestamp.valueOf(endDate));
 		
-		shopService.itemModifyAticle(dto,model);
+		shopService.itemModifyAticle(dto,model,item_num);
 		
 		return "shop/itemModifyPro";
 	}
 	
+
+	@RequestMapping("itemDeleteForm.com")
+	public String itemDeleteForm(String pageNum,Model model,int item_num) {
+		
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("item_num",item_num);
+		
+		return "shop/itemDeleteForm";
+	}
+
+	
+	@RequestMapping("itemDeletePro.com")
+	public String itemDeletePro(int item_num,String pageNum, Model model) {
+		shopService.itemDeleteAticle(item_num,pageNum,model);
+		
+		return "shop/itemDeletePro";
+	}
+	
+
 	@RequestMapping("itemEnrollment.com")
 	public String itemEnrollment() {
 		return "shop/itemEnrollmentForm";
 	}
-	
-
-		
-	
 	
 
 }

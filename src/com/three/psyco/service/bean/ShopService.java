@@ -17,7 +17,8 @@ public interface ShopService {
 	
 	public ListData getItemList(String pageName, String pageNum, int id) throws SQLException;
 	public ItemDTO getItemOne(int item_num, String pageNum, Model model) throws SQLException;
-	public int itemModifyAticle(ItemDTO dto,Model model);
+	public int itemDeleteAticle(int item_num, String pageNum, Model model);
+	public int itemModifyAticle(ItemDTO dto, Model model, int item_num);
 	
 	
 

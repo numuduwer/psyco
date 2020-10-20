@@ -3,6 +3,8 @@ package com.three.psyco.service.bean;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -104,11 +106,25 @@ public class ShopServiceImpl implements ShopService {
 	}
 	
 	@Override
-	public int itemModifyAticle(ItemDTO dto, Model model) {
+	public int itemModifyAticle(ItemDTO dto, Model model,int item_num) {
 		
 		int result = itemDAO.itemModifyAticle(dto);
 		
 		model.addAttribute("result",result);
+		model.addAttribute("item_num",item_num);
+		
+		return result;
+	}
+	
+	@Override
+	public int itemDeleteAticle(int item_num, String pageNum, Model model) {
+		
+		int result = itemDAO.itemDeleteAticle(item_num);
+		
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("result",result);
+		model.addAttribute("item_num",item_num);
+		
 		
 		return result;
 	}

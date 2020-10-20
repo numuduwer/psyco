@@ -74,6 +74,14 @@ public class ItemDAOImpl implements ItemDAO {
 		
 		return result;
 	}
+	
+	@Override
+	public int itemDeleteAticle(int item_num) {
+		
+		int result = sqlSession.delete("item.itemDeleteAticle",item_num);
+		
+		return result;
+	}
 
 	
 	

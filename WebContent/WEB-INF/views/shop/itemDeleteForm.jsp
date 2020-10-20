@@ -8,16 +8,15 @@
 </head>
 <body>
 		<h1 align="center"> delete </h1>
-		<form action="/psyco/communityDeletePro.com?pageNum=${pageNum}" method="post">
-		<input type="hidden" name="community_num" value="${community_num}"/>
-		<input type="hidden" name="category" value="${category}"/>
+		<form action="/psyco/shop/itemDeletePro.com?pageNum=${pageNum}" method="post">
+		<input type="hidden" name="item_num" value="${item_num}"/>
 			<table>
 				<tr>
 					<td>삭제를 원하시면 삭제버튼을 눌러주세요.</td>	
 				</tr>
 				<tr>
 					<td><input type="submit" value="삭제"/></td>	
-					<td><input type="button" value="삭제취소" onclick="window.location='/psyco/communityDetail.com?pageNum=${pageNum}&category=${category}'"/></td>
+					<td><input type="button" value="삭제취소" onclick="window.location='/psyco/shop/itemDetail.com?item_num=${item_num}'"/></td>
 				</tr>
 			
 			</table>

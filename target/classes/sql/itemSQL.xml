@@ -53,6 +53,13 @@
   	</update>
   	
   	
+  	<!-- 해당 역경매 상품 삭제 -->
+  	<delete id="itemDeleteAticle" parameterType="int">
+  		delete from item where item_num=#{item_num}
+  	</delete>
+  	
+  	
+  	
   	
   	
   	

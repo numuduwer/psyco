@@ -24,6 +24,7 @@
 		<tr>
 			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com?category=1&grade=11&pageNum=${pageNum}'"> 글쓰기 </button> </td>
 			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityMyArticle.com?category=1&grade=11&pageNum=${pageNum}'"> 내가 작성한 자유게시판 글 보러가기 </button> </td>
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/community.com'"> 커뮤니티 목록 돌아가기 </button> </td>
 		
 		</tr>
 		<tr>
@@ -39,12 +40,6 @@
 					<c:set var="number" value="${number-1}" />
 				</td>
 				<td align="left">
-					<c:set var="wid" value="0" />
-					<c:if test="${article.re_level > 0}">
-						<c:set var="wid" value="${8 * article.re_level}" />
-						<img src="/psyco/resources/img/tabImg.PNG" width="${wid}" />	
-						<img src="/psyco/resources/img/replyImg.png" width="11" />
-					</c:if>
 					<a href="/psyco/communityDetail.com?community_num=${article.community_num}&pageNum=${pageNum}&category=1" >${article.subject}</a>
 				</td>
 				<td><a href="mailto:${article.writer}">${article.writer}</a></td>
@@ -62,6 +57,7 @@
 			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com?category=2&grade=11&pageNum=${pageNum}'"> 글쓰기 </button> </td>
 			<td colspan="6" align="center"> <button onclick="window.location='/psyco/help.com?category=5&grade=11&pageNum=1'"> 고객센터 </button> </td>	
 			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityMyArticle.com?category=2&grade=11&pageNum=${pageNum}'"> 내가 작성한 QnA 글 보러가기 </button> </td>	
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/community.com'"> 커뮤니티 목록 돌아가기 </button> </td>
 		</tr>
 		<tr>
 			<td>No.</td>
@@ -76,12 +72,6 @@
 					<c:set var="number" value="${number-1}" />
 				</td>
 				<td align="left">
-					<c:set var="wid" value="0" />
-					<c:if test="${article.re_level > 0}">
-						<c:set var="wid" value="${8 * article.re_level}" />
-						<img src="/psyco/resources/img/tabImg.PNG" width="${wid}" />	
-						<img src="/psyco/resources/img/replyImg.png" width="11" />
-					</c:if>
 					<a href="/psyco/communityDetail.com?community_num=${article.community_num}&pageNum=${pageNum}&category=2" >${article.subject}</a>
 				</td>
 				<td><a href="mailto:${article.writer}">${article.writer}</a></td>
@@ -97,6 +87,7 @@
 		<tr>
 			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com?category=3&grade=11&pageNum=${pageNum}'"> 글쓰기 </button> </td>
 			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityMyArticle.com?category=3&grade=11&pageNum=${pageNum}'"> 내가 작성한 홍보 글 보러가기 </button> </td>
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/community.com'"> 커뮤니티 목록 돌아가기 </button> </td>
 		
 		</tr>
 		<tr>
@@ -114,12 +105,6 @@
 					<c:set var="number" value="${number-1}" />
 				</td>
 				<td align="left">
-					<c:set var="wid" value="0" />
-					<c:if test="${article.re_level > 0}">
-						<c:set var="wid" value="${8 * article.re_level}" />
-						<img src="/psyco/resources/img/tabImg.PNG" width="${wid}" />	
-						<img src="/psyco/resources/img/replyImg.png" width="11" />
-					</c:if>
 					<a href="/psyco/communityDetail.com?community_num=${article.community_num}&pageNum=${pageNum}&category=3" >${article.subject}</a>
 				</td>
 				<td><a href="mailto:${article.writer}">${article.writer}</a></td>
@@ -138,6 +123,7 @@
 		<tr>
 			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityForm.com?category=4&grade=11&pageNum=${pageNum}'"> 글쓰기 </button> </td>
 			<td colspan="6" align="center"> <button onclick="window.location='/psyco/communityMyArticle.com?category=4&grade=11&pageNum=${pageNum}'"> 내가 작성한 음식점 추천 글 보러가기 </button> </td>
+			<td colspan="6" align="center"> <button onclick="window.location='/psyco/community.com'"> 커뮤니티 목록 돌아가기 </button> </td>
 		</tr>
 		<tr>
 			<td>No.</td>
@@ -153,12 +139,6 @@
 					<c:set var="number" value="${number-1}" />
 				</td>
 				<td align="left">
-					<c:set var="wid" value="0" />
-					<c:if test="${article.re_level > 0}">
-						<c:set var="wid" value="${8 * article.re_level}" />
-						<img src="/psyco/resources/img/tabImg.PNG" width="${wid}" />	
-						<img src="/psyco/resources/img/replyImg.png" width="11" />
-					</c:if>
 					<a href="/psyco/communityDetail.com?community_num=${article.community_num}&pageNum=${pageNum}&category=4" >${article.subject}</a>
 				</td>
 				<td><a href="mailto:${article.writer}">${article.writer}</a></td>
