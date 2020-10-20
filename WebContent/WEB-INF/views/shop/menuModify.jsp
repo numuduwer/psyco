@@ -27,6 +27,7 @@
 			<tr>
 				<td>메뉴 이미지 </td>
 				<td><input type="file" name="menu_img" value="${article.menu_img}" /></td>
+
 			</tr>
 			<tr>
 				<td>메뉴 가격 </td>
