@@ -398,6 +398,202 @@ section .buy_info {
   border: solid 1px red;
 }
 
+
+/* 가게 정보 */
+
+.shop_info {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+}
+/* 가게 정보 */
+.items_info {
+  display: flex;
+  justify-content: center;
+}
+
+.ing_info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 480px;
+  border: 1px solid var(--color-black);
+}
+
+.ing_info h2 {
+  color: var(--color-dark-grey);
+  font-size: var(--font-medium);
+}
+.ing_info img {
+  border: 1px solid red;
+  width: 100px;
+  height: 100px;
+  margin: 5px 5px;
+}
+
+.shop_comment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 12px;
+}
+
+.shop_comment h2 {
+  color: var(--color-dark-grey);
+}
+/* 콘텐츠 텝스 정보*/
+
+.shopCotent_btn {
+  display: flex;
+  flex-direction: column;
+}
+.tabs {
+  display: flex;
+  justify-content: center;
+}
+.tabs .tab {
+  font-size: 1rem;
+  text-align: center;
+  line-height: 30px;
+  width: 320px;
+  height: 50px;
+  cursor: pointer;
+  background-color: rgb(243, 243, 243);
+  color: rgb(20, 19, 19);
+  position: relative;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  border: 1px solid black;
+}
+.content {
+  display: flex;
+  margin: 0 auto;
+  border: 1px solid black;
+  width: 960px;
+}
+.items {
+  width: 300px;
+  display: none;
+  padding: 10px;
+  background-color: #fff;
+  position: relative;
+}
+.items::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 318px;
+  height: 4px;
+  background-color: rgb(255, 255, 255);
+}
+.items:nth-child(2)::before {
+  left: 320px;
+  top: -4px;
+  background-color: rgb(255, 255, 255);
+}
+.items:nth-child(3)::before {
+  left: 640px;
+  top: -4px;
+  background-color: rgb(255, 255, 255);
+}
+.items.active {
+  display: inline-block;
+  width: 100%l;
+}
+
+#tab1 img {
+  width: 150px;
+  height: 150px;
+  border-radius: 3%;
+  margin-right: 40px;
+}
+
+.shopinfo_info {
+	
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.shopinfo_info p {
+  color: red;
+  font-weight: var(--weight-semi-bold);
+}
+
+#tab1 {
+  width: 100%;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--color-dark-grey);
+}
+#tab2 {
+  width: 100%;
+  padding: 28px 0;
+  border: 1px solid blue;
+}
+
+#tab3 {
+  width: 100%;
+  padding: 28px 0;
+  border: 1px solid gold;
+}
+
+.tab1_item {
+  display: flex;
+  flex-direction: row;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--color-dark-grey);
+}
+
+.tab2_item {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  padding: 12px 18px;
+}
+
+.tab2_item ul {
+  list-style: none;
+  display: flex;
+}
+.tab2_item li {
+  padding-right: 30px;
+}
+
+#tab2 img {
+  width: 200px;
+  height: 200px;
+  border-radius: 3%;
+  margin-right: 40px;
+}
+
+.tab3_item {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 12px 40px;
+  align-items: center;
+}
+/* 공용 */
+table {
+  border-collapse: collapse;
+  width: 600px;
+}
+td,
+th {
+  text-align: center;
+  border-bottom: 0.5px solid var(--color-dark-grey);
+  padding: 5px;
+}
+
+th {
+  background-color: var(--color-light-white);
+  font-size: var(--font-small);
+}
+
+
+
 /* footer */
 footer {
   height: 200px;
