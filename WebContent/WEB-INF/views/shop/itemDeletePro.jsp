@@ -11,7 +11,7 @@
 <body>
 		<script type="text/javascript">
 			alert('삭제가 완료되었습니다.');
-			window.location='/psyco/shop/itemList.com?${pageNum}';
+			window.location='/psyco/shop/itemList.com?pageNum=${pageNum}';
 		</script>
 
 

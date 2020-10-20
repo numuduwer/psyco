@@ -119,7 +119,7 @@ public class CommunityBean {
 	
 	// 글 저장
 	@RequestMapping("communityPro.com")
-	public String communityPro(MultipartHttpServletRequest request, Model model,String pageNum,String grade) throws Exception {
+	public String communityPro(MultipartHttpServletRequest request, Model model,String pageNum,String grade,String category) throws Exception {
 		
 		CommunityDTO dto = new CommunityDTO();
 		String subject = request.getParameter("subject");
@@ -132,9 +132,10 @@ public class CommunityBean {
 			dto.setCommunity_img(request.getParameter("writer"));
 			dto.setCategory(request.getParameter("category"));
 			communityService.insertArticleSv(dto);
-			
+			model.addAttribute("category",category);
+			model.addAttribute("pageNum",pageNum);
 			return "community/communityPro";
-		}
+		}else {
 		
 		
 			// - 파일 정보 꺼내기
@@ -187,8 +188,8 @@ public class CommunityBean {
 			}
 
 			communityService.insertArticleSv(dto);
-
-		String category = request.getParameter("category");
+		}
+		
 
 		model.addAttribute("category",category);
 		model.addAttribute("pageNum",pageNum);
@@ -329,20 +330,22 @@ public class CommunityBean {
 	
 	
 	@RequestMapping("communityDeleteForm.com")
-	public String communityDeleteForm(HttpServletRequest request,Model model,String pageNum) {
+	public String communityDeleteForm(HttpServletRequest request,Model model,String pageNum,String category) {
 		String community_num = request.getParameter("community_num");
 		model.addAttribute("community_num",community_num);
 		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("category",category);
 		
 		
 		return "community/communityDeleteForm";
 	}
 	
 	@RequestMapping("communityDeletePro.com")
-	public String communityDeletePro(CommunityDTO dto,String pageNum,Model model) throws SQLException {
-		
+	public String communityDeletePro(CommunityDTO dto,String pageNum,Model model,String category) throws SQLException {
+		System.out.println("category : " + category);
 		communityService.deleteArticleSv(dto);
 		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("category",category);
 		
 		return "community/communityDeletePro";
 	}

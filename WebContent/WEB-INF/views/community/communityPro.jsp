@@ -8,7 +8,8 @@
 <body>
 		<script type="text/javascript">
 			alert('작성이 완료 되었습니다.');
-			window.location.href="/psyco/communityList.com?category="+${category};
+			window.location='/psyco/communityList.com?category=${category}';
 		</script>
+		
 </body>
 </html>
