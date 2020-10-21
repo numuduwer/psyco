@@ -60,7 +60,7 @@
 			</form>
 			<tr>
 				<td colspan="2"> 
-					<button onclick="window.location='/psyco/shop/itemList.com?pageNum=1'">돌아가기</button>
+					<button onclick="window.location='/psyco/shop/itemDetail.com?item_num=${item_num}'">돌아가기</button>
 				 </td>
 			</tr>
 		

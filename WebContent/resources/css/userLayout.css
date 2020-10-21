@@ -209,3 +209,268 @@ footer {
     border-right: solid 1px black;
     background-color: var(--color-light-white);
 }
+
+
+
+/* 유저 마이페이지 */
+/* my page space  */
+.myPage {
+  
+  width: 100%;
+  height: 100%;
+  
+}
+
+.myPage_content {
+  margin: 10px auto;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--color-white);
+  width: 800px;
+  height: 100vh;
+
+}
+
+/* tabs  */
+.myPage_main {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+.tabs {
+  display: flex;
+  justify-content: center;
+}
+.tabs .tab {
+  font-size: 1rem;
+  text-align: center;
+  line-height: 30px;
+  width: 400px;
+  height: 40px;
+  cursor: pointer;
+  background-color: rgb(243, 243, 243);
+  color: rgb(20, 19, 19);
+  position: relative;
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
+  border: 1px solid black;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 800px;
+  height: 100%;
+}
+
+.items {
+  display: flex;
+  justify-content: center;
+
+  width: 800px;
+  height: 100%;
+  display: none;
+  padding: 10px;
+  background-color: #fff;
+  position: relative;
+}
+.items::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 400px;
+  height: 4px;
+  background-color: rgb(255, 255, 255);
+}
+.items:nth-child(2)::before {
+  left: 398px;
+  top: -4px;
+  background-color: rgb(255, 255, 255);
+}
+
+.items.active {
+  display: inline-block;
+}
+
+/* 전체 구매내역   */
+
+.reg {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  margin-top: 8px 0;
+  padding: 24px 12px;
+  background-color: var(--color-light-white);
+  border: solid 1px var(--color-dark-white);
+}
+
+.reg li {
+  font-size: 24px;
+}
+.reg a {
+  color: var(--color-dark-blue);
+  font-size: var(--font-small);
+}
+
+.myPage_item_info {
+  border: solid 1px var(--color-dark-white);
+  height: 150px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+}
+.myPage_item_info img {
+  width: 120px;
+  height: 120px;
+  border-radius: 4px;
+}
+.myPage_item_info ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px;
+}
+.myPage_item_info li {
+  padding: 7px 0;
+  color: red;
+  font-size: 20px;
+  font-weight: 350;
+}
+.myPage_item_info li a {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--color-dark-grey);
+}
+
+.myPage_item_info li span {
+  color: var(--color-black);
+  font-weight: 500;
+  font-size: var(--font-small);
+}
+
+.myPage_item_info button {
+  margin-left: 310px;
+  padding: 8px 20px;
+  border: 1px solid var(--color-dark-blue);
+  background-color: var(--color-white);
+}
+.myPage_item_info button a {
+  color: var(--color-dark-blue);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* 낵가 쓴 후기   */
+.userpage_tab2 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 12px 40px;
+  align-items: center;
+}
+
+/* 테이블 공용 */
+table {
+  border-collapse: collapse;
+  width: 600px;
+}
+td,
+th {
+  text-align: center;
+  border-bottom: 0.5px solid var(--color-dark-grey);
+  padding: 5px;
+}
+
+th {
+  background-color: var(--color-light-white);
+  font-size: var(--font-small);
+}
+
+/* 마이페이지 */
+/* 마이페이지 타이틀 */
+.myPage_mainTitle {
+  display: flex;
+  margin: 0 auto;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 800px;
+  padding: 10px 0;
+}
+.myPage_mainTitle h1 {
+  padding: 20px 10px;
+  font-size: 45px;
+  font-weight: 500;
+  margin: 10px 0;
+}
+.myPage_mainTitle span {
+  line-height: 300%;
+  padding: 0 10px;
+}
+
+.myPage_mainTitle h2 {
+  font-size: 35px;
+  font-weight: 500;
+}
+.myPage_userTitle {
+  display: flex;
+
+  width: 800px;
+  line-height: 100%;
+  padding-left: 10px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  border: 1px solid var(--color-dark-white);
+  border-top: 2px solid var(--color-dark-blue);
+}
+.myPage_userTitle ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid var(--color-dark-white);
+  padding: 10px 40px;
+}
+.myPage_userTitle li {
+  font-size: 20px;
+}
+
+
+  
+
+#tab1 {
+  border: 1px solid var(--color-light-grey);
+}
+#tab2 {
+  border: 1px solid var(--color-light-grey);
+}
+  
+/* 찜 리스트 */
+.zzim_reg {
+  display: flex;
+  list-style: none;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 8px 0;
+  padding: 18px 12px;
+  background-color: var(--color-light-white);
+  border: solid 1px var(--color-dark-white);
+}
+.zzim_reg a {
+  display: inline-block;
+  color: var(--color-black);
+  font-weight: 500;
+  font-size: var(--font-micro);
+  padding: 4px 4px;
+  border: 1px solid var(--color-light-grey);
+  background-color: var(--color-white);
+  border-radius: 4px;
+  margin-left: 30px;
+}
+  
+

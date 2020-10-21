@@ -38,6 +38,11 @@ public class UserBean {
 	public UserBean(MemberServiceImpl memberService) {
 		this.memberService = memberService;
 	}
+	
+	@RequestMapping("myPageList2.com")
+	public String myPageList2() {
+		return "user/myPageList2";
+		}
 
 	//buy 부분
 	@RequestMapping("myPageList.com")// int member_num 나중에 넣어야함
@@ -53,6 +58,7 @@ public class UserBean {
 		model.addAttribute("number", data.getNumber());
 		model.addAttribute("count", data.getCount());
 		model.addAttribute("articleList", data.getArticleList());
+
 		return "user/myPageList";
 	}
 	
@@ -225,4 +231,6 @@ public class UserBean {
 	
 
 
+
+	
 }

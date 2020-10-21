@@ -14,9 +14,12 @@ import org.springframework.web.servlet.mvc.Controller;
 
 import com.three.psyco.controller.bean.ShopBean;
 import com.three.psyco.model.dao.ItemDAOImpl;
+import com.three.psyco.model.dao.MenuDAO;
+import com.three.psyco.model.dao.MenuDAOImpl;
 import com.three.psyco.model.dao.ShopDAOImpl;
 import com.three.psyco.model.dao.SuperDAOImpl;
 import com.three.psyco.model.dto.ListData;
+import com.three.psyco.model.dto.MenuDTO;
 
 
 
@@ -40,6 +43,9 @@ public class CommonsServiceImpl implements CommonsService {
 
 	@Autowired
 	private ItemDAOImpl itemDAO = null;
+	
+	@Autowired
+	private MenuDAOImpl menuDAO = null;
 
 
 	
@@ -142,6 +148,7 @@ public class CommonsServiceImpl implements CommonsService {
 		data.setStartRow(startRow);
 		return data;
 	}
+	
 	
 	
 	
@@ -282,9 +289,18 @@ public class CommonsServiceImpl implements CommonsService {
 	}
 	
 
+	@Override
+	public List<Integer> getMyShop_MemberNumList(int member_Num) throws SQLException {
+		List<Integer> myShop_ShopNumList = shopDAO.getMyShop_ShopNumList(member_Num);
+		return myShop_ShopNumList;
+	}
 	
-	
-	
+	@Override
+	public List<MenuDTO> getMyMenuListFromShopNum(List<Integer> myShop_ShopNumList) {
+		List<MenuDTO> menuList = menuDAO.getMyMenuListFromShopNum(myShop_ShopNumList);
+		return menuList;
+		
+	}
 
 
 
