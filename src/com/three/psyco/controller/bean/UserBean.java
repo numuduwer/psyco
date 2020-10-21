@@ -23,9 +23,14 @@ public class UserBean {
 	public UserBean(MemberServiceImpl memberService) {
 		this.memberService = memberService;
 	}
+	
+	@RequestMapping("myPageList2.com")
+	public String myPageList2() {
+		return "user/myPageList2";
+		}
 
 	@RequestMapping("myPageList.com")
-	public String loginForm() {
+	public String myPageList() {
 		return "user/myPageList";
 	}
 	
@@ -111,4 +116,7 @@ public class UserBean {
 		model.addAttribute("count", result);
 		return "user/modifyCheck";
 	}
+	
+
+	
 }

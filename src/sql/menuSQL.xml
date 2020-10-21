@@ -9,7 +9,7 @@
  	
  
  	<select id="getMenuData" parameterType="int" resultType="menuDTO" >
- 		select * from menu where MENU_NUM = #{value} 
+ 		select * from menu where MENU_NUM = #{value}
  	</select>
  	
  	
@@ -22,6 +22,7 @@
  		delete from menu where menu_num =#{value}
  	</delete>
  	
+
  	<!-- 해당 음식 content 페이지에서 해당가게 이미지 리스트 뿌려주기 -->
 	<select id="getContentImgList" parameterType="int" resultType="menuDTO">
 		<![CDATA[
@@ -32,6 +33,10 @@
 		AND shop_num = #{value}
   		]]>
 	</select>
- 
+
+	<select id="getMenuInfoFromMenuNum" parameterType="int" resultType="menuDTO">
+		select * from menu where menu_num=#{value}
+	</select>
+
 
  </mapper>

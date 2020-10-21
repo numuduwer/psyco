@@ -11,9 +11,12 @@ import org.springframework.web.servlet.mvc.Controller;
 
 import com.three.psyco.controller.bean.ShopBean;
 import com.three.psyco.model.dao.ItemDAOImpl;
+import com.three.psyco.model.dao.MenuDAO;
+import com.three.psyco.model.dao.MenuDAOImpl;
 import com.three.psyco.model.dao.ShopDAOImpl;
 import com.three.psyco.model.dao.SuperDAOImpl;
 import com.three.psyco.model.dto.ListData;
+import com.three.psyco.model.dto.MenuDTO;
 
 @Service
 public class CommonsServiceImpl implements CommonsService {
@@ -30,6 +33,9 @@ public class CommonsServiceImpl implements CommonsService {
 
 	@Autowired
 	private ItemDAOImpl itemDAO = null;
+	
+	@Autowired
+	private MenuDAOImpl menuDAO = null;
 
 
 	
@@ -133,6 +139,7 @@ public class CommonsServiceImpl implements CommonsService {
 	
 	
 	
+	
 	// main 조건 상관없이 테이블 모든 글 가져오기
 	public ListData getListData(String pageName, String pageNum, String controller) throws SQLException {
 		// 디폴트 값 설정 
@@ -178,8 +185,19 @@ public class CommonsServiceImpl implements CommonsService {
 		return data;
 	}
 	
+	@Override
+	public List<Integer> getMyShop_MemberNumList(int member_Num) throws SQLException {
+		List<Integer> myShop_ShopNumList = shopDAO.getMyShop_ShopNumList(member_Num);
+		return myShop_ShopNumList;
+	}
 	
-	
+	@Override
+	public List<MenuDTO> getMyMenuListFromShopNum(List<Integer> myShop_ShopNumList) {
+		List<MenuDTO> menuList = menuDAO.getMyMenuListFromShopNum(myShop_ShopNumList);
+		return menuList;
+		
+	}
+
 
 
 
