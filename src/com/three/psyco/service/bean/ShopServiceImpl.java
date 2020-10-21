@@ -207,6 +207,7 @@ public class ShopServiceImpl implements ShopService {
 		dto.setComment1((String)jSONObject.get("comment"));
 		dto.setMenu_num(Integer.valueOf((String)jSONObject.get("menu_num")));
 		dto.setMem_num(mem_num);
+		dto.setShop_num(Integer.valueOf((String)jSONObject.get("shop_num")));
 		
 		/*
 		try {

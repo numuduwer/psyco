@@ -53,7 +53,7 @@
 				success: function(result) {
 					console.log(result);
 					alert('등록 되었습니다.');
-					window.loation.href='/psyco/shop/itemList.com';
+					window.location.href='/psyco/shop/itemList.com';
 				},
 				error: function() {
 					
