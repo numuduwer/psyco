@@ -55,7 +55,7 @@ public interface CommunityService {
 	
 	public int getMyAskCount(String category, String writer) throws SQLException;
 
-
+	
 
 	
 

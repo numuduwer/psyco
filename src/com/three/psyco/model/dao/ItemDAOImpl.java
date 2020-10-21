@@ -3,6 +3,7 @@ package com.three.psyco.model.dao;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.three.psyco.model.dto.ItemDTO;
+import com.three.psyco.model.dto.JoinResultDTO;
 
 @Repository
 public class ItemDAOImpl implements ItemDAO {
@@ -91,7 +93,12 @@ public class ItemDAOImpl implements ItemDAO {
 		return result;
 	}
 	
-	
+	@Override
+	public List<JoinResultDTO> getEntireList() {
+		List<JoinResultDTO> list = sqlSession.selectList("item.getEntireList");
+		return list;
+		
+	}
 	
 	
 	

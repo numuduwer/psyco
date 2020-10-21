@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import com.three.psyco.model.dto.ItemDTO;
+import com.three.psyco.model.dto.JoinResultDTO;
 
 public interface ItemDAO {
 	
@@ -28,4 +29,5 @@ public interface ItemDAO {
 	
 	public int itemEnrollmentPro(ItemDTO dto) throws ParseException;
 	
+	public List<JoinResultDTO> getEntireList();
 }
