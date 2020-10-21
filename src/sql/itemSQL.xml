@@ -58,7 +58,9 @@
   		delete from item where item_num=#{item_num}
   	</delete>
   	
-  	
+  	<insert id="itemEnrollmentPro" parameterType="ItemDTO">
+  		insert into item(item_num, item_name, content, amount, startdate, enddate, discount_cycle, maxprice, minprice, auction_unit, sett, comment1, mem_num, menu_num) values (item_seq.nextval, #{item_name}, #{content}, #{amount}, #{startDate}, #{endDate}, #{discount_cycle}, #{maxPrice}, #{minPrice}, #{auction_unit}, #{sett}, #{comment1}, #{mem_num}, #{menu_num})
+  	</insert>
   	
   	
   	

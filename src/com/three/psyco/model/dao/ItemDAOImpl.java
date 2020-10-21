@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -83,7 +85,11 @@ public class ItemDAOImpl implements ItemDAO {
 		return result;
 	}
 
-	
+	@Override
+	public int itemEnrollmentPro(ItemDTO dto) throws ParseException {
+		int result = sqlSession.insert("item.itemEnrollmentPro", dto);
+		return result;
+	}
 	
 	
 	
