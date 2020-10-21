@@ -46,9 +46,9 @@
 				<c:if test="${category == 3 || category == 4}">
 					<button onclick="window.location='/psyco/communityModifyForm.com?&community_num=${community_num}&pageNum=${pageNum}&category=${category}'">수 정</button>
 				</c:if>
-					<button onclick="window.location='/psyco/communityDeleteForm.com?community_num=${community_num}&pageNum=${pageNum}'">삭 제</button>
+					<button onclick="window.location='/psyco/communityDeleteForm.com?community_num=${community_num}&pageNum=${pageNum}&category=${category}'">삭 제</button>
 					<button onclick="window.location='/psyco/communityForm.com?community_num=${community_num}&ref=${article.ref}&re_step=${article.re_step}&re_level=${article.re_level}&category=6'">답 글</button>
-					<button onclick="window.location='/psyco/communityList.com?pageNum=${pageNum}'">리스트</button>
+					<button onclick="window.location='/psyco/communityList.com?pageNum=${pageNum}&category=${category}'">리스트</button>
 				 </td>
 			</tr>
 		

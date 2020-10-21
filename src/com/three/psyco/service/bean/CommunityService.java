@@ -5,16 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import com.three.psyco.model.dto.CommunityDTO;
 import com.three.psyco.model.dto.ListData;
 
 public interface CommunityService {
 	
 	// 게시글 저장	
-	public void insertArticleSv(CommunityDTO dto) throws SQLException;
-	
-	// 페이지 관련 정보 가져오기 
-	public Map getPageData(String pageNum) throws SQLException;
+	public void insertArticleSv(MultipartHttpServletRequest request, String pageNum, String grade, String category,Model model) throws SQLException;
 	
 	// 전체글 개수 검색
 	public int getArticleCountSv(String category) throws SQLException;
@@ -32,7 +32,7 @@ public interface CommunityService {
 	public CommunityDTO getArticleForUpdateSv(int num) throws SQLException;
 	
 	// 게시글 수정 
-	public int updateArticleSv(CommunityDTO dto) throws SQLException;
+	public int updateArticleSv(MultipartHttpServletRequest request, String pageNum, Model model) throws SQLException;
 	
 	// 게시글 삭제 
 	public int deleteArticleSv(CommunityDTO dto) throws SQLException;
@@ -54,5 +54,11 @@ public interface CommunityService {
 	public ListData abc(String pageNum, String category) throws SQLException;
 	
 	public int getMyAskCount(String category, String writer) throws SQLException;
+
+
+
+	
+
+	
 	
 }

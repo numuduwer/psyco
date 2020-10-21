@@ -54,12 +54,6 @@ public class CommunityDAOImpl implements CommunityDAO {
 	}
 
 	@Override
-	public Map getPageData(String pageNum) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public int getArticleCount(String category) throws SQLException {
 
 		
@@ -76,7 +70,6 @@ public class CommunityDAOImpl implements CommunityDAO {
 		
 		
 		List list = sqlSession.selectList("community.selectAll",map);
-		CommunityDTO dto = (CommunityDTO) list.get(0);
 		System.out.println("list size : " + list.size());
 		
 		
@@ -192,5 +185,7 @@ public class CommunityDAOImpl implements CommunityDAO {
 			
 			return count;
 		}
+
+
 
 }

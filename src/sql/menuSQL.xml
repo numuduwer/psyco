@@ -9,7 +9,7 @@
  	
  
  	<select id="getMenuData" parameterType="int" resultType="menuDTO" >
- 		select * from menu where MENU_NUM = #{value} 
+ 		select * from menu where MENU_NUM = #{value}
  	</select>
  	
  	
@@ -22,7 +22,9 @@
  		delete from menu where menu_num =#{value}
  	</delete>
  	
-
- 
+	<select id="getMenuInfoFromMenuNum" parameterType="int" resultType="menuDTO">
+		select * from menu where menu_num=#{value}
+	</select>
+ 	
 
  </mapper>
