@@ -7,35 +7,23 @@
 <title>Insert title here</title>
 </head>
 <body>
- <!--  기능  타이틀 -->
+	   <!--  기능  타이틀 -->
     <div class="myPage_mainTitle">
         <h1>마이페이지</h1>
         <div class="myPage_userTitle">
-            <h2>김신</h2><span>님 환영합니다.</span>
-            <ul>
-                <li>랭킹</li>
-                <li>-<span>등</span></li>
-            </ul>
-            <ul>
-                <li>최고 할인기록</li>
-                <li>40 <span>%</span></li>
-            </ul>
-
+            <h2 class="myPage_subTitle">찜 리스트 / 문의하기 </h2>
         </div>
     </div>
-
-
- 
     <!--   탭 버튼-->
     <div class="myPage">
         <div class="myPage_content">
             <div class="myPage_main">
                 <div class="tabs">
                     <div class="tab" data-tab-target="#tab1">
-                        <p>전체 구매내역</p>
+                        <p>찜 상품 리스트</p>
                     </div>
                     <div class="tab" data-tab-target="#tab2">
-                        <p>내가쓴 후기 </p>
+                        <p>문의내역 확인 </p>
                     </div>
                 </div>
             </div>
@@ -43,10 +31,10 @@
             <div class="content">
                 <!--   탭 1 내용-->
                 <div id="tab1" data-tab-content class="items active">
-                    <div class="userpage_tab1">
-                        <ul class="reg">
-                            <li>주문일 2020/8/30</li>
-                            <li><a href="">주문 상세보기 >></a> </li>
+                    <div class="userZZimpage_tab1">
+                        <ul class="zzim_reg">
+                            <li><input type="checkbox" name="" id=""> 전체선택</li>
+                            <li><a href="">선택 삭제</a> </li>
                         </ul>
                         <div class="myPage_item_info">
                             <img src="/img/item/one/1.jpg" alt="">
@@ -57,14 +45,8 @@
                                     <span>1000원 / 1개</span>
                                 </li>
                             </ul>
-                            <button><a href="">후기 쓰러가기</a> </button>
+                            <button><a href="">삭제</a> </button>
                         </div>
-                    </div>
-                    <div class="userpage_tab1">
-                        <ul class="reg">
-                            <li>주문일 2020/8/30</li>
-                            <li><a href="">주문 상세보기 >></a> </li>
-                        </ul>
                         <div class="myPage_item_info">
                             <img src="/img/item/one/1.jpg" alt="">
                             <ul>
@@ -74,14 +56,8 @@
                                     <span>1000원 / 1개</span>
                                 </li>
                             </ul>
-                            <button><a href="">후기 쓰러가기</a> </button>
+                            <button><a href="">삭제</a> </button>
                         </div>
-                    </div>
-                    <div class="userpage_tab1">
-                        <ul class="reg">
-                            <li>주문일 2020/8/30</li>
-                            <li><a href="">주문 상세보기 >></a> </li>
-                        </ul>
                         <div class="myPage_item_info">
                             <img src="/img/item/one/1.jpg" alt="">
                             <ul>
@@ -91,16 +67,18 @@
                                     <span>1000원 / 1개</span>
                                 </li>
                             </ul>
-                            <button><a href="">후기 쓰러가기</a> </button>
+                            <button><a href="">삭제</a> </button>
                         </div>
                     </div>
+
+
                 </div>
 
 
                 <!--   탭 2 내용-->
                 <div id="tab2" data-tab-content class="items">
-                   <div class="userpage_tab2">
-                        <h2>최근 리뷰</h2>
+                    <div class="userpage_tab2">
+                        <h2>문의 내역 리스트</h2>
                         <table>
                             <tr>
                                 <th>no.</th>
@@ -118,8 +96,8 @@
                     </div>
                 </div>
             </div>
-    
-    
+        </div>
+    </div>
     <script>
         const tabs = document.querySelectorAll("[data-tab-target]");
         const tabcon = document.querySelectorAll("[data-tab-content]");
@@ -135,6 +113,5 @@
         });
 
     </script>
-
 </body>
 </html>
