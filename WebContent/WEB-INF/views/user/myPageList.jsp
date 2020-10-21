@@ -9,9 +9,7 @@
 <title>마이페이지 리스트</title>
 </head>
 <body>
-	<!-- member_id 를 이용하여 nickname을 가져와야함 -->
 	<br />
-
 		<h1 align="center"> board </h1>
 		<%-- 후기 없을때 --%>
 		<c:if test="${count == 0}">
