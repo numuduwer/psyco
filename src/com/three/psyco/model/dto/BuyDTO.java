@@ -15,6 +15,20 @@ public class BuyDTO {
 	private Timestamp reg;
 	private String item_name;
 	private String meun_img;
+	private Integer shop_num;
+	
+	public String getMeun_img() {
+		return meun_img;
+	}
+	public void setMeun_img(String meun_img) {
+		this.meun_img = meun_img;
+	}
+	public Integer getShop_num() {
+		return shop_num;
+	}
+	public void setShop_num(Integer shop_num) {
+		this.shop_num = shop_num;
+	}
 	public int getBuy_num() {
 		return buy_num;
 	}

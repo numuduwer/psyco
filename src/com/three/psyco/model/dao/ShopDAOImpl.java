@@ -27,7 +27,10 @@ public class ShopDAOImpl implements ShopDAO {
 			count = sqlSession.selectOne("shop.getMyShopCount",id);
 		}else if(pageName.equals("menuList")) {
 			count = sqlSession.selectOne("shop.getMyMenuCount", id);
+		}else if(pageName.equals("reviewList")) {
+			count = sqlSession.selectOne("shop.getShopReviewCount", id);
 		}
+		
 		
 		return count;
 	}
@@ -48,6 +51,8 @@ public class ShopDAOImpl implements ShopDAO {
 			list = sqlSession.selectList("shop.getMyShopList", map);	
 		}else if(pageName.equals("menuList")){
 			list = sqlSession.selectList("shop.getMenuList", map);
+		}else if(pageName.equals("reviewList")){
+			list = sqlSession.selectList("shop.getShopReviewList", map);
 		}
 		return list;
 	}
@@ -75,9 +80,7 @@ public class ShopDAOImpl implements ShopDAO {
 		List<Integer> myShop_ShopNumList = sqlSession.selectList("shop.getMyShop_ShopNumList", member_Num);
 		return myShop_ShopNumList;
 	}
-	
 
-	
-	
+
 
 }

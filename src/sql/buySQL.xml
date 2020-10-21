@@ -6,9 +6,9 @@
   <select id="buyCount" resultType="int">
   	select count(*) from buy
   </select>
-  <select id="buyList" resultType="hashmap" parameterType="BuyDTO">
+  <select id="buyList" resultType="BuyDTO" parameterType="hashmap">
   <![CDATA[
-  	SELECT B.*,r FROM (SELECT A.*,rownum r FROM (select bu.*,it.item_name,me.menu_img from buy bu inner join item it on bu.item_num=it.item_num inner join menu me on bu.menu_num=me.menu_num WHERE member_num = #{member_num} )A)B WHERE r >=#{start} AND r <=#{end}
+  	SELECT B.*,r FROM (SELECT A.*,rownum r FROM (select bu.*,it.item_name,it.shop_num,me.menu_img from buy bu inner join item it on bu.item_num=it.item_num inner join menu me on bu.menu_num=me.menu_num WHERE member_num = #{member_num} )A)B WHERE r >=#{start} AND r <=#{end}
   	]]>
   </select>
   </mapper>

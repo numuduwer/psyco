@@ -10,9 +10,7 @@ import com.three.psyco.model.dto.ReviewDTO;
 
 public interface ReviewService {
 	
-	public int insertReviews(MultipartHttpServletRequest request,int Shop_num,String writer)throws SQLException;
-
-	public List getReviews(int startRow,int endRow,String member_id)throws SQLException;
+	public int insertReviews(MultipartHttpServletRequest request,int item_num,String writer,int shop_num)throws SQLException;
 	
 	public int getReviewc()throws SQLException;
 	

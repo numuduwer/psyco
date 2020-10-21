@@ -11,15 +11,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.three.psyco.model.dto.ItemDTO;
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.MemberDTO;
 import com.three.psyco.model.dto.ReviewDTO;
 import com.three.psyco.service.bean.CommonsServiceImpl;
 import com.three.psyco.service.bean.MemberServiceImpl;
 import com.three.psyco.service.bean.ReviewServiceImpl;
+import com.three.psyco.service.bean.ShopServiceImpl;
 
 @Controller
 @RequestMapping("/user/")
@@ -32,6 +35,9 @@ public class UserBean {
 	
 	@Autowired
 	private ReviewServiceImpl reviewService=null;
+	
+	@Autowired
+	private ShopServiceImpl shopService=null;
 	
 
 	
@@ -47,18 +53,25 @@ public class UserBean {
 	//buy 부분
 	@RequestMapping("myPageList.com")// int member_num 나중에 넣어야함
 	public String myPageList(String pageNum,Model model)throws SQLException {
-		int member_num = 3;
-		System.out.println("member_num1=="+member_num);
-		ListData data =commonsService.getbuyData(pageNum, member_num); 
-		model.addAttribute("pageNum",  data.getPageNum());
-		model.addAttribute("pageSize", data.getPageSize());
-		model.addAttribute("currPage", data.getCurrPage());
-		model.addAttribute("startRow", data.getStartRow());
-		model.addAttribute("endRow", data.getEndRow());
-		model.addAttribute("number", data.getNumber());
-		model.addAttribute("count", data.getCount());
-		model.addAttribute("articleList", data.getArticleList());
-
+	
+			int member_num=91;
+			System.out.println("member_num1=="+member_num);
+			ListData data =commonsService.getbuyData(pageNum, member_num); 
+			model.addAttribute("pageNum",  data.getPageNum());
+			model.addAttribute("pageSize", data.getPageSize());
+			model.addAttribute("currPage", data.getCurrPage());
+			model.addAttribute("startRow", data.getStartRow());
+			model.addAttribute("endRow", data.getEndRow());
+			model.addAttribute("number", data.getNumber());
+			model.addAttribute("count", data.getCount());
+			model.addAttribute("articleList", data.getArticleList());
+			System.out.println("data.getArticleList()=="+data.getArticleList());
+			
+			ListData data2=commonsService.getrListData(pageNum, model);
+			model.addAttribute("reviewCount", data2.getCount());
+			model.addAttribute("reviewArticleList", data2.getArticleList());
+			System.out.println("data2.getArticleList()=="+data2.getArticleList());
+		
 		return "user/myPageList";
 	}
 	
@@ -147,8 +160,7 @@ public class UserBean {
 	
 	//후기 등록!	
 	@RequestMapping("reviewForm.com") //,int item_num 페이지 붙일땐 필요
-	public String reviewForm(HttpServletRequest request,Model model)throws Exception {
-		int item_num =19;	
+	public String reviewForm(HttpServletRequest request,Model model,int item_num,int shop_num)throws Exception {
 		//int shop_num=Integer.getInteger(request.getParameter("shop_num"));
 		HttpSession sessions=request.getSession();
 		String session=(String)sessions.getAttribute("memId");
@@ -163,10 +175,10 @@ public class UserBean {
 	//페이지 설정 다시해야할 듯 ! JSP
 	@RequestMapping("reviewPro.com")
 	public String reviewPro(MultipartHttpServletRequest request,String writer,int item_num,Model model,String pageNum)throws Exception {
-		pageNum="1";
+		ItemDTO dto=shopService.getItemOne(item_num, pageNum, model);
 		System.out.println(writer);
 		System.out.println(item_num);
-		int result=reviewService.insertReviews(request, item_num, writer);
+		int result=reviewService.insertReviews(request, item_num, writer,dto.getShop_num());
 		model.addAttribute("result", result);
 		model.addAttribute("pageNum", pageNum);
 		return "review/reviewPro";
@@ -176,8 +188,6 @@ public class UserBean {
 	@RequestMapping("reviewList.com")
 	public String reviewList(String pageNum,Model model) throws SQLException {		
 		ListData data=commonsService.getrListData(pageNum, model);
-		
-		
 		model.addAttribute("pageNum",  data.getPageNum());
 		model.addAttribute("pageSize", data.getPageSize());
 		model.addAttribute("currPage", data.getCurrPage());

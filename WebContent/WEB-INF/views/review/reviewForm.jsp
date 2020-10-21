@@ -18,6 +18,8 @@
 	<form action="/psyco/user/reviewPro.com" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="writer" value="${nickname}"/>
 	<input type="hidden" name="item_num" value="${item_num}">
+	<input type="hidden" name="shop_num" value="${shop_num}">
+	<input type="hidden" name="pageNum" value="${pageNum}">
 	
 	
 		<table>

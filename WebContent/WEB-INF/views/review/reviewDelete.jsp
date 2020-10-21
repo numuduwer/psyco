@@ -11,13 +11,13 @@
 	<c:if test="${res ne 'null'}">
 		<script>
 			alert("삭제완료");
-			window.location.href='/psyco/user/reviewList.com?pageNum=${pageNum}';
+			window.location.href='/psyco/user/myPageList.com?pageNum=${pageNum}';
 		</script>		
 	</c:if>
 	<c:if test="${res eq 'null'}">
 		<script type="text/javascript">
 			alert('오류 발생');
-			window.location.href='/psyco/user/reviewList.com?pageNum=${pageNum}';
+			window.location.href='/psyco/user/myPageList.com?pageNum=${pageNum}';
 		</script>
 	</c:if>
 

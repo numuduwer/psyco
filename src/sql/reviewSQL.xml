@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="review">
   	<insert id="insertReview" parameterType="ReviewDTO">
-  		insert into review values(review_seq.nextVal,#{writer},#{category},#{content},#{grade},#{confirm},#{ref},#{reply_content},#{item_num},#{member_id},#{review_img},sysdate)
+  		insert into review values(review_seq.nextVal,#{writer},#{category},#{content},#{grade},#{confirm},#{ref},#{reply_content},#{item_num},#{shop_num},#{member_id},#{review_img},sysdate)
   	</insert>
   	<select id="getReview" parameterType="hashmap" resultType="ReviewDTO">
   		<![CDATA[

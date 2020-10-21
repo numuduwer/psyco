@@ -36,14 +36,12 @@ public class ReviewDAOImpl implements ReviewDAO {
 		map.put("end", endRow);
 		map.put("member_id", member_id);
 		list=sqlSession.selectList("review.getReview",map);
-		System.out.println("list==="+list);
 		return list;
 	}
 
 	@Override
 	public int getCount() throws SQLException {
 		int count = sqlSession.selectOne("review.getCount");
-		System.out.println("dao count : " + count);
 		return count;
 	}
 
@@ -62,9 +60,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	@Override
 	public String deleteReview(int review_num) throws SQLException {
-		System.out.println("review_num3="+review_num);
 		String res=sqlSession.selectOne("review.deleteReview",review_num);
-		System.out.println(res);
 		return res;
 	}
 

@@ -14,12 +14,19 @@ public class ReviewDTO {
 	private String reply_content;
 	private int item_num;
 	private String member_id;
+	private Integer shop_num;
 	private String review_img;
 	private Timestamp reg;
 	private String item_name;
 	
 	
 
+	public Integer getShop_num() {
+		return shop_num;
+	}
+	public void setShop_num(Integer shop_num) {
+		this.shop_num = shop_num;
+	}
 	public String getMember_id() {
 		return member_id;
 	}

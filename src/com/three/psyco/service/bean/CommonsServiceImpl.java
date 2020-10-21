@@ -13,9 +13,11 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.mvc.Controller;
 
 import com.three.psyco.controller.bean.ShopBean;
+import com.three.psyco.model.dao.BuyDAOImpl;
 import com.three.psyco.model.dao.ItemDAOImpl;
 import com.three.psyco.model.dao.MenuDAO;
 import com.three.psyco.model.dao.MenuDAOImpl;
+import com.three.psyco.model.dao.ReviewDAOImpl;
 import com.three.psyco.model.dao.ShopDAOImpl;
 import com.three.psyco.model.dao.SuperDAOImpl;
 import com.three.psyco.model.dto.ListData;
@@ -46,6 +48,12 @@ public class CommonsServiceImpl implements CommonsService {
 	
 	@Autowired
 	private MenuDAOImpl menuDAO = null;
+	
+	@Autowired
+	private ReviewDAOImpl reviewDAO =null;
+	
+	@Autowired
+	private BuyDAOImpl buyDAO =null;
 
 
 	
@@ -222,7 +230,7 @@ public class CommonsServiceImpl implements CommonsService {
 		
 		// 글 있으면 전부 가져오기
 		if(count >0) {
-			 articleList = reviewService.getReviews(startRow, endRow,member_id);
+			 articleList = reviewDAO.getReview(startRow, endRow, member_id);
 		}
 		
 		number = count - (currPage-1) * pageSize;
@@ -244,6 +252,7 @@ public class CommonsServiceImpl implements CommonsService {
 	}
 
 	//구매 리스트
+	@Override
 	public ListData getbuyData(String pageNum,int member_num) throws SQLException {
 		// 디폴트 값 설정 
 		System.out.println("member_num2=="+member_num);
@@ -267,7 +276,7 @@ public class CommonsServiceImpl implements CommonsService {
 		
 		// 글 있으면 전부 가져오기
 		if(count >0) {
-			articleList = buyService.getBuyLists(startRow, endRow, member_num);
+			articleList = buyDAO.getBuyList(startRow, endRow, member_num);
 		}
 		
 		number = count - (currPage-1) * pageSize;

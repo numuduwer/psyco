@@ -24,7 +24,7 @@
 		<tr>
 			<td><input type="button" value="수정" onclick="window.location='reviewModify.com?review_num=${article.review_num}&pageNum=${pageNum}'"/></td>
 			<td><input type="button" value="삭제" onclick="window.location='reviewDelete.com?review_num=${article.review_num}&pageNum=${pageNum}'"/></td>
-			<td><input type="button" value="리스트 가기" onclick="window.location='reviewList.com?review_num=${article.review_num}&pageNum=${pageNum}'"/></td>
+			<td><input type="button" value="리스트 가기" onclick="window.location='myPageList.com?review_num=${article.review_num}&pageNum=${pageNum}'"/></td>
 		</tr>
 	</table>
 

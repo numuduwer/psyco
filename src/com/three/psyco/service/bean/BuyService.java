@@ -7,7 +7,6 @@ import com.three.psyco.model.dto.ListData;
 
 public interface BuyService {
 	
-	public List getBuyLists(int startRow,int endRow,int member_num) throws SQLException ;
 
 	public int getBuyCounts()throws SQLException ;
 	

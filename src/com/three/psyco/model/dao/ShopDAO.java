@@ -13,6 +13,5 @@ public interface ShopDAO {
 	public List getList(String pageName, int memNum, int startRow, int endRow) throws SQLException;
 	public ShopDTO getShopData(int id ) throws SQLException;
 	public int updateShopData(ShopDTO dto) throws SQLException;
-	
 	public List<Integer> getMyShop_ShopNumList(int member_Num) throws SQLException;
 }
