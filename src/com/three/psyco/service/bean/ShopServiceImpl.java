@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -149,8 +150,24 @@ public class ShopServiceImpl implements ShopService {
 		return result;
 	}
 	
-
-	
+	@Override
+	public JSONObject getMenuInfoFromMenuNum(int menu_num) throws SQLException {
+		MenuDTO menu = menuDAO.getMenuInfoFromMenuNum(menu_num);
+		
+		JSONObject jSONObject = new JSONObject();
+		jSONObject.put("menu_num", menu.getMenu_num());
+		jSONObject.put("menu_name", menu.getMenu_name());
+		jSONObject.put("content", menu.getContent());
+		jSONObject.put("menu_img", menu.getMenu_img());
+		jSONObject.put("price", menu.getPrice());
+		jSONObject.put("category", menu.getCategory());
+		jSONObject.put("season", menu.getSeason());
+		jSONObject.put("sett", menu.getSett());
+		jSONObject.put("shop_num", menu.getShop_num());
+		jSONObject.put("reg", menu.getReg().toString());
+		
+		return jSONObject;
+	}
 	
 	
 

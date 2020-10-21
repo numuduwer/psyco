@@ -6,11 +6,18 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.event.MenuListener;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +30,6 @@ import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.MenuDTO;
 import com.three.psyco.model.dto.ShopDTO;
 import com.three.psyco.service.bean.CommonsServiceImpl;
-import com.three.psyco.service.bean.ItemServiceImpl;
 import com.three.psyco.service.bean.ShopService;
 import com.three.psyco.service.bean.ShopServiceImpl;
 
@@ -35,9 +41,6 @@ public class ShopBean {
 	private ShopServiceImpl shopService = null;
 	@Autowired
 	private CommonsServiceImpl commonsService = null;
-
-	@Autowired
-	private ItemServiceImpl itemService = null;
 
 	public static String controllerName = "shopBean";
 
@@ -129,6 +132,17 @@ public class ShopBean {
 		commonsService.setListDataToModel(model, data);
 		return "shop/menuList";
 	}
+	
+	@RequestMapping("MyMenuList.com")
+	public String MyMenuList(HttpSession session, Model model) throws SQLException {
+		int member_Num = (int) session.getAttribute("memNum");
+		List<Integer> myShop_ShopNumList = commonsService.getMyShop_MemberNumList(member_Num);
+		List<MenuDTO> menuList = commonsService.getMyMenuListFromShopNum(myShop_ShopNumList);
+		model.addAttribute("menuList", menuList);
+		
+		return "shop/myMenuList";
+	}
+	
 		
 	@RequestMapping("menuModify.com")
 	public String menuModify(int menu_num,String pageName, Model model) throws SQLException {
@@ -253,12 +267,33 @@ public class ShopBean {
 		
 		return "shop/itemDeletePro";
 	}
-	
 
-	@RequestMapping("itemEnrollment.com")
+	@RequestMapping("itemEnrollmentForm.com")
 	public String itemEnrollment() {
 		return "shop/itemEnrollmentForm";
 	}
 	
+	@RequestMapping(value="getMenuInfoFromMenuNum.com")
+	@ResponseBody
+	public ResponseEntity<String> getMenuInfoFromMenuNum(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		int menu_num = Integer.parseInt(request.getParameter("menu_num"));
+		JSONObject jSONObject = shopService.getMenuInfoFromMenuNum(menu_num);
+		response.setContentType("text/html;charset=UTF-8");
+		String json = jSONObject.toString();
 
+		// 응답헤더 설정
+		HttpHeaders resHeaders = new HttpHeaders();
+		resHeaders.add("content-Type", "application/json;charset=UTF-8");
+		
+		return new ResponseEntity<String>(json, resHeaders, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value="itemEnrollmentPro.com")
+	public String itemEnrollmentPro(ItemDTO dto, HttpServletRequest request) {
+		System.out.println(dto.getItem_name());
+		System.out.println(request.getParameter("startDate1"));
+		System.out.println(request.getParameter("startDate2"));
+		
+		return "";
+	}
 }

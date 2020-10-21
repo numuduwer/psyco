@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.three.psyco.model.dto.ItemDTO;
+import com.three.psyco.model.dto.MenuDTO;
 import com.three.psyco.model.dto.ShopDTO;
 
 @Repository
@@ -69,9 +70,13 @@ public class ShopDAOImpl implements ShopDAO {
 		
 	}
 	
+	@Override
+	public List<Integer> getMyShop_ShopNumList(int member_Num) throws SQLException {
+		List<Integer> myShop_ShopNumList = sqlSession.selectList("shop.getMyShop_ShopNumList", member_Num);
+		return myShop_ShopNumList;
+	}
 	
-	
-	
+
 	
 	
 
