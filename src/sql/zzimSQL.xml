@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <!-- namespace : 내부에 쿼리태크 호출시 namespace속성명 쿼리태그 id값-->
+ 
+ <mapper namespace="zzim">
+ 	
+ 	
+ 	<select id="myPageZzim" parameterType="int" resultType="ZzimDTO">
+ 		<![CDATA[
+		SELECT rownum rn, menu.MENU_IMG,menu.MENU_NAME,menu.price,zzim.MENU_NUM,menu.shop_num
+		FROM menu menu, zzim zzim
+		WHERE menu.menu_num = zzim.menu_num AND zzim.MEMBER_NUM=#{value} and rownum >= 1 and rownum <= 10
+		]]>
+ 	</select>
+ 	
+ 	
+
+ </mapper>

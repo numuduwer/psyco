@@ -12,6 +12,9 @@
 	<br />
 	<h1 align="center">Detail</h1>
 	<table>
+	<c:if test="${pageNum == 2}">
+			<button onclick="window.location='/psyco/user/myPageList2.com'">마이페이지 돌아가기</button>
+	</c:if>
 		<tr>
 			<td width="80" align="center">제 목</td>
 		</tr>
