@@ -58,9 +58,8 @@
   		delete from item where item_num=#{item_num}
   	</delete>
   	
-  	
-  	
-  	
-  	
+  	<update id="updatePrice" parameterType="int">
+  		delete from item where item_num=#{item_num}
+  	</update>
   	
   </mapper>

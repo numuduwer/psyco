@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.service.bean.CommonsServiceImpl;
+import com.three.psyco.service.bean.Scheduler;
 
 
 
@@ -26,25 +27,28 @@ public class MainBean {
 	
 	@Autowired
 	public static String controller = "mainBean";
-
+	
+	@Autowired
+	public Scheduler scheduler = null;
 	
 	@RequestMapping("main.com")
 	public String main(Model model,String pageNum, String pageName) throws SQLException {
 		System.out.println("controller 잘 연결 ");
 		
 		ListData data = commonsService.getListData(pageName,pageNum,controller);
-		commonsService.setListDataToModel(model, data);
-		
+		commonsService.setListDataToModel(model, data);	
 		return "main/main";
 	}
 	
 
 	@RequestMapping("content.com")
-	public String content() {
+	public String content(int itemNum, Model model) {
 		
 		System.out.println("controller 잘 연결 ");
 		return "main/content";
 	}
+	
+	
 	
 	
 	

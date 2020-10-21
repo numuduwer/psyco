@@ -84,6 +84,13 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	
+
+	public void updatePrice(int cycle) {
+		sqlSession.update("item.updatePrice", cycle);
+		
+	}
+
+	
 	
 	
 	

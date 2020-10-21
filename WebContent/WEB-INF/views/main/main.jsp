@@ -27,6 +27,8 @@ $('#btn1').on('click', function(){
     });
 });
 
+
+
 </script>
 <body>
 	
@@ -39,7 +41,9 @@ $('#btn1').on('click', function(){
 
 
             <div class="new_content">
-                신메뉴
+          
+           
+                
             </div>
             <div class="rank_content">
                 랭킹
