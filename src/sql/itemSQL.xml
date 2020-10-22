@@ -30,18 +30,17 @@
   	</select>
   	
   	<select id="getMyItemList" parameterType="hashmap" resultType="ItemDTO">
-  		<![CDATA[
-		SELECT rownum rn, ITEM_NUM,ITEM_NAME,CONTENT,AMOUNT,STARTDATE,ENDDATE,DISCOUNT_CYCLE,SELLING_STATUS,
-		PROGRESS_STATUS,MAXPRICE,MINPRICE,AUCTION_UNIT,SETT,COMMENT1,MENU_NUM,mem_num  
-		FROM item
+  		<![CDATA[		
+		SELECT rownum rn, item.ITEM_NUM,item.ITEM_NAME,item.CONTENT,item.AMOUNT,item.STARTDATE,item.ENDDATE,item.DISCOUNT_CYCLE,item.SELLING_STATUS,
+		item.PROGRESS_STATUS,item.MAXPRICE,item.MINPRICE,item.AUCTION_UNIT,item.SETT,item.COMMENT1,item.MENU_NUM,item.mem_num,item.shop_num,menu.menu_img
+		FROM item item, menu menu
 		WHERE rownum >= #{startRow}
 		AND rownum <= #{endRow}
-		AND MEM_NUM = #{mem_num}
-		and selling_status = #{selling}
+		AND item.MEM_NUM = #{mem_num}
+		and item.selling_status = #{selling}
+		and menu.menu_num = item.menu_num
   		]]>
   	</select>
-  	
-  	
   	
   	
   	<!-- 해당 역경매 상품 수정 -->

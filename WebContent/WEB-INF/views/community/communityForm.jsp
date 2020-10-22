@@ -31,7 +31,6 @@
 			<input type="hidden" name="category" value= "${category}"/>
 			<input type="hidden" name="grade" value= "${grade}"/>
 			<input type="hidden" name="pageNum" value= "${pageNum}"/>
-			<input type="hidden" name="category" value= "${category}"/>
 			<input type="hidden" name="community_num" value= "${community_num}"/>
 		
 		<table>

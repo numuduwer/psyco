@@ -25,7 +25,7 @@ public class CommunityDAOImpl implements CommunityDAO {
 			String numb = sqlSession.selectOne("community.maxNum");
 			if(numb != null) {
 				number = Integer.parseInt(numb) + 1;
-				dto.setCommunity_num(number);
+
 			}else {
 				number = 1;
 			}
@@ -38,11 +38,8 @@ public class CommunityDAOImpl implements CommunityDAO {
 				
 				sqlSession.update("community.updateRestep", map);
 				
-				dto.setRe_step(dto.getRe_step()+1);
-				dto.setRe_level(dto.getRe_level()+1);
-
 				
-			}else {
+			}else{
 				dto.setRef(number);
 				dto.setRe_level(0);
 				dto.setRe_step(0);

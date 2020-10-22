@@ -123,7 +123,6 @@ public class CommunityBean {
 	@RequestMapping("communityPro.com")
 	public String communityPro(MultipartHttpServletRequest request, Model model,String pageNum,String grade,String category) throws Exception {
 		
-		
 
 			communityService.insertArticleSv(request, pageNum, grade, category, model);
 		

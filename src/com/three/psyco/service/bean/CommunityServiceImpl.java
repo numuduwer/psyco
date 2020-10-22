@@ -33,27 +33,14 @@ public class CommunityServiceImpl implements CommunityService {
 		
 	
 		CommunityDTO dto = new CommunityDTO();
-		String subject = request.getParameter("subject");
-		if(subject.equals("[답글]")) {
-			dto.setCommunity_num(Integer.parseInt(request.getParameter("community_num")));
-			dto.setContent(request.getParameter("content"));
-			dto.setSubject(request.getParameter("subject"));
-			dto.setGrade(request.getParameter("grade"));
-			dto.setWriter(request.getParameter("writer"));
-			dto.setCommunity_img(request.getParameter("writer"));
-			dto.setCategory(request.getParameter("category"));
-			commnuityDAO.insertArticle(dto);
-			model.addAttribute("category",category);
-			model.addAttribute("pageNum",pageNum);
-		}else {
-		
+		String subject = request.getParameter("subject");	
 		
 			// - 파일 정보 꺼내기
 		String path = request.getRealPath("save");
 			MultipartFile mf = null;
 			try { 
 				mf = request.getFile("img");
-				if(request.getFile("img") == null) {
+				if(request.getFile("img") == null && subject.equals("[답글]")) {
 					String orgName = "asd.asd";
 					String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
 					String ext = orgName.substring(orgName.lastIndexOf('.'));
@@ -98,7 +85,8 @@ public class CommunityServiceImpl implements CommunityService {
 			}
 		
 			commnuityDAO.insertArticle(dto);
-		}
+			model.addAttribute("category",category);
+		
 	}
 
 
@@ -181,6 +169,7 @@ public class CommunityServiceImpl implements CommunityService {
 		}
 		model.addAttribute("pageNum",pageNum);
 		model.addAttribute("category",category);
+		model.addAttribute("community_num",community_num);
 		commnuityDAO.updateArticle(dto);
 		
 		return 0;
@@ -199,6 +188,7 @@ public class CommunityServiceImpl implements CommunityService {
 		
 		model.addAttribute("category", category);
 		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("community_num",community_num);
 		
 		commnuityDAO.updateArticle(dto);
 		
