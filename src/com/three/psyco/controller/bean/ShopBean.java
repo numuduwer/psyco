@@ -302,6 +302,5 @@ public class ShopBean {
 		String result_str = "{\"result\":" + result + "}";
 		System.out.println(result);
 		return result_str;
-		
 	}
 }

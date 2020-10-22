@@ -30,4 +30,8 @@ public interface ItemDAO {
 	public int itemEnrollmentPro(ItemDTO dto) throws ParseException;
 	
 	public List<JoinResultDTO> getEntireList();
+	
+	public int modifyStatus(int item_num);
+	
+	public int modifyAmountZero(int item_num);
 }
