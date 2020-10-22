@@ -93,14 +93,24 @@ public class ItemDAOImpl implements ItemDAO {
 		return result;
 	}
 	
+
+
+	public void updatePrice(int cycle) {
+		sqlSession.update("item.updatePrice", cycle);
+		
+	}
+
+	
+	
+	
+
 	@Override
 	public List<JoinResultDTO> getEntireList() {
 		List<JoinResultDTO> list = sqlSession.selectList("item.getEntireList");
 		return list;
 		
 	}
-	
-	
+
 	
 	
 	

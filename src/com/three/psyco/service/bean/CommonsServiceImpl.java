@@ -199,6 +199,9 @@ public class CommonsServiceImpl implements CommonsService {
 		return menuList;
 		
 	}
+	
+	
+
 
 	@Override
 	public List<JoinResultDTO> getEntireList() {

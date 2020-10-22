@@ -15,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.three.psyco.model.dto.JoinResultDTO;
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.service.bean.CommonsServiceImpl;
+import com.three.psyco.service.bean.Scheduler;
 
 
 
@@ -30,7 +31,9 @@ public class MainBean {
 	
 	@Autowired
 	public static String controller = "mainBean";
-
+	
+	@Autowired
+	public Scheduler scheduler = null;
 	
 	@RequestMapping("main.com")
 	public String main(Model model,String pageNum, String pageName, HttpSession session) throws SQLException {
@@ -42,21 +45,25 @@ public class MainBean {
 		
 		List<JoinResultDTO> itemList = commonsService.getEntireList();
 		
-		
-		
+		ListData data = commonsService.getListData(pageName,pageNum,controller);
+		commonsService.setListDataToModel(model, data);	
+
 		System.out.println("itemList의 사이즈 : " + itemList.size());
 		model.addAttribute("itemList", itemList);
 		
+
 		return "main/main";
 	}
 	
 
 	@RequestMapping("content.com")
-	public String content() {
+	public String content(int itemNum, Model model) {
 		
 		System.out.println("controller 잘 연결 ");
 		return "main/content";
 	}
+	
+	
 	
 	
 	
