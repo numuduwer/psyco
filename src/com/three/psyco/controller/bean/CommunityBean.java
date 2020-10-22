@@ -232,7 +232,7 @@ public class CommunityBean {
 		System.out.println("category : " + category);
 		communityService.deleteArticleSv(dto);
 		model.addAttribute("pageNum",pageNum);
-		model.addAttribute("category",category);
+		model.addAttribute("category",category);   
 		
 		return "community/communityDeletePro";
 	}
