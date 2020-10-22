@@ -106,9 +106,7 @@
         </div>
         <div class="shop_comment">
             <h2>사장님 오늘의 한마디</h2>
-            <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis mollitia odio illum suscipit.
-                Laboriosam
-                qui temporibus,</h3>
+            <h3>${idto.content}</h3>
         </div>
 
     </section>
@@ -191,6 +189,13 @@
         </div>
         <div id="tab3" data-tab-content class="items">
             <div class="tab3_item">
+            	<c:if test="${rcount == 0}">
+					<table>
+						<tr>
+							<td> 후기가 없습니다. </td>
+						</tr>
+					</table>
+				</c:if>
                 <h2>최근 리뷰</h2>
                 <table>
                     <tr>
@@ -200,7 +205,6 @@
                         <th>작성시간</th>
                         <th>내용</th>
                     </tr>
-                    ${article.rcount}
                     <c:forEach var="article" items="${rarticleList}">
                     <tr>
                     	<td>${rnumber}
