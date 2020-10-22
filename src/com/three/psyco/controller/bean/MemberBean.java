@@ -37,6 +37,8 @@ public class MemberBean {
 	
 	@RequestMapping("loginCheck.com")
 	public String loginCheck(String member_Id, String pw, Model model, HttpSession session) {
+		System.out.println("member_id : "+member_Id );
+		System.out.println("pw : "+pw );
 		int count = memberService.loginCheck(member_Id, pw);
 		model.addAttribute("count", count);
 		return "member/loginCheck";
@@ -129,6 +131,8 @@ public class MemberBean {
 
 	@RequestMapping("shopSignupPro.com")
 	public String shopSignPro(MultipartHttpServletRequest request,int member_num) {
+	
+	
 		String status ="0";
 		String approve_status="0";
 		
