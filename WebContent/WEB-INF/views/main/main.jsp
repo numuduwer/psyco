@@ -33,11 +33,13 @@ $('#btn1').on('click', function(){
 
 </script>
 <body>
-	
+
+
     <!--  검색베너  & 신메뉴 , 랭킹미리보기 -->
     <section id="banner_section">
+      
         <div id="banner">
-            검색창 & 아이디어 소개
+            <img src="/psyco/resources/img/main/where.jpg" alt="">
         </div>
         <div id="new__box">
 
