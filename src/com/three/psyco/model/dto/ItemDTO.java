@@ -20,6 +20,7 @@ public class ItemDTO {
 	private String comment1;
 	private Integer menu_num;
 	private Integer mem_num;
+	private Integer shop_num;
 	
 	public Integer getItem_num() {
 		return item_num;
@@ -117,5 +118,10 @@ public class ItemDTO {
 	public void setMem_num(Integer mem_num) {
 		this.mem_num = mem_num;
 	}
-
+	public Integer getShop_num() {
+		return shop_num;
+	}
+	public void setShop_num(Integer shop_num) {
+		this.shop_num = shop_num;
+	}
 }

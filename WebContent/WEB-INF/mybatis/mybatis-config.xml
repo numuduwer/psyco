@@ -19,6 +19,7 @@
 		<typeAlias type="com.three.psyco.model.dto.MidDTO" alias="MidDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.TestDTO" alias="TestDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.ItemDTO" alias="ItemDTO"/>
+		<typeAlias type="com.three.psyco.model.dto.JoinResultDTO" alias="JoinResultDTO"/>
 	</typeAliases>
 	
 	<mappers>

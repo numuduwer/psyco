@@ -24,36 +24,41 @@
 		}
 		
 		function enrollment(form) {
-			
-			console.log(form)
-			
+			var itemData = new Object();
 			var item_name = form.item_name.value;
-			console.log(item_name);
-			var content = form.content.value;
-			console.log(content);
-			var amount = form.amount.value;
-			console.log(amount);
-			var startDate = form.startDate1.value + " " + form.startDate2.value + ":00";
-			console.log(startDate);
-			var endDate = form.endDate1.value + " " + form.endDate2.value + ":00";
-			console.log(endDate);
-			var discount_cycle = form.discount_cycle.value;
-			console.log(discount_cycle);
-			var maxPrice = form.maxPrice.value;
-			console.log(maxPrice);
-			var minPrice = form.minPrice.value;
-			console.log(minPrice);
-			var aution_unit = form.aution_unit.value;
-			console.log(aution_unit);
-			var sett = form.sett.value;
-			console.log(sett);
-			var comment = form.menu_content.value;
-			console.log(comment);
-			var menu_num = form.menu_num.value;
-			console.log(menu_num);
-			var shop_num = form.shop_num.value;
-			console.log(shop_num);
 			
+			itemData.item_name = form.item_name.value;
+			itemData.content = form.content.value;
+			itemData.amount = form.amount.value;
+			itemData.startDate = form.startDate1.value + " " + form.startDate2.value + ":00";
+			itemData.endDate = form.endDate1.value + " " + form.endDate2.value + ":00";
+			itemData.discount_cycle = form.discount_cycle.value;
+			itemData.maxPrice = form.maxPrice.value;
+			itemData.minPrice = form.minPrice.value;
+			itemData.auction_unit = form.aution_unit.value;
+			itemData.sett = form.sett.value;
+			itemData.comment = form.menu_content.value;
+			itemData.menu_num = form.menu_num.value;
+			itemData.shop_num = form.shop_num.value;
+			
+			var jsonData = JSON.stringify(itemData);
+			console.log(jsonData);
+			
+			$.ajax({
+				url: "/psyco/shop/itemEnrollmentPro.com",
+				type: "post",
+				dataType: "text",
+				data: jsonData,
+				contentType: "application/json; charset=UTF-8",
+				success: function(result) {
+					console.log(result);
+					alert('등록 되었습니다.');
+					window.location.href='/psyco/shop/itemList.com';
+				},
+				error: function() {
+					
+				}
+			});
 		}
 	
 	</script>
@@ -82,15 +87,19 @@
 			<input type="date" name="startDate1" id="startDate1"> <input type="time" name="startDate2" id="startDate2">  <br>
 			<label for="endDate">경매 종료 일</label> <br>
 			<input type="date" name="endDate1" id="endDate1"> <input type="time" name="endDate2" id="endDate2"><br>
-			<label for="aution_unit">AUTION_UNIT(경매 단위 %)</label> <br>
-			<input type="text" name="aution_unit" id="aution_unit"> <br>
+			<label for="auction_unit">AUTION_UNIT(경매 단위 %)</label> <br>
+			<input type="text" name="aution_unit" id="auction_unit"> <br>
 			<label for="maxPrice">최대가격</label> <br>
 			<input type="text" name="maxPrice" id="maxPrice" readonly> <br>
 			<label for="minPrice">최소가격</label> <br>
 			<input type="text" name="minPrice" id="minPrice"> <br>
 			<label for="discount_cycle">할인 주기(시간)</label> <br>
-			<input type="text" name="discount_cycle" id="discount_cycle"> <br>
-			<label for="sett">세트 여부</label>
+			<select id="discount_cycle" name="discount_cycle">
+				<option value="3000">5분</option>
+				<option value="6000">10분</option>
+				<option value="18000">30분</option>
+			</select> <br>
+			<label for="sett">세트 여부</label> <br>
 			<input type="checkbox" id="sett" value="1">
 			
 			<img alt="이미지를 삽입해주세요" src="" id="menu_img"> <br>

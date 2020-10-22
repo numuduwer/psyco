@@ -1,7 +1,7 @@
 package com.three.psyco.service.bean;
 
 import java.sql.SQLException;
-
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,7 @@ import com.three.psyco.model.dao.MenuDAO;
 import com.three.psyco.model.dao.MenuDAOImpl;
 import com.three.psyco.model.dao.ShopDAOImpl;
 import com.three.psyco.model.dao.SuperDAOImpl;
+import com.three.psyco.model.dto.JoinResultDTO;
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.MenuDTO;
 
@@ -202,6 +203,12 @@ public class CommonsServiceImpl implements CommonsService {
 	
 
 
-
+	@Override
+	public List<JoinResultDTO> getEntireList() {
+		List<JoinResultDTO> itemList = itemDAO.getEntireList();
+	
+		
+		return itemList;
+	}
 
 }
