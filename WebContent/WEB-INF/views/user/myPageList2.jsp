@@ -13,7 +13,7 @@
 
 		function popupOpen(zzim_num){
 			var popUrl = "/psyco/user/zzimDelete.com?zzim_num=" + zzim_num;	//팝업창에 출력될 페이지 URL		
-			var popOption = "width=370, height=360, left=500,top=500, resizable=no, scrollbars=no, status=no";    //팝업창 옵션		
+			var popOption = "width=300, height=300, left=500,top=500, resizable=no, scrollbars=no, status=no";    //팝업창 옵션		
 				window.open(popUrl,"",popOption);
 			}
 		
