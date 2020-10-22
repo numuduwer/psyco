@@ -22,9 +22,21 @@
  		delete from menu where menu_num =#{value}
  	</delete>
  	
+
+ 	<!-- 해당 음식 content 페이지에서 해당가게 이미지 리스트 뿌려주기 -->
+	<select id="getContentImgList" parameterType="int" resultType="menuDTO">
+		<![CDATA[
+		SELECT rownum rn, menu_img 
+		FROM menu
+		WHERE rownum >= 1
+		AND rownum <= 4
+		AND shop_num = #{value}
+  		]]>
+	</select>
+
 	<select id="getMenuInfoFromMenuNum" parameterType="int" resultType="menuDTO">
 		select * from menu where menu_num=#{value}
 	</select>
- 	
+
 
  </mapper>

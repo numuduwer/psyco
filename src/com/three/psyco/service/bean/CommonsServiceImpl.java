@@ -38,9 +38,8 @@ public class CommonsServiceImpl implements CommonsService {
 	@Autowired
 	private SuperServiceImpl superService = null;
 	
-	
 	@Autowired
-	private ShopServiceImpl shopService = null;
+	private ShopServiceImpl ShopService = null;
 	
 	
 	@Autowired
@@ -113,6 +112,7 @@ public class CommonsServiceImpl implements CommonsService {
 
 	public ListData getListData(String pageName, String pageNum, int shop_num, String controller) throws SQLException{
 		// 디폴트 값 설정 
+		System.out.println("Commons Service 잘 연결 ");
 		if(pageNum == null) {
 			pageNum = "1";
 		}
@@ -126,6 +126,7 @@ public class CommonsServiceImpl implements CommonsService {
 		List articleList = null;
 		
 		int count = 0;
+		
 		
 		// 글 갯수 불러오기 
 		if(controller.equals("shopBean")) {
@@ -178,12 +179,14 @@ public class CommonsServiceImpl implements CommonsService {
 		
 		// 글 갯수 불러오기 
 		if(controller.equals("mainBean")) {
-			count = itemDAO.count();
+			String selling = "3";
+			count = itemDAO.count(selling);
 		}
 		
 	
 		if(count >0) {
-			articleList = itemDAO.getList(pageName);	
+			String selling = "3";
+			articleList = itemDAO.getList(pageName,selling);	
 		}
 		
 		number = count - (currPage-1) * pageSize;
@@ -212,6 +215,9 @@ public class CommonsServiceImpl implements CommonsService {
 		return menuList;
 		
 	}
+	
+	
+
 
 	@Override
 	public List<Object> getEntireList() throws JsonProcessingException {
@@ -282,5 +288,6 @@ public class CommonsServiceImpl implements CommonsService {
 		}
 		return jsonArray;
 	}
+
 
 }

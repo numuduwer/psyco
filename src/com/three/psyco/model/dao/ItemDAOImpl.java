@@ -21,17 +21,17 @@ public class ItemDAOImpl implements ItemDAO {
 	private SqlSessionTemplate sqlSession = null;
 	
 	@Override
-	public int count() {
-		int count = sqlSession.selectOne("item.countAll");
+	public int count(String selling) {
+		int count = sqlSession.selectOne("item.countAll",selling);
 		return count;
 	}
 	
 	// main 페이지 경매상품 전부 뿌려주기
 	@Override
-	public List getList(String pageName) throws SQLException {
+	public List getList(String pageName,String selling) throws SQLException {
 		
 		System.out.println("pageNameDAO : " + pageName);
-		List list = sqlSession.selectList("item.itemList");
+		List list = sqlSession.selectList("item.itemList",selling);
 		
 		return list;
 	}
@@ -49,27 +49,169 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 	
 	
-	// 사장님 역경매 등록 해놓은것들 전부 가져오기.
+	// 0:임시저장,1:시작전,2:대기,3:판매중,4:판매종료
+	// 현재 해당가게 사장 아이템리스트    (DAO 에서 판매중인지 아닌지 처리)
 	@Override
 	public int count1(int id) throws SQLException {
-
-		int count = sqlSession.selectOne("item.itemOneCount",id);
+		String selling = "0";
+		
+		HashMap map = new HashMap();
+		map.put("id", id);
+		map.put("selling", selling);
+		
+		int count = sqlSession.selectOne("item.itemOneCount",map);
 		System.out.println("count : " + count);
+		
 		return count;
 	}
 	
 	@Override
 	public List getItemList(int id, int startRow, int endRow) {
-		
+		String selling = "0";
 		HashMap map = new HashMap();
 		map.put("mem_num", id);
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
+		map.put("selling", selling);
 		
 		List list = sqlSession.selectList("item.getMyItemList",map);
 		
 		return list;
 	}
+	
+	/////////////////////////1
+	@Override
+	public int countA(int id) throws SQLException {
+		String selling = "1";
+		
+		HashMap map = new HashMap();
+		map.put("id", id);
+		map.put("selling", selling);
+		
+		int count = sqlSession.selectOne("item.itemOneCount",map);
+		System.out.println("count : " + count);
+		
+		return count;
+	}
+	
+	@Override
+	public List getItemListA(int id, int startRow, int endRow) {
+		String selling = "1";
+		HashMap map = new HashMap();
+		map.put("mem_num", id);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("selling", selling);
+		
+		List list = sqlSession.selectList("item.getMyItemList",map);
+		
+		return list;
+	}
+	/////////////////////////////2
+	@Override
+	public int countB(int id) throws SQLException {
+		String selling = "2";
+		
+		HashMap map = new HashMap();
+		map.put("id", id);
+		map.put("selling", selling);
+		
+		int count = sqlSession.selectOne("item.itemOneCount",map);
+		System.out.println("count : " + count);
+		
+		return count;
+	}
+	
+	@Override
+	public List getItemListB(int id, int startRow, int endRow) {
+		String selling = "2";
+		HashMap map = new HashMap();
+		map.put("mem_num", id);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("selling", selling);
+		
+		List list = sqlSession.selectList("item.getMyItemList",map);
+		
+		return list;
+	}
+	/////////////////////////////////3
+	@Override
+	public int countC(int id) throws SQLException {
+		String selling = "3";
+		
+		HashMap map = new HashMap();
+		map.put("id", id);
+		map.put("selling", selling);
+		
+		int count = sqlSession.selectOne("item.itemOneCount",map);
+		System.out.println("count : " + count);
+		
+		return count;
+	}
+	
+	@Override
+	public List getItemListC(int id, int startRow, int endRow) {
+		String selling = "3";
+		HashMap map = new HashMap();
+		map.put("mem_num", id);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("selling", selling);
+		
+		List list = sqlSession.selectList("item.getMyItemList",map);
+		
+		return list;
+	}
+	///////////////////////////////////////////4
+	@Override
+	public int countD(int id) throws SQLException {
+		String selling = "4";
+		
+		HashMap map = new HashMap();
+		map.put("id", id);
+		map.put("selling", selling);
+		
+		int count = sqlSession.selectOne("item.itemOneCount",map);
+		System.out.println("count : " + count);
+		
+		return count;
+	}
+	
+	@Override
+	public List getItemListD(int id, int startRow, int endRow) {
+		String selling = "4";
+		HashMap map = new HashMap();
+		map.put("mem_num", id);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("selling", selling);
+		
+		List list = sqlSession.selectList("item.getMyItemList",map);
+		
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@Override
 	public int itemModifyAticle(ItemDTO dto) {
@@ -94,11 +236,28 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 	
 	@Override
+	public ItemDTO getContentInfo(int item_num) {
+		
+		ItemDTO item = sqlSession.selectOne("item.getContentInfo",item_num);
+		
+		return item;
+	}
+	
+	public void updatePrice(int cycle) {
+		sqlSession.update("item.updatePrice", cycle);
+		
+	}
+
+	
+	
+	
+
+	@Override
 	public List<JoinResultDTO> getEntireList() {
 		List<JoinResultDTO> list = sqlSession.selectList("item.getEntireList");
 		return list;
 	}
-	
+
 	@Override
 	public int modifyStatus(int item_num) {
 		int result = sqlSession.update("item.modifyStatus", item_num);
@@ -110,5 +269,6 @@ public class ItemDAOImpl implements ItemDAO {
 		int result = sqlSession.update("item.modifyAmountZero", item_num);
 		return result;
 	}
+
 	
 }

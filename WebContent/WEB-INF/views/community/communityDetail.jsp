@@ -14,6 +14,9 @@
 	<br/>
 		<h1 align="center"> content </h1>
 		<table align="center">
+		<c:if test="${pageNum == 2}">
+			<button onclick="window.location='/psyco/user/myPageList2.com'">마이페이지 돌아가기</button>
+		</c:if>
 			<tr>
 				<td width="80">제 목 </td>
 				<td colspan="20" align="center" > ${article.subject} </td>
@@ -48,7 +51,7 @@
 				</c:if>
 					<button onclick="window.location='/psyco/communityDeleteForm.com?community_num=${community_num}&pageNum=${pageNum}&category=${category}'">삭 제</button>
 					<button onclick="window.location='/psyco/communityForm.com?community_num=${community_num}&ref=${article.ref}&re_step=${article.re_step}&re_level=${article.re_level}&category=6'">답 글</button>
-					<button onclick="window.location='/psyco/communityList.com?pageNum=${pageNum}&category=${category}'">리스트</button>
+					<button onclick="window.location='/psyco/communityList.com?pageNum=1&category=${category}'">해당게시판 리스트가기</button>
 				 </td>
 			</tr>
 		

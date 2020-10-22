@@ -23,6 +23,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.three.psyco.model.dto.JoinResultDTO;
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.service.bean.CommonsServiceImpl;
+import com.three.psyco.service.bean.MainServiceImpl;
+
+import com.three.psyco.service.bean.Scheduler;
+
 
 
 
@@ -37,18 +41,31 @@ public class MainBean {
 	private SqlSessionTemplate sqlSession = null;
 	
 	@Autowired
+	private MainServiceImpl mainService = null;
+	
+	@Autowired
 	public static String controller = "mainBean";
-
+	
+	@Autowired
+	public Scheduler scheduler = null;
 	
 	@RequestMapping("main.com")
 	public String main(Model model,String pageNum, String pageName, HttpSession session) throws SQLException {
 		System.out.println("controller 잘 연결 ");
 		
 		//List<Object> itemMapList = commonsService.getEntireList();
-		
 		//System.out.println("itemMapList의 길이 :" + itemMapList.size());
 		//model.addAttribute("itemMapList", itemMapList);
+
+		List<JoinResultDTO> itemList = commonsService.getEntireList();
 		
+		ListData data = commonsService.getListData(pageName,pageNum,controller);
+		commonsService.setListDataToModel(model, data);	
+
+		System.out.println("itemList의 사이즈 : " + itemList.size());
+		model.addAttribute("itemList", itemList);
+
+
 		return "main/main";
 	}
 	
@@ -64,11 +81,25 @@ public class MainBean {
 	
 
 	@RequestMapping("content.com")
-	public String content() {
+		// 나중에 페이지 콘텐트 페이지 전 페이지랑 연결되면 매개변수 item_num 이랑 shop_num 받아야함.
+
+	public String content(int itemNum, Model model) {
 		
 		System.out.println("controller 잘 연결 ");
+		
+		// 임의로 값 지정해서 테스트
+		int item_num = 23;
+		int shop_num = 1233;
+		
+		
+		mainService.getContentInfo(item_num,model);
+		mainService.getContentImg(shop_num,model);
+		
+		
 		return "main/content";
 	}
+	
+	
 	
 	
 	

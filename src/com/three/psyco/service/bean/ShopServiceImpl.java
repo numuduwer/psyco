@@ -58,8 +58,9 @@ public class ShopServiceImpl implements ShopService {
 		result = 1;
 		return result;
 	}
-
-	public ListData getItemList(String pageName, String pageNum, int id) throws SQLException{
+	
+	@Override
+	public ListData getItemList(String pageName, String pageNum, int id,Model model) throws SQLException{
 		// 디폴트 값 설정 
 		if(pageNum == null) {
 			pageNum = "1";
@@ -73,18 +74,62 @@ public class ShopServiceImpl implements ShopService {
 		int startRow = (currPage-1) * pageSize +1;
 		int endRow = currPage * pageSize;
 		int number = 0; //(게시판에 보여주기식 글번호 )
+		
 		List articleList = null;
+		List articleListA = null;
+		List articleListB = null;
+		List articleListC = null;
+		List articleListD = null;
 		
 		int count = 0;
+		int countA = 0;
+		int countB = 0;
+		int countC = 0;
+		int countD = 0;
 		
-	
+		// 0:임시저장,1:시작전,2:대기,3:판매중,4:판매종료
+		// 현재 해당가게 사장 아이템리스트    (DAO 에서 판매중인지 아닌지 처리)
 		count = itemDAO.count1(id);
-		System.out.println("MyItemListcount : " + count);
-	
 		if(count >0) {
 			articleList = itemDAO.getItemList(id,startRow, endRow);	
 		}
 		
+		//1
+		countA = itemDAO.countA(id);
+		if(count >0) {
+			articleListA = itemDAO.getItemListA(id,startRow, endRow);	
+		}
+		
+		//2
+		countB = itemDAO.countB(id);
+		if(count >0) {
+			articleListB = itemDAO.getItemListB(id,startRow, endRow);	
+		}
+		
+		//3
+		countC = itemDAO.countC(id);
+		if(count >0) {
+			articleListC = itemDAO.getItemListC(id,startRow, endRow);	
+		}
+		
+		//4
+		countD = itemDAO.countD(id);
+		if(count >0) {
+			articleListD = itemDAO.getItemListD(id,startRow, endRow);	
+		}
+		
+		model.addAttribute("countA",countA);
+		model.addAttribute("countB",countB);
+		model.addAttribute("countC",countC);
+		model.addAttribute("countD",countD);
+		
+		model.addAttribute("articleListA",articleListA);
+		model.addAttribute("articleListB",articleListB);
+		model.addAttribute("articleListC",articleListC);
+		model.addAttribute("articleListD",articleListD);
+		
+		
+	
 		
 		number = count - (currPage-1) * pageSize;
 
@@ -225,5 +270,6 @@ public class ShopServiceImpl implements ShopService {
 		
 		return result;
 	}
+	
 
 }

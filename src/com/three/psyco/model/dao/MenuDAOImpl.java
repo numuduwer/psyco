@@ -1,6 +1,10 @@
 package com.three.psyco.model.dao;
 
 import java.sql.SQLException;
+
+
+import java.util.HashMap;
+
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -30,11 +34,22 @@ public class MenuDAOImpl implements MenuDAO {
 		sqlSession.delete("shop.deleteShop", id);
 	}
 
+
+	public List getContentImg(int shop_num) {
+		
+
+		List list = sqlSession.selectList("menu.getContentImgList",shop_num);
+		
+		return list;
+	}
+
+
 	@Override
 	public List<MenuDTO> getMyMenuListFromShopNum(List<Integer> myShop_ShopNumList) {
 		List<MenuDTO> menuList = sqlSession.selectList("shop.getMyMenuListFromShopNum", myShop_ShopNumList);
 		return menuList;
 	}
+
 	
 	@Override
 	public MenuDTO getMenuInfoFromMenuNum(int menu_num) throws SQLException {

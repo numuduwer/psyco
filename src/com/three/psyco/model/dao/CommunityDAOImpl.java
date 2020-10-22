@@ -185,7 +185,20 @@ public class CommunityDAOImpl implements CommunityDAO {
 			
 			return count;
 		}
-
+		
+		// 내 문의 내역 외에 다른 활동내역 전부 가져오기
+		@Override
+		public List getMyAsk2(int start, int end, String category, String writer) throws SQLException {
+			HashMap map = new HashMap();
+			map.put("start", start);
+			map.put("end", end);
+			map.put("category", category);
+			map.put("writer", writer);
+			
+			List list = sqlSession.selectList("community.myHelpList2", map);
+			
+			return list;
+		}
 
 
 }

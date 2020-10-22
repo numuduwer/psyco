@@ -7,28 +7,26 @@
   <mapper namespace="item">
   
   
-  	<select id="countAll" resultType="int">
-  		select count(*) from item
+  	<select id="countAll" parameterType="string" resultType="int">
+  		select count(*) from item where selling_status=#{value}
   	</select> 
   	
-  	<select id="itemList" resultType="ItemDTO">
+  	<select id="itemList" parameterType="string" resultType="ItemDTO">
   		<![CDATA[
   		select ITEM_NUM,ITEM_NAME,CONTENT,AMOUNT,STARTDATE,ENDDATE,DISCOUNT_CYCLE,SELLING_STATUS,
-  		PROGRESS_STATUS,MAXPRICE,MINPRICE,AUCTION_UNIT,SETT,COMMENT1,MENU_NUM,mem_num,rownum r from item
+  		PROGRESS_STATUS,MAXPRICE,MINPRICE,AUCTION_UNIT,SETT,COMMENT1,MENU_NUM,mem_num,rownum r from item where selling_status=#{value}
   		]]>
   	</select>
   	
   	<select id="getItemOne" parameterType="int" resultType="ItemDTO">
   		select * from item where item_num=#{value}
   	</select>
+
   	
-  	
-  	
-  	
-  	
-  	<!-- 사장님이 등록한 역경매 상품 전부 긁어오기.(판매중아니여도 가져오기) -->
-  	<select id="itemOneCount" parameterType="int" resultType="int">
-  		select count(*) from item where mem_num=#{value}
+  	<!-- 사장님이 등록한 역경매 상품 전부 긁어오기. 0
+  	0:임시저장,1:시작전,2:대기,3:판매중,4:판매종료   -->
+  	<select id="itemOneCount" parameterType="hashmap" resultType="int">
+  		select count(*) from item where mem_num=#{id} and selling_status=#{selling}
   	</select>
   	
   	<select id="getMyItemList" parameterType="hashmap" resultType="ItemDTO">
@@ -39,8 +37,10 @@
 		WHERE rownum >= #{startRow}
 		AND rownum <= #{endRow}
 		AND MEM_NUM = #{mem_num}
+		and selling_status = #{selling}
   		]]>
   	</select>
+  	
   	
   	
   	
@@ -58,6 +58,16 @@
   		delete from item where item_num=#{item_num}
   	</delete>
   	
+
+  	<!-- content 에서 해당가게 진행중인 역경매상품 뿌려줄 리스트 가져오기 -->
+  	 	<select id="getContentInfo" parameterType="int" resultType="ItemDTO">
+		SELECT * from item where item_num=#{value}
+  	</select>
+  	
+  	<update id="updatePrice" parameterType="int">
+  		delete from item where item_num=#{item_num}
+  	</update>
+
   	<insert id="itemEnrollmentPro" parameterType="ItemDTO">
   		insert into item(item_num, item_name, content, amount, startdate, enddate, discount_cycle, maxprice, minprice, auction_unit, sett, comment1, mem_num, menu_num, shop_num) values (item_seq.nextval, #{item_name}, #{content}, #{amount}, #{startDate}, #{endDate}, #{discount_cycle}, #{maxPrice}, #{minPrice}, #{auction_unit}, #{sett}, #{comment1}, #{mem_num}, #{menu_num}, #{shop_num})
   	</insert>
@@ -65,6 +75,8 @@
   	<select id="getEntireList" resultType="JoinResultDTO">
   		SELECT ITEM.ITEM_NUM, ITEM.ITEM_NAME, MENU.MENU_IMG, SHOP.SHOP_NAME, ITEM.AMOUNT, ITEM.STARTDATE, ITEM.ENDDATE, ITEM.DISCOUNT_CYCLE, ITEM.MAXPRICE, ITEM.MINPRICE, ITEM.AUCTION_UNIT FROM ITEM INNER JOIN SHOP ON ITEM.SHOP_NUM = SHOP.SHOP_NUM INNER JOIN MENU ON ITEM.MENU_NUM = MENU.MENU_NUM
   	</select>
+
+
   	
   	<update id="modifyStatus">
   		update item set progress_status=1, selling_status=4 where item_num=#{item_num}
