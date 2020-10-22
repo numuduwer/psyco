@@ -296,4 +296,18 @@ public class ShopBean {
 		
 		return "";
 	}
+	
+	
+	
+	@RequestMapping("shopPageList.com")
+	public String shopPageList() {
+		return "shop/shopPageList";
+	}
+	
+	@RequestMapping("shopPageList2.com")
+	public String shopPageList2() {
+		return "shop/shopPageList2";
+	}
+	
+	
 }
