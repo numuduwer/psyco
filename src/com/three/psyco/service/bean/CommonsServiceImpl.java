@@ -99,6 +99,7 @@ public class CommonsServiceImpl implements CommonsService {
 
 	public ListData getListData(String pageName, String pageNum, int shop_num, String controller) throws SQLException{
 		// 디폴트 값 설정 
+		System.out.println("Commons Service 잘 연결 ");
 		if(pageNum == null) {
 			pageNum = "1";
 		}
@@ -112,6 +113,7 @@ public class CommonsServiceImpl implements CommonsService {
 		List articleList = null;
 		
 		int count = 0;
+		
 		
 		// 글 갯수 불러오기 
 		if(controller.equals("shopBean")) {

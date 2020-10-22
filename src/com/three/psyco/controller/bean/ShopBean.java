@@ -55,7 +55,7 @@ public class ShopBean {
 	@RequestMapping("shopList.com")
 	public String storeList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
 		pageName = "shopList";
-		System.out.println("잘연결");
+		System.out.println("controller 잘연결");
 		int memNum = 0;
 
 		pageName = "shopList";
@@ -69,6 +69,15 @@ public class ShopBean {
 		ListData data = commonsService.getListData(pageName,pageNum,memNum,controllerName);
 		commonsService.setListDataToModel(model, data);
 		return "shop/shopList";
+	}
+	
+	@RequestMapping("menuList.com")
+	public String menuList(int shop_num,String pageNum,  Model model) throws SQLException {
+		String pageName = "menuList";
+
+		ListData data = commonsService.getListData(pageName,pageNum,shop_num,controllerName);
+		commonsService.setListDataToModel(model, data);
+		return "shop/menuList";
 	}
 	
 	@RequestMapping("shopDetail.com")
@@ -129,14 +138,7 @@ public class ShopBean {
 	
 ////////////////////// 메뉴  마이페이지 ///////////////////
 	
-	@RequestMapping("menuList.com")
-	public String menuList(int shop_num,String pageNum,  Model model) throws SQLException {
-		String pageName = "menuList";
-
-		ListData data = commonsService.getListData(pageName,pageNum,shop_num,controllerName);
-		commonsService.setListDataToModel(model, data);
-		return "shop/menuList";
-	}
+	
 	
 	@RequestMapping("MyMenuList.com")
 	public String MyMenuList(HttpSession session, Model model) throws SQLException {
