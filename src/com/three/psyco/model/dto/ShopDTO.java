@@ -22,7 +22,7 @@ public class ShopDTO {
 	private String approve_status;
 	private int member_num;
 	
-	
+
 	
 	
 	public int getShop_num() {

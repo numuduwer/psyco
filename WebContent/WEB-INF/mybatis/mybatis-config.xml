@@ -21,6 +21,7 @@
 		<typeAlias type="com.three.psyco.model.dto.ReviewDTO" alias="ReviewDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.ItemDTO" alias="ItemDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.BuyDTO" alias="BuyDTO"/>
+		<typeAlias type="com.three.psyco.model.dto.JoinResultDTO" alias="JoinResultDTO"/>
 	</typeAliases>
 	
 	<mappers>

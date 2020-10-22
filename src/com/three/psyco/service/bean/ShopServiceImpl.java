@@ -1,15 +1,29 @@
 package com.three.psyco.service.bean;
 
+import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.three.psyco.model.dao.ItemDAOImpl;
 import com.three.psyco.model.dao.MenuDAOImpl;
 import com.three.psyco.model.dao.ShopDAOImpl;
@@ -168,10 +182,50 @@ public class ShopServiceImpl implements ShopService {
 		
 		return jSONObject;
 	}
+	@Override
+	public int itemEnrollmentPro(String jsonData) throws ParseException {
 	
+		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession httpSession = servletRequestAttribute.getRequest().getSession();
+		int mem_num = Integer.parseInt(httpSession.getAttribute("memNum").toString());
+		
+		JSONParser jSONParser = new JSONParser();
+		JSONObject jSONObject = (JSONObject) jSONParser.parse(jsonData);
+		
+		ItemDTO dto = new ItemDTO();
+		
+		dto.setItem_name((String)jSONObject.get("item_name"));
+		dto.setContent((String)jSONObject.get("content"));
+		dto.setAmount(Integer.valueOf((String)jSONObject.get("amount")));
+		dto.setStartDate(Timestamp.valueOf((String)jSONObject.get("startDate")));
+		dto.setEndDate(Timestamp.valueOf((String)jSONObject.get("endDate")));
+		dto.setDiscount_cycle(Integer.valueOf((String)jSONObject.get("discount_cycle")));
+		dto.setMaxPrice(Integer.valueOf((String)jSONObject.get("maxPrice")));
+		dto.setMinPrice(Integer.valueOf((String)jSONObject.get("minPrice")));
+		dto.setAuction_unit((String)jSONObject.get("auction_unit"));
+		dto.setSett((String)jSONObject.get("sett"));
+		dto.setComment1((String)jSONObject.get("comment"));
+		dto.setMenu_num(Integer.valueOf((String)jSONObject.get("menu_num")));
+		dto.setMem_num(mem_num);
+		dto.setShop_num(Integer.valueOf((String)jSONObject.get("shop_num")));
+		
+		/*
+		try {
+			dto = new ObjectMapper().readValue(jSONObject.toJSONString(), ItemDTO.class);
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		*/
+		
+		int result = itemDAO.itemEnrollmentPro(dto);
+		
+		return result;
+	}
 
-	
-	
 	
 
 }

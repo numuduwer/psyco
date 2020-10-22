@@ -2,6 +2,8 @@ package com.three.psyco.service.bean;
 
 import java.sql.SQLException; 
 
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import com.three.psyco.model.dao.MenuDAOImpl;
 import com.three.psyco.model.dao.ReviewDAOImpl;
 import com.three.psyco.model.dao.ShopDAOImpl;
 import com.three.psyco.model.dao.SuperDAOImpl;
+import com.three.psyco.model.dto.JoinResultDTO;
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.MenuDTO;
 
@@ -116,7 +119,7 @@ public class CommonsServiceImpl implements CommonsService {
 	}
 	
 
-	public ListData getListData(String pageName, String pageNum, int shop_num, String controller) throws SQLException{
+	public ListData getListData(String pageName, String pageNum,int shop_num, String controller) throws SQLException{
 		// 디폴트 값 설정 
 		if(pageNum == null) {
 			pageNum = "1";
@@ -137,6 +140,7 @@ public class CommonsServiceImpl implements CommonsService {
 			count = shopDAO.count(pageName, shop_num);
 		}
 		if(count >0) {
+			
 				articleList = shopDAO.getList(pageName, shop_num,startRow, endRow);
 		}
 		
@@ -296,6 +300,51 @@ public class CommonsServiceImpl implements CommonsService {
 		return data;
 		
 	}
+	@Override
+	public ListData getShopNumLists(String pageNum,List list) throws SQLException{
+		// 디폴트 값 설정 
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+
+		// 페이징 처리 초기값
+		int pageSize = 10;
+		int currPage = Integer.parseInt(pageNum);	// 페이지 계산을 위해  형변환 
+		int startRow = (currPage-1) * pageSize +1;
+		int endRow = currPage * pageSize;
+		int number = 0; //(게시판에 보여주기식 글번호 )
+		List articleList = null;
+		int shop_num = 0;
+		
+		
+		for(int i = 0; i <list.size() ; i++) {
+			System.out.println("service list : " + list.get(i));
+			
+		}
+		// 글 갯수 불러오기 
+		int	count = shopDAO.ShopNumcount(list);
+		if(count >0) {
+		
+				articleList = shopDAO.getShopNumList(list,startRow, endRow);
+	
+		}
+		
+		number = count - (currPage-1) * pageSize;
+
+		
+		ListData data = new ListData();
+		
+		data.setArticleList(articleList);
+		data.setCount(count);
+		data.setCurrPage(currPage);
+		data.setEndRow(endRow);
+		data.setNumber(number);
+		data.setPageNum( Integer.parseInt(pageNum));
+		data.setPageSize(pageSize);
+		data.setStartRow(startRow);
+		
+		return data;
+	}
 	
 
 	@Override
@@ -310,7 +359,21 @@ public class CommonsServiceImpl implements CommonsService {
 		return menuList;
 		
 	}
+	
+	
 
 
+	@Override
+	public List<JoinResultDTO> getEntireList() {
+		List<JoinResultDTO> itemList = itemDAO.getEntireList();
+	
+		
+		return itemList;
+	}
+
+
+
+
+	
 
 }

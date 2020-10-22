@@ -18,9 +18,15 @@ public class ReviewDTO {
 	private String review_img;
 	private Timestamp reg;
 	private String item_name;
-	
+	private String shop_name;
 	
 
+	public String getShop_name() {
+		return shop_name;
+	}
+	public void setShop_name(String shop_name) {
+		this.shop_name = shop_name;
+	}
 	public Integer getShop_num() {
 		return shop_num;
 	}

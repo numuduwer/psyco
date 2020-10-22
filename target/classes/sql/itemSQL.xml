@@ -58,9 +58,17 @@
   		delete from item where item_num=#{item_num}
   	</delete>
   	
-  	
-  	
-  	
-  	
+  	<update id="updatePrice" parameterType="int">
+  		delete from item where item_num=#{item_num}
+  	</update>
+
+  	<insert id="itemEnrollmentPro" parameterType="ItemDTO">
+  		insert into item(item_num, item_name, content, amount, startdate, enddate, discount_cycle, maxprice, minprice, auction_unit, sett, comment1, mem_num, menu_num, shop_num) values (item_seq.nextval, #{item_name}, #{content}, #{amount}, #{startDate}, #{endDate}, #{discount_cycle}, #{maxPrice}, #{minPrice}, #{auction_unit}, #{sett}, #{comment1}, #{mem_num}, #{menu_num}, #{shop_num})
+  	</insert>
+
+  	<select id="getEntireList" resultType="JoinResultDTO">
+  		SELECT ITEM.ITEM_NAME, MENU.MENU_IMG, SHOP.SHOP_NAME, ITEM.STARTDATE, ITEM.ENDDATE, ITEM.DISCOUNT_CYCLE, ITEM.MAXPRICE, ITEM.MINPRICE FROM ITEM INNER JOIN SHOP ON ITEM.SHOP_NUM = SHOP.SHOP_NUM INNER JOIN MENU ON ITEM.MENU_NUM = MENU.MENU_NUM
+  	</select>
+
   	
   </mapper>

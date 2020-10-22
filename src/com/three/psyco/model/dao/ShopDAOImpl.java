@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.three.psyco.model.dto.ItemDTO;
 import com.three.psyco.model.dto.MenuDTO;
+import com.three.psyco.model.dto.ReviewDTO;
 import com.three.psyco.model.dto.ShopDTO;
 
 @Repository
@@ -80,6 +81,41 @@ public class ShopDAOImpl implements ShopDAO {
 		List<Integer> myShop_ShopNumList = sqlSession.selectList("shop.getMyShop_ShopNumList", member_Num);
 		return myShop_ShopNumList;
 	}
+
+
+	@Override
+	public List getShopNumList(List list, int startRow, int endRow) {
+		HashMap map = new HashMap();
+		map.put("start", startRow);
+		map.put("end", endRow);
+		map.put("shop_num", list);
+		 
+		List<ReviewDTO> DTOList = sqlSession.selectList("shop.getShopNumReviewList", map);
+		return DTOList;
+	}
+
+
+
+
+	@Override
+	public int ShopNumcount(List list) throws SQLException {
+		
+		
+		int count = 0;
+		int tmp = 0;
+		for(int i = 0; i <list.size() ; i++) {
+			tmp =  sqlSession.selectOne("shop.getShopNumCount",list.get(i));
+			count += tmp;	
+		}
+
+		
+		return count;
+	}
+
+
+
+
+
 
 
 

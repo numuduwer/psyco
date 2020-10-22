@@ -1,8 +1,12 @@
 package com.three.psyco.controller.bean;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,9 +15,11 @@ import javax.servlet.http.HttpSession;
 import javax.swing.event.MenuListener;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -289,11 +295,57 @@ public class ShopBean {
 	}
 	
 	@RequestMapping(value="itemEnrollmentPro.com")
-	public String itemEnrollmentPro(ItemDTO dto, HttpServletRequest request) {
-		System.out.println(dto.getItem_name());
-		System.out.println(request.getParameter("startDate1"));
-		System.out.println(request.getParameter("startDate2"));
+	@ResponseBody
+	public String itemEnrollmentPro(HttpServletRequest request, HttpServletResponse response, @RequestBody String jsonData) throws ParseException {
+		System.out.println(jsonData);
 		
-		return "";
+		int result = shopService.itemEnrollmentPro(jsonData);
+		String result_str = "{\"result\":" + result + "}";
+		System.out.println(result);
+		return result_str;
+		
 	}
+	
+	
+	
+	@RequestMapping("shopPageList.com")//int member_num,
+	public String shopPageList(String pageNum,Model model)throws SQLException {
+		int member_num=91;
+		String pageName="shopList";
+		String controller="shopBean";
+		ListData data=commonsService.getListData(pageName, pageNum, member_num, controller);
+		model.addAttribute("pageNum", data.getPageNum());
+		model.addAttribute("pageSize", data.getPageSize());
+		model.addAttribute("currPage", data.getCurrPage());
+		model.addAttribute("startRow", data.getStartRow());
+		model.addAttribute("endRow", data.getEndRow());
+		model.addAttribute("number", data.getNumber());
+		model.addAttribute("articleList", data.getArticleList());
+		model.addAttribute("count", data.getCount());
+		//---------------------------------------------review
+		List<Integer> num=commonsService.getMyShop_MemberNumList(member_num);
+		System.out.println("num=="+num);
+
+			ListData rdata=commonsService.getShopNumLists(pageNum, num);
+			
+			  
+			model.addAttribute("pageNum", rdata.getPageNum());
+			model.addAttribute("pageSize", rdata.getPageSize());
+			model.addAttribute("currPage", rdata.getCurrPage());
+			model.addAttribute("startRow", rdata.getStartRow());
+			model.addAttribute("endRow", rdata.getEndRow());
+			model.addAttribute("rnumber", rdata.getNumber());
+			model.addAttribute("rarticleList", rdata.getArticleList());
+			model.addAttribute("count", rdata.getCount());
+		
+		System.out.println("shop_num"+rdata.getArticleList());
+		return "shop/shopPageList";
+	}
+	
+	@RequestMapping("shopPageList2.com")
+	public String shopPageList2() {
+		return "shop/shopPageList2";
+	}
+	
+	
 }
