@@ -137,9 +137,18 @@ public class UserBean {
 	}
 	
 	@RequestMapping("zzimDelete.com")
-	public String zzimDelete(HttpServletRequest request) {
+	public String zzimDelete(int zzim_num,Model model) {
 		
-		System.out.println(request.getParameter("zzim_num"));
+		model.addAttribute("zzim_num",zzim_num);
+		
+		
+		return "user/zzimDelete";
+	}
+	
+	@RequestMapping("zzimDeletePro.com")
+	public String zzimDeletePro(int zzim_num,Model model) {
+		
+		userService.zzimDeleteOne(zzim_num,model);
 		
 		return "zzim/zzimDelete";
 	}

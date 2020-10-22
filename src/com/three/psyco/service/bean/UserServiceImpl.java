@@ -68,7 +68,18 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
-
+	@Override
+	public int zzimDeleteOne(int zzim_num,Model model) {
+		
+		int result = zzimDAO.zzimDeleteOne(zzim_num);
+		
+		model.addAttribute("result",result);
+		
+		return result;
+	}
+	
+	
+	
 	
 	
 }

@@ -8,15 +8,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 
-		function popupOpen(){		
-			var popUrl = "/psyco/user/zzimDelete.com";	//팝업창에 출력될 페이지 URL		
+		function popupOpen(zzim_num){
+			var popUrl = "/psyco/user/zzimDelete.com?zzim_num=" + zzim_num;	//팝업창에 출력될 페이지 URL		
 			var popOption = "width=370, height=360, left=500,top=500, resizable=no, scrollbars=no, status=no";    //팝업창 옵션		
 				window.open(popUrl,"",popOption);
 			}
 		
-</script>
+	</script>
 
 
 	   <!--  기능  타이틀 -->
@@ -62,7 +63,7 @@
                                     <span> ${zzim.price}</span>
                                 </li>
                             </ul>
-                            <button><a href="javascript:popupOpen()" id="zzim_num" value="${zzim.zzim_num}"> 삭제 </a></button>
+                            <button><a href="javascript:popupOpen(${zzim.zzim_num})" id="zzim_num"> 삭제 </a></button>
                         </div>
                         </c:forEach>    
  
@@ -107,7 +108,7 @@
                             <tr>
                                 <th>no.</th>
                                 <th>제목</th>
-                                <th>별점</th>
+                                <th>커뮤니티</th>
                                 <th>작성시간</th>
                             </tr>
                              <c:forEach var="article2" items="${articleList2}">

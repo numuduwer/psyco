@@ -10,5 +10,8 @@ import com.three.psyco.model.dto.ListData;
 public interface UserService {
 
 	public ListData getMyAsk(String pageNum,String category,Model model) throws SQLException;
+
+	public int zzimDeleteOne(int zzim_num, Model model);
+
 	
 }

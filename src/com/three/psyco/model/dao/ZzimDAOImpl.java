@@ -24,7 +24,12 @@ public class ZzimDAOImpl implements ZzimDAO{
 		return list;
 	}
 	
-	
+	public int zzimDeleteOne(int zzim_num) {
+		
+		int result = sqlSession.delete("zzim.zzimDeleteOne",zzim_num);
+		
+		return result;
+	}
 	
 	
 }

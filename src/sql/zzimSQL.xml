@@ -10,12 +10,15 @@
  	
  	<select id="myPageZzim" parameterType="int" resultType="ZzimDTO">
  		<![CDATA[
-		SELECT rownum rn, menu.MENU_IMG,menu.MENU_NAME,menu.price,zzim.MENU_NUM,menu.shop_num
+		SELECT rownum rn, menu.MENU_IMG,menu.MENU_NAME,menu.price,zzim.MENU_NUM,menu.shop_num,zzim.zzim_num
 		FROM menu menu, zzim zzim
 		WHERE menu.menu_num = zzim.menu_num AND zzim.MEMBER_NUM=#{value} and rownum >= 1 and rownum <= 10
 		]]>
  	</select>
  	
+ 	<delete id="zzimDeleteOne" parameterType="int" >		
+ 		delete from zzim where zzim_num=#{value}
+ 	</delete>
  	
 
  </mapper>
