@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +29,8 @@ $('#btn1').on('click', function(){
     });
 });
 
+
+
 </script>
 <body>
 	
@@ -39,7 +43,9 @@ $('#btn1').on('click', function(){
 
 
             <div class="new_content">
-                신메뉴
+          
+           
+                
             </div>
             <div class="rank_content">
                 랭킹
@@ -58,7 +64,49 @@ $('#btn1').on('click', function(){
     <!-- 경매 상품 -->
     <section class="item-section">
         <div class="card-container">
-            <div class="card">
+        
+        <c:forEach var="item" items="${itemList}">
+        	<div class="card">
+        		<img src="/psyco/resources/${item.menu_img}" alt="" class="card_img">
+        		<div class="card_content">
+        			<h3>${item.shop_name}</h3>
+        			<h2>${item.item_name}</h2>
+        			<ul>
+        				<li>시작 시간</li>
+        				<li>${fn:substring(item.startDate,0,16)}</li>	
+        			</ul>
+        			<ul>
+        				<li>종료 시간</li>
+        				<li>${fn:substring(item.endDate,0,16)}</li>	
+        			</ul>
+        			<ul>
+        				<li>자동 할인시간</li>
+        				<li><fmt:parseNumber var="discount_cycle" value="${item.discount_cycle / 60}" integerOnly="true"/>${discount_cycle} 분</li>
+        			</ul>
+        			<ul>
+        				<li>시작 가격</li>
+        				<li>${item.maxPrice}</li>
+        			</ul>
+        			<ul>
+        				<li>종료 가격</li>
+        				<li>${item.minPrice}</li>
+        			</ul>
+        			
+        			<ul class="sale">
+        				<li class="sale_item"></li>
+        				<li></li>
+        			</ul>
+        			<ul class="price">
+        				<li></li>
+        				<li></li>
+        			</ul>
+        		</div>
+        	</div>
+        
+        </c:forEach>
+        </div>
+        
+            <!-- <div class="card">
                 <img src="/psyco/resources/img/item/one/1.jpg" alt="" class="card_img">
                 <div class="card_content">
                     <h3>김밥천국</h3>
@@ -324,7 +372,7 @@ $('#btn1').on('click', function(){
             </div>
 
 
-        </div>
+        </div> -->
 
     </section>
 

@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService{
 		myHelpList2 = commnuityDAO.getMyAsk2(start,end,category,writer);
 		
 		// 자신이 찜한 정보 가져오기 (리스트)
-		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// session 필요
 		List myPageZzim = null;
 		int mem_num = 123;
 		myPageZzim = zzimDAO.myPageZzim(mem_num);

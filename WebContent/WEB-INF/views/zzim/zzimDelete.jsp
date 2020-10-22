@@ -7,9 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<script type="text/javascript">
-		alert("삭제가 완료되었습니다.");
-	</script>
-
+		<button><a href="/psyco/user/zzimDeletePro.com?zzim_num=${zzim_num}">삭제하기</a></button>
+		<button onclose>취소</button>
 </body>
 </html>

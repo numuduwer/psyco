@@ -479,4 +479,182 @@ th {
   background-color: var(--color-white);
   border-radius: 4px;
   margin-left: 30px;
+<<<<<<< HEAD
 }
+=======
+}
+
+
+/* form 공용 */
+
+.form_box {
+  margin: 0 auto;
+  width: 800px;
+  height: 100vh;
+  border: 2px solid var(--color-light-white);
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  width: 600px;
+  height: 100vh;
+  padding: 30px 30px;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+.form_title {
+  display: inline;
+  color: var(--color-dark-grey);
+  font-size: 18px;
+  font-weight: 500;
+  padding: 0 20px;
+}
+.form_input {
+  width: 300px;
+  height: 25px;
+  border: 1px solid var(--color-light-grey);
+  border-radius: 3px;
+}
+
+.form_tab {
+  padding: 20px 0;
+  border-bottom: 0.5px solid var(--color-dark-white);
+}
+.form_btn {
+  width: 120px;
+
+  border-style: none;
+  border-radius: 3px;
+  background-color: var(--color-light-grey);
+  font-size: 20px;
+  padding: 5px;
+  color: var(--color-light-white);
+}
+
+/* 마이페이지 사이드 메뉴 기능 */
+
+ul > li {
+  list-style: none;
+}
+
+.hnav {
+  height: 300px;
+}
+#side_menu2 {
+  margin: 40px 0;
+  margin-bottom: 70px;
+  background: linear-gradient(white 50px, rgba(255, 255, 255, 0.5) 50px, rgba(255, 255, 255, 0.5));
+  height: 20px;
+}
+.mypage_menu2 {
+  display: flex;
+  justify-content: center;
+
+  align-content: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.mypage_menu2 ul li {
+  padding: 0 30px;
+}
+
+.mypage_menu2 ul ul {
+  display: none;
+}
+.mypage_menu2 li:hover > ul {
+  display: block;
+}
+
+.select_tab {
+}
+/* footer */
+
+footer {
+  border-top: 100px;
+  padding-top: 140px;
+  background-color: #ffffff;
+}
+
+.footer_top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style: none;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-light-white);
+}
+.foot_top {
+  display: flex;
+  justify-content: space-around;
+}
+.foot_top ul li {
+  list-style: none;
+}
+.footer_top p {
+  color: var(--color-dark-grey);
+  font-size: 14px;
+}
+
+.footer_bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 8px 100px;
+  list-style: none;
+}
+.footer_bottom p {
+  color: var(--color-light-grey);
+  font-size: 14px;
+}
+
+.foot_bottom_box {
+  line-height: 100%;
+  background-color: none;
+  border: 0.5px solid var(--color-light-white);
+  width: 180px;
+  height: 40px;
+  font-size: 14px;
+  border-radius: 4px;
+  color: var(--color-light-grey);
+}
+
+
+/*가게 마이페이지 */
+
+.myPage_item_info_btnList {
+  display: flex;
+  flex-direction: row;
+}
+
+.myPage_item_info_btnList button {
+  margin-left: 310px;
+  padding: 8px 20px;
+  border: 1px solid tomato;
+  background-color: var(--color-white);
+}
+
+.myPage_item_info button a {
+  color: tomato;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.myPage_shopTitle {
+  display: flex;
+
+  width: 800px;
+  line-height: 100%;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-top: 20px;
+  border: 1px solid var(--color-dark-white);
+  border-top: 3px solid tomato;
+}
+

@@ -27,6 +27,7 @@
             <h2 class="myPage_subTitle">찜 리스트 / 문의하기 </h2>
         </div>
     </div>
+  
     <!--   탭 버튼-->
     <div class="myPage">
         <div class="myPage_content">
@@ -97,10 +98,9 @@
                             </c:forEach>
                         </table>
                     </div>
-                   </div> 
-                    
-                    
-      			 <!--   탭 3 내용-->
+                </div>
+
+                <!--   탭 3 내용-->
                 <div id="tab3" data-tab-content class="items">
                     <div class="userpage_tab2">
                         <h2> 커뮤니티 리스트</h2>
@@ -133,12 +133,6 @@
                         </table>
                     </div>
                 </div>             
-                    
-                    
-                    
-                    
-                    
-                
             </div>
         </div>
     </div>

@@ -1,6 +1,9 @@
 package com.three.psyco.controller.bean;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
@@ -11,9 +14,11 @@ import javax.servlet.http.HttpSession;
 import javax.swing.event.MenuListener;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -208,10 +213,10 @@ public class ShopBean {
 	public String itemList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
 		
 		int id = 123;
-	
+		System.out.println(id);
 		
 		System.out.println("itemList Controller id :" + id);
-		ListData data = shopService.getItemList(pageName,pageNum,id);
+		ListData data = shopService.getItemList(pageName,pageNum,id,model);
 		commonsService.setListDataToModel(model, data);
 		return "shop/itemList";
 	}
@@ -289,11 +294,36 @@ public class ShopBean {
 	}
 	
 	@RequestMapping(value="itemEnrollmentPro.com")
-	public String itemEnrollmentPro(ItemDTO dto, HttpServletRequest request) {
-		System.out.println(dto.getItem_name());
-		System.out.println(request.getParameter("startDate1"));
-		System.out.println(request.getParameter("startDate2"));
+	@ResponseBody
+	public String itemEnrollmentPro(HttpServletRequest request, HttpServletResponse response, @RequestBody String jsonData) throws ParseException {
+		System.out.println(jsonData);
 		
-		return "";
+		int result = shopService.itemEnrollmentPro(jsonData);
+		String result_str = "{\"result\":" + result + "}";
+		System.out.println(result);
+		return result_str;
+		
 	}
+	
+	
+	
+	@RequestMapping("shopPageList.com")
+	public String shopPageList() {
+		return "shop/shopPageList";
+	}
+	
+	@RequestMapping("shopPageList2.com")
+	public String shopPageList2(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
+		
+		int id = 123;
+	
+		
+		System.out.println("itemList Controller id :" + id);
+		ListData data = shopService.getItemList(pageName,pageNum,id,model);
+		commonsService.setListDataToModel(model, data);
+		
+		return "shop/shopPageList2";
+	}
+	
+	
 }

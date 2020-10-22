@@ -42,9 +42,6 @@ public class UserBean {
 		commonsService.setListDataToModel(model,list);
 		
 		
-		
-		
-		
 		return "user/myPageList2";
 		}
 
@@ -142,15 +139,17 @@ public class UserBean {
 		model.addAttribute("zzim_num",zzim_num);
 		
 		
-		return "user/zzimDelete";
+		return "zzim/zzimDelete";
 	}
 	
 	@RequestMapping("zzimDeletePro.com")
 	public String zzimDeletePro(int zzim_num,Model model) {
 		
+		System.out.println("zzim_num : " + zzim_num);
+		
 		userService.zzimDeleteOne(zzim_num,model);
 		
-		return "zzim/zzimDelete";
+		return "zzim/zzimDeletePro";
 	}
 	
 

@@ -1,7 +1,7 @@
 package com.three.psyco.service.bean;
 
 import java.sql.SQLException;
-
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,7 @@ import com.three.psyco.model.dao.MenuDAO;
 import com.three.psyco.model.dao.MenuDAOImpl;
 import com.three.psyco.model.dao.ShopDAOImpl;
 import com.three.psyco.model.dao.SuperDAOImpl;
+import com.three.psyco.model.dto.JoinResultDTO;
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.MenuDTO;
 
@@ -163,12 +164,14 @@ public class CommonsServiceImpl implements CommonsService {
 		
 		// 글 갯수 불러오기 
 		if(controller.equals("mainBean")) {
-			count = itemDAO.count();
+			String selling = "3";
+			count = itemDAO.count(selling);
 		}
 		
 	
 		if(count >0) {
-			articleList = itemDAO.getList(pageName);	
+			String selling = "3";
+			articleList = itemDAO.getList(pageName,selling);	
 		}
 		
 		number = count - (currPage-1) * pageSize;
@@ -197,8 +200,17 @@ public class CommonsServiceImpl implements CommonsService {
 		return menuList;
 		
 	}
+	
+	
 
 
+	@Override
+	public List<JoinResultDTO> getEntireList() {
+		List<JoinResultDTO> itemList = itemDAO.getEntireList();
+	
+		
+		return itemList;
+	}
 
 
 }

@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<button><a href="/psyco/zzim/zzimDeletePro.com?zzim_num=${zzim_num}">삭제하기</a></button>
+	<script type="text/javascript">
+		alert("삭제가 완료되었습니다.");
+		close();
+	</script>
+
 </body>
 </html>
