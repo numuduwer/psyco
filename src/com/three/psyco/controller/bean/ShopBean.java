@@ -213,10 +213,10 @@ public class ShopBean {
 	public String itemList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
 		
 		int id = 123;
-	
+		System.out.println(id);
 		
 		System.out.println("itemList Controller id :" + id);
-		ListData data = shopService.getItemList(pageName,pageNum,id);
+		ListData data = shopService.getItemList(pageName,pageNum,id,model);
 		commonsService.setListDataToModel(model, data);
 		return "shop/itemList";
 	}
@@ -313,7 +313,15 @@ public class ShopBean {
 	}
 	
 	@RequestMapping("shopPageList2.com")
-	public String shopPageList2() {
+	public String shopPageList2(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
+		
+		int id = 123;
+	
+		
+		System.out.println("itemList Controller id :" + id);
+		ListData data = shopService.getItemList(pageName,pageNum,id,model);
+		commonsService.setListDataToModel(model, data);
+		
 		return "shop/shopPageList2";
 	}
 	

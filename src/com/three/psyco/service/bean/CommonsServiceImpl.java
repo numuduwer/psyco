@@ -25,9 +25,8 @@ public class CommonsServiceImpl implements CommonsService {
 	@Autowired
 	private SuperServiceImpl superService = null;
 	
-	
 	@Autowired
-	private ShopServiceImpl shopService = null;
+	private ShopServiceImpl ShopService = null;
 	
 	
 	@Autowired
@@ -165,12 +164,14 @@ public class CommonsServiceImpl implements CommonsService {
 		
 		// 글 갯수 불러오기 
 		if(controller.equals("mainBean")) {
-			count = itemDAO.count();
+			String selling = "3";
+			count = itemDAO.count(selling);
 		}
 		
 	
 		if(count >0) {
-			articleList = itemDAO.getList(pageName);	
+			String selling = "3";
+			articleList = itemDAO.getList(pageName,selling);	
 		}
 		
 		number = count - (currPage-1) * pageSize;
@@ -210,5 +211,6 @@ public class CommonsServiceImpl implements CommonsService {
 		
 		return itemList;
 	}
+
 
 }
