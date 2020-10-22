@@ -9,6 +9,7 @@
 	<meta charset="UTF-8">
 	<title>main</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			
@@ -24,52 +25,66 @@
 					console.log(typeof(array[0][0].itemList));
 					
 					for (var i in array[0]) {
-						var itemList = JSON.parse(array[0][i].itemList);
+						var item = JSON.parse(array[0][i].itemList);
+						var progress_status;
 						
-						var html = '<div class="card">' +
-		        		'<div class="card_content">' +
-		        			'<h3 id="shop_name"></h3>' +
-		        			'<h2 id="item_name"></h2>' +
+						if (array[0][i].progress_status == 1) {
+							progress_status = '<li>종료된 경매입니다.</li>'
+						} else if (array[0][i].progress_status == 0) {
+							progress_status = '<li>현재가격</li>'+
+											'<li>' + array[0][i].current_price + '</li>'+
+											'<li>남은시간</li>'+
+											'<li>' + array[0][i].remainder_time + '</li>';
+						}
+						
+						var html = '<div class="card">'+
+						'<img src="/psyco/save/' + item.menu_img + '"alt="" class="card_img">'+
+		        		'<div class="card_content">'+
+		        			'<h3 id="shop_name">' + item.shop_name + '</h3>'+
+		        			'<h2 id="item_name">' + item.item_name + '</h2>'+
 		        			'<ul>' +
 		        				'<li>시작 시간</li>' +
-		        				'<li id="startDate"></li>' +
+		        				'<li id="startDate">' + moment(new Date(item.startDate)).format("YYYY-MM-DD HH:mm") + '</li>'+
 		        			'</ul>' +
 		        			'<ul>' +
 		        				'<li>종료 시간</li>' +
-		        				'<li id="endDate"></li>' +	
+		        				'<li id="endDate">' + moment(new Date(item.endDate)).format("YYYY-MM-DD HH:mm") + '</li>'+
 		        			'</ul>' +
 		        			'<ul>' +
 		        				'<li>자동 할인시간</li>' +
-		        				'<li id="discount_cycle"></li>' +
+		        				'<li id="discount_cycle">' + (item.discount_cycle / 60) + '분</li>'+
 		        			'</ul>' +
 		        			'<ul>' +
 		        				'<li>시작 가격</li>' +
-		        				'<li id="maxPrice"></li>' +
+		        				'<li id="maxPrice">' + item.maxPrice + '</li>'+
 		        			'</ul>' +
 		        			'<ul>' +
 		        				'<li>최저 가격</li>' +
-		        				'<li id="minPrice"></li>' +
-		        			'</ul>'
-		        			'<ul class="sale">' +
-		        				'<li class="sale_item"></li>' +
-		        				'<li></li>' +
+		        				'<li id="minPrice">' + item.minPrice + '</li>'+
 		        			'</ul>' +
-		        			'<ul class="price">' +
+		        			'<ul class="sale">' +
+		        				'<li id="discount_rate">' + array[0][i].discount_rate + '%</li>'+
+		        				'<li id="discount_price">' + array[0][i].discount_price + '원 할인</li>' +
+		        			'</ul>' +
+		        			'<ul class="price">' + progress_status +
 		        			'</ul>' +
 		        		'</div>' +
 		        	'</div>';
 			        	
 						$('.card-container').append(html);
 						
-						$('#shop_name').text(itemList.shop_name);
-						$('#item_name').text(itemList.item_name);
-						$('#startDate').text(itemList.startDate);
-						$('#endDate').text(itemList.endDate);
-						$('#discount_cycle').text(itemList.discount_cycle);
-						$('#maxPrice').text(itemList.maxPrice);
-						$('#minPrice').text(itemList.minPrice);
 						
+						
+						/* $('#shop_name' + i).text(itemList.shop_name);
+						$('#item_name' + i).text(itemList.item_name);
+						$('#startDate'+ i).text(moment(new Date(itemList.startDate)).format("YYYY-MM-DD HH:mm"));
+						$('#endDate'+ i).text(moment(new Date(itemList.endDate)).format("YYYY-MM-DD HH:mm"));
+						$('#discount_cycle' + i).text(itemList.discount_cycle);
+						$('#maxPrice' + i).text(itemList.maxPrice);
+						$('#minPrice' + i).text(itemList.minPrice); */
+
 					}
+					
 					
 					
 				},
@@ -79,7 +94,7 @@
 			});
 		}) 
 	
-	
+		
 	
 
 	/* 	$('#btn1').on('click', function(){
