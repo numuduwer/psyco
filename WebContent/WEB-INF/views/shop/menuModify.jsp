@@ -10,7 +10,6 @@
 	<h1> Menu 수정하는 페이지</h1>
 
 	<form action="/psyco/shop/menuModifyPro.com?pageNum=${pageNum}" method="post" enctype="multipart/form-data"  >
-
 		<input type="hidden" name="menu_num" value="${article.menu_num}" />
 		<input type="hidden" name="category" value="${article.category}" />
 		<input type="hidden" name="sett" value="${article.sett}" />

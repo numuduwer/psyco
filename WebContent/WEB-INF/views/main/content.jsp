@@ -81,6 +81,147 @@
         </div>
 
     </section>
+    
+    
+    <section class="shop_info">
+        <div class="items_info">
+            <div class="ing_info">
+                <h2>이 가게에서 진행중인 경매1</h2>
+                <div class="info_items">
+                <c:forEach var="list" items="${list}">
+                    <img src="/psyco/save//${list.menu_img}" width=100>
+                </c:forEach>
+                </div>
+            </div>
+            <div class="ing_info">
+                <h2>이 가게에서 진행예정 경매</h2>
+                <div class="info_items">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                    <img src="" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="shop_comment">
+            <h2>사장님 오늘의 한마디</h2>
+            <h3>${item}</h3>
+        </div>
+
+    </section>
+    <div class="shopCotent_btn">
+        <div class="tabs">
+            <div class="tab" data-tab-target="#tab1">
+                <p>메뉴</p>
+            </div>
+            <div class="tab" data-tab-target="#tab2">
+                <p>가게정보</p>
+            </div>
+            <div class="tab" data-tab-target="#tab3">
+                <p>리뷰</p>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div id="tab1" data-tab-content class="items active">
+            <div class="tab1_item">
+                <img src="/img/item/one/1.jpg" alt="">
+                <div class="shopinfo_info">
+                    <h2>제육볶음</h2>
+                    <h3>멘트??</h3>
+                    <p>5000원</p>
+                </div>
+            </div>
+            <div class="tab1_item">
+                <img src="/img/item/one/1.jpg" alt="">
+                <div class="shopinfo_info">
+                    <h2>제육볶음</h2>
+                    <h3>멘트??</h3>
+                    <p>5000원</p>
+                </div>
+            </div>
+
+        </div>
+        <div id="tab2" data-tab-content class="items">
+            <div class="tab2_item">
+                <img src="/img/item/one/1.jpg" alt="">
+                <div class="shopinfo_info">
+                    <h2>가게 이름</h2>
+                    <ul>
+                        <li>
+                            <h3>전화번호 :</h3>
+                        </li>
+                        <li>
+                            <h3>000 0000 0000</h3>
+                        </li>
+                    </ul>
+
+                    <ul>
+                        <li>
+                            <h3>영업시간 :</h3>
+                        </li>
+                        <li>
+                            <h3>03:00 ~ 10:00</h3>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h3>포장여부 :</h3>
+                        </li>
+                        <li>
+                            <h3>가능</h3>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h3>주소 :</h3>
+                        </li>
+                        <li>
+                            <h3>수원시 권선구 온정로9번길 36 서희스타힐스 2401</h3>
+                        </li>
+                    </ul>
+
+
+                </div>
+            </div>
+        </div>
+        <div id="tab3" data-tab-content class="items">
+            <div class="tab3_item">
+                <h2>최근 리뷰</h2>
+                <table>
+                    <tr>
+                        <th>no.</th>
+                        <th>제목</th>
+                        <th>별점</th>
+                        <th>작성시간</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>테스트 제목</td>
+                        <td>별은 몇개</td>
+                        <td>테스트 작성시간 </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        const tabs = document.querySelectorAll("[data-tab-target]");
+        const tabcon = document.querySelectorAll("[data-tab-content]");
+        tabs.forEach((tab) => {
+            tab.addEventListener("click", () => {
+                const target = document.querySelector(tab.dataset.tabTarget);
+                tabcon.forEach((tabc_all) => {
+                    tabc_all.classList.remove("active");
+                });
+
+                target.classList.add("active");
+            });
+        });
+
+    </script>
+    
 
 
     

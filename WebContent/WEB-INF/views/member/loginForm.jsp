@@ -21,45 +21,41 @@
 			padding: 90px 70px 50px 70px;
 			background: rgba(40, 57, 101, .9);
 		}
-		
 	</style>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript">
-		
 	
-	</script>
 </head>
 <body>
-	<div class="login-wrap">
-		<div class="login-html">
-			<input type="radio" id="tab-1" name="tab" class="sign-in" checked><label for="tab-1">로그인</label>
-			<input type="radio" id="tab-2" name="tab" class="sign-up"><label for="tab-2">회원가입</label>
-			<div class="login-form">
-				<form action="/psyco/member/loginCheck.com" method="post">
-					<div class="sign-in-htm">
-						<div class="group">
-							<label for="user" class="label">아이디</label>
-							<input type="text" name="member_Id" id="member_Id" class="input">
-						</div>
-						<div class="group">
-							<label for="passwd" class="label">패스워드</label>
-							<input type="password" name="pw" id="pw" class="input">
-						</div>
-						<div class="group">
-							<input type="checkbox" id="check" class="button">
-							<label for="check">자동 로그인</label>
-						</div>
-						<div class="group">
-							<input type="submit" class="button" value="로그인">
-						</div>
-						<div class="group">
-							<a href="/psyco/member/naverLoginPro.com"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
-						</div>
-						<div class="hr"></div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+	    <!--  기능  타이틀 -->
+    <div class="myPage_mainTitle">
+        <h1>로그인</h1>
+        <div class="myPage_userTitle">
+            <h2 class="myPage_subTitle"> 일반 로그인 & 소셜 로그인 </h2>
+        </div>
+    </div>
+
+    <div class="form_box">
+        <form action="/psyco/member/loginCheck.com" class="form">
+            <div class=form_tab>
+                <label for="" class="form_title"> 아이디</label>
+                <input type="text" name= "member_Id"  class="form_input" />
+            </div>
+            <div class=form_tab>
+                <label for="" class="form_title"> 비밀번호 </label>
+                <input type="password" name="pw" class="form_input" />
+            </div>
+            <div class=form_tab>
+                <input type="checkbox" id="check" class="button">
+                <label for="check">자동 로그인</label>
+            </div>
+            <div class=form_tab>
+                <a href="/psyco/member/naverLoginPro.com"><img height="50"
+                        src="http://static.nid.naver.com/oauth/small_g_in.PNG" /></a>
+                <div class=form_tab>
+                    <input type="submit" class="form_btn" value="로그인" />
+                    <input type="button" class="form_btn" value="회원가입" onclick="location.href='/psyco/member/signupSelect.com'" />
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

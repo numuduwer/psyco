@@ -1,6 +1,7 @@
 package com.three.psyco.service.bean;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.Controller;
 
 import com.three.psyco.controller.bean.ShopBean;
+import com.three.psyco.model.dao.ItemDAOImpl;
+import com.three.psyco.model.dao.MenuDAO;
+import com.three.psyco.model.dao.MenuDAOImpl;
 import com.three.psyco.model.dao.ShopDAOImpl;
 import com.three.psyco.model.dao.SuperDAOImpl;
+import com.three.psyco.model.dto.JoinResultDTO;
 import com.three.psyco.model.dto.ListData;
+import com.three.psyco.model.dto.MenuDTO;
 
 @Service
 public class CommonsServiceImpl implements CommonsService {
@@ -19,15 +25,19 @@ public class CommonsServiceImpl implements CommonsService {
 	@Autowired
 	private SuperServiceImpl superService = null;
 	
-	
 	@Autowired
-	private ShopServiceImpl shopService = null;
+	private ShopServiceImpl ShopService = null;
 	
 	
 	@Autowired
 	private ShopDAOImpl shopDAO = null;
+
+	@Autowired
+	private ItemDAOImpl itemDAO = null;
 	
-	
+	@Autowired
+	private MenuDAOImpl menuDAO = null;
+
 
 	
 	public void setListDataToModel(Model model, ListData data) {
@@ -49,8 +59,8 @@ public class CommonsServiceImpl implements CommonsService {
 		if(pageName == null) {
 			pageName = "sMemberList";
 		}
-		System.out.println("list Test pageName :" + pageName);
-		System.out.println("list Test pageNum :" + pageNum);
+		System.out.println("list pageName :" + pageName);
+		System.out.println("list pageNum :" + pageNum);
 		
 		// 페이징 처리 초기값
 		int pageSize = 10;
@@ -89,6 +99,7 @@ public class CommonsServiceImpl implements CommonsService {
 
 	public ListData getListData(String pageName, String pageNum, int shop_num, String controller) throws SQLException{
 		// 디폴트 값 설정 
+		System.out.println("Commons Service 잘 연결 ");
 		if(pageNum == null) {
 			pageNum = "1";
 		}
@@ -103,12 +114,66 @@ public class CommonsServiceImpl implements CommonsService {
 		
 		int count = 0;
 		
+		
 		// 글 갯수 불러오기 
 		if(controller.equals("shopBean")) {
 			count = shopDAO.count(pageName, shop_num);
 		}
 		if(count >0) {
 				articleList = shopDAO.getList(pageName, shop_num,startRow, endRow);
+		}
+		
+		
+		number = count - (currPage-1) * pageSize;
+
+		
+		ListData data = new ListData();
+		
+		data.setArticleList(articleList);
+		data.setCount(count);
+		data.setCurrPage(currPage);
+		data.setEndRow(endRow);
+		data.setNumber(number);
+		data.setPageNum( Integer.parseInt(pageNum));
+		data.setPageSize(pageSize);
+		data.setStartRow(startRow);
+		return data;
+	}
+	
+	
+	
+	
+	// main 조건 상관없이 테이블 모든 글 가져오기
+	public ListData getListData(String pageName, String pageNum, String controller) throws SQLException {
+		// 디폴트 값 설정 
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		if(pageName == null) {
+			pageName = "itemList";
+		}
+		System.out.println("commons Serrvice pageName : " + pageName);
+		
+		// 페이징 처리 초기값
+		int pageSize = 10;
+		int currPage = Integer.parseInt(pageNum);	// 페이지 계산을 위해  형변환 
+		int startRow = (currPage-1) * pageSize +1;
+		int endRow = currPage * pageSize;
+		int number = 0; //(게시판에 보여주기식 글번호 )
+		List articleList = null;
+		
+		int count = 0;
+		
+		// 글 갯수 불러오기 
+		if(controller.equals("mainBean")) {
+			String selling = "3";
+			count = itemDAO.count(selling);
+		}
+		
+	
+		if(count >0) {
+			String selling = "3";
+			articleList = itemDAO.getList(pageName,selling);	
 		}
 		
 		number = count - (currPage-1) * pageSize;
@@ -125,10 +190,29 @@ public class CommonsServiceImpl implements CommonsService {
 		return data;
 	}
 	
+	@Override
+	public List<Integer> getMyShop_MemberNumList(int member_Num) throws SQLException {
+		List<Integer> myShop_ShopNumList = shopDAO.getMyShop_ShopNumList(member_Num);
+		return myShop_ShopNumList;
+	}
 	
+	@Override
+	public List<MenuDTO> getMyMenuListFromShopNum(List<Integer> myShop_ShopNumList) {
+		List<MenuDTO> menuList = menuDAO.getMyMenuListFromShopNum(myShop_ShopNumList);
+		return menuList;
+		
+	}
 	
 	
 
+
+	@Override
+	public List<JoinResultDTO> getEntireList() {
+		List<JoinResultDTO> itemList = itemDAO.getEntireList();
+	
+		
+		return itemList;
+	}
 
 
 }

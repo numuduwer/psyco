@@ -83,36 +83,80 @@
 			사업자 번호 : <c:out value="${param.license_number}"></c:out>
 		</div>
 	</c:if>
-	<div id="wrap">
-		<div>
-			<form action="/psyco/member/signup.com" method="post">
-			<input type="hidden" name="license_number" value="${param.license_number}">
-				<input type="text" name="member_Id" placeholder="아이디를 입력" /> <br />
-				<input type="password" name="pw" placeholder="비밀번호를 입력" /> <br />
-				<input type="password" name="pw_confirm" placeholder="비밀번호 재입력" /> <br />
-				<input type="text" name="name" placeholder="이름 입력" /> <br />
-				<input type="date" name="birth" /> <br />
-				<input type="text" name="phoneNum" placeholder="번호 입력" /> <br>
-				
-				<label for="male">남성</label>
-				<input type="radio" name="gender" id="male" value="M" />
-				<label for="female">여성</label>
-				<input type="radio" name="gender" id="female" value="F" /> <br>
-				<input type="text" name="nickname" placeholder="닉네임(활동 이름) 입력" /> <br />
-				<input type="text" name="email" placeholder="이메일 입력" /> <br />
-				
-				<input type="text" id="postcode" placeholder="우편번호">
-				<input type="button" id="btn1" onclick="execDaumPostCode()" value="우편번호 찾기"><br>
-				<input type="text" id="roadAddress" placeholder="도로명주소">
-				<input type="text" id="jibunAddress" placeholder="지번주소">
-				<span id="guide" style="color:#999;display:none"></span>
-				<input type="text" id="detailAddress" placeholder="상세주소">
-				<input type="text" id="extraAddress" placeholder="참고항목"> <br>
-				
-				<input type="submit" value="가입" />
-				<input type="button" value="취소" onclick="history.go(-1)" />
-			</form>
-		</div>
-	</div>
+	<div class="form_box">
+
+
+        <div>
+            <form action="/psyco/member/signup.com" method="post" class="form">
+                <input class="form_input" type="hidden" name="license_number" value="${param.license_number}">
+                <div class=form_tab>
+                    <label for="" class="form_title"> 아이디</label>
+                    <input class="form_input" type="text" name="member_Id" placeholder="아이디를 입력" />
+                </div>
+                <div class=form_tab>
+                    <label for="" class="form_title"> 비밀번호</label>
+                    <input class="form_input" type="password" name="pw" placeholder="비밀번호를 입력" />
+                </div>
+                <div class=form_tab>
+                    <label for="" class="form_title"> 비밀번호 확인</label>
+                    <input class="form_input" type="password" name="pw_confirm" placeholder="비밀번호 재입력" />
+                </div>
+
+                <div class=form_tab>
+                    <label for="" class="form_title">이름</label>
+                    <input class="form_input" type="text" name="name" placeholder="이름 입력" />
+                </div>
+                <div class=form_tab>
+                    <label for="" class="form_title">생년월일</label>
+                    <input class="form_input" type="date" name="birth" />
+                </div>
+                <div class=form_tab>
+                    <label for="" class="form_title">핸드폰</label>
+                    <input class="form_input" type="text" name="phoneNum" placeholder="번호 입력" />
+                </div>
+                <div class="form_male_tab">
+                    <label for="male">남성</label>
+                    <input class="form_checkbox" type="radio" name="gender" id="male" value="M" />
+                    <label for="female">여성</label>
+                    <input class="form_checkbox" type="radio" name="gender" id="female" value="F" />
+                </div>
+                <div class=form_tab>
+                    <label for="" class="form_title">닉네임</label>
+                    <input class="form_input" type="text" name="nickname" placeholder="닉네임(활동 이름) 입력" />
+                </div>
+                <div class=form_tab>
+                    <label for="" class="form_title">E-mail</label>
+                    <input class="form_input" type="text" name="email" placeholder="이메일 입력" />
+                </div>
+
+                <div class=form_tab>
+                    <input class="form_input" type="text" id="postcode" placeholder="우편번호">
+                    <input class="form_postbtn" type="button" id="btn1" onclick="execDaumPostCode()" value="우편번호 찾기">
+                </div>
+
+                <div class=form_tab>
+                    <label for="" class="form_title">지번주소</label>
+                    <input class="form_input" type="text" id="jibunAddress" placeholder="지번주소">
+                </div>
+                <div class=form_tab>
+                    <label for="" class="form_title">도로명주소</label>
+                    <input class="form_input" type="text" id="roadAddress" placeholder="도로명주소">
+                </div>
+                <div class=form_tab>
+                    <label for="" class="form_title">싱세주소</label>
+                    <input class="form_input" type="text" id="detailAddress" placeholder="상세주소">
+                </div>
+
+
+
+                <div class=form_tab>
+                    <input type="submit" value="가입" class="form_btn" />
+                    <input type="button" value="취소" onclick="history.go(-1) " class="form_btn" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+	
 </body>
 </html>

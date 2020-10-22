@@ -55,6 +55,15 @@
  		delete from shop where shop_num =#{value}
  	</delete>
  
- 
+ 	<select id="getMyShop_ShopNumList" parameterType="int" resultType="int">
+ 		select shop_num from shop where member_num=#{value} group by shop_num
+ 	</select>
+ 	
+ 	<select id="getMyMenuListFromShopNum" parameterType="list" resultType="MenuDTO">
+ 		select * from menu where shop_num in
+ 		<foreach collection="list" item="item" open="(" close=")" separator=",">
+ 			#{item}
+ 		</foreach>
+ 	</select>
 
  </mapper>
