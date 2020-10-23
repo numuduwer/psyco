@@ -154,10 +154,7 @@ public class MainBean {
 		}
 
 		System.out.println("controller 잘 연결 ");
-	@RequestMapping("content.com")
-	public String content(int item_num) {
-		
-	
+
 		return "main/content";
 	}
 	

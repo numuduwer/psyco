@@ -345,11 +345,7 @@ public class ShopBean {
 			model.addAttribute("count", rdata.getCount());
 		
 		System.out.println("shop_num"+rdata.getArticleList());
-	@RequestMapping("shopPageList.com")
-	public String shopPageList() {
-	
-		
-		
+
 		return "shop/shopPageList";
 	}
 	
