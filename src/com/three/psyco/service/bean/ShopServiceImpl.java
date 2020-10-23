@@ -152,7 +152,6 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public ItemDTO getItemOne(int item_num, String pageNum, Model model) throws SQLException {
 		String pageName = "itemOne";
-		System.out.println("itemOne Service : " + pageName);
 		ItemDTO article = itemDAO.getItemOne(item_num);
 		
 		if(pageNum == null) {
@@ -271,7 +270,16 @@ public class ShopServiceImpl implements ShopService {
 		return result;
 	}
 	
-
-	
+	@Override
+	public int paymentInsert(String data) throws ParseException  {
+		System.out.println("결제 서비스");
+		
+		JSONParser jsonParser = new JSONParser();
+		Object obj = jsonParser.parse(data);
+		JSONObject jsonObject = (JSONObject) obj;
+		System.out.println(jsonObject);
+		
+		return 0;
+	}
 
 }

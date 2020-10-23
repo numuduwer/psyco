@@ -3,8 +3,11 @@ package com.three.psyco.controller.bean;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -20,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.three.psyco.model.dto.BuyDTO;
 import com.three.psyco.model.dto.MemberDTO;
 import com.three.psyco.service.bean.MemberServiceImpl;
 
@@ -143,5 +149,30 @@ public class MemberBean {
 			e.printStackTrace();
 		}
 		return "member/menuSignupForm";
+	}
+	
+	@RequestMapping(value="getUserInfo.com")
+	@ResponseBody
+	public ResponseEntity<String> getUserInfo(HttpServletRequest request) throws JsonProcessingException {
+		
+		int member_Num = Integer.parseInt(request.getParameter("mem_num"));
+		MemberDTO dto = memberService.getMemberProfileFromNum(member_Num);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonString = mapper.writeValueAsString(dto);
+		
+		HttpHeaders resHeaders = new HttpHeaders();
+		resHeaders.add("content-Type", "application/json;charset=UTF-8");
+		
+		return new ResponseEntity<String>(jsonString, resHeaders, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping("paymentInsert.com")
+	public String paymentInsert(String abc) {
+		
+		
+		
+		System.out.println(abc);
+		return "";
 	}
 }

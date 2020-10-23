@@ -55,8 +55,6 @@ public class MainBean {
 	@Autowired
 	public static String controller = "mainBean";
 	
-	@Autowired
-	private ShopServiceImpl shopService=null;
 	
 	public Scheduler scheduler = null;
 	
@@ -66,7 +64,6 @@ public class MainBean {
 
 		List<Object> itemMapList = commonsService.getEntireList();
 		model.addAttribute("itemMapList", itemMapList);
-		System.out.println(itemMapList);
 		
 
 		return "main/main";

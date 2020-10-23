@@ -42,7 +42,6 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public ItemDTO getItemOne(int item_num) throws SQLException {
 		
-		System.out.println("itemOne DAO : " + item_num);
 		ItemDTO dto = sqlSession.selectOne("item.getItemOne", item_num);
 		
 		return dto;

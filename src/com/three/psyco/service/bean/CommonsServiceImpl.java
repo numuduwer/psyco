@@ -286,7 +286,6 @@ public class CommonsServiceImpl implements CommonsService {
 			}
 
 			String jsonOfItemList = new ObjectMapper().writeValueAsString(dto);		// string으로 형 변환하면 timestamp -> long타입으로 바뀌는듯 (확인 결과 값 일치)
-			System.out.println(jsonOfItemList);
 			
 			itemMap.put("itemList", dto);
 			itemMap.put("discount_price", discount_price);
