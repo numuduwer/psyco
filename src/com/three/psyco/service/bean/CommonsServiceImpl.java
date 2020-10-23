@@ -1,6 +1,7 @@
 package com.three.psyco.service.bean;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -241,7 +242,8 @@ public class CommonsServiceImpl implements CommonsService {
 			long item_endTime_minuet = TimeUnit.MILLISECONDS.toMinutes(dto.getEndDate().getTime());
 			
 			long time_difference = current_minuets - item_StartTime_minuet;		// 몇분 지났는지 알 수 있는 시간
-			long discount_cycle = dto.getDiscount_cycle() / 600;						// 할인 주기
+			long remainder_time = item_endTime_minuet - current_minuets;
+			long discount_cycle = dto.getDiscount_cycle() / 600;				// 할인 주기
 			long auction_unit = Long.parseLong(dto.getAuction_unit());			// 할인 단위
 			long discount_count = time_difference / discount_cycle;				// 할인 횟수
 			long discount_price = discount_count *  auction_unit;				// 할인 된 가격
@@ -264,13 +266,15 @@ public class CommonsServiceImpl implements CommonsService {
 				itemDAO.modifyAmountZero(dto.getItem_num());
 			}
 			
-			String jsonOfItemList = new ObjectMapper().writeValueAsString(itemList.get(i));
+			String jsonOfItemList = new ObjectMapper().writeValueAsString(dto);		// string으로 형 변환하면 timestamp -> long타입으로 바뀌는듯 (확인 결과 값 일치)
+			System.out.println(jsonOfItemList);
 			
 			itemMap.put("itemList", jsonOfItemList);
 			itemMap.put("discount_price", discount_price);
 			itemMap.put("current_price", current_price);
 			itemMap.put("discount_rate", discount_rate);
 			itemMap.put("progress_status", progress_status);
+			itemMap.put("remainder_time", remainder_time);
 			itemMapList.add(itemMap);
 		}
 		
