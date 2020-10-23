@@ -23,15 +23,21 @@ import com.three.psyco.service.bean.CommonsServiceImpl;
 import com.three.psyco.service.bean.MemberServiceImpl;
 import com.three.psyco.service.bean.ReviewServiceImpl;
 import com.three.psyco.service.bean.ShopServiceImpl;
+import com.three.psyco.service.bean.UserServiceImpl;
 
 @Controller
 @RequestMapping("/user/")
 public class UserBean {
 	
 	@Autowired
+	UserServiceImpl userService = null;
+	
+	@Autowired
+	CommonsServiceImpl commonsService = null;
+	
+	@Autowired
 	private MemberServiceImpl memberService;
 	
-	@Autowired CommonsServiceImpl commonsService;
 	
 	@Autowired
 	private ReviewServiceImpl reviewService=null;
@@ -46,7 +52,12 @@ public class UserBean {
 	}
 	
 	@RequestMapping("myPageList2.com")
-	public String myPageList2() {
+	public String myPageList2(String pageNum,String category,Model model) throws SQLException {
+		
+		ListData list = userService.getMyAsk(pageNum,category,model);
+		commonsService.setListDataToModel(model,list);
+		
+		
 		return "user/myPageList2";
 		}
 
@@ -242,6 +253,25 @@ public class UserBean {
 	
 
 
+	@RequestMapping("zzimDelete.com")
+	public String zzimDelete(int zzim_num,Model model) {
+		
+		model.addAttribute("zzim_num",zzim_num);
+		
+		
+		return "zzim/zzimDelete";
+	}
+	
+	@RequestMapping("zzimDeletePro.com")
+	public String zzimDeletePro(int zzim_num,Model model) {
+		
+		System.out.println("zzim_num : " + zzim_num);
+		
+		userService.zzimDeleteOne(zzim_num,model);
+		
+		return "zzim/zzimDeletePro";
+	}
+	
 
 	
 }

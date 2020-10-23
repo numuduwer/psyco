@@ -23,15 +23,19 @@
             <ul class="login_menu">
                 <li><a href="#">고객센터</a></li>
                 <c:if test="${sessionScope.memId == null}">
-               		<li><a href="/psyco/member/signupSelect.com">회원가입</a></li>
-                	<li><a href="/psyco/member/loginForm.com">로그인</a></li>
+                <li><a href="/psyco/member/loginForm.com">로그인</a></li>
+               	<li><a href="/psyco/member/signupSelect.com">회원가입</a></li>
                	</c:if>
                	
                	<c:if test="${sessionScope.memId != null}">
                		<li><a href="/psyco/member/logout.com">로그아웃</a></li>
                		<li><c:out value="${sessionScope.memId}" /> 님 환영합니다.</li>
+               		<li><a href="/psyco/user/myPageList.com">마이페이지</a></li>
 				</c:if>
-      
+				 	<c:if test="${sessionScope.shopCheck != null}">
+               		  <li><a href="/psyco/shop/shopPageList.com">내 가게 관리가기</a></li>
+             		  <li><a href="/psyco/shop/shopPageList2.com">경매상품 올리기 </a></li>     		
+				</c:if>
             </ul>
         </div>
 

@@ -87,7 +87,7 @@ ul{
 /* 레이아웃 사이즈 */
 header {
     height: 100px;
-    border:  solid 1px red;
+
 }
 
 header #top {
@@ -105,7 +105,7 @@ section {
     margin: auto;
     width: 1700px;
     
-    border: solid 1px red; 
+ 
 }
 
 #side_menu{
@@ -139,12 +139,12 @@ section {
     width: 1700px;
  
     margin: 0 auto;
-    border: solid 1px blue;
+    
 }
 
 footer {
     height: 200px;
-    border: solid 1px yellow;
+ 
     background-color: var(--color-dark-white);
 }
 
@@ -479,6 +479,7 @@ th {
   background-color: var(--color-white);
   border-radius: 4px;
   margin-left: 30px;
+
 }
 }
 
@@ -570,8 +571,7 @@ ul > li {
   display: block;
 }
 
-.select_tab {
-}
+
 /* footer */
 
 footer {
@@ -655,4 +655,224 @@ footer {
   border: 1px solid var(--color-dark-white);
   border-top: 3px solid tomato;
 }
+
+
+/* 진행중인 경매 */
+
+
+.main_shopItem {
+  display: flex;
+  flex-direction: column;
+}
+.tabs_shopItem {
+  display: flex;
+  justify-content: center;
+}
+.tabs_shopItem .tab_shopItem {
+  font-size: 1rem;
+  text-align: center;
+  line-height: 30px;
+  width: 270px;
+  height: 50px;
+  cursor: pointer;
+  background-color: rgb(243, 243, 243);
+  color: rgb(20, 19, 19);
+  position: relative;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border: 1px solid var(--color-dark-white);
+}
+.content_shopItem {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  border: 1px solid var(--color-dark-white);
+  width: 1400px;
+  height: 100%;
+}
+.items2 {
+  width: 1400px;
+  height: 100%;
+  display: none;
+  padding: 60px;
+  background-color: var(--color-white);
+  position: relative;
+}
+.items2::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 295px;
+  width: 268px;
+  height: 4px;
+  background-color: rgb(255, 255, 255);
+}
+.items2:nth-child(2)::before {
+  left: 564px;
+  top: -4px;
+  background-color: rgb(255, 255, 255);
+}
+.items2:nth-child(3)::before {
+  left: 835px;
+  top: -4px;
+  background-color: rgb(255, 255, 255);
+}
+.items2.active {
+  display: inline-block;
+}
+
+.content_shopItem_listBox {
+  width: 220px;
+  height: 380px;
+  border: 1px solid var(--color-dark-white);
+  margin: 8px 12px;
+}
+.content_shopItem_listBox ul {
+  padding: 4px 8px;
+}
+.content_shopItem_listBox h3 {
+  font-size: 20px;
+  font-weight: 500;
+  border-bottom: 0.5px solid var(--color-light-white);
+}
+.shopItem_img img {
+  width: 100%;
+  height: 220px;
+  border-bottom: 1px solid var(--color-dark-grey);
+}
+
+.content_shopItem_btn {
+  display: flex;
+  justify-content: space-around;
+  border: 10px 0;
+}
+
+.content_shopItem_btn li {
+  background-color: var(--color-dark-grey);
+  padding: 4px 14px;
+  border-radius: 4px;
+}
+.content_shopItem_btn li a {
+  color: var(--color-white);
+}
+
+#tab11 {
+  border: 1px solid var(--color-light-grey);
+}
+
+#tab12 {
+  border: 1px solid var(--color-light-grey);
+}
+
+#tab13 {
+  border: 1px solid var(--color-light-grey);
+}
+
+.ltem2_shopItembox {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+.tabb11_box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* form 공용 */
+
+/* form 공용 */
+
+.form_box {
+  margin: 0 auto;
+  width: 800px;
+  height: 100vh;
+  border: 2px solid var(--color-light-white);
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  width: 600px;
+  height: 100vh;
+  padding: 30px 30px;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+.form_title {
+  display: inline;
+  color: var(--color-dark-grey);
+  font-size: 18px;
+  font-weight: 500;
+  padding: 0 20px;
+}
+.form_input {
+  width: 300px;
+  height: 25px;
+  border: 1px solid var(--color-light-grey);
+  border-radius: 3px;
+}
+
+.form_tab {
+  padding: 20px 0;
+  border-bottom: 0.5px solid var(--color-dark-white);
+}
+.form_btn {
+  width: 120px;
+
+  border-style: none;
+  border-radius: 3px;
+  background-color: var(--color-light-grey);
+  font-size: 20px;
+  padding: 5px;
+  color: var(--color-light-white);
+}
+
+.select_tab {
+  width: 230px;
+  border-style: none;
+  border-radius: 3px;
+  background-color: var(--color-light-grey);
+  font-size: 20px;
+  padding: 5px;
+  color: var(--color-white);
+}
+
+
+/* member */
+
+.form_input2 {
+  width: 180px;
+  height: 25px;
+  border: 1px solid var(--color-light-grey);
+  border-radius: 3px;
+}
+
+.form_btn_box {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0;
+}
+
+.form_btn_box li {
+  padding: 30px;
+}
+.form_btn2 {
+  width: 120px;
+  margin: 10 auto;
+  border-style: none;
+  border-radius: 3px;
+  background-color: var(--color-light-grey);
+  font-size: 20px;
+  padding: 5px 30px;
+  color: var(--color-white);
+}
+
+
 

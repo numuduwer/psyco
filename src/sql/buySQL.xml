@@ -11,4 +11,21 @@
   	SELECT B.*,r FROM (SELECT A.*,rownum r FROM (select bu.*,it.item_name,it.shop_num,me.menu_img from buy bu inner join item it on bu.item_num=it.item_num inner join menu me on bu.menu_num=me.menu_num WHERE member_num = #{member_num} )A)B WHERE r >=#{start} AND r <=#{end}
   	]]>
   </select>
+  
+  
+  
+  	<select id="countAll" resultType="int">
+  		select count(*) from buy 
+  	</select> 
+  	
+	<select id="getBuyList" parameterType="hashmap" resultType="BuyDTO">
+		<![CDATA[
+		SELECT /*+ index_desc(BUY BUY_SEQ)*/rownum rn, BUY_NUM, PRICE, AMOUNT, DISCOUNT_RATE, GENDER, MEMBER_NUM, MENU_NUM, ITEM_NUM, REG  
+		FROM BUY
+		WHERE BUY_NUM >= #{startRow}
+		AND rownum <= #{endRow}		
+		]]>
+  	</select> 
+	
+
   </mapper>

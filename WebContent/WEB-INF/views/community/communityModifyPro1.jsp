@@ -9,7 +9,7 @@
 <body>
 		<script type="text/javascript">
 			alert('수정이 완료 되었습니다.');
-			window.location.href="/psyco/communityList.com?category="+${category};
+			window.location.href="/psyco/communityDetail.com?category=${category}&community_num=${community_num}";
 		</script>
 </body>
 </html>

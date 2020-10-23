@@ -37,7 +37,7 @@
 
  	<tiles:insertAttribute name="tile_header" />
  	<tiles:insertAttribute name="tile_userHeader" />  
- 	
+ 		 <img src="/psyco/resources/img/main/where.jpg" alt="">
    	<section>
     	<div id="content_box">
         	<tiles:insertAttribute name="tile_body"/>
