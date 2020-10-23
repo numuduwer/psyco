@@ -19,5 +19,8 @@ public interface CommonsService {
 	
 	public List<MenuDTO> getMyMenuListFromShopNum(List<Integer> myShop_ShopNumList);
 	
+
+	public ListData getShopNumLists(String pageNum, List shop_num) throws SQLException;
+	public ListData getbuyData(String pageNum,int member_num) throws SQLException;
 	public List<Object> getEntireList() throws JsonProcessingException;
 }

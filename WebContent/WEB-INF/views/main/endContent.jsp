@@ -131,7 +131,7 @@
             	<div class="card">
             		<img src="/psyco/resources/img/item/one/1.jpg" alt="" class="card_img">
             		<div class="card_content">
-            			<h3>테스트 : ${article.price}</h3>
+            			<h3>${article.price}</h3>
                  		<h2>${article.amount}</h2>
                  	</div>
             	</div>

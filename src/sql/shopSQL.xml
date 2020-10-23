@@ -14,6 +14,9 @@
  	<select id="getMyMenuCount" parameterType="int" resultType="int" >
  		select count(*) from menu where SHOP_NUM = #{value} 
  	</select>
+ 	<select id="getShopReviewCount" parameterType="int" resultType="int" >
+ 		select count(*) from review where SHOP_NUM = #{value} 
+ 	</select>
  	
  	
  	
@@ -30,12 +33,17 @@
  	
  	<select id="getMenuList" parameterType="hashmap" resultType="MenuDTO">
  		<![CDATA[
-		SELECT /*+ index_desc(MENU MENU_SEQ)*/rownum rn, MENU_NUM, MENU_NAME, CONTENT, MENU_IMG, MENU_IMG, PRICE, CATEGORY, SEASON, SETT, SHOP_NUM, REG 
+		SELECT /*+ index_desc(MENU MENU_SEQ)*/rownum rn, MENU_NUM, MENU_NAME, CONTENT, MENU_IMG, MENU_IMG, PRICE, CATEGORY, SEASON, SETT, SHOP_NUM, REG
 		FROM MENU
 		WHERE MENU_NUM >= #{start}
 		AND rownum <= #{end}
 		AND SHOP_NUM = #{id}
 	
+		]]>
+ 	</select>
+ 	<select id="getShopReviewList" parameterType="hashmap" resultType="ReviewDTO">
+ 		<![CDATA[
+  			select B.*,r from (select A.*,rownum r from (select * from review where shop_num=#{id} )A )B where r >=#{start}  and r <=#{end} 
 		]]>
  	</select>
  	
@@ -65,5 +73,21 @@
  			#{item}
  		</foreach>
  	</select>
-
+ 	
+ 	
+ 	 <select id="getShopNumCount" parameterType="List" resultType="int" >
+ 		select count(*) from review where SHOP_NUM =#{value}
+ 
+ 	</select>
+	<select id="getShopNumReviewList" parameterType="hashmap" resultType="ReviewDTO">
+	<![CDATA[
+		select B.* from (select A.*,rownum r from (select re.*,sh.shop_name from review re inner join shop sh on re.shop_num = sh.shop_num where re.SHOP_NUM IN
+	]]>
+		<foreach collection="shop_num" item="item" open="(" close=")" separator=",">
+			 #{item}
+		</foreach>
+	<![CDATA[
+		 )A )B where r >=#{start} and r <=#{end}
+	]]>
+	</select>
  </mapper>

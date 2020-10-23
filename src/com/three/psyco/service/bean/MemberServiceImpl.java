@@ -335,6 +335,21 @@ public class MemberServiceImpl implements MemberService {
 		
 		return response.toString();
 	}
+
+		//멤버 정보 가져오기 -동윤-
+	@Override
+	public MemberDTO memberInfos(String session) throws Exception {
+		MemberDTO dto=memberDAO.memberInfo(session);
+		return null;
+	}
+
+	@Override
+	public String getNickNames(String session) throws Exception {
+		String nickname ="";
+		nickname=memberDAO.getNickName(session);
+		return nickname;
+	}
+	
 	
 	@Override
 	public int userDelete(String member_Id, String pw) {
