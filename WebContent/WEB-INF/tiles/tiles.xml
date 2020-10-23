@@ -14,6 +14,13 @@
 	<definition name= "main/*" extends="main">
 		<put-attribute name="tile_body" value="/WEB-INF/views/main/{1}.jsp"/>
 	</definition>
+	
+	
+	
+	<definition name= "*/*.mm" extends="main">
+		<put-attribute name="tile_body" value="/WEB-INF/views/{1}/{2}.jsp"/>
+	</definition>
+	
 		
 	<!--  member 레이아웃 -->	
 	<definition name= "memberMypage" template="/WEB-INF/tiles/layouts/userLayout.jsp">
@@ -26,7 +33,6 @@
 	<definition name= "member/*" extends="memberMypage">
 		<put-attribute name="tile_body" value="/WEB-INF/views/member/{1}.jsp"/>
 	</definition>
-	
 	
 	
 	<!--  user 레이아웃 -->	
@@ -53,6 +59,10 @@
 	<definition name= "shop/*" extends="shopMypage">
 		<put-attribute name="tile_body" value="/WEB-INF/views/shop/{1}.jsp"/>
 	</definition>
+	
+	
+	
+
 	
 	<definition name= "item/*" extends="shopMypage">
 		<put-attribute name="tile_body" value="/WEB-INF/views/item/{1}.jsp"/>

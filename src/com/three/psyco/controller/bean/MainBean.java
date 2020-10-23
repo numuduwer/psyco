@@ -20,12 +20,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.three.psyco.model.dto.ItemDTO;
 import com.three.psyco.model.dto.JoinResultDTO;
 import com.three.psyco.model.dto.ListData;
+import com.three.psyco.model.dto.ShopDTO;
 import com.three.psyco.service.bean.CommonsServiceImpl;
 import com.three.psyco.service.bean.MainServiceImpl;
 
 import com.three.psyco.service.bean.Scheduler;
+import com.three.psyco.service.bean.ShopServiceImpl;
 
 
 
@@ -43,6 +46,9 @@ public class MainBean {
 	
 	@Autowired
 	private MainServiceImpl mainService = null;
+	
+	@Autowired
+	private ShopServiceImpl shopService = null;
 	
 	@Autowired
 	public static String controller = "mainBean";
@@ -90,6 +96,23 @@ public class MainBean {
 		return "main/endContent";
 	}
 	
+	
+	
+
+	// buy페이지에서 만들어놓은 해당 구매 상품 정보 가져오는거 사용
+	@RequestMapping("itemDetail.com")
+	public String itemDetail(int item_num,Model model,String pageNum) throws SQLException {
+		if (pageNum == null) pageNum = "1";
+		
+		System.out.println("item_num : " + item_num);
+		ItemDTO article = shopService.getItemOne(item_num, pageNum, model);
+		ShopDTO shopInfo = shopService.getShopDataSV(article.getShop_num());
+		
+		model.addAttribute("article", article);
+		model.addAttribute("shopInfo", shopInfo);
+		
+		return "shop/itemDetail";
+	}
 	
 	
 	

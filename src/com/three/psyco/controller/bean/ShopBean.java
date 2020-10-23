@@ -236,7 +236,7 @@ public class ShopBean {
 		model.addAttribute("article", article);
 		model.addAttribute("shopInfo", shopInfo);
 		
-		return "shop/itemDetail";
+		return "shop/itemDetail.mm";
 	}
 	
 	@RequestMapping("itemModifyForm.com")
