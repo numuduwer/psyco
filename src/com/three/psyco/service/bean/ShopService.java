@@ -19,7 +19,7 @@ public interface ShopService {
 	
 	
 	
-	public ListData getItemList(String pageName, String pageNum, int id) throws SQLException;
+	public ListData getItemList(String pageName, String pageNum, int id,Model model) throws SQLException;
 	public ItemDTO getItemOne(int item_num, String pageNum, Model model) throws SQLException;
 	public int itemDeleteAticle(int item_num, String pageNum, Model model);
 	public int itemModifyAticle(ItemDTO dto, Model model, int item_num);
@@ -27,4 +27,5 @@ public interface ShopService {
 	public JSONObject getMenuInfoFromMenuNum(int menu_num) throws SQLException;
 	
 	public int itemEnrollmentPro(String jsonData) throws ParseException;
+
 }

@@ -258,8 +258,12 @@ public class MemberServiceImpl implements MemberService {
 		if (count == 1) {
 			MemberDTO dto = memberDAO.getMemberProfileFromId(member_Id);
 			
+			
 			ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 			HttpSession httpSession = servletRequestAttribute.getRequest().getSession();
+			if(dto.getBusiness_license() == 0 ) {
+				httpSession.setAttribute("shopCheck", dto.getBusiness_license());
+			}
 			httpSession.setAttribute("memId", member_Id);
 			httpSession.setAttribute("memNum", dto.getMember_Num());
 		}

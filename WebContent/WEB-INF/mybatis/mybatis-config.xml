@@ -19,7 +19,9 @@
 		<typeAlias type="com.three.psyco.model.dto.MidDTO" alias="MidDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.TestDTO" alias="TestDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.ItemDTO" alias="ItemDTO"/>
+		<typeAlias type="com.three.psyco.model.dto.ZzimDTO" alias="ZzimDTO"/>
 		<typeAlias type="com.three.psyco.model.dto.JoinResultDTO" alias="JoinResultDTO"/>
+		<typeAlias type="com.three.psyco.model.dto.BuyDTO" alias="BuyDTO"/>
 	</typeAliases>
 	
 	<mappers>
@@ -32,6 +34,8 @@
 		<mapper resource="/sql/shopSQL.xml"/>
 		<mapper resource="/sql/itemSQL.xml"/>
 		<mapper resource="/sql/menuSQL.xml"/>
+		<mapper resource="/sql/zzimSQL.xml"/>
+		<mapper resource="/sql/buySQL.xml"/>
 	</mappers>
   	
 </configuration>

@@ -12,9 +12,9 @@ import com.three.psyco.model.dto.JoinResultDTO;
 
 public interface ItemDAO {
 	
-	public int count()throws SQLException;
+	public int count(String selling)throws SQLException;
 	
-	public List getList(String pageName)throws SQLException;
+	public List getList(String pageName,String selling)throws SQLException;
 	
 	public ItemDTO getItemOne(int item_num)throws SQLException;
 	
@@ -26,12 +26,31 @@ public interface ItemDAO {
 	public int itemModifyAticle(ItemDTO dto);
 
 	public int itemDeleteAticle(int item_num);
+
+	public ItemDTO getContentInfo(int item_num);
 	
 	public int itemEnrollmentPro(ItemDTO dto) throws ParseException;
 	
 	public List<JoinResultDTO> getEntireList();
+
 	
 	public int modifyStatus(int item_num);
 	
 	public int modifyAmountZero(int item_num);
+
+	
+	public int countA(int id) throws SQLException;
+	public List getItemListA(int id, int startRow, int endRow);
+	
+	public int countB(int id) throws SQLException;	
+	public List getItemListB(int id, int startRow, int endRow);
+		
+	public int countC(int id) throws SQLException;
+	public List getItemListC(int id, int startRow, int endRow);
+	
+	public int countD(int id) throws SQLException;	
+	public List getItemListD(int id, int startRow, int endRow);
+
+
+
 }

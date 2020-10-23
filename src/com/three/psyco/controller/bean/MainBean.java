@@ -23,12 +23,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.three.psyco.model.dto.JoinResultDTO;
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.service.bean.CommonsServiceImpl;
+import com.three.psyco.service.bean.MainServiceImpl;
+
+import com.three.psyco.service.bean.Scheduler;
+
 
 
 
 @Controller
 @RequestMapping("/main/")
 public class MainBean {
+	public static String controllerName = "mainBean";
 	
 	@Autowired
 	private CommonsServiceImpl commonsService = null;
@@ -37,16 +42,23 @@ public class MainBean {
 	private SqlSessionTemplate sqlSession = null;
 	
 	@Autowired
+	private MainServiceImpl mainService = null;
+	
+	@Autowired
 	public static String controller = "mainBean";
-
+	
+	@Autowired
+	public Scheduler scheduler = null;
 	
 	@RequestMapping("main.com")
 	public String main(Model model,String pageNum, String pageName, HttpSession session) throws SQLException, JsonProcessingException {
 		
+
 		List<Object> itemMapList = commonsService.getEntireList();
 		model.addAttribute("itemMapList", itemMapList);
 		System.out.println(itemMapList);
 		
+
 		return "main/main";
 	}
 	
@@ -56,20 +68,28 @@ public class MainBean {
 		
 		List<Object> jsonArray = commonsService.getEntireList();
 		String jsonString = jsonArray.toString();
-		
-		
+
+		System.out.println(jsonString);	
 		return jsonArray;
+
 	}
 	
 
 	@RequestMapping("content.com")
 	public String content(int item_num) {
 		
-		
-		
-		
+	
 		return "main/content";
 	}
+	
+	@RequestMapping("endContent.com")
+	public String endContent(Model model, String pageNum) throws SQLException {
+		String pageName = "endContent";
+		ListData data = commonsService.getListData(pageName,pageNum,controllerName);
+		commonsService.setListDataToModel(model, data);
+		return "main/endContent";
+	}
+	
 	
 	
 	
