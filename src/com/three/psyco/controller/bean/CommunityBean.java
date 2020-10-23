@@ -122,7 +122,7 @@ public class CommunityBean {
 	// 글 저장
 	@RequestMapping("communityPro.com")
 	public String communityPro(MultipartHttpServletRequest request, Model model,String pageNum,String grade,String category) throws Exception {
-		
+			
 
 			communityService.insertArticleSv(request, pageNum, grade, category, model);
 		
@@ -131,6 +131,8 @@ public class CommunityBean {
 		
 		return "community/communityPro";
 	}
+	
+	
 	
 	
 	@RequestMapping("communityDetail.com")

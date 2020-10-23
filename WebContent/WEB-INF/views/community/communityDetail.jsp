@@ -17,11 +17,11 @@
 		<c:if test="${pageNum == 2}">
 			<button onclick="window.location='/psyco/user/myPageList2.com'">마이페이지 돌아가기</button>
 		</c:if>
+
 			<tr>
 				<td width="80">제 목 </td>
 				<td colspan="20" align="center" > ${article.subject} </td>
 			</tr>
-			<br />
 			<tr>
 				<td>작성 내용</td>
 				<td colspan="2"align="center" height="300">${article.content}   </td>
@@ -37,20 +37,22 @@
 					<td><img src="/psyco/save//${article.community_img}" width="400"></td>
 				</tr>
 			</c:if>
+			
 			<tr>
 				<td>댓글</td>
 				<td colspan="2"align="center" height="300">${article.content}   </td>
 			</tr>
+			
 			<tr>
 				<td colspan="2"> 
-				<c:if test="${category == 1 || category == 2}">
+				<c:if test="${category == 1 || category == 2 || category == 6}">
 					<button onclick="window.location='/psyco/communityModifyForm1.com?&community_num=${community_num}&pageNum=${pageNum}&category=${category}'">수 정</button>
 				</c:if>
 				<c:if test="${category == 3 || category == 4}">
 					<button onclick="window.location='/psyco/communityModifyForm.com?&community_num=${community_num}&pageNum=${pageNum}&category=${category}'">수 정</button>
 				</c:if>
 					<button onclick="window.location='/psyco/communityDeleteForm.com?community_num=${community_num}&pageNum=${pageNum}&category=${category}'">삭 제</button>
-					<button onclick="window.location='/psyco/communityForm.com?community_num=${community_num}&ref=${article.ref}&re_step=${article.re_step}&re_level=${article.re_level}&category=6'">답 글</button>
+					<button onclick="window.location='/psyco/communityForm.com?community_num=${community_num}&ref=${article.ref}&re_step=${article.re_step}&re_level=${article.re_level}&category=${category}'">답 글</button>
 					<button onclick="window.location='/psyco/communityList.com?pageNum=1&category=${category}'">해당게시판 리스트가기</button>
 				 </td>
 			</tr>

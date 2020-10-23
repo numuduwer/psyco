@@ -31,16 +31,28 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public void insertArticleSv(MultipartHttpServletRequest request, String pageNum, String grade, String category,Model model) throws SQLException {
 		
-	
+		System.out.println("writer : " + request.getParameter("writer"));
 		CommunityDTO dto = new CommunityDTO();
-		String subject = request.getParameter("subject");	
-		
+		String subject = request.getParameter("subject");
+		if(subject.equals("[답글]")) {
+			System.out.println("community_num : " + request.getParameter("community_num"));
+			dto.setRef(Integer.parseInt(request.getParameter("community_num")));
+			dto.setContent(request.getParameter("content"));
+			dto.setSubject(request.getParameter("subject"));
+			dto.setGrade("11");
+			dto.setWriter(request.getParameter("writer"));
+			dto.setCommunity_img(request.getParameter("writer"));
+			dto.setCategory(request.getParameter("category"));
+			commnuityDAO.insertArticle(dto);
+			model.addAttribute("category",category);
+			model.addAttribute("pageNum",pageNum);
+		}else {
 			// - 파일 정보 꺼내기
 		String path = request.getRealPath("save");
 			MultipartFile mf = null;
 			try { 
 				mf = request.getFile("img");
-				if(request.getFile("img") == null && subject.equals("[답글]")) {
+				if(request.getFile("img") == null) {
 					String orgName = "asd.asd";
 					String imgName = orgName.substring(0, orgName.lastIndexOf('.')); 
 					String ext = orgName.substring(orgName.lastIndexOf('.'));
@@ -49,11 +61,16 @@ public class CommunityServiceImpl implements CommunityService {
 					String newName1 = "ads"+date;
 					dto.setSubject(request.getParameter("subject"));
 					dto.setContent(request.getParameter("content"));
+					dto.setRef(Integer.parseInt(request.getParameter("community_num")));
+					if(request.getParameter("grade") == null) {
+						dto.setGrade("11");
+					}else {
 					dto.setGrade(request.getParameter("grade"));
+					}
 					dto.setWriter(request.getParameter("writer"));
 					if(Integer.parseInt(request.getParameter("category")) == 3 || Integer.parseInt(request.getParameter("category")) == 4) {
 						dto.setCommunity_img(newName);
-					}else if(Integer.parseInt(request.getParameter("category")) == 1 || Integer.parseInt(request.getParameter("category")) == 2) {
+					}else if(Integer.parseInt(request.getParameter("category")) == 1 || Integer.parseInt(request.getParameter("category")) == 2 || Integer.parseInt(request.getParameter("category")) == 6) {
 						dto.setCommunity_img(newName1);
 					}
 					dto.setCategory(request.getParameter("category"));
@@ -73,9 +90,10 @@ public class CommunityServiceImpl implements CommunityService {
 					dto.setContent(request.getParameter("content"));
 					dto.setGrade(request.getParameter("grade"));
 					dto.setWriter(request.getParameter("writer"));
+					dto.setRef(Integer.parseInt(request.getParameter("community_num")));
 					if(Integer.parseInt(request.getParameter("category")) == 3 || Integer.parseInt(request.getParameter("category")) == 4) {
 						dto.setCommunity_img(newName);
-					}else if(Integer.parseInt(request.getParameter("category")) == 1 || Integer.parseInt(request.getParameter("category")) == 2) {
+					}else if(Integer.parseInt(request.getParameter("category")) == 1 || Integer.parseInt(request.getParameter("category")) == 2 || Integer.parseInt(request.getParameter("category")) == 2) {
 						dto.setCommunity_img(newName1);
 					}
 					dto.setCategory(request.getParameter("category"));
@@ -86,7 +104,9 @@ public class CommunityServiceImpl implements CommunityService {
 		
 			commnuityDAO.insertArticle(dto);
 			model.addAttribute("category",category);
-		
+		}
+		int community_num = Integer.parseInt(request.getParameter("community_num"));
+		model.addAttribute("community_num",community_num);
 	}
 
 

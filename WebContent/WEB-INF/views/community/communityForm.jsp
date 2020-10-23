@@ -36,7 +36,7 @@
 		<table>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" name="writer" value="${sessionScope.memId}"></td>
+				<td><input type="text" name="writer" value="test"></td>
 			</tr>
 			<tr>
 				<td>제 목</td>
@@ -68,7 +68,12 @@
 				<td colspan="2">
 					<input type="submit" value="저장" /> 
 					<input type="reset" value="재작성" />
-					<input type="button" value="리스트보기"  onclick="window.location='/psyco/communityList.com?category=${category}'"/>
+					<c:if test="${community_num != null}">
+						<input type="button" value="돌아가기"  onclick="window.location='/psyco/communityDetail.com?community_num=${community_num}&category=${category}'"/>
+					</c:if>
+					<c:if test="${community_num == null}">
+						<input type="button" value="리스트보기"  onclick="window.location='/psyco/communityList.com?category=${category}'"/>
+					</c:if>
 				</td>
 			</tr>
 		</table>
