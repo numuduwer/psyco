@@ -34,14 +34,14 @@
     </div>
 
     <div class="form_box">
-        <form action="" class="form">
+        <form action="/psyco/member/loginCheck.com" class="form">
             <div class=form_tab>
                 <label for="" class="form_title"> 아이디</label>
-                <input type="text" class="form_input" />
+                <input type="text" name= "member_Id"  class="form_input" />
             </div>
             <div class=form_tab>
-                <label for="" class="form_title"> 회원가입</label>
-                <input type="text" class="form_input" />
+                <label for="" class="form_title"> 비밀번호 </label>
+                <input type="password" name="pw" class="form_input" />
             </div>
             <div class=form_tab>
                 <input type="checkbox" id="check" class="button">
@@ -51,8 +51,8 @@
                 <a href="/psyco/member/naverLoginPro.com"><img height="50"
                         src="http://static.nid.naver.com/oauth/small_g_in.PNG" /></a>
                 <div class=form_tab>
-                    <input type="button" class="form_btn" value="가입" />
-                    <input type="button" class="form_btn" value="뒤로" />
+                    <input type="submit" class="form_btn" value="로그인" />
+                    <input type="button" class="form_btn" value="회원가입" onclick="location.href='/psyco/member/signupSelect.com'" />
                 </div>
             </div>
         </form>
