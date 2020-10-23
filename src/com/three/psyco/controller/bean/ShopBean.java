@@ -346,6 +346,7 @@ public class ShopBean {
 		
 		System.out.println("shop_num"+rdata.getArticleList());
 
+		
 		return "shop/shopPageList";
 	}
 	

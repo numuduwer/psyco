@@ -79,13 +79,6 @@ public class ReviewServiceImpl implements ReviewService {
 
 	
 
-	//리뷰 카운트
-	@Override
-	public int getReviewc()throws SQLException {
-		int count=reviewDAO.getCount();
-			return count;
-		
-	}
 	//리뷰 디테일
 	@Override
 	public ReviewDTO getReviewDetails(int review_num) throws SQLException {

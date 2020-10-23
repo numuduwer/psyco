@@ -155,6 +155,9 @@ public class MainBean {
 
 		System.out.println("controller 잘 연결 ");
 
+
+		
+	
 		return "main/content";
 	}
 	

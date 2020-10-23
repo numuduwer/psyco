@@ -12,7 +12,6 @@ public interface ReviewService {
 	
 	public int insertReviews(MultipartHttpServletRequest request,int item_num,String writer,int shop_num)throws SQLException;
 	
-	public int getReviewc()throws SQLException;
 	
 	public ReviewDTO getReviewDetails(int review_num) throws SQLException;
 	
