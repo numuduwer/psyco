@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  <mapper namespace="buy">
+  
+  	<select id="countAll" resultType="int">
+  		select count(*) from buy 
+  	</select> 
+  	
+	<select id="getBuyList" parameterType="hashmap" resultType="BuyDTO">
+		<![CDATA[
+		SELECT /*+ index_desc(BUY BUY_SEQ)*/rownum rn, BUY_NUM, PRICE, AMOUNT, DISCOUNT_RATE, GENDER, MEMBER_NUM, MENU_NUM, ITEM_NUM, REG  
+		FROM BUY
+		WHERE BUY_NUM >= #{startRow}
+		AND rownum <= #{endRow}		
+		]]>
+  	</select> 
+	
+
+  </mapper>

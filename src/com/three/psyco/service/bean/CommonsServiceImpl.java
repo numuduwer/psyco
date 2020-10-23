@@ -24,6 +24,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.google.gson.JsonObject;
 import com.three.psyco.controller.bean.ShopBean;
+import com.three.psyco.model.dao.BuyDAO;
+import com.three.psyco.model.dao.BuyDAOImpl;
 import com.three.psyco.model.dao.ItemDAOImpl;
 import com.three.psyco.model.dao.MenuDAO;
 import com.three.psyco.model.dao.MenuDAOImpl;
@@ -51,6 +53,9 @@ public class CommonsServiceImpl implements CommonsService {
 	
 	@Autowired
 	private MenuDAOImpl menuDAO = null;
+	
+	@Autowired
+	private BuyDAOImpl buyDAO = null;
 
 
 	
@@ -184,10 +189,18 @@ public class CommonsServiceImpl implements CommonsService {
 			count = itemDAO.count(selling);
 		}
 		
+		if(pageName.equals("endContent")) {
+			count = buyDAO.countAll();
+		}
 	
 		if(count >0) {
-			String selling = "3";
-			articleList = itemDAO.getList(pageName,selling);	
+			if(pageName.equals("endContent")) {
+				articleList = buyDAO.getList(startRow, endRow);
+		
+			}
+			
+			//String selling = "3";
+			//articleList = itemDAO.getList(pageName,selling);	
 		}
 		
 		number = count - (currPage-1) * pageSize;

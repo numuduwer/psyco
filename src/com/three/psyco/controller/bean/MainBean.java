@@ -33,6 +33,7 @@ import com.three.psyco.service.bean.Scheduler;
 @Controller
 @RequestMapping("/main/")
 public class MainBean {
+	public static String controllerName = "mainBean";
 	
 	@Autowired
 	private CommonsServiceImpl commonsService = null;
@@ -57,15 +58,11 @@ public class MainBean {
 		//System.out.println("itemMapList의 길이 :" + itemMapList.size());
 		//model.addAttribute("itemMapList", itemMapList);
 
-		List<JoinResultDTO> itemList = commonsService.getEntireList();
-		
+	//	List<JoinResultDTO> itemList = commonsService.getEntireList();	
 		ListData data = commonsService.getListData(pageName,pageNum,controller);
 		commonsService.setListDataToModel(model, data);	
-
-		System.out.println("itemList의 사이즈 : " + itemList.size());
-		model.addAttribute("itemList", itemList);
-
-
+		//System.out.println("itemList의 사이즈 : " + itemList.size());
+		//model.addAttribute("itemList", itemList);
 		return "main/main";
 	}
 	
@@ -74,15 +71,12 @@ public class MainBean {
 	public String getListData() throws JsonProcessingException {
 		List<Object> jsonArray = commonsService.getEntireList();
 		String jsonString = jsonArray.toString();
-		System.out.println(jsonString);
-		
+		System.out.println(jsonString);	
 		return jsonString;
 	}
 	
 
 	@RequestMapping("content.com")
-		// 나중에 페이지 콘텐트 페이지 전 페이지랑 연결되면 매개변수 item_num 이랑 shop_num 받아야함.
-
 	public String content(int itemNum, Model model) {
 		
 		System.out.println("controller 잘 연결 ");
@@ -90,15 +84,18 @@ public class MainBean {
 		// 임의로 값 지정해서 테스트
 		int item_num = 23;
 		int shop_num = 1233;
-		
-		
 		mainService.getContentInfo(item_num,model);
 		mainService.getContentImg(shop_num,model);
-		
-		
 		return "main/content";
 	}
 	
+	@RequestMapping("endContent.com")
+	public String endContent(Model model, String pageNum) throws SQLException {
+		String pageName = "endContent";
+		ListData data = commonsService.getListData(pageName,pageNum,controllerName);
+		commonsService.setListDataToModel(model, data);
+		return "main/endContent";
+	}
 	
 	
 	
