@@ -41,25 +41,22 @@ public class MainBean {
 
 	
 	@RequestMapping("main.com")
-	public String main(Model model,String pageNum, String pageName, HttpSession session) throws SQLException {
-		System.out.println("controller 잘 연결 ");
+	public String main(Model model,String pageNum, String pageName, HttpSession session) throws SQLException, JsonProcessingException {
 		
-		//List<Object> itemMapList = commonsService.getEntireList();
-		
-		//System.out.println("itemMapList의 길이 :" + itemMapList.size());
-		//model.addAttribute("itemMapList", itemMapList);
+		List<Object> itemMapList = commonsService.getEntireList();
+		model.addAttribute("itemMapList", itemMapList);
 		
 		return "main/main";
 	}
 	
-	@RequestMapping(value="getListData.com", method=RequestMethod.POST)
+	@RequestMapping(value="getListData.com", produces = "application/json")
 	@ResponseBody
-	public String getListData() throws JsonProcessingException {
+	public List<Object> getListData() throws JsonProcessingException {
+		
 		List<Object> jsonArray = commonsService.getEntireList();
 		String jsonString = jsonArray.toString();
-		System.out.println(jsonString);
 		
-		return jsonString;
+		return jsonArray;
 	}
 	
 
