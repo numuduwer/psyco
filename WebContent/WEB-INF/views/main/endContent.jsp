@@ -131,12 +131,14 @@
             	<div class="card">
             		<img src="/psyco/resources/img/item/one/1.jpg" alt="" class="card_img">
             		<div class="card_content">
+
             		<!-- buy_num,price,AMOUNT ,DISCOUNT_RATE ,GENDER ,MEMBER_NUM ,MENU_NUM ,ITEM_NUM ,REG -->
                  		<h2>구매자아이디 : ${article.buy_num}</h2>
             			<h2>구매가격 : ${article.price}</h2>
                  		<h3>구매시간 : ${article.reg}</h3>
                  		<h3>수량 : ${article.amount}</h3>
                  		<h3>구매자 성별 : ${article.gender}</h3>
+
                  	</div>
             	</div>
             </c:forEach>	

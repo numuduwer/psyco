@@ -30,6 +30,10 @@ public interface MemberService {
 	
 	public String licenseLookup(String license_number) throws IOException;
 	
+	public MemberDTO memberInfos(String session)throws Exception;
+	
+	public String getNickNames(String session)throws Exception;
+	
 	public int userDelete(String member_Id, String pw);
 	
 	public int userTypeCheck(String member_Num);

@@ -31,7 +31,7 @@ public class MemberShopMenuBean {
 	
 	@RequestMapping("menuSignupForm.com")
 	public String menuSignupForm() {
-		return "member/menuSignupForm";
+		return "store/menuSignupForm";
 	}
 	
 	@RequestMapping("menuSignupPro.com")
@@ -39,7 +39,7 @@ public class MemberShopMenuBean {
 		
 		memberMenu.insertMemberMenus(request,shop_num);
 		
-		return "member/menuSignupPro";
+		return "store/menuSignupPro";
 	}
 	
 
