@@ -51,41 +51,34 @@ public class MainBean {
 	public Scheduler scheduler = null;
 	
 	@RequestMapping("main.com")
-	public String main(Model model,String pageNum, String pageName, HttpSession session) throws SQLException {
-		System.out.println("controller 잘 연결 ");
+	public String main(Model model,String pageNum, String pageName, HttpSession session) throws SQLException, JsonProcessingException {
 		
-		//List<Object> itemMapList = commonsService.getEntireList();
-		//System.out.println("itemMapList의 길이 :" + itemMapList.size());
-		//model.addAttribute("itemMapList", itemMapList);
 
-	//	List<JoinResultDTO> itemList = commonsService.getEntireList();	
-		ListData data = commonsService.getListData(pageName,pageNum,controller);
-		commonsService.setListDataToModel(model, data);	
-		//System.out.println("itemList의 사이즈 : " + itemList.size());
-		//model.addAttribute("itemList", itemList);
+		List<Object> itemMapList = commonsService.getEntireList();
+		model.addAttribute("itemMapList", itemMapList);
+		System.out.println(itemMapList);
+		
+
 		return "main/main";
 	}
 	
-	@RequestMapping(value="getListData.com", method=RequestMethod.POST)
+	@RequestMapping(value="getListData.com", produces = "application/json")
 	@ResponseBody
-	public String getListData() throws JsonProcessingException {
+	public List<Object> getListData() throws JsonProcessingException {
+		
 		List<Object> jsonArray = commonsService.getEntireList();
 		String jsonString = jsonArray.toString();
+
 		System.out.println(jsonString);	
-		return jsonString;
+		return jsonArray;
+
 	}
 	
 
 	@RequestMapping("content.com")
-	public String content(int itemNum, Model model) {
+	public String content(int item_num) {
 		
-		System.out.println("controller 잘 연결 ");
-		
-		// 임의로 값 지정해서 테스트
-		int item_num = 23;
-		int shop_num = 1233;
-		mainService.getContentInfo(item_num,model);
-		mainService.getContentImg(shop_num,model);
+	
 		return "main/content";
 	}
 	

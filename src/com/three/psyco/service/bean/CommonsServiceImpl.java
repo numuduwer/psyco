@@ -278,11 +278,11 @@ public class CommonsServiceImpl implements CommonsService {
 			if (dto.getAmount() == 0) {
 				itemDAO.modifyAmountZero(dto.getItem_num());
 			}
-			
+
 			String jsonOfItemList = new ObjectMapper().writeValueAsString(dto);		// string으로 형 변환하면 timestamp -> long타입으로 바뀌는듯 (확인 결과 값 일치)
 			System.out.println(jsonOfItemList);
 			
-			itemMap.put("itemList", jsonOfItemList);
+			itemMap.put("itemList", dto);
 			itemMap.put("discount_price", discount_price);
 			itemMap.put("current_price", current_price);
 			itemMap.put("discount_rate", discount_rate);
