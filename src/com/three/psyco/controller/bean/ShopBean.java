@@ -143,7 +143,10 @@ public class ShopBean {
 	
 	@RequestMapping("MyMenuList.com")
 	public String MyMenuList(HttpSession session, Model model) throws SQLException {
+		System.out.println("myMenuList 연결 ");
 		int member_Num = (int) session.getAttribute("memNum");
+		System.out.println(member_Num);
+	
 		List<Integer> myShop_ShopNumList = commonsService.getMyShop_MemberNumList(member_Num);
 		List<MenuDTO> menuList = commonsService.getMyMenuListFromShopNum(myShop_ShopNumList);
 		model.addAttribute("menuList", menuList);

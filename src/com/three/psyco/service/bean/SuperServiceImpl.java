@@ -25,6 +25,8 @@ public class SuperServiceImpl implements SuperService {
 
 	@Override
 	public List getListSV(String pageName, int startRow, int endRow) throws SQLException {
+		System.out.println("superrService --------");
+		System.out.println("pageName : " + pageName);
 		List articleList = superDAO.List(pageName,startRow, endRow);	
 		return articleList;
 	}

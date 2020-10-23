@@ -9,11 +9,13 @@ public class MemberDTO {
 	private String pw;
 	private String name;
 	private String birth;
+	
 	private String phoneNum;
 	private String gender;
 	private String nickname;
 	private String email;
 	private int purchase_count;
+	
 	private int business_license;
 	private String license_number;
 	private Timestamp reg;

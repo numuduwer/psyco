@@ -9,6 +9,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
 		function pushMenuInfo(menu_num) {
+			consol.log(menu)
 			$.ajax({
 				url: "/psyco/shop/getMenuInfoFromMenuNum.com",
 				type: "post",

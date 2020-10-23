@@ -8,6 +8,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		function selectMenu(memNum) {
+			console.log(memNum);
 			
 			var options = 'width=500, height=600, top=30, left=30, resizeable=yes, scrollbars=yes, location=no';
 			window.open('', 'pop', options);

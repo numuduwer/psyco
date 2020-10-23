@@ -38,8 +38,10 @@ private CommonsServiceImpl commonsService = null;
 	
 //////// 리스트 뽑기  /////////
 	@RequestMapping("memberList")
-	public String memberList(String pageName, String pageNum,  Model model) throws SQLException {		
+	public String memberList(String pageName, String pageNum,  Model model) throws SQLException {
+		pageName = "sMemberList";
 		ListData data = commonsService.getListData(pageName,pageNum);
+		
 		commonsService.setListDataToModel(model, data);
 		return "/super/sMemberList";
 	}
