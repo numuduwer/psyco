@@ -61,7 +61,7 @@
 					<c:if test="${count == 0}">
 						<table>
 							<tr>
-								<td> 후기가 없습니다. </td>
+								<td> 구매내역이 없습니다. </td>
 							</tr>
 						</table>
 					</c:if>
@@ -93,7 +93,7 @@
       
                 <div id="tab2" data-tab-content class="items">
                    <div class="userpage_tab2">
-                   		<c:if test="${count == 0}">
+                   		<c:if test="${reviewCount == 0}">
 							<table>
 								<tr>
 									<td> 후기가 없습니다. </td>
@@ -111,8 +111,8 @@
 	                            </tr>
 	                        	<c:forEach var="article" items="${reviewArticleList}">
 	                            	<tr>
-		                            	<td>${number}
-											<c:set var="number" value="${number-1}" />
+		                            	<td>${reviewNumber}
+											<c:set var="number" value="${reviewNumber-1}" />
 										</td>
 										<td align="left">
 											<a href="/psyco/user/reviewDetail.com?review_num=${article.review_num}&pageNum=${pageNum}" >${article.item_name}</a>

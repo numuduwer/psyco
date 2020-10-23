@@ -69,6 +69,7 @@ public class UserBean {
 			
 			ListData data2=commonsService.getrListData(pageNum, model);
 			model.addAttribute("reviewCount", data2.getCount());
+			model.addAttribute("reviewNumber", data2.getNumber());
 			model.addAttribute("reviewArticleList", data2.getArticleList());
 			System.out.println("data2.getArticleList()=="+data2.getArticleList());
 		
