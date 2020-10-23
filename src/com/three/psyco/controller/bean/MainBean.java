@@ -45,6 +45,7 @@ public class MainBean {
 		
 		List<Object> itemMapList = commonsService.getEntireList();
 		model.addAttribute("itemMapList", itemMapList);
+		System.out.println(itemMapList);
 		
 		return "main/main";
 	}
@@ -56,14 +57,17 @@ public class MainBean {
 		List<Object> jsonArray = commonsService.getEntireList();
 		String jsonString = jsonArray.toString();
 		
+		
 		return jsonArray;
 	}
 	
 
 	@RequestMapping("content.com")
-	public String content() {
+	public String content(int item_num) {
 		
-		System.out.println("controller 잘 연결 ");
+		
+		
+		
 		return "main/content";
 	}
 	

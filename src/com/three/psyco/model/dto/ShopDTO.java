@@ -9,14 +9,11 @@ public class ShopDTO {
 	private String shop_phone;
 	private String operating_time;
 	private String address;
-	
-	
 	private String origin;
 	private String takeout;
 	private String shop_img;
 	private String license_number;
 	private Timestamp request_time;
-	
 	private Timestamp approve_time;
 	private String status;
 	private String approve_status;
