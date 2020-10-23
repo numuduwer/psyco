@@ -229,7 +229,6 @@ public class ShopBean {
 	public String itemDetail(int item_num,Model model,String pageNum) throws SQLException {
 		if (pageNum == null) pageNum = "1";
 		
-		System.out.println("item_num : " + item_num);
 		ItemDTO article = shopService.getItemOne(item_num, pageNum, model);
 		ShopDTO shopInfo = shopService.getShopDataSV(article.getShop_num());
 		
@@ -334,5 +333,12 @@ public class ShopBean {
 		return "shop/shopPageList2";
 	}
 	
-	
+	@RequestMapping("paymentInsert.com")
+	public String paymentInsert(@RequestBody String data) throws ParseException {
+		System.out.println("결제 컨트롤러");
+		
+		shopService.paymentInsert(data);
+		
+		return "";
+	}
 }

@@ -8,7 +8,104 @@
 <head>
 	<meta charset="UTF-8">
 	<title>글내용</title>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			IMP.init('imp29075190');	
+		})
+		
+		function getParam(sname) {
+			var params = location.search.substr(location.search.indexOf("?")+1);
+			var sval = "";
+			params = params.split("&");
+			for (var i = 0; i < params.length; i++) {
+				temp = params[i].split("=");
+				if (temp[0] == sname) {
+					sval = temp[1];
+				}
+			}
+			return sval;
+		}
+		
+		function getToday() {
+			var date = new Date();
+			var year = date.getFullYear();
+			var month = new String(date.getMonth() + 1);
+			var day = new String(date.getDate());
+			
+			if (month.length == 1) {
+				month = "0" + month;
+			}
+			if (day.length == 1) {
+				day = "0" + day;
+			}
+			return year + "" + month + "" + day;
+		}
+		
+		// 호출 전 db에 주문 정보를 전달하고 서버가 생성 한 주문 번호를 param의 merchant_uid 속성에 지정하기 
+		function payment(mem_num) {
+			
+			$.ajax({
+				url: "/psyco/member/getUserInfo.com",
+				method: "post",
+				data: {"mem_num": mem_num},
+				dataType: "json",
+				success: function(result){
+							
+					// IMP.request_pay(param, callback) 호출
+					IMP.request_pay({ // param
+						pg: "html5_inicis",
+						payment_method: "card",					
+						//merchant_uid: 'psyco' + getToday() + '-' + ${article.item_num},	// 주문 번호, 한번 결제 완료된 주문번호는 다시 사용할 수 없는 듯
+						merchant_uid: 'psyco20201023-000144',
+						name: '${article.item_name}',
+						amount: getParam("current_price"),
+						buyer_email: result.email,
+						buyer_name: result.name,
+						buyer_tel: result.phone_Num,
+						buyer_addr: '${shopInfo.address}',
+						//buyer_postcode: "00308"
+					}, function(response) {
+						// 결제 후 호출되는 callback 함수
+						if (response.success) {
+							console.log(response);
+							
+							$.ajax({
+								url: "/psyco/shop/paymentInsert.com",
+								method: "post",
+								headers: { "Content-Type": "application/json"},
+								data: {
+									price: response.paid_amount,
+									amount: ${article.amount},
+									discount_rate: getParam("discount_rate"),
+									gender: result.gender,
+									member_num: result.member_Num,
+									menu_num: ${article.menu_num},
+									item_num: ${article.item_num}
+								},
+								success: function(result){
+									console.log(result);
+								}
+								
+							});
+							
+							
+							
+						} else {
+							var msg = "결재가 실패하였습니다.";
+							msg += '에러내용 :' + response.error_msg;
+							console.log(msg);
+						}
+					})
+				},
+				error: function(){
+					
+				}
+			});
+		}
+		
+	</script>
 	
 </head>
 	
@@ -81,7 +178,7 @@
                     </ul>
                 </div>
             </div>
-            <button class="buy_btn">
+            <button class="buy_btn" onclick="javascript:payment(${sessionScope.memNum})">
                 <h2>구매하기</h2>
             </button>
         </div>
@@ -221,7 +318,7 @@
             </div>
         </div>
     </div>
-    <script>
+    <!-- <script>
         const tabs = document.querySelectorAll("[data-tab-target]");
         const tabcon = document.querySelectorAll("[data-tab-content]");
         tabs.forEach((tab) => {
@@ -236,7 +333,7 @@
         });
 
     </script>
-		
+		 -->
 		
 		
 	</body>

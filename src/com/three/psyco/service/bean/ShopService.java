@@ -28,4 +28,5 @@ public interface ShopService {
 	
 	public int itemEnrollmentPro(String jsonData) throws ParseException;
 
+	public int paymentInsert(String data) throws ParseException;
 }

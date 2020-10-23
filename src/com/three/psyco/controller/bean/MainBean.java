@@ -56,7 +56,6 @@ public class MainBean {
 
 		List<Object> itemMapList = commonsService.getEntireList();
 		model.addAttribute("itemMapList", itemMapList);
-		System.out.println(itemMapList);
 		
 
 		return "main/main";
