@@ -57,13 +57,13 @@ public class MainBean {
 		//System.out.println("itemMapList의 길이 :" + itemMapList.size());
 		//model.addAttribute("itemMapList", itemMapList);
 
-		List<JoinResultDTO> itemList = commonsService.getEntireList();
+		//List<JoinResultDTO> itemList = commonsService.getEntireList();
 		
 		ListData data = commonsService.getListData(pageName,pageNum,controller);
 		commonsService.setListDataToModel(model, data);	
 
-		System.out.println("itemList의 사이즈 : " + itemList.size());
-		model.addAttribute("itemList", itemList);
+		//System.out.println("itemList의 사이즈 : " + itemList.size());
+		//model.addAttribute("itemList", itemList);
 
 
 		return "main/main";

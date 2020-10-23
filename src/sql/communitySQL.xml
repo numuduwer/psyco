@@ -7,8 +7,8 @@
  
  <mapper namespace="community">
  
- 	<select id="countAll" parameterType="String" resultType="int">
- 		select count(*) from community where category=#{value}
+ 	<select id="countAll" parameterType="hashmap" resultType="int">
+ 		select count(*) from community where category=#{category} and subject NOT LIKE #{re}
  	</select>
  	
  	
@@ -16,7 +16,7 @@
   		<![CDATA[
 		select community_num,subject,content,writer,community_img,ref,re_step,re_level,reg,r
 		from (SELECT community_num,subject,content,writer,community_img,ref,re_step,re_level,reg,rownum r FROM community where category=#{category})
-		where r >= #{start} and r <= #{end} ORDER BY COMMUNITY_NUM desc
+		where r >= #{start} and r <= #{end} AND subject NOT LIKE #{re} ORDER BY COMMUNITY_NUM desc
 		]]>
   	</select>
  	
@@ -26,7 +26,7 @@
  	
  	<update id="updateRestep" parameterType="hashmap">
    		<![CDATA[
-   		update community set re_step=re_step+1 where ref=#{ref} and re_step > #{re_step}
+   		update community set re_step=re_step+1 where ref=#{ref}
    		]]>
    </update>
  	

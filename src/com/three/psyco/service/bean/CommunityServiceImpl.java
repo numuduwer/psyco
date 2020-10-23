@@ -34,9 +34,9 @@ public class CommunityServiceImpl implements CommunityService {
 		System.out.println("writer : " + request.getParameter("writer"));
 		CommunityDTO dto = new CommunityDTO();
 		String subject = request.getParameter("subject");
-		if(subject.equals("[답글]")) {
-			System.out.println("community_num : " + request.getParameter("community_num"));
+		if(subject.equals("[댓글]")) {
 			dto.setRef(Integer.parseInt(request.getParameter("community_num")));
+			dto.setCommunity_num(Integer.parseInt(request.getParameter("community_num")));
 			dto.setContent(request.getParameter("content"));
 			dto.setSubject(request.getParameter("subject"));
 			dto.setGrade("11");
@@ -61,7 +61,6 @@ public class CommunityServiceImpl implements CommunityService {
 					String newName1 = "ads"+date;
 					dto.setSubject(request.getParameter("subject"));
 					dto.setContent(request.getParameter("content"));
-					dto.setRef(Integer.parseInt(request.getParameter("community_num")));
 					if(request.getParameter("grade") == null) {
 						dto.setGrade("11");
 					}else {
@@ -90,7 +89,6 @@ public class CommunityServiceImpl implements CommunityService {
 					dto.setContent(request.getParameter("content"));
 					dto.setGrade(request.getParameter("grade"));
 					dto.setWriter(request.getParameter("writer"));
-					dto.setRef(Integer.parseInt(request.getParameter("community_num")));
 					if(Integer.parseInt(request.getParameter("category")) == 3 || Integer.parseInt(request.getParameter("category")) == 4) {
 						dto.setCommunity_img(newName);
 					}else if(Integer.parseInt(request.getParameter("category")) == 1 || Integer.parseInt(request.getParameter("category")) == 2 || Integer.parseInt(request.getParameter("category")) == 2) {
@@ -104,9 +102,9 @@ public class CommunityServiceImpl implements CommunityService {
 		
 			commnuityDAO.insertArticle(dto);
 			model.addAttribute("category",category);
+			
+
 		}
-		int community_num = Integer.parseInt(request.getParameter("community_num"));
-		model.addAttribute("community_num",community_num);
 	}
 
 
