@@ -40,6 +40,7 @@ public class MemberBean {
 		System.out.println("member_id : "+member_Id );
 		System.out.println("pw : "+pw );
 		int count = memberService.loginCheck(member_Id, pw);
+		
 		model.addAttribute("count", count);
 		return "member/loginCheck";
 	}
@@ -92,7 +93,7 @@ public class MemberBean {
 	@RequestMapping("logout.com")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "main/main";
+		return "redirect:/main/main.com";
 	}
 	
 	@RequestMapping("licenseLookup.com")

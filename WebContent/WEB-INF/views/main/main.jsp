@@ -39,20 +39,9 @@ $('#btn1').on('click', function(){
     <section id="banner_section">
       
         <div id="banner">
-            <img src="/psyco/resources/img/main/where.jpg" alt="">
+            <img src="/psyco/resources/img/main/banner.png" alt="">
         </div>
-        <div id="new__box">
-
-
-            <div class="new_content">
-          
-           
-                
-            </div>
-            <div class="rank_content">
-                랭킹
-            </div>
-        </div>
+ 
     </section>
     <!-- 경매 카테고리 -->
     <section id="category">
