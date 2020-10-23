@@ -11,20 +11,23 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
+	
+	
+	 	$(document).ready(function(){
 			
 			$.ajax({
 				url: "/psyco/main/getListData.com",
 				type: "post",
 				dataType: "json",
-				contentType: "application/json; charset=UTF-8",
 				success: function(result) {
+					console.log(result);
 					var array = new Array(result);
-					console.log(array);
-					console.log(array[0]);
-					console.log(typeof(array[0][0].itemList));
-					
 					for (var i in array[0]) {
+						
+						var item = JSON.parse(array[0][i].itemList);
+						var progress_status;
+						
+						/* if (array[0][i].progress_status == 1) {
 						var item = JSON.parse(array[0][i].itemList);
 						var progress_status;
 						
@@ -33,6 +36,7 @@
 						} else if (array[0][i].progress_status == 0) {
 							progress_status = '<li>현재가격</li>'+
 											'<li>' + array[0][i].current_price + '</li>'+
+											'<li class="remainder_time' + item.item_num + '">남은시간</li>'+
 											'<li>남은시간</li>'+
 											'<li>' + array[0][i].remainder_time + '</li>';
 						}
@@ -70,10 +74,8 @@
 		        			'</ul>' +
 		        		'</div>' +
 		        	'</div>';
-			        	
+			        
 						$('.card-container').append(html);
-						
-						
 						
 						/* $('#shop_name' + i).text(itemList.shop_name);
 						$('#item_name' + i).text(itemList.item_name);
@@ -84,15 +86,14 @@
 						$('#minPrice' + i).text(itemList.minPrice); */
 
 					}
-					
-					
-					
+
 				},
 				error: function() {
-					
+					console.log('ajax 실패');
 				}
 			});
-		}) 
+
+		})
 	
 		
 	
@@ -142,14 +143,12 @@
     <!-- 경매 상품 -->
     <section class="item-section">
         <div class="card-container">
-        
-        
-        <%-- <c:forEach var="item" items="${itemMapList}">
+        <c:forEach var="item" items="${itemMapList}">
         	<div class="card">
         		<img src="/psyco/resources/${item.itemList.menu_img}" alt="" class="card_img">
         		<div class="card_content">
-        			<h3 id="shop_name"></h3>
-        			<h2 id="item_name"></h2>
+        			<h3 id="shop_name"><a href="/psyco/shop/shopDetail.com?shop_num=${item.itemList.shop_num}">${item.itemList.shop_name}</a></h3>
+        			<h2 id="item_name"><a href="/psyco/shop/itemDetail.com?item_num=${item.itemList.item_num}&current_price=${item.current_price}&discount_price=${item.discount_price}&discount_rate=${item.discount_rate}">${item.itemList.item_name}</a></h2>
         			<ul>
         				<li>시작 시간</li>
         				<li>${fn:substring(item.itemList.startDate,0,16)}</li>	
@@ -176,18 +175,20 @@
         			</ul>
         			<ul class="price">
 	       				<c:choose>
-	       					<c:when test="${item.result == 1}">
+	       					<c:when test="${item.progress_status == 1}">
 	       						<li>종료된 경매입니다.</li>
 	       					</c:when>
-	       					<c:when test="${item.result == 0}">
+	       					<c:when test="${item.progress_status == 0}">
 	       						<li>현재 가격</li>
-	       						<li>${item.current_price}</li>	
+	       						<li>${item.current_price}원</li>
+	       						<li>남은 시간</li>
+	       						<li id="remainder_time${item.itemList.item_num}">${item.remainder_time}분</li>
 	       					</c:when>
 	       				</c:choose>
         			</ul>
         		</div>
         	</div> 
-        </c:forEach> --%>
+        </c:forEach>
         </div>
         
             <!-- <div class="card">

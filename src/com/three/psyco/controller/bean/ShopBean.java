@@ -227,9 +227,14 @@ public class ShopBean {
 	// buy페이지에서 만들어놓은 해당 구매 상품 정보 가져오는거 사용
 	@RequestMapping("itemDetail.com")
 	public String itemDetail(int item_num,Model model,String pageNum) throws SQLException {
+		if (pageNum == null) pageNum = "1";
+		
 		System.out.println("item_num : " + item_num);
 		ItemDTO article = shopService.getItemOne(item_num, pageNum, model);
-		model.addAttribute("article",article);
+		ShopDTO shopInfo = shopService.getShopDataSV(article.getShop_num());
+		
+		model.addAttribute("article", article);
+		model.addAttribute("shopInfo", shopInfo);
 		
 		return "shop/itemDetail";
 	}
