@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="review">
+  	<insert id="insertReview" parameterType="ReviewDTO">
+  		insert into review values(review_seq.nextVal,#{writer},#{category},#{content},#{grade},#{confirm},#{ref},#{reply_content},#{item_num},#{shop_num},#{member_id},#{review_img},sysdate)
+  	</insert>
+  	<select id="getReview" parameterType="hashmap" resultType="ReviewDTO">
+  		<![CDATA[
+  			select B.*,r from (select A.*,rownum r from (select re.*,it.item_name from review re inner join item it on re.item_num = it.item_num where member_id=#{member_id} )A )B where r >=#{start}  and r <=#{end} 
+		]]>
+  	</select>
+  	
+  	<select id="getCount"  resultType="int">
+  		select count(*) from review
+  	</select>
+  	
+  	<select id="getReivewDetail" parameterType="int" resultType="reviewDTO">
+  		select re.*,it.item_name from review re inner join item it on re.item_num = it.item_num where review_num=#{value}
+  	</select>
+  	<update id="updateReview" parameterType="reviewDTO">
+  		update review set category=#{category},grade=#{grade},content=#{content},review_img=#{review_img} where review_num=#{review_num}
+  	</update>
+  	<delete id="deleteReview" parameterType="int">
+  		delete from review where review_num=#{value}
+  	</delete>
+
+  	
+  </mapper>

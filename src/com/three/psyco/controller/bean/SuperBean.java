@@ -1,6 +1,6 @@
 package com.three.psyco.controller.bean;
 
-import java.sql.SQLException; 
+import java.sql.SQLException;  
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;

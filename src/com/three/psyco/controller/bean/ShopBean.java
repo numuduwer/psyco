@@ -6,6 +6,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -235,7 +236,7 @@ public class ShopBean {
 		model.addAttribute("article", article);
 		model.addAttribute("shopInfo", shopInfo);
 		
-		return "shop/itemDetail";
+		return "shop/itemDetail.mm";
 	}
 	
 	@RequestMapping("itemModifyForm.com")
@@ -312,10 +313,38 @@ public class ShopBean {
 	
 	
 	
-	@RequestMapping("shopPageList.com")
-	public String shopPageList() {
-	
+	@RequestMapping("shopPageList.com")//int member_num,
+	public String shopPageList(String pageNum,Model model)throws SQLException {
+		int member_num=91;
+		String pageName="shopList";
+		String controller="shopBean";
+		ListData data=commonsService.getListData(pageName, pageNum, member_num, controller);
+		model.addAttribute("pageNum", data.getPageNum());
+		model.addAttribute("pageSize", data.getPageSize());
+		model.addAttribute("currPage", data.getCurrPage());
+		model.addAttribute("startRow", data.getStartRow());
+		model.addAttribute("endRow", data.getEndRow());
+		model.addAttribute("number", data.getNumber());
+		model.addAttribute("articleList", data.getArticleList());
+		model.addAttribute("count", data.getCount());
+		//---------------------------------------------review
+		List<Integer> num=commonsService.getMyShop_MemberNumList(member_num);
+		System.out.println("num=="+num);
+
+			ListData rdata=commonsService.getShopNumLists(pageNum, num);
+			
+			  
+			model.addAttribute("pageNum", rdata.getPageNum());
+			model.addAttribute("pageSize", rdata.getPageSize());
+			model.addAttribute("currPage", rdata.getCurrPage());
+			model.addAttribute("startRow", rdata.getStartRow());
+			model.addAttribute("endRow", rdata.getEndRow());
+			model.addAttribute("rnumber", rdata.getNumber());
+			model.addAttribute("rarticleList", rdata.getArticleList());
+			model.addAttribute("count", rdata.getCount());
 		
+		System.out.println("shop_num"+rdata.getArticleList());
+
 		
 		return "shop/shopPageList";
 	}

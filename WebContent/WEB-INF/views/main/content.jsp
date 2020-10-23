@@ -20,13 +20,13 @@
             </div>
             <div class="shop_title">
                 <ul>
-                    <li>김밥천국</li>
-                    <li>08:30 18:30</li>
+                    <li>${sdto.shop_name}</li>
+                    <li>${sdto.operating_time}</li>
                     <li></li>
                 </ul>
                 <ul>
-                    <li>010-5227-0817</li>
-                    <li>주소</li>
+                    <li>${sdto.shop_phone}</li>
+                    <li>${sdto.address}</li>
                     <li></li>
                 </ul>
 
@@ -34,21 +34,21 @@
             <div class="buy_detail">
                 <ul>
                     <li>시작일</li>
-                    <li>10/18</li>
+                    <li>${dto.startdate}</li>
 
                 </ul>
                 <ul>
                     <li>할인 주기</li>
-                    <li>30분</li>
+                    <li>${dto.discount_cycle}</li>
                 </ul>
                 <ul>
                     <li>경매 단위</li>
-                    <li>400원</li>
+                    <li>${dto.auction_unit}</li>
 
                 </ul>
                 <ul>
                     <li>남은 수량</li>
-                    <li>10개</li>
+                    <li>${dto.amount}</li>
 
                 </ul>
             </div>
@@ -56,7 +56,7 @@
                 <div class="start_price">
                     <ul>
                         <li>시작 가격</li>
-                        <li>5000원</li>
+                        <li>${maxprice}</li>
 
                     </ul>
                     <ul>
@@ -105,7 +105,11 @@
         </div>
         <div class="shop_comment">
             <h2>사장님 오늘의 한마디</h2>
+<<<<<<< HEAD
+            <h3>${idto.content}</h3>
+=======
             <h3>${item}</h3>
+>>>>>>> 439a0ceef5cbd13a356220fca0522ec61d32dffb
         </div>
 
     </section>
@@ -125,34 +129,35 @@
     <div class="content">
         <div id="tab1" data-tab-content class="items active">
             <div class="tab1_item">
-                <img src="/img/item/one/1.jpg" alt="">
-                <div class="shopinfo_info">
-                    <h2>제육볶음</h2>
-                    <h3>멘트??</h3>
-                    <p>5000원</p>
-                </div>
+            	<table>
+		            <c:forEach var="article" items="${articleList}">
+		            	<tr>
+			            	<td>
+				                <img src="/img/item/one/1.jpg" alt="">
+				                <div class="shopinfo_info">
+				                    <h2>${article.menu_name }</h2>
+				                    <h3>멘트??</h3>
+				                    <p>${article.price}</p>
+				                </div>
+			                </td>
+		                </tr>
+		            </c:forEach>
+                </table>
             </div>
-            <div class="tab1_item">
-                <img src="/img/item/one/1.jpg" alt="">
-                <div class="shopinfo_info">
-                    <h2>제육볶음</h2>
-                    <h3>멘트??</h3>
-                    <p>5000원</p>
-                </div>
-            </div>
+
 
         </div>
         <div id="tab2" data-tab-content class="items">
             <div class="tab2_item">
                 <img src="/img/item/one/1.jpg" alt="">
                 <div class="shopinfo_info">
-                    <h2>가게 이름</h2>
+                    <h2>${sdto.shop_name}</h2>
                     <ul>
                         <li>
                             <h3>전화번호 :</h3>
                         </li>
                         <li>
-                            <h3>000 0000 0000</h3>
+                            <h3> ${sdto.shop_phone}</h3>
                         </li>
                     </ul>
 
@@ -161,7 +166,7 @@
                             <h3>영업시간 :</h3>
                         </li>
                         <li>
-                            <h3>03:00 ~ 10:00</h3>
+                            <h3> ${sdto.operating_time}</h3>
                         </li>
                     </ul>
                     <ul>
@@ -169,7 +174,7 @@
                             <h3>포장여부 :</h3>
                         </li>
                         <li>
-                            <h3>가능</h3>
+                            <h3> ${sdto.takeout}</h3>
                         </li>
                     </ul>
                     <ul>
@@ -177,7 +182,7 @@
                             <h3>주소 :</h3>
                         </li>
                         <li>
-                            <h3>수원시 권선구 온정로9번길 36 서희스타힐스 2401</h3>
+                            <h3> ${sdto.address}</h3>
                         </li>
                     </ul>
 
@@ -187,20 +192,33 @@
         </div>
         <div id="tab3" data-tab-content class="items">
             <div class="tab3_item">
+            	<c:if test="${rcount == 0}">
+					<table>
+						<tr>
+							<td> 후기가 없습니다. </td>
+						</tr>
+					</table>
+				</c:if>
                 <h2>최근 리뷰</h2>
                 <table>
                     <tr>
                         <th>no.</th>
-                        <th>제목</th>
+                        <th>작성자</th>
                         <th>별점</th>
                         <th>작성시간</th>
+                        <th>내용</th>
                     </tr>
+                    <c:forEach var="article" items="${rarticleList}">
                     <tr>
-                        <td>1</td>
-                        <td>테스트 제목</td>
-                        <td>별은 몇개</td>
-                        <td>테스트 작성시간 </td>
+                    	<td>${rnumber}
+							<c:set var="number" value="${rnumber-1}" />
+						</td>
+                        <td>${article.writer}</td>
+                        <td>${article.grade}</td>
+                        <td>${article.reg } </td>
+                        <td>${article.content } </td>
                     </tr>
+                    </c:forEach>
                 </table>
 
             </div>

@@ -22,6 +22,55 @@
     </div>
     
 <!-- 히든값 value member_num으로 나중에 수정  -->
+<<<<<<< HEAD
+<<<<<<< HEAD:WebContent/WEB-INF/views/store/shopSignupForm.jsp
+	<form action="/psyco/shopSignupPro.com" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="member_num" value="${member_num}">
+=======
+	<form action="/psyco/member/shopSignupPro.com" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="member_num" value=2>
+>>>>>>> 9bb5c41c0db0b336ed6c754e870748b95e449c5e:WebContent/WEB-INF/views/member/shopSignupForm.jsp
+		<table>
+			<tr>
+				<td>가게이름</td>
+				<td><input type="text" name="shop_name"/></td>
+			</tr>
+			<tr>
+				<td>가게번호</td>
+				<td><input type="text" name="shop_phone"/></td>
+			</tr>
+			<tr>
+				<td>영업시간</td>
+				<td><input type="text" name="operating_time"/></td>
+			</tr>
+			<tr>
+				<td>가게 주소</td>
+				<td><input type="text" name="address"/></td>
+			</tr>
+			<tr>
+				<td>원산지</td>
+				<td><input type="text" name="origin"/></td>
+			</tr>
+			<tr>
+				<td>포장 여부</td>
+				<td><input type="checkbox" name="takeout" value="1"/></td>
+			</tr>
+			<tr>
+				<td>가게 이미지</td>
+				<td><input type="file" name="shop_img"/></td>
+			</tr>
+			<tr>
+				<td>사업자 번호</td>
+				<td><input type="text" name="license_number" value="${license_number}" readonly/></td>
+			</tr>
+			<tr>
+				<td><input type="button" value="뒤로가기" onclick="goBack();"></td>
+				<td><input type="submit" value="다음"></td>
+			</tr>
+		</table>
+	</form>
+=======
+>>>>>>> 439a0ceef5cbd13a356220fca0522ec61d32dffb
 
     <div class="form_box">
 
