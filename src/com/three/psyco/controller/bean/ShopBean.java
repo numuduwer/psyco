@@ -310,6 +310,9 @@ public class ShopBean {
 	
 	@RequestMapping("shopPageList.com")
 	public String shopPageList() {
+	
+		
+		
 		return "shop/shopPageList";
 	}
 	

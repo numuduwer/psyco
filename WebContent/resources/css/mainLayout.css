@@ -100,6 +100,26 @@ header {
 .login_menu li {
   padding: 8px 24px;
 }
+
+.shop_menu {
+  display: flex;
+  list-style-type: none;
+  justify-content: flex-end;
+}
+
+.shop_menu li {
+  margin: 0 10px;
+  padding: 8px 20px;
+  border: 1px solid tomato;
+  background-color: tomato;
+  border-radius: 10px;
+}
+
+.shop_menu li a {
+  color: var(--color-white);
+  font-weight: 500;
+  font-size: var(--font-small);
+}
 /* header  로고  */
 #logo {
   display: flex;
@@ -137,15 +157,13 @@ header {
 section {
   display: flex;
   margin: 0 auto;
-
   align-items: center;
-  border: solid 1px red;
-  justify-content : center;
+  justify-content: center;
 }
 
-#buy_info{
-	display: flex;
-	 width: 1000px;
+#buy_info {
+  display: flex;
+  width: 1000px;
 }
 
 /* 콘텐츠1  배너화면    */
@@ -158,8 +176,8 @@ section {
   display: flex;
   width: 100%;
   height: 300px;
-  border-top: solid 1px black;
-  border-bottom: solid 1px black;
+
+  border-bottom: solid 1px var(--color-dark-white);
 }
 
 /* 콘텐츠2  신메뉴와 랭킹     */
@@ -194,10 +212,13 @@ section {
 #category ul {
   display: flex;
   list-style: none;
+  padding-top: 10px;
+  padding-right: 150px;
 }
 #category li {
   padding: 12px 28px;
   font-weight: var(--weight-semi-bold);
+  color: var(--color-dark-grey);
 }
 
 /* 콘텐츠3  역경매 카드   */
@@ -228,12 +249,13 @@ section {
 }
 
 .card_img {
-  width: 380px;
+  width: 100%;
+  max-width: 420px;
   height: 218px;
 }
 
 .card_content {
-  padding: 4px 12px;
+  padding: 4px 8px;
 }
 .card_content h2 {
   font-weight: var(--weight-semi-bold);
@@ -280,7 +302,6 @@ section {
 .buy_info {
   width: 50%;
   display: flex;
-
 }
 
 .buy_img {
@@ -303,7 +324,6 @@ section {
   width: 450px;
   height: 450px;
 }
-
 
 /*  콘텐츠2. 오른쪽 (상품 정보)*/
 .buy_content {
@@ -397,7 +417,6 @@ section .buy_info {
   align-items: center;
   border: solid 1px red;
 }
-
 
 /* 가게 정보 */
 
@@ -511,7 +530,6 @@ section .buy_info {
 }
 
 .shopinfo_info {
-	
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -591,8 +609,6 @@ th {
   background-color: var(--color-light-white);
   font-size: var(--font-small);
 }
-
-
 
 /* footer */
 
@@ -710,7 +726,6 @@ footer {
   padding: 5px;
   color: var(--color-white);
 }
-
 
 /* member */
 
