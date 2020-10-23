@@ -1,4 +1,4 @@
-package com.three.psyco.model.dto;
+ package com.three.psyco.model.dto;
 
 import java.sql.Timestamp;
 

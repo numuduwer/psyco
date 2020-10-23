@@ -12,7 +12,7 @@
  		<![CDATA[
 		SELECT rownum rn, menu.MENU_IMG,menu.MENU_NAME,menu.price,zzim.MENU_NUM,menu.shop_num,zzim.zzim_num
 		FROM menu menu, zzim zzim
-		WHERE menu.menu_num = zzim.menu_num AND zzim.MEMBER_NUM=#{value} and rownum >= 1 and rownum <= 10
+		WHERE menu.menu_num = zzim.menu_num AND zzim.MEMBER_NUM=#{value} and rownum >= 1 and rownum <= 5
 		]]>
  	</select>
  	
