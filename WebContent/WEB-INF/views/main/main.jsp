@@ -28,11 +28,16 @@
 						var progress_status;
 						
 						/* if (array[0][i].progress_status == 1) {
+						var item = JSON.parse(array[0][i].itemList);
+						var progress_status;
+						
+						if (array[0][i].progress_status == 1) {
 							progress_status = '<li>종료된 경매입니다.</li>'
 						} else if (array[0][i].progress_status == 0) {
 							progress_status = '<li>현재가격</li>'+
 											'<li>' + array[0][i].current_price + '</li>'+
 											'<li class="remainder_time' + item.item_num + '">남은시간</li>'+
+											'<li>남은시간</li>'+
 											'<li>' + array[0][i].remainder_time + '</li>';
 						}
 						
@@ -72,9 +77,7 @@
 			        
 						$('.card-container').append(html);
 						
-						
-						
-						$('#shop_name' + i).text(itemList.shop_name);
+						/* $('#shop_name' + i).text(itemList.shop_name);
 						$('#item_name' + i).text(itemList.item_name);
 						$('#startDate'+ i).text(moment(new Date(itemList.startDate)).format("YYYY-MM-DD HH:mm"));
 						$('#endDate'+ i).text(moment(new Date(itemList.endDate)).format("YYYY-MM-DD HH:mm"));
@@ -83,11 +86,13 @@
 						$('#minPrice' + i).text(itemList.minPrice); */
 
 					}
+
 				},
 				error: function() {
 					console.log('ajax 실패');
 				}
 			});
+
 		})
 	
 		
