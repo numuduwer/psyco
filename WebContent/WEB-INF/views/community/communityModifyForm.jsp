@@ -57,7 +57,7 @@
 					<td colspan="2">
 						<input type="submit" value="수정" /> 
 			
-						<input type="button" value="리스트보기"  onclick="window.location='/psyco/communityList.com?pageNum=${pageNum}'"/>
+						<input type="button" value="리스트보기"  onclick="window.location='/psyco/communityDetail.com?community_num=${community_num}&category=${category}'"/>
 					</td>
 				</tr>
 			

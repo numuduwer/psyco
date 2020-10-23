@@ -37,28 +37,30 @@
     <div class="content_shopItem">
         <div id="tab1" data-tab-content class="items2 active">
             <div class="ltem2_shopItembox">
-                <div class="content_shopItem_listBox">
-                    <div class="shopItem_img">
-                        <img src="/img/item/one/1.jpg" alt="">
-                    </div>
-                    <ul>
-                        <li>
-                            시작시간 :
-                        </li>
-                        <li>종료시간 : </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <h3 class="content_shopItem_title"><a href="">상품 명</a></h3>
-                        </li>
-                        <li> 수량 : </li>
-                    </ul>
-                    <ul class="content_shopItem_btn">
-                        <li><a href="">수정</a></li>
-                        <li><a href="">삭제</a></li>
-
-                    </ul>
+                	<c:forEach var="article" items="${articleListC}">
+               	<div class="content_shopItem_listBox">
+	                    <div class="shopItem_img">
+	                        <img src="/img/item/one/1.jpg" alt="">
+	                    </div>
+	                    <ul>
+	                        <li>
+	                            시작시간 : ${article.startDate}
+	                        </li>
+	                        <li>종료시간 : ${article.endDate}</li>
+	                    </ul>
+	                    <ul>
+	                        <li>
+	                            <h3 class="content_shopItem_title"><a href="">상품 명 : ${article.item_name}</a></h3>
+	                        </li>
+	                        <li> 수량 : ${aritlce.amount}</li>
+	                    </ul>
+	                    <ul class="content_shopItem_btn">
+	                        <li><a href="">수정</a></li>
+	                        <li><a href="">삭제</a></li>
+	
+	                    </ul>
                 </div>
+	                </c:forEach>
                 <div class="content_shopItem_listBox">
                     <div class="shopItem_img">
                         <img src="/img/item/one/1.jpg" alt="">
@@ -247,7 +249,31 @@
 
                     </ul>
                 </div>
-
+	<%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
+		<div align="center">
+		<c:if test="${count > 0}">
+			<fmt:parseNumber var="res" value="${count / pageSize}"  integerOnly="true"/>
+			<c:set var="pageCount" value="${res + (count % pageSize == 0 ? 0 : 1)}"  />
+			<c:set var="pageBlock" value="10" />
+			<fmt:parseNumber var="result" value="${(currPage-1)/pageBlock}" integerOnly="true" />
+			<fmt:parseNumber var="startPage" value="${result * pageBlock + 1}" />
+			<fmt:parseNumber var="endPage" value="${startPage + pageBlock - 1}" />
+			<c:if test="${endPage > pageCount}">
+				<c:set var="endPage" value="${pageCount}" />
+			</c:if>
+			
+			<c:if test="${startPage > pageBlock}">
+				<a href="/psyco/shop/shopList.com?pageNum=${startPage-pageBlock}" > &lt; </a>
+			</c:if>
+			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1" >
+				<a href="/psyco/shop/shopList.com?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+			</c:forEach>
+			<c:if test="${endPage < pageCount}">
+				<a href="/psyco/shop/shopList.com?pageNum=${startPage+pageBlock}" > &gt; </a>
+			</c:if>
+		
+		</c:if>
+		</div>
             </div>
         </div>
     </div>

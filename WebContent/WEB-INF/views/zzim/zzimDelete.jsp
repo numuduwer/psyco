@@ -23,8 +23,14 @@
 	
 </script>
 
-<body>
-		<button><a href="/psyco/user/zzimDeletePro.com?zzim_num=${zzim_num}">삭제하기</a></button>
-		<button><a href="#" onclick="javascript:self.close()">취소</a></button>
+<body>	
+	<table align="center">
+		<tr>
+			<td>
+				<button align="center"><a href="/psyco/user/zzimDeletePro.com?zzim_num=${zzim_num}">삭제하기</a></button>
+				<button><a href="#" onclick="javascript:self.close()">취소</a></button>
+			</td>
+		<tr>
+	</table>
 </body>
 </html>
