@@ -7,6 +7,7 @@ public class JoinResultDTO {
 	private int item_num;
 	private String item_name;
 	private String menu_img;
+	private int shop_num;
 	private String shop_name;
 	private int amount;
 	private Timestamp startDate;
@@ -33,6 +34,12 @@ public class JoinResultDTO {
 	}
 	public void setMenu_img(String menu_img) {
 		this.menu_img = menu_img;
+	}
+	public int getShop_num() {
+		return shop_num;
+	}
+	public void setShop_num(int shop_num) {
+		this.shop_num = shop_num;
 	}
 	public String getShop_name() {
 		return shop_name;
