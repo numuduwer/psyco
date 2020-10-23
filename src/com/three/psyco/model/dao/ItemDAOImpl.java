@@ -256,11 +256,19 @@ public class ItemDAOImpl implements ItemDAO {
 	public List<JoinResultDTO> getEntireList() {
 		List<JoinResultDTO> list = sqlSession.selectList("item.getEntireList");
 		return list;
-		
 	}
 
+	@Override
+	public int modifyStatus(int item_num) {
+		int result = sqlSession.update("item.modifyStatus", item_num);
+		return result;
+	}
+	
+	@Override
+	public int modifyAmountZero(int item_num) {
+		int result = sqlSession.update("item.modifyAmountZero", item_num);
+		return result;
+	}
 
-	
-	
 	
 }
