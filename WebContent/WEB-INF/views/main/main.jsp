@@ -8,30 +8,102 @@
 <head>
 	<meta charset="UTF-8">
 	<title>main</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			$.ajax({
+				url: "/psyco/main/getListData.com",
+				type: "post",
+				dataType: "json",
+				contentType: "application/json; charset=UTF-8",
+				success: function(result) {
+					var array = new Array(result);
+					console.log(array);
+					console.log(array[0]);
+					console.log(typeof(array[0][0].itemList));
+					
+					for (var i in array[0]) {
+						var itemList = JSON.parse(array[0][i].itemList);
+						
+						var html = '<div class="card">' +
+		        		'<div class="card_content">' +
+		        			'<h3 id="shop_name"></h3>' +
+		        			'<h2 id="item_name"></h2>' +
+		        			'<ul>' +
+		        				'<li>시작 시간</li>' +
+		        				'<li id="startDate"></li>' +
+		        			'</ul>' +
+		        			'<ul>' +
+		        				'<li>종료 시간</li>' +
+		        				'<li id="endDate"></li>' +	
+		        			'</ul>' +
+		        			'<ul>' +
+		        				'<li>자동 할인시간</li>' +
+		        				'<li id="discount_cycle"></li>' +
+		        			'</ul>' +
+		        			'<ul>' +
+		        				'<li>시작 가격</li>' +
+		        				'<li id="maxPrice"></li>' +
+		        			'</ul>' +
+		        			'<ul>' +
+		        				'<li>최저 가격</li>' +
+		        				'<li id="minPrice"></li>' +
+		        			'</ul>'
+		        			'<ul class="sale">' +
+		        				'<li class="sale_item"></li>' +
+		        				'<li></li>' +
+		        			'</ul>' +
+		        			'<ul class="price">' +
+		        			'</ul>' +
+		        		'</div>' +
+		        	'</div>';
+			        	
+						$('.card-container').append(html);
+						
+						$('#shop_name').text(itemList.shop_name);
+						$('#item_name').text(itemList.item_name);
+						$('#startDate').text(itemList.startDate);
+						$('#endDate').text(itemList.endDate);
+						$('#discount_cycle').text(itemList.discount_cycle);
+						$('#maxPrice').text(itemList.maxPrice);
+						$('#minPrice').text(itemList.minPrice);
+						
+					}
+					
+					
+				},
+				error: function() {
+					
+				}
+			});
+		}) 
+	
+	
+	
+
+	/* 	$('#btn1').on('click', function(){
+		    var form = {
+		            name: "jamong",
+		            age: 23
+		    }
+		    $.ajax({
+		        url: "/psyco/main.com",
+		        type: "POST",
+		        data: form,
+		        success: function(data){
+		            $('#result').text(data);
+		        },
+		        error: function(){
+		            alert("simpleWithObject err");
+		        }
+		    });
+		}); */
+
+	</script>
 </head>
-<script type="text/javascript">
-
-$('#btn1').on('click', function(){
-    var form = {
-            name: "jamong",
-            age: 23
-    }
-    $.ajax({
-        url: "/psyco/main.com",
-        type: "POST",
-        data: form,
-        success: function(data){
-            $('#result').text(data);
-        },
-        error: function(){
-            alert("simpleWithObject err");
-        }
-    });
-});
 
 
-
-</script>
 <body>
 
 
@@ -56,45 +128,51 @@ $('#btn1').on('click', function(){
     <section class="item-section">
         <div class="card-container">
         
-        <c:forEach var="item" items="${itemList}">
+        
+        <%-- <c:forEach var="item" items="${itemMapList}">
         	<div class="card">
-        		<img src="/psyco/resources/${item.menu_img}" alt="" class="card_img">
+        		<img src="/psyco/resources/${item.itemList.menu_img}" alt="" class="card_img">
         		<div class="card_content">
-        			<h3>${item.shop_name}</h3>
-        			<h2>${item.item_name}</h2>
+        			<h3 id="shop_name"></h3>
+        			<h2 id="item_name"></h2>
         			<ul>
         				<li>시작 시간</li>
-        				<li>${fn:substring(item.startDate,0,16)}</li>	
+        				<li>${fn:substring(item.itemList.startDate,0,16)}</li>	
         			</ul>
         			<ul>
         				<li>종료 시간</li>
-        				<li>${fn:substring(item.endDate,0,16)}</li>	
+        				<li>${fn:substring(item.itemList.endDate,0,16)}</li>	
         			</ul>
         			<ul>
         				<li>자동 할인시간</li>
-        				<li><fmt:parseNumber var="discount_cycle" value="${item.discount_cycle / 60}" integerOnly="true"/>${discount_cycle} 분</li>
+        				<li><fmt:parseNumber var="discount_cycle" value="${item.itemList.discount_cycle / 60}" integerOnly="true"/>${discount_cycle} 분</li>
         			</ul>
         			<ul>
         				<li>시작 가격</li>
-        				<li>${item.maxPrice}</li>
+        				<li>${item.itemList.maxPrice}</li>
         			</ul>
         			<ul>
         				<li>종료 가격</li>
-        				<li>${item.minPrice}</li>
+        				<li>${item.itemList.minPrice}</li>
         			</ul>
-        			
         			<ul class="sale">
-        				<li class="sale_item"></li>
-        				<li></li>
+        				<li class="sale_item"><fmt:formatNumber var="discount_rate" value="${item.discount_rate}" type="percent" pattern=".0" />${discount_rate} %</li>
+        				<li>${item.discount_price}원 할인</li>
         			</ul>
         			<ul class="price">
-        				<li></li>
-        				<li></li>
+	       				<c:choose>
+	       					<c:when test="${item.result == 1}">
+	       						<li>종료된 경매입니다.</li>
+	       					</c:when>
+	       					<c:when test="${item.result == 0}">
+	       						<li>현재 가격</li>
+	       						<li>${item.current_price}</li>	
+	       					</c:when>
+	       				</c:choose>
         			</ul>
         		</div>
-        	</div>
-        
-        </c:forEach>
+        	</div> 
+        </c:forEach> --%>
         </div>
         
             <!-- <div class="card">
