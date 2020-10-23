@@ -24,13 +24,15 @@
  	
 
  	<!-- 해당 음식 content 페이지에서 해당가게 이미지 리스트 뿌려주기 -->
-	<select id="getContentImgList" parameterType="int" resultType="menuDTO">
+	<select id="getContentList" parameterType="int" resultType="itemDTO">
 		<![CDATA[
-		SELECT rownum rn, menu_img 
-		FROM menu
-		WHERE rownum >= 1
+		SELECT rownum rn,item.item_num,menu.menu_img 
+		from item item, menu menu 
+		WHERE item.shop_num = #{value}
+		and menu.menu_num = item.menu_num
+		AND item.SELLING_STATUS=3
 		AND rownum <= 4
-		AND shop_num = #{value}
+		AND rownum >= 1
   		]]>
 	</select>
 

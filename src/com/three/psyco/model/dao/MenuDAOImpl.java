@@ -38,7 +38,7 @@ public class MenuDAOImpl implements MenuDAO {
 	public List getContentImg(int shop_num) {
 		
 
-		List list = sqlSession.selectList("menu.getContentImgList",shop_num);
+		List list = sqlSession.selectList("menu.getContentList",shop_num);
 		
 		return list;
 	}

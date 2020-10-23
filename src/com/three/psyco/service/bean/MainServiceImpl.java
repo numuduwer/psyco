@@ -37,9 +37,8 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public List getContentImg(int shop_num,Model model) {
 		System.out.println(shop_num);
-		List list = menuDAO.getContentImg(shop_num);
+		List<MenuDTO> list = menuDAO.getContentImg(shop_num);
 		System.out.println("size : " + list.size());
-		model.addAttribute("list",list);
 		
 		return list;
 	}

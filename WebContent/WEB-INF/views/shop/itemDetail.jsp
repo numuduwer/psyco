@@ -94,10 +94,11 @@
             <div class="ing_info">
                 <h2>이 가게에서 진행중인 경매</h2>
                 <div class="info_items">
-                    <img src="/img/item/one/1.jpg" alt="">
-                    <img src="/img/item/one/2.jpg" alt="">
-                    <img src="/img/item/one/3.jpg" alt="">
-                    <img src="/img/item/one/4.jpg" alt="">
+                <c:forEach var="list" items="${itemImgList}">
+                <a href="/psyco/shop/itemDetail.com?item_num=${list.item_num}"></a>
+                    <img src="/psyco/save//" width=100>
+                      ${list.menu_img}
+                </c:forEach>
                 </div>
             </div>
             <div class="ing_info">
@@ -112,9 +113,7 @@
         </div>
         <div class="shop_comment">
             <h2>사장님 오늘의 한마디</h2>
-            <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis mollitia odio illum suscipit.
-                Laboriosam
-                qui temporibus,</h3>
+            <h3>${article.comment1}</h3>
         </div>
 
     </section>

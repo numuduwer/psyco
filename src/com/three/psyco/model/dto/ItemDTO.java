@@ -21,7 +21,15 @@ public class ItemDTO {
 	private Integer menu_num;
 	private Integer mem_num;
 	private Integer shop_num;
+	private String menu_img;
 	
+	
+	public String getMenu_img() {
+		return menu_img;
+	}
+	public void setMenu_img(String menu_img) {
+		this.menu_img = menu_img;
+	}
 	public Integer getShop_num() {
 		return shop_num;
 	}

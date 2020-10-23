@@ -36,6 +36,7 @@ import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.MenuDTO;
 import com.three.psyco.model.dto.ShopDTO;
 import com.three.psyco.service.bean.CommonsServiceImpl;
+import com.three.psyco.service.bean.MainServiceImpl;
 import com.three.psyco.service.bean.ShopService;
 import com.three.psyco.service.bean.ShopServiceImpl;
 
@@ -49,6 +50,9 @@ public class ShopBean {
 	private CommonsServiceImpl commonsService = null;
 
 	public static String controllerName = "shopBean";
+	
+	@Autowired
+	private MainServiceImpl mainService = null;
 
 	
 	
@@ -233,9 +237,14 @@ public class ShopBean {
 		System.out.println("item_num : " + item_num);
 		ItemDTO article = shopService.getItemOne(item_num, pageNum, model);
 		ShopDTO shopInfo = shopService.getShopDataSV(article.getShop_num());
+		// shop num 임의 지정 test
+		int shop_num = 2;
+		List itemImgList = mainService.getContentImg(shop_num, model);
+		
 		
 		model.addAttribute("article", article);
 		model.addAttribute("shopInfo", shopInfo);
+		model.addAttribute("itemImgList", itemImgList);
 		
 		return "shop/itemDetail.mm";
 	}
