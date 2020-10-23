@@ -47,17 +47,33 @@
 		}
 	</script>
 
-	<div id="wrap">
-		<form>
-			<div class="group">
-				<input type="text" name="text1" id="text1"> - <input type="text" name="text2" id="text2"> - <input type="text" name="text3" id="text3">
-				<input type="button" value="유효성 검사"  id="checkBtn">
-				<br />
-				<span id="chkMsg"></span>
-				<input type="button" id="nextBtn" value="다음" onclick="licenseNumber()" disabled>
-			</div>
-			
-		</form>
-	</div>
+	 <!--  기능  타이틀 -->
+    <div class="myPage_mainTitle">
+        <h1>사업자 등록 확인 </h1>
+        <div class="myPage_userTitle">
+            <h2 class="myPage_subTitle"> 가게 사업자 번호를 인증해주세요 </h2>
+        </div>
+    </div>
+    <form class="form_box">
+        <div class="group">
+            <input class="form_input2" type="text" name="text1" id="text1"> - <input class="form_input2" type="text"
+                name="text2" id="text2">
+            - <input class="form_input2" type="text" name="text3" id="text3">
+            <input type="button" value="사업자 중복확인" id="checkBtn">
+            <br />
+            <span id="chkMsg"></span>
+
+            <ul class="form_btn_box">
+                <li>
+                    <input class=form_btn2 type="button" id="nextBtn" value="뒤로가기" onClick="history.go(-1);" >
+                </li>
+                <li>
+                    <input class=form_btn2 type="button" id="nextBtn" value="다음으로" onclick="licenseNumber()">
+                </li>
+            </ul>
+
+        </div>
+  
+    </form>
 </body>
 </html>

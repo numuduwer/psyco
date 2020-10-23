@@ -122,8 +122,7 @@ public class CommunityBean {
 	// 글 저장
 	@RequestMapping("communityPro.com")
 	public String communityPro(MultipartHttpServletRequest request, Model model,String pageNum,String grade,String category) throws Exception {
-		
-		
+			
 
 			communityService.insertArticleSv(request, pageNum, grade, category, model);
 		
@@ -132,6 +131,8 @@ public class CommunityBean {
 		
 		return "community/communityPro";
 	}
+	
+	
 	
 	
 	@RequestMapping("communityDetail.com")
@@ -232,7 +233,7 @@ public class CommunityBean {
 		System.out.println("category : " + category);
 		communityService.deleteArticleSv(dto);
 		model.addAttribute("pageNum",pageNum);
-		model.addAttribute("category",category);
+		model.addAttribute("category",category);   
 		
 		return "community/communityDeletePro";
 	}

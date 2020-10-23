@@ -3,9 +3,20 @@ package com.three.psyco.service.bean;
 import java.sql.SQLException; 
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -14,7 +25,11 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 import org.springframework.web.servlet.mvc.Controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.google.gson.JsonObject;
 import com.three.psyco.controller.bean.ShopBean;
+import com.three.psyco.model.dao.BuyDAO;
 import com.three.psyco.model.dao.BuyDAOImpl;
 import com.three.psyco.model.dao.ItemDAOImpl;
 import com.three.psyco.model.dao.MenuDAO;
@@ -40,7 +55,7 @@ public class CommonsServiceImpl implements CommonsService {
 	@Autowired BuyServiceImpl buyService = null;
 	
 	@Autowired
-	private ShopServiceImpl shopService = null;
+	private ShopServiceImpl ShopService = null;
 	
 	
 	@Autowired
@@ -121,6 +136,7 @@ public class CommonsServiceImpl implements CommonsService {
 
 	public ListData getListData(String pageName, String pageNum,int shop_num, String controller) throws SQLException{
 		// 디폴트 값 설정 
+		System.out.println("Commons Service 잘 연결 ");
 		if(pageNum == null) {
 			pageNum = "1";
 		}
@@ -134,6 +150,7 @@ public class CommonsServiceImpl implements CommonsService {
 		List articleList = null;
 		
 		int count = 0;
+		
 		
 		// 글 갯수 불러오기 
 		if(controller.equals("shopBean")) {
@@ -187,12 +204,22 @@ public class CommonsServiceImpl implements CommonsService {
 		
 		// 글 갯수 불러오기 
 		if(controller.equals("mainBean")) {
-			count = itemDAO.count();
+			String selling = "3";
+			count = itemDAO.count(selling);
 		}
 		
+		if(pageName.equals("endContent")) {
+			count = buyDAO.countAll();
+		}
 	
 		if(count >0) {
-			articleList = itemDAO.getList(pageName);	
+			if(pageName.equals("endContent")) {
+				articleList = buyDAO.getList(startRow, endRow);
+		
+			}
+			
+			//String selling = "3";
+			//articleList = itemDAO.getList(pageName,selling);	
 		}
 		
 		number = count - (currPage-1) * pageSize;
@@ -364,13 +391,77 @@ public class CommonsServiceImpl implements CommonsService {
 
 
 	@Override
-	public List<JoinResultDTO> getEntireList() {
+	public List<Object> getEntireList() throws JsonProcessingException {
 		List<JoinResultDTO> itemList = itemDAO.getEntireList();
-	
 		
-		return itemList;
-	}
+		List<Map<String, Object>> itemMapList = new ArrayList<Map<String, Object>>();
+		
+		// 현재 시간
+		long date_now = System.currentTimeMillis();
+		
+		// 시간 계산
+		long current_hours = TimeUnit.MILLISECONDS.toHours(date_now);
+		long current_minuets = TimeUnit.MILLISECONDS.toMinutes(date_now);
+		long current_seconds = TimeUnit.MILLISECONDS.toSeconds(date_now);		
+		
+		for (int i = 0; i < itemList.size(); i++) {
+			JoinResultDTO dto = (JoinResultDTO) itemList.get(i);
+			Map<String, Object> itemMap = new HashMap<String, Object>();
+			
+			long item_StartTime_minuet = TimeUnit.MILLISECONDS.toMinutes(dto.getStartDate().getTime());
+			long item_endTime_minuet = TimeUnit.MILLISECONDS.toMinutes(dto.getEndDate().getTime());
+			
+			long time_difference = current_minuets - item_StartTime_minuet;		// 몇분 지났는지 알 수 있는 시간
+			long remainder_time = item_endTime_minuet - current_minuets;
+			long discount_cycle = dto.getDiscount_cycle() / 600;				// 할인 주기
+			long auction_unit = Long.parseLong(dto.getAuction_unit());			// 할인 단위
+			long discount_count = time_difference / discount_cycle;				// 할인 횟수
+			long discount_price = discount_count *  auction_unit;				// 할인 된 가격
+			
+			long current_price = Long.valueOf(dto.getMaxPrice()) - discount_price;	// 현재 가격
+			//long discount_rate = (Long.valueOf(dto.getMaxPrice()) - discount_price) / Long.valueOf(dto.getMaxPrice());	// 할인율
+			
+			if (current_price <= Long.valueOf(dto.getMinPrice())) {
+				current_price = Long.valueOf(dto.getMinPrice());
+			}
+			
+			double discount_rate = ((double)discount_price / Long.valueOf(dto.getMaxPrice())) * 100;		// 할인율
+			
+			int progress_status = 0;									// 진행 중 경매인지 종료 된 경매인지 확인할 수 있는 변수
+			if (item_endTime_minuet < current_minuets) {	// 경매 시간이 종료 되었으면
+				progress_status = itemDAO.modifyStatus(dto.getItem_num());
+			}
+			
+			if (dto.getAmount() == 0) {
+				itemDAO.modifyAmountZero(dto.getItem_num());
+			}
 
+			String jsonOfItemList = new ObjectMapper().writeValueAsString(dto);		// string으로 형 변환하면 timestamp -> long타입으로 바뀌는듯 (확인 결과 값 일치)
+			System.out.println(jsonOfItemList);
+			
+			itemMap.put("itemList", dto);
+			itemMap.put("discount_price", discount_price);
+			itemMap.put("current_price", current_price);
+			itemMap.put("discount_rate", discount_rate);
+			itemMap.put("progress_status", progress_status);
+			itemMap.put("remainder_time", remainder_time);
+			itemMapList.add(itemMap);
+		}
+		
+		JSONArray jsonArray = new JSONArray();
+		for (Map<String, Object> map : itemMapList) {
+			
+			
+			JSONObject jsonObject = new JSONObject();
+			for (Map.Entry<String, Object> entry : map.entrySet()) {
+				String key = entry.getKey();
+				Object value = entry.getValue();
+				jsonObject.put(key, value);
+			}
+			jsonArray.add(jsonObject);
+		}
+		return jsonArray;
+	}
 
 
 

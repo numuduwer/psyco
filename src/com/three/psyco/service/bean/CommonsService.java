@@ -1,11 +1,12 @@
 package com.three.psyco.service.bean;
 
 import java.sql.SQLException;
-import java.util.HashMap;
+
 import java.util.List;
 
 import org.springframework.ui.Model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.three.psyco.model.dto.JoinResultDTO;
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.MenuDTO;
@@ -22,8 +23,8 @@ public interface CommonsService {
 	
 	public List<MenuDTO> getMyMenuListFromShopNum(List<Integer> myShop_ShopNumList);
 	
-	public List<JoinResultDTO> getEntireList();
 
 	public ListData getShopNumLists(String pageNum, List shop_num) throws SQLException;
 	
+	public List<Object> getEntireList() throws JsonProcessingException;
 }

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,133 +20,265 @@
 
 
 
-    <!--   탭 버튼-->
-    <div class="myPage">
-        <div class="myPage_content">
-            <div class="myPage_main">
-                <div class="tabs">
-                    <div class="tab" data-tab-target="#tab1">
-                        <p>내 가게 리스트</p>
-                    </div>
-                    <div class="tab" data-tab-target="#tab2">
-                        <p>내 가게 리뷰목록 </p>
-                    </div>
-                    <div class="tab" data-tab-target="#tab3">
-                        <p>서비스 탈퇴하기</p>
-                    </div>
-                </div>
+    <!--  기능  타이틀 -->
+    <div class="main_shopItem">
+        <div class="tabs_shopItem">
+            <div class="tab_shopItem" data-tab-target="#tab1">
+                <p>진행중인 경매</p>
             </div>
-
-            <div class="content">
-                <!--   탭 1 내용-->
-                <div id="tab1" data-tab-content class="items active">
-                    <div class="userZZimpage_tab1">
-                        <ul class="zzim_reg">
-                            <li><input type="checkbox" name="" id=""> 전체선택</li>
-                            <li><a href="">선택 삭제</a> </li>
-                        </ul>
-                        <div class="myPage_item_info">
-                            <img src="/img/item/one/1.jpg" alt="">
-                            <ul>
-                                <li><a href="">가게 이름</a></li>
-                                <li>
-                                    <span> 주소</span>
-                                </li>
-                                <li>
-                                    <span> 영업시간</span>
-                                </li>
-                            </ul>
-                            <ul class="myPage_item_info_btnList">
-                                <li><button class="shop_btn"><a href="">수정</a> </button></li>
-                                <li><button class="shop_btn"><a href="">삭제</a> </button></li>
-                            </ul>
-
-                        </div>
-                        <div class="myPage_item_info">
-                            <img src="/img/item/one/1.jpg" alt="">
-                            <ul>
-                                <li><a href="">가게 이름</a></li>
-                                <li>
-                                    <span> 주소</span>
-                                </li>
-                                <li>
-                                    <span> 영업시간</span>
-                                </li>
-                            </ul>
-                            <ul class="myPage_item_info_btnList">
-                                <li><button class="shop_btn"><a href="">수정</a> </button></li>
-                                <li><button class="shop_btn"><a href="">삭제</a> </button></li>
-                            </ul>
-
-                        </div>
-                        <div class="myPage_item_info">
-                            <img src="/img/item/one/1.jpg" alt="">
-                            <ul>
-                                <li><a href="">가게 이름</a></li>
-                                <li>
-                                    <span> 주소</span>
-                                </li>
-                                <li>
-                                    <span> 영업시간</span>
-                                </li>
-                            </ul>
-                            <ul class="myPage_item_info_btnList">
-                                <li><button class="shop_btn"><a href="">수정</a> </button></li>
-                                <li><button class="shop_btn"><a href="">삭제</a> </button></li>
-                            </ul>
-                        </div>
-                    </div>
-
-
-                </div>
-
-
-                <!--   탭 2 내용-->
-                <div id="tab2" data-tab-content class="items">
-                    <div class="userpage_tab2">
-                        <h2>가게리뷰 리스트</h2>
-                        <table>
-                            <tr>
-                                <th>no.</th>
-                                <th>제목</th>
-                                <th>별점</th>
-                                <th>작성시간</th>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>테스트 제목</td>
-                                <td>별은 몇개</td>
-                                <td>테스트 작성시간 </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
-                <!--   탭 3 내용-->
-                <div id="tab3" data-tab-content class="items">
-                    <div class="form_box">
-                        <form action="" class="form">
-                            <div class=form_tab>
-                                <label for="" class="form_title"> 아이디</label>
-                                <input type="text" class="form_input" />
-                            </div>
-                            <div class=form_tab>
-                                <label for="" class="form_title"> 패스워드</label>
-                                <input type="text" class="form_input" />
-                            </div>
-
-
-                            <div class=form_tab>
-                                <input type="button" class="form_btn" value="제출" />
-                                <input type="button" class="form_btn" value="뒤로" />
-                            </div>
-                        </form>
-                    </div>
-                </div>
+            <div class="tab_shopItem" data-tab-target="#tab2">
+                <p>진행 예정 경매</p>
+            </div>
+            <div class="tab_shopItem" data-tab-target="#tab3">
+                <p>진행 완료 경매 </p>
             </div>
         </div>
     </div>
-       <script>
+    <div class="content_shopItem">
+        <div id="tab1" data-tab-content class="items2 active">
+            <div class="ltem2_shopItembox">
+                	<c:forEach var="article" items="${articleListC}">
+               	<div class="content_shopItem_listBox">
+	                    <div class="shopItem_img">
+	                        <img src="/img/item/one/1.jpg" alt="">
+	                    </div>
+	                    <ul>
+	                        <li>
+	                            시작시간 : ${article.startDate}
+	                        </li>
+	                        <li>종료시간 : ${article.endDate}</li>
+	                    </ul>
+	                    <ul>
+	                        <li>
+	                            <h3 class="content_shopItem_title"><a href="">상품 명 : ${article.item_name}</a></h3>
+	                        </li>
+	                        <li> 수량 : ${aritlce.amount}</li>
+	                    </ul>
+	                    <ul class="content_shopItem_btn">
+	                        <li><a href="">수정</a></li>
+	                        <li><a href="">삭제</a></li>
+	
+	                    </ul>
+                </div>
+	                </c:forEach>
+                <div class="content_shopItem_listBox">
+                    <div class="shopItem_img">
+                        <img src="/img/item/one/1.jpg" alt="">
+                    </div>
+                    <ul>
+                        <li>
+                            시작시간 :
+                        </li>
+                        <li>종료시간 : </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h3 class="content_shopItem_title"><a href="">상품 명</a></h3>
+                        </li>
+                        <li> 수량 : </li>
+                    </ul>
+                    <ul class="content_shopItem_btn">
+                        <li><a href="">수정</a></li>
+                        <li><a href="">삭제</a></li>
+
+                    </ul>
+                </div>
+                <%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
+	<div align="center">
+	<c:if test="${count > 0}">
+		<fmt:parseNumber var="res" value="${count / pageSize}"  integerOnly="true"/>
+		<c:set var="pageCount" value="${res + (count % pageSize == 0 ? 0 : 1)}"  />
+		<c:set var="pageBlock" value="10" />
+		<fmt:parseNumber var="result" value="${(currPage-1)/pageBlock}" integerOnly="true" />
+		<fmt:parseNumber var="startPage" value="${result * pageBlock + 1}" />
+		<fmt:parseNumber var="endPage" value="${startPage + pageBlock - 1}" />
+		<c:if test="${endPage > pageCount}">
+			<c:set var="endPage" value="${pageCount}" />
+		</c:if>
+		
+		<c:if test="${startPage > pageBlock}">
+			<a href="/psyco/shop/shopList.com?pageNum=${startPage-pageBlock}" > &lt; </a>
+		</c:if>
+		<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1" >
+			<a href="/psyco/shop/shopList.com?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+		</c:forEach>
+		<c:if test="${endPage < pageCount}">
+			<a href="/psyco/shop/shopList.com?pageNum=${startPage+pageBlock}" > &gt; </a>
+		</c:if>
+	
+	</c:if>
+	</div>
+            </div>
+        </div>
+        <div id="tab2" data-tab-content class="items2">
+            <div class="ltem2_shopItembox">
+                <div class="content_shopItem_listBox">
+                    <div class="shopItem_img">
+                        <img src="/img/item/one/1.jpg" alt="">
+                    </div>
+                    <ul>
+                        <li>
+                            시작시간 :
+                        </li>
+                        <li>종료시간 : </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h3 class="content_shopItem_title"><a href="">상품 명</a></h3>
+                        </li>
+                        <li> 수량 : </li>
+                    </ul>
+                    <ul class="content_shopItem_btn">
+                        <li><a href="">수정</a></li>
+                        <li><a href="">삭제</a></li>
+
+                    </ul>
+                </div>
+                <div class="content_shopItem_listBox">
+                    <div class="shopItem_img">
+                        <img src="/img/item/one/1.jpg" alt="">
+                    </div>
+                    <ul>
+                        <li>
+                            시작시간 :
+                        </li>
+                        <li>종료시간 : </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h3 class="content_shopItem_title"><a href="">상품 명</a></h3>
+                        </li>
+                        <li> 수량 : </li>
+                    </ul>
+                    <ul class="content_shopItem_btn">
+                        <li><a href="">수정</a></li>
+                        <li><a href="">삭제</a></li>
+
+                    </ul>
+                </div>
+                <div class="content_shopItem_listBox">
+                    <div class="shopItem_img">
+                        <img src="/img/item/one/1.jpg" alt="">
+                    </div>
+                    <ul>
+                        <li>
+                            시작시간 :
+                        </li>
+                        <li>종료시간 : </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h3 class="content_shopItem_title"><a href="">상품 명</a></h3>
+                        </li>
+                        <li> 수량 : </li>
+                    </ul>
+                    <ul class="content_shopItem_btn">
+                        <li><a href="">수정</a></li>
+                        <li><a href="">삭제</a></li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div id="tab3" data-tab-content class="items2">
+            <div class="ltem2_shopItembox">
+                <div class="content_shopItem_listBox">
+                    <div class="shopItem_img">
+                        <img src="/img/item/one/1.jpg" alt="">
+                    </div>
+                    <ul>
+                        <li>
+                            시작시간 :
+                        </li>
+                        <li>종료시간 : </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h3 class="content_shopItem_title"><a href="">상품 명</a></h3>
+                        </li>
+                        <li> 수량 : </li>
+                    </ul>
+                    <ul class="content_shopItem_btn">
+                        <li><a href="">수정</a></li>
+                        <li><a href="">삭제</a></li>
+
+                    </ul>
+                </div>
+                <div class="content_shopItem_listBox">
+                    <div class="shopItem_img">
+                        <img src="/img/item/one/1.jpg" alt="">
+                    </div>
+                    <ul>
+                        <li>
+                            시작시간 :
+                        </li>
+                        <li>종료시간 : </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h3 class="content_shopItem_title"><a href="">상품 명</a></h3>
+                        </li>
+                        <li> 수량 : </li>
+                    </ul>
+                    <ul class="content_shopItem_btn">
+                        <li><a href="">수정</a></li>
+                        <li><a href="">삭제</a></li>
+
+                    </ul>
+                </div>
+                <div class="content_shopItem_listBox">
+                    <div class="shopItem_img">
+                        <img src="/img/item/one/1.jpg" alt="">
+                    </div>
+                    <ul>
+                        <li>
+                            시작시간 :
+                        </li>
+                        <li>종료시간 : </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <h3 class="content_shopItem_title"><a href="">상품 명</a></h3>
+                        </li>
+                        <li> 수량 : </li>
+                    </ul>
+                    <ul class="content_shopItem_btn">
+                        <li><a href="">수정</a></li>
+                        <li><a href="">삭제</a></li>
+
+                    </ul>
+                </div>
+	<%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
+		<div align="center">
+		<c:if test="${count > 0}">
+			<fmt:parseNumber var="res" value="${count / pageSize}"  integerOnly="true"/>
+			<c:set var="pageCount" value="${res + (count % pageSize == 0 ? 0 : 1)}"  />
+			<c:set var="pageBlock" value="10" />
+			<fmt:parseNumber var="result" value="${(currPage-1)/pageBlock}" integerOnly="true" />
+			<fmt:parseNumber var="startPage" value="${result * pageBlock + 1}" />
+			<fmt:parseNumber var="endPage" value="${startPage + pageBlock - 1}" />
+			<c:if test="${endPage > pageCount}">
+				<c:set var="endPage" value="${pageCount}" />
+			</c:if>
+			
+			<c:if test="${startPage > pageBlock}">
+				<a href="/psyco/shop/shopList.com?pageNum=${startPage-pageBlock}" > &lt; </a>
+			</c:if>
+			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1" >
+				<a href="/psyco/shop/shopList.com?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+			</c:forEach>
+			<c:if test="${endPage < pageCount}">
+				<a href="/psyco/shop/shopList.com?pageNum=${startPage+pageBlock}" > &gt; </a>
+			</c:if>
+		
+		</c:if>
+		</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
         const tabs = document.querySelectorAll("[data-tab-target]");
         const tabcon = document.querySelectorAll("[data-tab-content]");
         tabs.forEach((tab) => {
@@ -157,8 +291,6 @@
                 target.classList.add("active");
             });
         });
-
     </script>
-
 </body>
 </html>

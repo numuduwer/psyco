@@ -103,12 +103,6 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	@Override
 	public void insertMemberShop(MemberShopDTO dto) throws SQLException {
-		System.out.println(dto.getShop_name());
-		System.out.println(dto.getShop_num());
-		System.out.println(dto.getShop_phone());
-		System.out.println(dto.getStatus());
-		System.out.println("shop 이미지: " + dto.getShop_img());
-		System.out.println("takeout"+dto.getTakeout());
 		if(dto.getTakeout() == null) {
 			dto.setTakeout("0");
 			sqlSession.insert("member.insertMemberShop",dto);	
@@ -116,4 +110,5 @@ public class MemberDAOImpl implements MemberDAO {
 			sqlSession.insert("member.insertMemberShop",dto);	
 		}
 	}
+
 }
