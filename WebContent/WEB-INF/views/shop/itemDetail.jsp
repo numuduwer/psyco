@@ -58,7 +58,7 @@
 						pg: "html5_inicis",
 						payment_method: "card",					
 						//merchant_uid: 'psyco' + getToday() + '-' + ${article.item_num},	// 주문 번호, 한번 결제 완료된 주문번호는 다시 사용할 수 없는 듯
-						merchant_uid: 'psyco20201023-000144',
+						merchant_uid: 'psyco20201023-001285',
 						name: '${article.item_name}',
 						amount: getParam("current_price"),
 						buyer_email: result.email,
@@ -71,26 +71,33 @@
 						if (response.success) {
 							console.log(response);
 							
+							var obj = new Object();
+							obj.price = response.paid_amount;
+							obj.amount = document.getElementById('quantity').value;
+							obj.discount_rate = getParam("discount_rate"),
+							obj.gender = result.gender;
+							obj.member_num = result.member_Num;
+							obj.menu_num = ${article.menu_num};
+							obj.item_num = ${article.item_num};
+							
+							var jsonData = JSON.stringify(obj);
+							console.log(jsonData);
+							
 							$.ajax({
 								url: "/psyco/shop/paymentInsert.com",
 								method: "post",
-								headers: { "Content-Type": "application/json"},
-								data: {
-									price: response.paid_amount,
-									amount: ${article.amount},
-									discount_rate: getParam("discount_rate"),
-									gender: result.gender,
-									member_num: result.member_Num,
-									menu_num: ${article.menu_num},
-									item_num: ${article.item_num}
-								},
+								//headers: {"ContentType": "application/json"},
+								data: jsonData,
+								dataType: "text",
 								success: function(result){
-									console.log(result);
+									if (result == '1') {
+										alert('결제가 완료 되었습니다.');
+									} else {
+										result == '오류 발생';
+									}
+									
 								}
-								
-							});
-							
-							
+							});							
 							
 						} else {
 							var msg = "결재가 실패하였습니다.";
@@ -103,6 +110,13 @@
 					
 				}
 			});
+		}
+		
+		function change(num){
+			var quantity = Number(document.getElementById('quantity').value) + num;
+			if (quantity < 1) quantity = 1;
+			if (quantity >= ${article.amount}) quantity = ${article.amount};
+			document.getElementById('quantity').value = quantity;
 		}
 		
 	</script>
@@ -176,6 +190,11 @@
                         <li>현재 가격</li>
                         <li>${param.current_price}원</li>
                     </ul>
+                </div>
+                <div>
+                	<input type="text" name="quantity" id="quantity" value="1">
+                	<input type="button" value="-" onclick="javascript:change(-1)">
+                	<input type="button" value="+" onclick="javascript:change(1)">
                 </div>
             </div>
             <button class="buy_btn" onclick="javascript:payment(${sessionScope.memNum})">
