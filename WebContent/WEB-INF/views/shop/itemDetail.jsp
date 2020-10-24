@@ -10,9 +10,50 @@
 	<title>글내용</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=bsd4urkj6r"></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=bsd4urkj6r&submodules=geocoder"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			IMP.init('imp29075190');	
+			IMP.init('imp29075190');
+			
+			var query = { query : '${shopInfo.address}' };
+			
+			function mapCreate(latitude, longitude) {
+				if (typeof latitude == "undefined" || latitude == null || latitude == "") {
+					latitude = 37.3595704;
+					longitude = 127.105399;
+				}
+				
+				var mapOptions = {
+						center: new naver.maps.LatLng(latitude, longitude),
+						zoom: 10
+				};
+				
+				var map = new naver.maps.Map('map', mapOptions);
+				return map;
+			}
+			
+			naver.maps.Service.geocode(query, function(status, response) {
+				if (status !== naver.maps.Service.Status.OK) {
+					return alert('Something wrong!');
+				}
+				
+				var v2 = response.v2,
+					addresses = v2.addresses;
+				
+				var latitude = addresses[0].y,		// ex : 37.5438733
+					longitude = addresses[0].x;		// ex : 127.0681978
+		
+				var changeMap = mapCreate(latitude, longitude);
+				changeMap.setZoom(17, true);
+				var marker = new naver.maps.Marker({
+					position: new naver.maps.LatLng(latitude, longitude),
+					map: changeMap
+				});
+			});
+			
+		
+			
 		})
 		
 		function getParam(sname) {
@@ -129,7 +170,7 @@
 	<section id="buy_info">
         <div class="buy_img">
             <img src="/psyco/resources/img/item/one/1.jpg" alt="" class="card_img">
-            <div class="map">ddddd</div>
+            <div class="map" id="map"></div>
         </div>
         <div class="buy_content">
             <div class="buy_title">
@@ -152,7 +193,6 @@
                 <ul>
                     <li>시작일</li>
                     <li>10/18</li>
-
                 </ul>
                 <ul>
                     <li>할인 주기</li>
