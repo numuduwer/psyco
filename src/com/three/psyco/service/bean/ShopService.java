@@ -24,8 +24,8 @@ public interface ShopService {
 	public int itemDeleteAticle(int item_num, String pageNum, Model model);
 	public int itemModifyAticle(ItemDTO dto, Model model, int item_num);
 	public JSONObject getMenuInfoFromMenuNum(int menu_num) throws SQLException;
-	
+	public int deleteShops(int member_num)throws SQLException;
 	public int itemEnrollmentPro(String jsonData) throws ParseException;
-
+	public int getShopNums(int member_num) throws SQLException;
 	public int paymentInsert(String data) throws ParseException;
 }

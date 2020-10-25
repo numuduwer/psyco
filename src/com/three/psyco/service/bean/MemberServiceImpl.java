@@ -410,7 +410,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void insertMemberShops(MultipartHttpServletRequest request,int member_num,String status,String approve_status) throws SQLException {
 		MemberShopDTO dto=new MemberShopDTO();
-		int shop_num=member_num;
 		String shop_name=request.getParameter("shop_name");
 		String shop_phone=request.getParameter("shop_phone");
 		String operating_time=request.getParameter("operating_time");
@@ -420,7 +419,7 @@ public class MemberServiceImpl implements MemberService {
 		String license_number=request.getParameter("license_number");
 		MultipartFile mf = request.getFile("shop_img");
 		try {
-			String path=request.getRealPath("shop_img");
+			String path=request.getRealPath("save");
 			System.out.println("path ="+path);
 			String orgName =mf.getOriginalFilename();
 			String imgName =orgName.substring(0, orgName.lastIndexOf('.'));
@@ -441,7 +440,6 @@ public class MemberServiceImpl implements MemberService {
 		dto.setOrigin(origin);
 		dto.setApprove_status(approve_status);
 		dto.setMember_num(member_num);
-		dto.setShop_num(shop_num);
 		dto.setTakeout(takeout);
 		dto.setlicense_number(license_number);
 		dto.setStatus(status);
