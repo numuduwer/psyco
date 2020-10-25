@@ -25,50 +25,55 @@ $("a").click(function(e){
 
 
 
-
-	<h1>SHOP 관리 페이지 </h1>
-	
+	<!-- 경매 상품 -->
+    <section class="item-section">
+        <div class="admin">
+            <ul class="admin_btn2">
+                <li><a href="/psyco/super/memberList.com">회원관리</a></li>
+                <li><a href="/psyco/communityList.com?category=2">서비스 등록 현황</a></li>
+                <li><a href="/psyco/super/shopList.com">가게관리</a></li>
+                <li><a href="/psyco/communityList.com?category=4">문의하기 관리</a></li>
+            </ul>
+        </div>
+    </section>
 	
 	<c:if test="${count == 0}">
 		<h2>가게가 없어요.</h2>
 	
 	</c:if>
 	<c:if test="${count > 0}">
+		<div class="admin_content2">
+		<br><br>
+		<h2>회원 리스트  </h2>
+		<br>
 		<table>
 			<tr>
-			
+			     <th>No.</th>
+			     <th>가게 명</th>
+			     <th>연락처</th>
+			     <th>주소 </th>
+			     <th>사업자 번호</th>
+			     <th>활동여부 </th>
+			     <th>삭제하기</th>
+			</tr>
 			
 			<c:forEach var="article" items="${articleList}">
 			<tr>
 				<td>${number} <c:set var="number" value="${number-1}" /> </td>
 				<td>${article.shop_name}</td>
 				<td>${article.shop_phone}</td>
-				<td>${article.orperating_time}</td>
 				<td>${article.address}</td>
-				
-				<td>${article.origin}</td>
-				<td>${article.takeout}</td>
-				<td>${article.shop_img}</td>
 				<td>${article.license_number}</td>
-				<td>${article.request_time}</td>
-				
-				<td>${article.approve_time}</td>
 				<td>${article.status}</td>
-				<td>${article.approve_time}</td>
-				<td>${article.approve_status}</td>	
 				<td>
-				<a href="/psyco/super/sShopDelete.com?pageNum=${pageNum}&shop_num=${article.shop_num}">삭제</a>
+				<a class= "admin_delete" href="/psyco/super/sShopDelete.com?pageNum=${pageNum}&shop_num=${article.shop_num}">삭제</a>
 					
 				</td>
 			
 			</tr>
 		</c:forEach>
-		
-		</table>
-	</c:if>
-	
-	
-	<%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
+		</table><br><br><br>
+				<%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
 	<div align="center">
 	<c:if test="${count > 0}">
 		<fmt:parseNumber var="res" value="${count / pageSize}"  integerOnly="true"/>
@@ -92,7 +97,15 @@ $("a").click(function(e){
 		</c:if>
 	
 	</c:if>
+	<br>
 	</div>
+	<br>
+		</div>
+		
+	</c:if>
+	
+	
+	
 	
 </body>
 </html>

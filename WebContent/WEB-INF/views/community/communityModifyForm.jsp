@@ -32,36 +32,41 @@
 			<input type="hidden" name="community_num" value= "${community_num}"/>
 			<input type="hidden" name="category" value= "${category}"/>
 			
-			
+					<div class="admin_content">
 			<table>
 				<tr>
-					<td>작성자</td>
+					<th>작성자</th>
+			
 					<td>${article.writer}</td>
+				
 				</tr>
 				<tr>
-					<td>제 목</td>
+					<th>제 목</th>
 					<td><input type="text" name="subject" value="${article.subject}"/></td>
 				</tr>
 				<tr>
-					<td>내용</td>
+					<th>내용</th>
 					<td><textarea rows="20" cols="70" name="content" >${article.content}</textarea></td>
 				</tr>
 					<tr>
-						<td>기존 이미지</td>
+						<th>기존 이미지</th>
 					</tr>
+					
 					<tr>
-		       			<th><img id="imgpreview" src="/psyco/save//${article.community_img}" width="100" height="100"></th>
-		       			<td><label>이미지 변경하기</label><input type="file" onchange="imagepreview(this);" name="community_img"/></td>
+		       			<td><img id="imgpreview" src="/psyco/save//${article.community_img}" width="100" height="100"></td>
+		       			<td><label>이미지 변경하기</label>
+		       				
+		       			<input type="file" onchange="imagepreview(this);" name="community_img"/></td>
 					</tr>
 				<tr>												
 					<td colspan="2">
-						<input type="submit" value="수정" /> 
+						<input class="admin_dtn2_content" type="submit" value="수정" /> 
 			
-						<input type="button" value="리스트보기"  onclick="window.location='/psyco/communityDetail.com?community_num=${community_num}&category=${category}'"/>
+						<input class="admin_dtn2_content" type="button" value="리스트보기"  onclick="window.location='/psyco/communityDetail.com?community_num=${community_num}&category=${category}'"/>
 					</td>
 				</tr>
 			
-			
+			</div>
 
 			
 			

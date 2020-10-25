@@ -30,7 +30,8 @@ public class SuperDAOImpl implements SuperDAO {
 	}
 	
 	public List List(String pageName, int startRow, int endRow) throws SQLException {
-		
+		System.out.println("Super DAO ---- ");
+		System.out.println("pageName ; " + pageName);
 		HashMap map = new HashMap();
 		map.put("start", startRow);
 		map.put("end", endRow);

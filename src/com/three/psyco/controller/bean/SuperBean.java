@@ -37,29 +37,34 @@ private CommonsServiceImpl commonsService = null;
 	
 	
 //////// 리스트 뽑기  /////////
-	@RequestMapping("memberList")
-	public String memberList(String pageName, String pageNum,  Model model) throws SQLException {		
+	@RequestMapping("memberList.com")
+	public String memberList(String pageName, String pageNum,  Model model) throws SQLException {	
+
 		ListData data = commonsService.getListData(pageName,pageNum);
 		commonsService.setListDataToModel(model, data);
-		return "/super/sMemberList";
+		
+		return "super/sMemberList.mm";
 	}
-	@RequestMapping("shopList")
+	@RequestMapping("shopList.com")
 	public String shopList(String pageName, String pageNum,  Model model) throws SQLException {
+		pageName ="sShopList";
+		System.out.println("----- controller  잘 연결 -----");
 		ListData data = commonsService.getListData(pageName,pageNum);
+		System.out.println("--- controller 데이터 잘 받음 ---");
 		commonsService.setListDataToModel(model, data);
-		return "/super/sShopList";
+		return "super/sShopList.mm";
 	}
 	@RequestMapping("helpList")
 	public String helpList(String pageName, String pageNum,  Model model) throws SQLException {
 		ListData data = commonsService.getListData(pageName,pageNum);
 		commonsService.setListDataToModel(model, data);
-		return "/super/sHelpList";
+		return "super/sHelpList.mm";
 	}
 	@RequestMapping("communityList")
 	public String communityList(String pageName, String pageNum,  Model model) throws SQLException {
 		ListData data = commonsService.getListData(pageName,pageNum);
 		commonsService.setListDataToModel(model, data);
-		return "/super/sCommunityList";
+		return "super/sCommunityList.mm";
 	}
 
 	
@@ -67,8 +72,9 @@ private CommonsServiceImpl commonsService = null;
 ///////  삭제하기 ////// 
 	@RequestMapping(value="deleteMember", method = RequestMethod.POST)
 	@ResponseBody
-	 void delete(@RequestParam("member_num") String memberNum) {
+	 void delete(@RequestParam("member_Num") String memberNum) {
 		System.out.println(memberNum);
+		
 		superService.deleteMemberSV(memberNum);
 		
 	}

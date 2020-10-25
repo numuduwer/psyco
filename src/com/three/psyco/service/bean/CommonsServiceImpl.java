@@ -84,6 +84,8 @@ public class CommonsServiceImpl implements CommonsService {
 		if(pageName == null) {
 			pageName = "sMemberList";
 		}
+		
+		System.out.println("------- Service -----");
 		System.out.println("list pageName :" + pageName);
 		System.out.println("list pageNum :" + pageNum);
 		
@@ -99,13 +101,16 @@ public class CommonsServiceImpl implements CommonsService {
 		
 		// 글 갯수 불러오기 
 		int count =  superService.getCountSV(pageName);
-		System.out.println("list Test count :" + count);
+		System.out.println("count :" + count);
+		
+		
 		
 		// 글 있으면 전부 가져오기
 		if(count >0) {
 			articleList = superService.getListSV(pageName, startRow, endRow);	
 		}
 		
+
 		number = count - (currPage-1) * pageSize;
 
 		ListData data = new ListData();

@@ -32,14 +32,12 @@
 			<input type="hidden" name="grade" value= "${grade}"/>
 			<input type="hidden" name="pageNum" value= "${pageNum}"/>
 			<input type="hidden" name="community_num" value= "${community_num}"/>
-		
+			<input type="hidden" name="writer" value= "${writer}"/>
+	<div class="admin_content">
 		<table>
+			
 			<tr>
-				<td>작성자</td>
-				<td><input type="text" name="writer" value="test"></td>
-			</tr>
-			<tr>
-				<td>제 목</td>
+				<th>제 목</th>
 				<c:if test="${community_num == null}">
 					<td>
 						<input type="text" name="subject"/>				
@@ -52,12 +50,12 @@
 				</c:if>
 			</tr>
 			<tr>
-				<td>내용</td>
+				<th>내용</th>
 				<td><textarea rows="20" cols="70" name="content"></textarea></td>
 			</tr>
 			<c:if test="${category == 3 || category == 4}">
 			<tr>
-				<td>음식점 사진</td>
+				<th>음식점 사진</th>
 			<tr>
 		       	<th><img id="imgpreview" src="/psyco/save//${article.community_img}" width="100" height="100"></th>
 		       	<td><label>이미지 변경하기</label><input type="file" onchange="imagepreview(this);" name="img"/></td>
@@ -66,18 +64,20 @@
 			</c:if>
 			<tr>
 				<td colspan="2">
-					<input type="submit" value="저장" /> 
-					<input type="reset" value="재작성" />
+					<input class="admin_dtn2_content" type="submit" value="저장" /> 
+				
 					<c:if test="${community_num != null}">
-						<input type="button" value="돌아가기"  onclick="window.location='/psyco/communityDetail.com?community_num=${community_num}&category=${category}'"/>
+						<input class="admin_dtn2_content" type="button" value="돌아가기"  onclick="window.location='/psyco/communityDetail.com?community_num=${community_num}&category=${category}'"/>
 					</c:if>
 					<c:if test="${community_num == null}">
-						<input type="button" value="리스트보기"  onclick="window.location='/psyco/communityList.com?category=${category}'"/>
+						<input class="admin_dtn2_content" type="button" value="리스트보기"  onclick="window.location='/psyco/communityList.com?category=${category}'"/>
 					</c:if>
 				</td>
 			</tr>
 		</table>
+		</div>
 	</form>
+	
 
 
 

@@ -25,7 +25,7 @@
  	
  	<select id="getMemberList" parameterType="hashmap" resultType="MemberDTO">
  		<![CDATA[
-		SELECT /*+ index_desc(MEMBER MEMBER_SEQ)*/rownum rn, member_num, member_id, pw, name, birth, phonenum, gender, nickname, email, purchase_count, business_license, reg
+		SELECT /*+ index_desc(MEMBER MEMBER_SEQ)*/rownum rn, member_num, member_id, pw, name, birth, phonenum, gender, nickname, email, purchase_count, business_license, license_number,reg
 		FROM MEMBER
 		WHERE MEMBER_NUM >= #{start}
 		AND rownum <= #{end}
