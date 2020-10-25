@@ -756,4 +756,121 @@ footer {
   color: var(--color-white);
 }
 
+.admin_btn {
+  display: flex;
+  justify-content: center;
+  margin: 100px;
+}
+.admin_btn li {
+  list-style: none;
+  border: 1px solid var(--color-dark-white);
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 4px;
+  font-size: 20px;
+  background-color: var(--color-light-white);
+  margin: 10px;
+}
+
+
+.admin_btn2 {
+  display: flex;
+  justify-content: center;
+  margin: 100px;
+}
+.admin_btn2 li {
+  list-style: none;
+  border: 1px solid #0e2652;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 4px;
+  font-size: 20px;
+  background-color: #0e2652;
+ 
+  margin: 10px;
+}
+
+.admin_btn2 li a {
+	
+ color : white;
+}
+
+.admin_content2 {
+  border: 1px solid #0e2652;
+
+  display: flex;
+    flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+   margin-top: 10px;
+}
+
+
+.admin_content {
+  border: 1px solid var(--color-dark-blue);
+
+  display: flex;
+    flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+   margin-top: 10px;
+}
+
+.admin_delete {
+  color: red;
+  font-weight: 500;
+}
+
+.paging{
+	padding : 20px;
+}
+/* 테이블 */
+
+/* 테이블 공용 */
+table {
+  border-collapse: collapse;
+  width: 600px;
+  padding: 10px;
+}
+
+.table{
+	margin-top : 20px;
+}
+td,
+th {
+  text-align: center;
+  border-bottom: 0.5px solid var(--color-dark-grey);
+  padding: 5px;
+}
+
+th {
+  background-color: var(--color-light-white);
+  font-size: var(--font-small);
+}
+
+.admint_btn2 {
+  display: flex;
+  justify-content: space-around;
+}
+
+.admin_dtn2_content {
+  width: 80px;
+  height: 30px;
+  background-color: var(--color-light-grey);
+  color: var(--color-white);
+  font-size: 12px;
+  border: none;
+  border-radius: 4px;
+}
+
+.ssss{
+	display : flex;
+	 justify-content: space-around;
+}
 /*# sourceMappingURL=style.css.map */

@@ -19,13 +19,15 @@
  	<select id="getCommunityCount" resultType="int" >
  		select count(*) from community
  	</select>
- 	
- 	
+ 	<select id="getShopEnrollCount" resultType="int" >
+ 		select count(*) from member where business_license = 0
+ 	</select>
+
  	
  	
  	<select id="getMemberList" parameterType="hashmap" resultType="MemberDTO">
  		<![CDATA[
-		SELECT /*+ index_desc(MEMBER MEMBER_SEQ)*/rownum rn, member_num, member_id, pw, name, birth, phonenum, gender, nickname, email, purchase_count, business_license, reg
+		SELECT /*+ index_desc(MEMBER MEMBER_SEQ)*/rownum rn, member_num, member_id, pw, name, birth, phonenum, gender, nickname, email, purchase_count, business_license, license_number,reg
 		FROM MEMBER
 		WHERE MEMBER_NUM >= #{start}
 		AND rownum <= #{end}
@@ -52,11 +54,26 @@
  	</select>
  	
  	
+ 	 <select id="sShopEnrollList" parameterType="hashmap" resultType="MemberDTO">
+ 		<![CDATA[
+		SELECT /*+ index_desc(MEMBER MEMBER_SEQ)*/rownum rn, member_num, member_id, pw, name, birth, phonenum, gender, nickname, email, purchase_count, business_license, license_number,reg
+		FROM MEMBER
+		WHERE MEMBER_NUM >= #{start}
+		AND rownum <= #{end}	
+		AND business_license = 0
+		]]>	
+ 	</select>
+ 	
+
  		
  	<select id="deleteMember" parameterType="String">
  		delete from MEMBER where MEMBER_ID =#{value}
  	</select>
  	
+ 	<update id="enrollShop" parameterType="int">
+ 		update member set business_license ='1' where member_Num =#{value}
+ 	</update>
+
  </mapper>
  
  

@@ -33,10 +33,12 @@
                		<li><a href="/psyco/user/myPageList.com">마이페이지</a></li>
 				</c:if>
 				 	<c:if test="${sessionScope.shopCheck != null}">
-               		  <li><a href="/psyco/shop/shopPageList.com?member_num=${sessionScope.memNum}">내 가게 관리가기</a></li>
-             		  <li><a href="/psyco/shop/shopPageList2.com">경매상품 올리기 </a></li>     		
 
+               		  <li><a href="/psyco/shop/shopPageList.com">내 가게 관리가기</a></li>
+             		  <li><a href="/psyco/shop/itemEnrollmentForm.com">경매상품 올리기 </a></li>     		
 				</c:if>
+					
+
 				
             </ul>
         </div>

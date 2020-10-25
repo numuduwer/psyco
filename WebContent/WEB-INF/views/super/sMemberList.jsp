@@ -9,22 +9,34 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	
-	
-function onClickItemDelete(memberNum){
-	var apiURL = '/psyco/super/deleteMember.com';
-	console.log(apiURL);
 
-	$.ajax({
-        type: 'POST',
-        url: apiURL,
-		data: {member_num : memberNum},
-        error: function (error) {
-            alert('data error');
-        }
-    });
+
+function onClickItemDelete(memberNum){
+	
+	var msg = confirm("삭제하시겠습니까? ");
+	if(msg == true){
+		var apiURL = '/psyco/super/deleteMember.com';
+		console.log(apiURL);
+
+		$.ajax({
+	        type: 'POST',
+	        url: apiURL,
+			data: {member_Num : memberNum},
+			success:function (member_Num) {
+				var myobj = document.getElementById(memberNum);
+				myobj.remove();
+	        },
+	        error: function (error) {
+	            alert('data error');
+	        }
+	    });	
+	}else{
+		alert('삭제 취소하셨습니다, ')
+	}
 	
 	
-}
+
+}	
 	
 </script>
 
@@ -35,42 +47,64 @@ function onClickItemDelete(memberNum){
 
 
 
-
-	<h1> 관리 페이지 </h1>
 	
-	
+	    <!-- 경매 상품 -->
+    <section class="item-section">
+        <div class="admin">
+            <ul class="admin_btn2">
+                <li><a href="/psyco/super/memberList.com">회원관리</a></li>
+                <li><a href="/psyco/super/shopEnrollList.com">서비스 등록 현황</a></li>
+                <li><a href="/psyco/communityList.com?category=3">가게관리</a></li>
+                <li><a href="/psyco/communityList.com?category=4">문의하기 관리</a></li>
+            </ul>
+        
+         
+        </div>
+    </section>
 	<c:if test="${count == 0}">
 		<h2> 멤버가 없어요.</h2>
 	
 	</c:if>
 	<c:if test="${count > 0}">
-	<h3> table</h3>
-	
-		<table>
-			<tr>	
-			<c:forEach var="article" items="${articleList}">
+	<div class="admin_content2">
+		<br>	<br>
+		
+	<h2>회원 리스트  </h2>
+		<br>
+			<table>
 			<tr>
+			     <th>No.</th>
+			     <th>ID</th>
+			     <th>PW</th>
+			     <th>이름</th>
+			     <th>생년월일</th>
+			     <th>핸드폰</th>
+			     <th>성별</th>
+			     <th>닉네임</th>
+			     <th>활동횟수</th>
+			     <th>가입날짜</th>
+			     <th>삭제하기</th>
+			</tr>	
+			<c:forEach var="article" items="${articleList}">
+			<tr id = "${article.member_Num}"}>
 				<td>${number} <c:set var="number" value="${number-1}" /> </td>		
-				<td>${article.member_id}</td>
+				<td>${article.member_Id}</td>
 				<td>${article.pw}</td>
 				<td>${article.name}</td>
 				<td>${article.birth}</td>
-				<td>${article.phonenum}</td>
+				<td>${article.phoneNum}</td>
 				<td>${article.gender}</td>
 				<td>${article.nickname}</td>
 				<td>${article.purchase_count}</td>
-				<td>${article.business_license}</td>
 				<td>${article.reg}</td>
 				<td>
 				
-					<a href="javascript:onClickItemDelete('${article.member_id}')" >삭제</a>				
+		<a class= "admin_delete" href="javascript:onClickItemDelete('${article.member_Num}')" >삭제</a>				
 				</td>		
 			</tr>
 		</c:forEach>		
-		</table>
-	</c:if>
-	
-	<%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
+		</table><br><br><br>
+		<%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
 	<div align="center">
 	<c:if test="${count > 0}">
 		<fmt:parseNumber var="res" value="${count / pageSize}"  integerOnly="true"/>
@@ -94,7 +128,16 @@ function onClickItemDelete(memberNum){
 		</c:if>
 	
 	</c:if>
+	<br>
 	</div>
+	<br>
+		</div>
+		
+		
+		
+	</c:if>
+	
+	
 	
 </body>
 </html>

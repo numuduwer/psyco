@@ -45,7 +45,7 @@ public class CommunityBean {
 		
 		
 		
-		return "community/community";
+		return "community/community.mm";
 	}
 	
 	@RequestMapping(value="communityList.com")
@@ -95,7 +95,7 @@ public class CommunityBean {
 
 		
 		
-		return "community/communityList";
+		return "community/communityList.mm";
 	}
 	
 	
@@ -115,7 +115,7 @@ public class CommunityBean {
 		
 		
 	
-		return "community/communityForm";
+		return "community/communityForm.mm";
 	}
 	
 	
@@ -129,7 +129,7 @@ public class CommunityBean {
 		
 
 		
-		return "community/communityPro";
+		return "community/communityPro.mm";
 	}
 	
 	
@@ -152,7 +152,7 @@ public class CommunityBean {
 		model.addAttribute("category", category);
 		
 		
-		return "community/communityDetail";
+		return "community/communityDetail.mm";
 	}
 	
 	// 사진 변경 있어야하는 페이지(홍보,음식점추천)
@@ -170,7 +170,7 @@ public class CommunityBean {
 		model.addAttribute("article", article);
 		model.addAttribute("pageNum", pageNum);
 		
-		return "community/communityModifyForm";
+		return "community/communityModifyForm.mm";
 	}
 	
 	// 사진 변경 있어야하는 페이지(홍보,음식점추천)
@@ -183,7 +183,7 @@ public class CommunityBean {
 
 		communityService.updateArticleSv(request, pageNum, model);
 		
-		return "community/communityModifyPro";
+		return "community/communityModifyPro.mm";
 	}
 	
 	
@@ -204,7 +204,7 @@ public class CommunityBean {
 		
 		
 		
-		return "community/communityModifyForm1";
+		return "community/communityModifyForm1.mm";
 	}
 	
 	@RequestMapping("communityModifyPro1.com")
@@ -213,7 +213,7 @@ public class CommunityBean {
 		
 		communityService.updateArticleSv1(request, dto, pageNum, model);
 		
-		return "community/communityModifyPro1";
+		return "community/communityModifyPro1.mm";
 	}
 	
 	
@@ -225,7 +225,7 @@ public class CommunityBean {
 		model.addAttribute("category",category);
 		
 		
-		return "community/communityDeleteForm";
+		return "community/communityDeleteForm.mm";
 	}
 	
 	@RequestMapping("communityDeletePro.com")
@@ -235,7 +235,7 @@ public class CommunityBean {
 		model.addAttribute("pageNum",pageNum);
 		model.addAttribute("category",category);   
 		
-		return "community/communityDeletePro";
+		return "community/communityDeletePro.mm";
 	}
 	
 	// 고객센터---------------------------------------------------------------
@@ -252,7 +252,7 @@ public class CommunityBean {
 			model.addAttribute("category", category);
 			model.addAttribute("pageNum", pageNum);
 			
-			return "community/help";
+			return "community/help.mm";
 		}
 		
 		
@@ -261,7 +261,7 @@ public class CommunityBean {
 			return "community/helpForm";
 		}
 		
-		@RequestMapping("helpPro.com")
+		@RequestMapping("helpPro.com.mm")
 		public String helpPro(CommunityDTO dto) throws SQLException{
 			
 
@@ -281,7 +281,7 @@ public class CommunityBean {
 			model.addAttribute("pageNum",pageNum);
 			model.addAttribute("category",category);
 			
-			return "community/myHelpList";
+			return "community/myHelpList.mm";
 		}
 		
 		@RequestMapping("helpDetail.com")
@@ -294,7 +294,7 @@ public class CommunityBean {
 			model.addAttribute("num", community_num);
 			model.addAttribute("article", article);
 			
-			return "community/helpDetail";
+			return "community/helpDetail.mm";
 		}
 	
 		@RequestMapping("communityMyArticle.com")
@@ -308,7 +308,7 @@ public class CommunityBean {
 			
 			
 			
-			return "community/communityMyArticle";
+			return "community/communityMyArticle.mm";
 		}
 	
 	
