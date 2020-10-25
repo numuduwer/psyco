@@ -37,12 +37,18 @@
 					<td><img src="/psyco/save//${article.community_img}" width="400"></td>
 				</tr>
 			</c:if>
-			
-			<tr>
-				<td>댓글</td>
-				<td colspan="2"align="center" height="300">${article.content}   </td>
-			</tr>
-			
+				<tr>
+					<td>댓글</td>
+					<td>작성자</td>
+					<td>댓글내용</td>
+				</tr>
+				<c:forEach var="article" items="${articleDabgle}">
+					<tr>
+						<td>${DabgleCount}<c:set var="DabgleCount" value="${DabgleCount-1}" /></td>
+						<td colspan="2"align="center" height="300">${article.writer}</td>
+						<td colspan="2"align="center" height="300">${article.content}</td>
+					</tr>
+				</c:forEach>
 			<tr>
 				<td colspan="2"> 
 				<c:if test="${category == 1 || category == 2 || category == 6}">

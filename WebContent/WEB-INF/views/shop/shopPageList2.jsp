@@ -37,7 +37,7 @@
     <div class="content_shopItem">
         <div id="tab1" data-tab-content class="items2 active">
             <div class="ltem2_shopItembox">
-                	<c:forEach var="article" items="${articleListC}">
+                	<c:forEach var="item" items="${itemMapList}">
                	<div class="content_shopItem_listBox">
 	                    <div class="shopItem_img">
 	                        <img src="/img/item/one/1.jpg" alt="">

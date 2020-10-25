@@ -139,17 +139,19 @@ public class CommunityBean {
 	public String communityDetail(String pageNum,int community_num, Model model,HttpServletRequest request) throws SQLException {
 		
 		
+		String category = request.getParameter("category");
 		
 		CommunityDTO article = communityService.getArticleSv(community_num);
+		List articleDabgle  = communityService.getArticleDabgle(community_num,category);
+		int DabgleCount = communityService.DabgleCount(community_num,category);
 		
-		
-		
-		String category = request.getParameter("category");
 		
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("community_num", community_num);
 		model.addAttribute("article", article);
 		model.addAttribute("category", category);
+		model.addAttribute("articleDabgle", articleDabgle);
+		model.addAttribute("DabgleCount", DabgleCount);
 		
 		
 		return "community/communityDetail";

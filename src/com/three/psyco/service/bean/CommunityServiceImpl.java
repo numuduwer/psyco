@@ -119,6 +119,7 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public List getArticlesSv(int start, int end, String category) throws SQLException {
 		List articles = commnuityDAO.getArticles(start, end, category);
+		
 		return articles;
 	}
 	
@@ -135,6 +136,7 @@ public class CommunityServiceImpl implements CommunityService {
 	public CommunityDTO getArticleSv(int community_num) throws SQLException {
 		
 		CommunityDTO article = commnuityDAO.getArticle(community_num);
+		
 		
 		return article;
 	}
@@ -329,6 +331,21 @@ public class CommunityServiceImpl implements CommunityService {
 		
 		int count = commnuityDAO.getMyAskCount(category, writer);
 		
+		return count;
+	}
+
+	
+	@Override
+	public List getArticleDabgle(int community_num,String category) throws SQLException {
+		
+		List list = commnuityDAO.getArticleDabgle(community_num,category);
+		return list;
+	}
+
+
+
+	public int DabgleCount(int community_num, String category) {
+		int count = commnuityDAO.DabgleCount(community_num,category);
 		return count;
 	}
 

@@ -55,6 +55,10 @@ public interface CommunityService {
 	public ListData abc(String pageNum, String category) throws SQLException;
 	
 	public int getMyAskCount(String category, String writer) throws SQLException;
+	
+	// 게시판 댓글
+	public List getArticleDabgle(int community_num,String category) throws SQLException;
+
 
 	
 

@@ -14,11 +14,29 @@
  	
  	<select id="selectAll" parameterType="hashmap" resultType="communityDTO">
   		<![CDATA[
-		select community_num,subject,content,writer,community_img,ref,re_step,re_level,reg,r
-		from (SELECT community_num,subject,content,writer,community_img,ref,re_step,re_level,reg,rownum r FROM community where category=#{category})
-		where r >= #{start} and r <= #{end} AND subject NOT LIKE #{re} ORDER BY COMMUNITY_NUM desc
+		select community_num,subject,content,writer,community_img,category,ref,re_step,re_level,reg,r
+		from (SELECT community_num,subject,content,writer,community_img,category,ref,re_step,re_level,reg,rownum r FROM community where category=#{category} and subject NOT LIKE #{re})
+		where r >= #{start} and r <= #{end} ORDER BY COMMUNITY_NUM DESC
 		]]>
   	</select>
+  	
+  	
+ 	<select id="getArticleDabgle" parameterType="hashmap" resultType="communityDTO">
+  		<![CDATA[
+		select community_num,subject,content,writer,community_img,category,ref,re_step,re_level,reg,r
+		from (SELECT community_num,subject,content,writer,community_img,category,ref,re_step,re_level,reg,rownum r 
+		FROM community WHERE REF=#{community_num} and category=#{category} and subject LIKE #{re})
+		ORDER BY re_step asc
+		]]>
+  	</select>
+  	
+ 	<select id="DabgleCount" parameterType="hashmap" resultType="int">
+  		<![CDATA[
+		select count(*) from community WHERE REF=#{community_num} and category=#{category} and subject LIKE #{re}
+		]]>
+  	</select>
+
+  	
  	
  	 <select id="maxNum" resultType="String">
    		select max(community_num) from community
@@ -26,7 +44,7 @@
  	
  	<update id="updateRestep" parameterType="hashmap">
    		<![CDATA[
-   		update community set re_step=re_step+1 where ref=#{ref}
+   		update community set re_step=re_step+1 where ref=#{ref} and re_step > #{re_step}
    		]]>
    </update>
  	

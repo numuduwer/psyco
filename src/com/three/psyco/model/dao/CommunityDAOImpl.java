@@ -71,6 +71,8 @@ public class CommunityDAOImpl implements CommunityDAO {
 	@Override
 	public List getArticles(int start, int end, String category) throws SQLException {
 		String re = "[댓글]";
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
 		HashMap map = new HashMap();
 		map.put("start",start);
 		map.put("end",end);
@@ -208,6 +210,33 @@ public class CommunityDAOImpl implements CommunityDAO {
 			
 			return list;
 		}
+		
+		@Override
+		public List getArticleDabgle(int community_num,String category) {
+			String re = "[댓글]";
+			HashMap map = new HashMap();
+			map.put("community_num", community_num);
+			map.put("category", category);
+			map.put("re", re);
+			List list = sqlSession.selectList("community.getArticleDabgle",map);
+			
+			return list;
+		}
+		
+		@Override
+		public int DabgleCount(int community_num, String category) {
+			String re = "[댓글]";
+			HashMap map = new HashMap();
+			map.put("community_num", community_num);
+			map.put("category", category);
+			map.put("re", re);
+			int count = sqlSession.selectOne("community.DabgleCount",map);
+			
+			return count;
+		}
+
+
+
 
 
 }
