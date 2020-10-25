@@ -25,6 +25,8 @@ public class SuperDAOImpl implements SuperDAO {
 			count = sqlSession.selectOne("super.getShopCount");
 		}else if(pageName.equals("sCommunityList")) {
 			count = sqlSession.selectOne("super.getCommunityCount");
+		}else if(pageName.equals("sShopEnrollment")) {
+			count = sqlSession.selectOne("super.getShopEnrollCount");
 		}
 		return count;
 	}
@@ -44,7 +46,9 @@ public class SuperDAOImpl implements SuperDAO {
 			list = sqlSession.selectList("super.getShopList", map);	
 		}else if(pageName.equals("sCommunityList")){
 			list = sqlSession.selectList("super.sCommunityList", map);	
-		}	
+		}else if(pageName.equals("sShopEnrollment")){
+			list = sqlSession.selectList("super.sShopEnrollList", map);	
+		}		
 		return list;
 	}
 
@@ -67,6 +71,11 @@ public class SuperDAOImpl implements SuperDAO {
 		System.out.println("dao memberId :" + memberNum);
 		sqlSession.update("super.deleteMember",memberNum);
 		
+	}
+
+	public int enrollShop(int member_Num) {
+		int result = sqlSession.update("super.enrollShop",member_Num);
+		return result;
 	}
 		
 }

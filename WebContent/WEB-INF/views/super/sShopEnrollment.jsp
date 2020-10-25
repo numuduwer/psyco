@@ -75,31 +75,31 @@ function onClickItemDelete(memberNum){
 			<tr>
 			     <th>No.</th>
 			     <th>ID</th>
-			     <th>PW</th>
+			     <th>사업자 등록 번호</th>
 			     <th>이름</th>
 			     <th>생년월일</th>
 			     <th>핸드폰</th>
 			     <th>성별</th>
-			     <th>닉네임</th>
-			     <th>활동횟수</th>
 			     <th>가입날짜</th>
+			     <th>등록</th>
 			     <th>삭제하기</th>
 			</tr>	
 			<c:forEach var="article" items="${articleList}">
 			<tr id = "${article.member_Num}"}>
 				<td>${number} <c:set var="number" value="${number-1}" /> </td>		
 				<td>${article.member_Id}</td>
-				<td>${article.pw}</td>
+				<td>${article.license_number}</td>
 				<td>${article.name}</td>
 				<td>${article.birth}</td>
 				<td>${article.phoneNum}</td>
 				<td>${article.gender}</td>
-				<td>${article.nickname}</td>
-				<td>${article.purchase_count}</td>
 				<td>${article.reg}</td>
 				<td>
+				<a class= "admin_delete" href="/psyco/super/shopEnrollPro.com?member_Num=${article.member_Num}" >등록 </a>				
 				
-		<a class= "admin_delete" href="javascript:onClickItemDelete('${article.member_Num}')" >삭제</a>				
+				</td>	
+				<td>
+				<a class= "admin_delete" href="javascript:onClickItemDelete('${article.member_Num}')" >삭제</a>				
 				</td>		
 			</tr>
 		</c:forEach>		

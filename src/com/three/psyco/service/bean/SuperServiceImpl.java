@@ -41,6 +41,12 @@ public class SuperServiceImpl implements SuperService {
 		
 	}
 
+	public int enrollShopSV(int member_Num) {
+		System.out.println("Service memberNum : " + member_Num);
+		int result =superDAO.enrollShop(member_Num);
+		return result;
+	}
+
 	
 
 

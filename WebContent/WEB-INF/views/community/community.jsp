@@ -15,7 +15,7 @@
     <section class="item-section">
         <div class="admin">
             <ul class="admin_btn">
-                <li><a href="/psyco/communityList.com?category=1">자유게시판</a></li>
+                <li><a href="/psyco/communityList.com?category=1">자유게시판 </a></li>
                 <li><a href="/psyco/communityList.com?category=2">QnA</a></li>
                 <li><a href="/psyco/communityList.com?category=3">홍보</a></li>
                 <li><a href="/psyco/communityList.com?category=4">음식점추천</a></li>

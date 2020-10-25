@@ -39,20 +39,33 @@ private CommonsServiceImpl commonsService = null;
 //////// 리스트 뽑기  /////////
 	@RequestMapping("memberList.com")
 	public String memberList(String pageName, String pageNum,  Model model) throws SQLException {	
-
 		ListData data = commonsService.getListData(pageName,pageNum);
 		commonsService.setListDataToModel(model, data);
-		
 		return "super/sMemberList.mm";
 	}
 	@RequestMapping("shopList.com")
 	public String shopList(String pageName, String pageNum,  Model model) throws SQLException {
 		pageName ="sShopList";
-		System.out.println("----- controller  잘 연결 -----");
 		ListData data = commonsService.getListData(pageName,pageNum);
-		System.out.println("--- controller 데이터 잘 받음 ---");
 		commonsService.setListDataToModel(model, data);
 		return "super/sShopList.mm";
+	}
+	
+	@RequestMapping("shopEnrollList.com")
+	public String shopEnrollList(String pageName, String pageNum,  Model model) throws SQLException {
+		pageName ="sShopEnrollment";
+		ListData data = commonsService.getListData(pageName,pageNum);
+		commonsService.setListDataToModel(model, data);
+		System.out.println(" controller 잘연 결 shopEnrollList ----------------- ");
+		return "super/sShopEnrollment.mm";
+	}
+	@RequestMapping("shopEnrollPro.com")
+	public String shopEnrollPro(int member_Num, String pageNum,  Model model) throws SQLException {
+		
+		int result = superService.enrollShopSV(member_Num);
+		System.out.println("controller result : " + result);
+		model.addAttribute("result", result);
+		return "super/shopEnrollPro.mm";
 	}
 	@RequestMapping("helpList")
 	public String helpList(String pageName, String pageNum,  Model model) throws SQLException {
