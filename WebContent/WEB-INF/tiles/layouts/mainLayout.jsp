@@ -34,8 +34,10 @@
 				</c:if>
 				 	<c:if test="${sessionScope.shopCheck != null}">
                		  <li><a href="/psyco/shop/shopPageList.com">내 가게 관리가기</a></li>
-             		  <li><a href="/psyco/shop/shopPageList2.com">경매상품 올리기 </a></li>     		
+             		  <li><a href="/psyco/shop/itemEnrollmentForm.com">경매상품 올리기 </a></li>     		
 				</c:if>
+					
+				
             </ul>
         </div>
 

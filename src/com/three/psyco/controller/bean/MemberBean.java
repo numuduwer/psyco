@@ -46,7 +46,6 @@ public class MemberBean {
 		System.out.println("member_id : "+member_Id );
 		System.out.println("pw : "+pw );
 		int count = memberService.loginCheck(member_Id, pw);
-		
 		model.addAttribute("count", count);
 		return "member/loginCheck";
 	}

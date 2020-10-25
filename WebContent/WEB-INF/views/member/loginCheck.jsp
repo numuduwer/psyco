@@ -19,6 +19,8 @@
 			alert('로그인 완료');
 			window.location.href='/psyco/main/main.com';
 		</script>
+		
+	
 	</c:if>
 </body>
 </html>
