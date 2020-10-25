@@ -115,6 +115,27 @@ public class ShopDAOImpl implements ShopDAO {
 
 
 
+	@Override
+	public int deleteShop1(int member_num) throws SQLException {
+	
+		
+		int count=sqlSession.delete("shop.deleteShop1",member_num);
+		return count;
+	}
+
+
+
+
+	@Override
+	public int getShopNum(int member_num) throws SQLException {
+		int shop_num=sqlSession.selectOne("shop.getShopNum",member_num);
+		System.out.println("shop_num===="+shop_num);
+		return shop_num;
+	}
+
+
+
+
 
 
 

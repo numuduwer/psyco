@@ -273,6 +273,11 @@ public class ShopServiceImpl implements ShopService {
 		
 		return result;
 	}
+	@Override
+	public int deleteShops(int member_num) throws SQLException {
+			int count=shopDAO.deleteShop1(member_num);
+		return count;
+	}
 	
 	@Override
 	public int paymentInsert(String data) throws ParseException  {
@@ -309,6 +314,12 @@ public class ShopServiceImpl implements ShopService {
 		int result = buyDAO.paymentInsert(map);
 		
 		return result;
+	}
+
+	@Override
+	public int getShopNums(int member_num) throws SQLException {
+		int shop_num=shopDAO.getShopNum(member_num);
+		return shop_num;
 	}
 
 }

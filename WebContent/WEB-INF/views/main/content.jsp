@@ -105,11 +105,8 @@
         </div>
         <div class="shop_comment">
             <h2>사장님 오늘의 한마디</h2>
-<<<<<<< HEAD
             <h3>${idto.content}</h3>
-=======
             <h3>${item}</h3>
->>>>>>> 439a0ceef5cbd13a356220fca0522ec61d32dffb
         </div>
 
     </section>

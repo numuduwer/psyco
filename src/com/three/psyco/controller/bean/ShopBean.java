@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.event.MenuListener;
 
+import org.apache.catalina.tribes.membership.MemberImpl;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.MenuDTO;
 import com.three.psyco.model.dto.ShopDTO;
 import com.three.psyco.service.bean.CommonsServiceImpl;
+import com.three.psyco.service.bean.MemberServiceImpl;
 import com.three.psyco.service.bean.ShopService;
 import com.three.psyco.service.bean.ShopServiceImpl;
 
@@ -47,6 +49,9 @@ public class ShopBean {
 	private ShopServiceImpl shopService = null;
 	@Autowired
 	private CommonsServiceImpl commonsService = null;
+	
+	@Autowired
+	private MemberServiceImpl memberService = null;
 
 	public static String controllerName = "shopBean";
 
@@ -314,8 +319,7 @@ public class ShopBean {
 	
 	
 	@RequestMapping("shopPageList.com")//int member_num,
-	public String shopPageList(String pageNum,Model model)throws SQLException {
-		int member_num=91;
+	public String shopPageList(int member_num,String pageNum,Model model,String pw,String member_Id )throws SQLException {
 		String pageName="shopList";
 		String controller="shopBean";
 		ListData data=commonsService.getListData(pageName, pageNum, member_num, controller);
@@ -342,10 +346,20 @@ public class ShopBean {
 			model.addAttribute("rnumber", rdata.getNumber());
 			model.addAttribute("rarticleList", rdata.getArticleList());
 			model.addAttribute("count", rdata.getCount());
-		
-		System.out.println("shop_num"+rdata.getArticleList());
+		//-------------------------------------가게 삭제
+			System.out.println("member_id : "+member_Id );
+			System.out.println("pw : "+pw );
+			int count=0;
+			int result = memberService.loginCheck(member_Id, pw);
+			if(result == 1) {
+			count = shopService.deleteShops(member_num);
+			
+			}
+			System.out.println("count==!"+count);
+			model.addAttribute("result", result);
+			model.addAttribute("count", count);
+			model.addAttribute("member_num", member_num);
 
-		
 		return "shop/shopPageList";
 	}
 	
