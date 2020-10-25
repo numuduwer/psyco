@@ -26,6 +26,10 @@
 		AND rownum <= #{endRow}		
 		]]>
   	</select> 
+  	
+  	<insert id="paymentInsert" parameterType="map">
+  		insert into buy values(buy_seq.nextval, #{price}, #{amount}, #{discount_rate}, #{gender}, #{member_num}, #{menu_num}, #{item_num}, sysdate)
+  	</insert>
 	
 
   </mapper>

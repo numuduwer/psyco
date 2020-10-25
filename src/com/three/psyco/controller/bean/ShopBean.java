@@ -362,12 +362,12 @@ public class ShopBean {
 		return "shop/shopPageList2";
 	}
 	
-	@RequestMapping("paymentInsert.com")
+	@RequestMapping(value="paymentInsert.com")
+	@ResponseBody
 	public String paymentInsert(@RequestBody String data) throws ParseException {
-		System.out.println("결제 컨트롤러");
-		
-		shopService.paymentInsert(data);
-		
-		return "";
+		data = URLDecoder.decode(data);
+		int result = shopService.paymentInsert(data);
+		String return_str = Integer.toString(result);
+		return return_str;
 	}
 }
