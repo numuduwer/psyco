@@ -79,6 +79,22 @@ public class MainBean {
 
 	}
 	
+	@RequestMapping(value="getEnrollEvent.com")
+	@ResponseBody
+	public String getEnrollEvent(HttpSession session) {
+		String id = (String)session.getAttribute("memId");
+		System.out.println("=====getEnrollEvent=== 연결됨 ");
+		String result_str = "no";
+		if(id != null) {
+			result_str = mainService.getEnroll(id);
+		}else {
+			result_str = "noLogin";
+		}
+		
+		System.out.println("controller result_str : " + result_str);
+		return result_str;
+	}
+	
 
 	@RequestMapping("content.com")//int item_nums << 변수로 넣을 때 편하게 이름 바꿔둠 나중에 if문 지우면 item_num으로 바꾸기
 	public String content(String item_nums,String pageNum,Model model)throws SQLException {

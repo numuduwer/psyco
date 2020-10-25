@@ -11,8 +11,42 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script type="text/javascript">
+	 $(document).ready(function(){
+		
+		 $.ajax({
+			url : "/psyco/main/getEnrollEvent.com",
+			type: "post",
+			dataType: "text",
+			success:function(result){
+				console.log("success 여부는   : " + result);
+				if(result == 'ok'){
+					alert(" 승인 축축 오이오이!");
+				}
+			},
+			error: function() {
+				console.log(' ajax  실패');
+			}
+			
+		 });
+		 
+	 })
 	
 	
+		/* $(document).ready(function(){
+			console.log("연결 ? ");
+			$.ajax({
+				url: "psyco/main/getEnrollEvent.com",
+				type: "post",
+				dataType:"json",
+				success: function(){
+					alert('사업자 가입에 승인처리되었다. 가게등록을 해보세요 .');
+
+				}
+			};	
+			
+		}) */
+		
+		
 	 	$(document).ready(function(){
 			
 			$.ajax({
@@ -116,6 +150,8 @@
 		    });
 		}); */
 
+		
+		
 	</script>
 </head>
 

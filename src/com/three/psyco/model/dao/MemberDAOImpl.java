@@ -111,4 +111,14 @@ public class MemberDAOImpl implements MemberDAO {
 		}
 	}
 
+	public MemberDTO getEnroll(String id) {
+		MemberDTO dto  = sqlSession.selectOne("member.getMemberData",id);
+		return dto;
+	}
+
+	public void upgradeEnroll(String id) {
+		sqlSession.update("member.upgradeEnroll",id);
+		
+	}
+
 }
