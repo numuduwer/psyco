@@ -51,12 +51,9 @@ public class MainServiceImpl implements MainService{
 
 
 	public String getEnroll(String id) {
-		String result_str = "login but not enroll";
-		System.out.println("mainService id : "  + id);
-		
+		String result_str = "login but not enroll";		
 		MemberDTO dto  = memberDAO.getEnroll(id);
 		int business_license = dto.getBusiness_license();
-		System.out.println("business_license : " + business_license);
 
 		if (business_license == 1) {
 			result_str = "ok";

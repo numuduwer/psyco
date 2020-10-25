@@ -83,15 +83,12 @@ public class MainBean {
 	@ResponseBody
 	public String getEnrollEvent(HttpSession session) {
 		String id = (String)session.getAttribute("memId");
-		System.out.println("=====getEnrollEvent=== 연결됨 ");
 		String result_str = "no";
 		if(id != null) {
 			result_str = mainService.getEnroll(id);
 		}else {
 			result_str = "noLogin";
 		}
-		
-		System.out.println("controller result_str : " + result_str);
 		return result_str;
 	}
 	

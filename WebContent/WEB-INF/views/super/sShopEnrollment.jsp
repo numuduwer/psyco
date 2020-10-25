@@ -51,11 +51,11 @@ function onClickItemDelete(memberNum){
 	    <!-- 경매 상품 -->
     <section class="item-section">
         <div class="admin">
-            <ul class="admin_btn2">
+           <ul class="admin_btn2">
                 <li><a href="/psyco/super/memberList.com">회원관리</a></li>
                 <li><a href="/psyco/super/shopEnrollList.com">서비스 등록 현황</a></li>
-                <li><a href="/psyco/communityList.com?category=3">가게관리</a></li>
-                <li><a href="/psyco/communityList.com?category=4">문의하기 관리</a></li>
+                <li><a href="/psyco/super/shopList.com">가게관리</a></li>
+                <li><a href="/psyco/help.com">문의하기 관리</a></li>
             </ul>
         
          
@@ -69,7 +69,7 @@ function onClickItemDelete(memberNum){
 	<div class="admin_content2">
 		<br>	<br>
 		
-	<h2>회원 리스트  </h2>
+	<h2> 서비스 등록 현황   </h2>
 		<br>
 			<table>
 			<tr>

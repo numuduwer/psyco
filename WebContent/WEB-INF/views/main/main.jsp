@@ -20,7 +20,7 @@
 			success:function(result){
 				console.log("success 여부는   : " + result);
 				if(result == 'ok'){
-					alert(" 승인 축축 오이오이!");
+					alert(" 승인 처리되셨습니다. !  오른쪽 위  버튼을   확인해주세요 !");
 				}
 			},
 			error: function() {

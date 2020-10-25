@@ -9,22 +9,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1 align="center"> 고객센터 </h1>	
-	<table>
-		<tr>
-			<td>
-				<button onclick="window.location='/psyco/helpForm.com'"> 문의하기 </button> <br/>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<button onclick="window.location='/psyco/myHelpList.com?category=5&pageNum=1'"> 내 문의 리스트 </button> <br/>
-			</td>
-		</tr>
-	</table>
-	
-	<br /><br />
-	
+	   <!-- 경매 상품 -->
+    <section class="item-section">
+        <div class="admin">
+            <ul class="admin_btn2">
+                <li><a href="/psyco/super/memberList.com">회원관리</a></li>
+                <li><a href="/psyco/super/shopEnrollList.com">서비스 등록 현황</a></li>
+                <li><a href="/psyco/super/shopList.com">가게관리</a></li>
+                <li><a href="/psyco/help.com">문의하기 관리</a></li>
+            </ul>
+        </div>
+    </section>
 	<%-- 게시글이 없을 때 --%>
 	<c:if test="${count == 0 }">
 		<table>
@@ -36,13 +31,17 @@
 		</table>
 	</c:if>
 	<c:if test="${count > 0 }">
+	<div class="admin_content2">
+		<br><br>
+	<h2>회원 리스트  </h2>
+		<br>
 		<table>
 			<tr>
-				<td>No.</td>
-				<td>제  목</td>
-				<td>작성자</td>
-				<td>시  간</td>
-				<td>조회수</td>
+				<th>No.</th>
+				<th>제  목</th>
+				<th>작성자</th>
+				<th>시  간</th>
+				<th>조회수</th>
 			</tr>
 			<c:forEach var="article" items="${articleList}">
 				<tr>
@@ -63,9 +62,8 @@
 				</tr>
 			</c:forEach>
 		</table>
-	</c:if>
-	
-			<%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
+	<br><br><br>
+		<%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
 	<div align="center">
 	<c:if test="${count > 0}">
 		<fmt:parseNumber var="res" value="${count / pageSize}"  integerOnly="true"/>
@@ -79,17 +77,22 @@
 		</c:if>
 		
 		<c:if test="${startPage > pageBlock}">
-			<a href="/psyco/help.com?pageNum=${startPage-pageBlock}&category=${category}" > &lt; </a>
+			<a href="/psyco/super/memberList.com?pageNum=${startPage-pageBlock}" > &lt; </a>
 		</c:if>
 		<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1" >
-			<a href="/psyco/help.com?pageNum=${i}&category=${category}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
+			<a href="/psyco/super/memberList.com?pageNum=${i}" class="pageNums"> &nbsp; ${i} &nbsp; </a>
 		</c:forEach>
 		<c:if test="${endPage < pageCount}">
-			<a href="/psyco/help.com?pageNum=${startPage+pageBlock}&category=${category}" > &gt; </a>
+			<a href="/psyco/super/memberList.com?pageNum=${startPage+pageBlock}" > &gt; </a>
 		</c:if>
 	
 	</c:if>
+	<br>
 	</div>
+	<br>
+		</div>
+	</c:if>
+
 	
 	
 </body>

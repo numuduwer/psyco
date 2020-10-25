@@ -42,9 +42,6 @@ public class CommunityBean {
 	public String community(CommunityDTO dto, Model model,HttpServletRequest request) {
 		String category = request.getParameter("category");
 		model.addAttribute("category",category);
-		
-		
-		
 		return "community/community.mm";
 	}
 	
@@ -252,7 +249,7 @@ public class CommunityBean {
 			model.addAttribute("category", category);
 			model.addAttribute("pageNum", pageNum);
 			
-			return "community/help.mm";
+			return "super/help.mm";
 		}
 		
 		
