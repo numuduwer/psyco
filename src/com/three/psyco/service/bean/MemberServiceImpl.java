@@ -245,10 +245,15 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public int insertMember(MemberDTO dto) {
+		int result = 0;
 		if (dto.getLicense_number() == "") {
 			dto.setLicense_number("0");
+			result = memberDAO.insertMember(dto);
+			result = 2;
+		}else {
+			result = memberDAO.insertMember(dto);
 		}
-		int result = memberDAO.insertMember(dto);
+		
 		return result;
 	}
 	
