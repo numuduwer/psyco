@@ -125,15 +125,16 @@ public class MemberBean {
 	}
 	
 	@RequestMapping("shopSignupForm.com")
-	public String shopSignupForm(String license_number, Model model) {
-		model.addAttribute("license_number", license_number);
+	public String shopSignupForm(String member_num, Model model) {
+		System.out.println("member_num==!"+member_num);
+		model.addAttribute("license_number", member_num);
 		return "member/shopSignupForm";
 	}
 
 	@RequestMapping("shopSignupPro.com")
 	public String shopSignPro(MultipartHttpServletRequest request,int member_num) {
 	
-	
+		System.out.println("잘안돼 ??");
 		String status ="0";
 		String approve_status="0";
 		

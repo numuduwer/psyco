@@ -414,7 +414,7 @@ public class MemberServiceImpl implements MemberService {
 		String license_number=request.getParameter("license_number");
 		MultipartFile mf = request.getFile("shop_img");
 		try {
-			String path=request.getRealPath("shop_img");
+			String path=request.getRealPath("save");
 			System.out.println("path ="+path);
 			String orgName =mf.getOriginalFilename();
 			String imgName =orgName.substring(0, orgName.lastIndexOf('.'));

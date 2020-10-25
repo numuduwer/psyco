@@ -55,8 +55,6 @@ public class MainBean {
 	@Autowired
 	public static String controller = "mainBean";
 	
-	@Autowired
-	private ShopServiceImpl shopService=null;
 	
 	public Scheduler scheduler = null;
 	

@@ -143,15 +143,15 @@
                     <input class="form_input" type="text" id="roadAddress" placeholder="도로명주소">
                 </div>
                 <div class=form_tab>
-                    <label for="" class="form_title">싱세주소</label>
+                    <label for="" class="form_title">상세주소</label>
                     <input class="form_input" type="text" id="detailAddress" placeholder="상세주소">
                 </div>
 
 
 
                 <div class=form_tab>
-                    <input type="submit" value="가입" class="form_btn" />
                     <input type="button" value="취소" onclick="history.go(-1) " class="form_btn" />
+                    <input type="submit" value="가입" class="form_btn" />
                 </div>
 
             </form>

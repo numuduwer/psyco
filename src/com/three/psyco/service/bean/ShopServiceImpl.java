@@ -270,6 +270,11 @@ public class ShopServiceImpl implements ShopService {
 		
 		return result;
 	}
+	@Override
+	public int deleteShops(int member_num) throws SQLException {
+			int count=shopDAO.deleteShop1(member_num);
+		return count;
+	}
 	
 
 	
