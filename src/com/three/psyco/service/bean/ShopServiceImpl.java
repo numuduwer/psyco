@@ -24,6 +24,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.three.psyco.model.dao.BuyDAOImpl;
 import com.three.psyco.model.dao.ItemDAOImpl;
 import com.three.psyco.model.dao.MenuDAOImpl;
 import com.three.psyco.model.dao.ShopDAOImpl;
@@ -44,7 +45,10 @@ public class ShopServiceImpl implements ShopService {
 	@Autowired
 	private MenuDAOImpl menuDAO = null;
 	
-
+	private BuyDAOImpl buyDAO;
+	public ShopServiceImpl(BuyDAOImpl buyDAO) {
+		this.buyDAO = buyDAO;
+	}
 
 	@Override
 	public ShopDTO getShopDataSV(int shop_num) throws SQLException {
@@ -152,7 +156,6 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public ItemDTO getItemOne(int item_num, String pageNum, Model model) throws SQLException {
 		String pageName = "itemOne";
-		System.out.println("itemOne Service : " + pageName);
 		ItemDTO article = itemDAO.getItemOne(item_num);
 		
 		if(pageNum == null) {
@@ -276,7 +279,41 @@ public class ShopServiceImpl implements ShopService {
 		return count;
 	}
 	
-
-	
+	@Override
+	public int paymentInsert(String data) throws ParseException  {
+		System.out.println("결제 서비스");
+		data = data.substring(0, data.length() -1);
+		
+		JSONParser jsonParser = new JSONParser();
+		Object obj = jsonParser.parse(data);
+		JSONObject jsonObject = (JSONObject) obj;
+		
+		Map<String, Object> map = null;
+		
+		try {
+			map = new ObjectMapper().readValue(jsonObject.toJSONString(), Map.class);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		int item_num = (int) map.get("item_num");
+		int amount = Integer.parseInt(String.valueOf(map.get("amount")));
+		
+		int reduce_result = itemDAO.reduceItemCount(item_num, amount);
+		if (reduce_result == 1) {
+			int item_amount = itemDAO.itemAmountCheck(item_num);
+			if (item_amount == 0) {
+				itemDAO.modifyStatus(item_num);
+			}
+		}
+		
+		int result = buyDAO.paymentInsert(map);
+		
+		return result;
+	}
 
 }

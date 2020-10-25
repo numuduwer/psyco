@@ -27,4 +27,5 @@ public interface ShopService {
 	public int deleteShops(int member_num)throws SQLException;
 	public int itemEnrollmentPro(String jsonData) throws ParseException;
 
+	public int paymentInsert(String data) throws ParseException;
 }

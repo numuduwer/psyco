@@ -235,7 +235,6 @@ public class ShopBean {
 	public String itemDetail(int item_num,Model model,String pageNum) throws SQLException {
 		if (pageNum == null) pageNum = "1";
 		
-		System.out.println("item_num : " + item_num);
 		ItemDTO article = shopService.getItemOne(item_num, pageNum, model);
 		ShopDTO shopInfo = shopService.getShopDataSV(article.getShop_num());
 		
@@ -377,5 +376,12 @@ public class ShopBean {
 		return "shop/shopPageList2";
 	}
 	
-	
+	@RequestMapping(value="paymentInsert.com")
+	@ResponseBody
+	public String paymentInsert(@RequestBody String data) throws ParseException {
+		data = URLDecoder.decode(data);
+		int result = shopService.paymentInsert(data);
+		String return_str = Integer.toString(result);
+		return return_str;
+	}
 }

@@ -61,12 +61,9 @@ public class MainBean {
 	@RequestMapping("main.com")
 	public String main(Model model,String pageNum, String pageName, HttpSession session) throws SQLException, JsonProcessingException {
 		
-
 		List<Object> itemMapList = commonsService.getEntireList();
 		model.addAttribute("itemMapList", itemMapList);
-		System.out.println(itemMapList);
 		
-
 		return "main/main";
 	}
 	

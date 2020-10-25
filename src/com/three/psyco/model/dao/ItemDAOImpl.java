@@ -42,7 +42,6 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public ItemDTO getItemOne(int item_num) throws SQLException {
 		
-		System.out.println("itemOne DAO : " + item_num);
 		ItemDTO dto = sqlSession.selectOne("item.getItemOne", item_num);
 		
 		return dto;
@@ -270,5 +269,19 @@ public class ItemDAOImpl implements ItemDAO {
 		return result;
 	}
 
+	@Override
+	public int reduceItemCount(int item_num, int amount) {
+		HashMap<String, Integer> hMap = new HashMap<String, Integer>();
+		hMap.put("item_num", item_num);
+		hMap.put("amount", amount);
+		int result = sqlSession.update("item.reduceItemCount", hMap);
+		return result;
+	}
 	
+	@Override
+	public int itemAmountCheck(int item_num) {
+		int amount = sqlSession.selectOne("item.itemAmountCheck", item_num);
+		System.out.println("item의 amount는 : " + amount);
+		return amount;
+	}
 }
