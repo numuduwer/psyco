@@ -26,8 +26,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.three.psyco.model.dto.BuyDTO;
+import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.MemberDTO;
+import com.three.psyco.service.bean.CommonsServiceImpl;
 import com.three.psyco.service.bean.MemberServiceImpl;
+import com.three.psyco.service.bean.MemberShopMenuServiceImpl;
+import com.three.psyco.service.bean.ShopServiceImpl;
 
 @Controller
 @RequestMapping("member")
@@ -35,7 +39,16 @@ public class MemberBean {
 	
 	@Autowired
 	private MemberServiceImpl memberService;
+	
+	@Autowired 
+	private ShopServiceImpl shopService;
+	
+	@Autowired
+	private CommonsServiceImpl commonsService;
 
+	@Autowired
+	private MemberShopMenuServiceImpl memberMenu=null;
+	
 	@RequestMapping("loginForm.com")
 	public String loginForm() {
 		return "member/loginForm";
@@ -131,24 +144,39 @@ public class MemberBean {
 	}
 	
 	@RequestMapping("shopSignupForm.com")
-	public String shopSignupForm(String member_num, Model model) {
+	public String shopSignupForm(String member_num, Model model,String license_number) {
 		System.out.println("member_num==!"+member_num);
-		model.addAttribute("license_number", member_num);
+		model.addAttribute("member_num", member_num);
+		model.addAttribute("license_number", license_number);
 		return "member/shopSignupForm";
 	}
 
 	@RequestMapping("shopSignupPro.com")
-	public String shopSignPro(MultipartHttpServletRequest request,int member_num) {
+	public String shopSignPro(MultipartHttpServletRequest request,int member_num,Model model)throws SQLException {
 	
-		System.out.println("잘안돼 ??");
 		String status ="0";
 		String approve_status="0";
+		String pageNum ="null";
 		
 		try {
 			memberService.insertMemberShops(request,member_num,status,approve_status);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		int shop_num=shopService.getShopNums(member_num);
+		System.out.println("shop_num=="+shop_num);
+		model.addAttribute("shop_num", shop_num);
+		model.addAttribute("member_num", member_num);
+		return "member/menuSignupForm";
+	}
+	
+	@RequestMapping("menuSignupPro.com")
+	public String menuSignupPro(MultipartHttpServletRequest request,int shop_num,int member_num,Model model)throws SQLException {
+		
+		memberMenu.insertMemberMenus(request,shop_num);
+		
+		model.addAttribute("member_num", member_num);
+		model.addAttribute("shop_num", shop_num);
 		return "member/menuSignupForm";
 	}
 	

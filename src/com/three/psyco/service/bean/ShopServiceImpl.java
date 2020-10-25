@@ -316,4 +316,10 @@ public class ShopServiceImpl implements ShopService {
 		return result;
 	}
 
+	@Override
+	public int getShopNums(int member_num) throws SQLException {
+		int shop_num=shopDAO.getShopNum(member_num);
+		return shop_num;
+	}
+
 }

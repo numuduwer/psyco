@@ -50,7 +50,7 @@ public class MemberShopMenuServiceImpl implements MemberShopMenuService {
 			}
 			dto.setMenu_name(menu_name);
 			dto.setContent(content);
-			dto.setCategory(category);
+			dto.setCategory("0");
 			dto.setPrice(price);
 			dto.setSeason(season);
 			dto.setSett(sett);
