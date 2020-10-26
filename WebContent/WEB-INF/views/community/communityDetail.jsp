@@ -13,7 +13,6 @@
 
 	<br/>
 <div class="admin_content">
-
 		<table align="center">
 			<tr >
 				<th width="80">제 목 </th>
@@ -30,20 +29,27 @@
 				<td colspan="2"align="center" height="300">${article.content}   </td>
 	
 			</tr>
-			
-		
-		
-			
 			<c:if test="${category == 3 || category == 4}">
 				<tr>
-					
+					<td><img src="/psyco/save//${article.community_img}" width="400"></td>
 				</tr>
 			</c:if>
+
+				<tr>
+					<td>댓글</td>
+					<td>댓글내용</td>
+					<td>작성자</td>
+				</tr>
+				<c:forEach var="article" items="${articleDabgle}">
+					<tr>
+						<td>${DabgleCount}<c:set var="DabgleCount" value="${DabgleCount-1}" /></td>
+						<td colspan="2"align="center" height="30">${article.content}</td>
+						<td colspan="2"align="center" height="30">${article.writer}</td>
+					</tr>
+				</c:forEach>
+
 			
-			<tr>
-				<th>댓글</th>
-				<td colspan="2"align="center" height="30">${article.content}   </td>
-			</tr>
+
 			
 			<tr>
 				<td colspan="2" > 
@@ -57,7 +63,7 @@
 				</c:if>
 					<button class="admin_dtn2_content" onclick="window.location='/psyco/communityDeleteForm.com?community_num=${community_num}&pageNum=${pageNum}&category=${category}'">삭 제</button>
 				</c:if>
-					<button class="admin_dtn2_content" onclick="window.location='/psyco/communityForm.com?community_num=${community_num}&ref=${article.ref}&re_step=${article.re_step}&re_level=${article.re_level}&category=${category}'">답 글 작성 </button>
+					<button class="admin_dtn2_content" onclick="window.location='/psyco/communityForm.com?community_num=${community_num}&ref=${article.ref}&re_step=${article.re_step}&re_level=${article.re_level}&category=${category}'">댓 글 작성 </button>
 					<button class="admin_dtn2_content" onclick="window.location='/psyco/communityList.com?pageNum=1&category=${category}'">리스트로 </button>
 				 </td>
 			</tr>

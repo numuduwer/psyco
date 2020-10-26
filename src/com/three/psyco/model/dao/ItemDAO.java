@@ -18,9 +18,6 @@ public interface ItemDAO {
 	
 	public ItemDTO getItemOne(int item_num)throws SQLException;
 	
-	public int count1(int id)throws SQLException;
-	
-	public List getItemList(int id, int startRow, int endRow)throws SQLException;
 
 
 	public int itemModifyAticle(ItemDTO dto);
@@ -42,8 +39,6 @@ public interface ItemDAO {
 	public int countA(int id) throws SQLException;
 	public List getItemListA(int id, int startRow, int endRow);
 	
-	public int countB(int id) throws SQLException;	
-	public List getItemListB(int id, int startRow, int endRow);
 		
 	public int countC(int id) throws SQLException;
 	public List getItemListC(int id, int startRow, int endRow);
@@ -54,4 +49,8 @@ public interface ItemDAO {
 	public int reduceItemCount(int item_num, int amount);
 
 	public int itemAmountCheck(int item_num);
+
+	public List<JoinResultDTO> getMyEntireList(int id, int startRow, int endRow);
+
+	
 }
