@@ -333,6 +333,7 @@ public class ShopBean {
 		model.addAttribute("articleList1", data.getArticleList());
 		model.addAttribute("count1", data.getCount());
 		//---------------------------------------------review
+		System.out.println("------ shopPageLst member_num :" + member_num);
 		List<Integer> num=commonsService.getMyShop_MemberNumList(member_num);
 		System.out.println("num=="+num);
 
@@ -344,9 +345,9 @@ public class ShopBean {
 			model.addAttribute("currPage", rdata.getCurrPage());
 			model.addAttribute("startRow", rdata.getStartRow());
 			model.addAttribute("endRow", rdata.getEndRow());
-			model.addAttribute("rnumber", rdata.getNumber());
-			model.addAttribute("rarticleList", rdata.getArticleList());
-			model.addAttribute("count", rdata.getCount());
+			model.addAttribute("number2", rdata.getNumber());
+			model.addAttribute("rarticleLis2", rdata.getArticleList());
+			model.addAttribute("count2", rdata.getCount());
 		//-------------------------------------가게 삭제
 			System.out.println("member_id : "+member_Id );
 			System.out.println("pw : "+pw );

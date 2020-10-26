@@ -37,41 +37,55 @@ function onClickItemDelete(menuNum){
 
 
 <body>
+  <!--  기능  타이틀 -->
+    <div class="myPage_mainTitle">
+        <h1>사장님 마이페이지</h1>
+
+        <div class="myPage_shopTitle ">
+            <h2 class="myPage_subTitle">내 메뉴  관리하기 </h2>
+        </div>
+    </div>
+      <div id="tab5" data-tab-content class="items active">
 
 
-
-
-	<h1> Menu 리스트 페이지 </h1>
-	
-	
 	<c:if test="${count == 0}">
 		<h2> 메뉴가 없어요.</h2>
 	
 	</c:if>
 	<c:if test="${count > 0}">
-	<h3> table</h3>
-	
+	   
+		<div class="admin_content2">
+		<br><br>	
+		<h2>메뉴 리스트  </h2>
+		<br>
+
+                   
 		<table>
-			<tr>	
+			<tr>
+				<th>메뉴 명</th>
+				<th>메뉴 소개 </th>
+				<th>메뉴 가격  </th>
+				<th>세트 여부  </th>
+				<th>계절 메뉴  </th>
+				<th>수정  </th>
+				<th>삭제   </th>
+			</tr>
 			<c:forEach var="article" items="${articleList}">
 			<tr id = "${article.menu_num}">
-				<td>${number} <c:set var="number" value="${number-1}" /> </td>	
 				<td>${article.menu_name}</td> 
 				<td>${article.content}</td>
-				<td>${article.menu_img}</td>
 				<td>${article.price}</td>	
-				<td>${article.category}</td>
 				<td>${article.season}</td>
 				<td>${article.sett}</td>
 				<td><button onclick="window.location='/psyco/shop/menuModify.com?menu_num=${article.menu_num}'">수  정</button></td>
-				<td><a href="javascript:onClickItemDelete('${article.menu_num}')" >삭제</a>	
-					
+				<td><a href="javascript:onClickItemDelete('${article.menu_num}')" >삭제</a>		
 			</tr>
 		</c:forEach>		
-		</table>
+		</table><br><br><br>
+		</div>
 	</c:if>
 	
-
+</div>
 	
 </body>
 </html>

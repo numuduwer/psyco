@@ -939,3 +939,11 @@ footer {
   font-weight: 500;
   font-size: var(--font-small);
 }
+
+
+#tab5{
+	border: 1px solid var(--color-light-grey);
+    display: flex;
+    /* justify-content: center; */
+    margin: auto;
+}
