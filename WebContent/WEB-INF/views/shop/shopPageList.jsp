@@ -78,16 +78,16 @@ function onClickItemDelete(shopNum){
                         
                     
                         </ul>
-                        <c:if test="${count == 0}">
+                        <c:if test="${coun1t == 0}">
 							<table>
 								<tr>
-									<td> 가게가 등록되어있지 않습니다. </td>
+									<td>  ${count1}가게가 등록되어있지 않습니다. </td>
 								</tr>
 							</table>
 						</c:if>
-                        <h2>가게 리스트</h2>
-                        <c:if test="${count > 0}">
-	                       <c:forEach var="article" items="${articleList}">
+                       
+                        <c:if test="${count1 > 0}">
+	                       <c:forEach var="article" items="${articleList1}">
 		                        <div id = "${article.shop_num}"} class="myPage_item_info">
 			                     
 		                            <img src="/img/item/one/1.jpg" alt="">
@@ -102,7 +102,7 @@ function onClickItemDelete(shopNum){
 		                            </ul>
 		                            <ul class="myPage_item_info_btnList">
 		                                <li><button class="shop_btn"><a href="shopModify.com?shop_num=${article.shop_num }">수정</a> </button></li>
-		                               	<li><button class="shop_btn"> <a href="javascript:onClickItemDelete('${article.shop_num}')" >삭제${article.shop_num}</a> </button></li>
+		                               	<li><button class="shop_btn"> <a href="javascript:onClickItemDelete('${article.shop_num}')" >삭제</a> </button></li>
 		                            </ul>
 		                        </div>
                         </c:forEach>
