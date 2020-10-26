@@ -48,7 +48,7 @@
 			<tr>
 				<td>사진</td>
 				<td>이름</td>
-				<td>내용</td>
+				<td>내용 </td>
 				<td>가격</td>
 				<td>선택란</td>
 			</tr>

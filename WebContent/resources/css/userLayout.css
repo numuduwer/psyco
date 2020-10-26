@@ -459,16 +459,7 @@ th {
 
   
 
-#tab1 {
-  border: 1px solid var(--color-light-grey);
-}
-#tab2 {
-  border: 1px solid var(--color-light-grey);
-}
-#tab3 {
-  border: 1px solid var(--color-light-grey);
-}
-  
+
 /* 찜 리스트 */
 .zzim_reg {
   display: flex;
@@ -924,18 +915,25 @@ footer {
   justify-content: flex-end;
 }
 
-.shop_menu li a{
+.shop_menu li {
   margin: 0 10px;
   padding: 8px 20px;
   border: 1px solid var( --color-dark-blue);
   background-color:var( --color-dark-blue);
-    font-weight: 500;
   border-radius: 5px;
 }
 
 
-.shop_menu li  {
+.shop_menu li a {
   color: var(--color-white);
   font-weight: 500;
   font-size: var(--font-small);
+}
+
+
+#tab5{
+	border: 1px solid var(--color-light-grey);
+    display: flex;
+    /* justify-content: center; */
+    margin: auto;
 }

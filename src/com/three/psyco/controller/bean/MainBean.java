@@ -1,11 +1,14 @@
 package com.three.psyco.controller.bean;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -15,13 +18,16 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.three.psyco.model.dto.ItemDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.three.psyco.model.dto.ItemDTO;
 import com.three.psyco.model.dto.JoinResultDTO;
 import com.three.psyco.model.dto.ListData;
@@ -59,42 +65,27 @@ public class MainBean {
 	public Scheduler scheduler = null;
 	
 	@RequestMapping("main.com")
-	public String main(Model model,String pageNum, String pageName, HttpSession session) throws SQLException, JsonProcessingException {
+	public String main(String menuDivision, HttpServletRequest request, Model model) throws SQLException, JsonProcessingException {
 		
-
-
-
-		//List<JoinResultDTO> itemList = commonsService.getEntireList();
+		if (menuDivision == null) menuDivision = "0";
 		
-		ListData data = commonsService.getListData(pageName,pageNum,controller);
-		commonsService.setListDataToModel(model, data);	
+		List<Object> itemMapList = commonsService.getEntireList(menuDivision);
 
-		//System.out.println("itemList의 사이즈 : " + itemList.size());
-		//model.addAttribute("itemList", itemList);
-
-
-		List<Object> itemMapList = commonsService.getEntireList();
 		model.addAttribute("itemMapList", itemMapList);
 		
 
 		return "main/main";
 	}
 	
-	@RequestMapping("getItemList.com")
-	public String getItemList() {
-		
-		
-		return "";
-	}
 	
-	@RequestMapping(value="getListData.com")
+	
+	@RequestMapping(value="getListData.com", produces = "application/text;charset=utf8")
 	@ResponseBody
-	public List<Object> getListData() throws JsonProcessingException {
-		
-		List<Object> jsonArray = commonsService.getEntireList();
+	public List<Object> getListData(String menuDivision) throws JsonProcessingException {
+		List<Object> jsonArray = commonsService.getEntireList(menuDivision);
 		String jsonString = jsonArray.toString();
 
-		System.out.println(jsonString);	
+		//System.out.println(jsonString);
 		return jsonArray;
 
 	}

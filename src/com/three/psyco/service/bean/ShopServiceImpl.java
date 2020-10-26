@@ -189,7 +189,6 @@ public class ShopServiceImpl implements ShopService {
 		model.addAttribute("result",result);
 		model.addAttribute("item_num",item_num);
 		
-		
 		return result;
 	}
 	
@@ -310,7 +309,7 @@ public class ShopServiceImpl implements ShopService {
 		if (reduce_result == 1) {
 			int item_amount = itemDAO.itemAmountCheck(item_num);
 			if (item_amount == 0) {
-				itemDAO.modifyStatus(item_num);
+				itemDAO.modifyStatusIntoEnd(item_num);
 			}
 		}
 		
@@ -320,8 +319,10 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 	@Override
-	public int getShopNums(int member_num) throws SQLException {
-		int shop_num=shopDAO.getShopNum(member_num);
+	public List getShopNums(int member_num) throws SQLException {
+		System.out.println(member_num);
+		List shop_num=shopDAO.getShopNum(member_num);
+		System.out.println("shop_num :" + shop_num);
 		return shop_num;
 	}
 
@@ -383,7 +384,7 @@ public class ShopServiceImpl implements ShopService {
 			
 			int progress_status = 0;									// 진행 중 경매인지 종료 된 경매인지 확인할 수 있는 변수
 			if (item_endTime_minuet < current_minuets) {	// 경매 시간이 종료 되었으면
-				progress_status = itemDAO.modifyStatus(dto.getItem_num());
+				//sprogress_status = itemDAO.modifyStatus(dto.getItem_num());
 			}
 			
 			if (dto.getAmount() == 0) {
@@ -421,16 +422,17 @@ public class ShopServiceImpl implements ShopService {
 		int startRow = 1;
 		int endRow = 4;
 
-		
+		// 아이템 상태 1
 		List articleList = null;
 		
 		int count = menuDAO.getItemListCount(shop_num);
-		System.out.println("count : " + count);
-		if(count >0) {
-			articleList = menuDAO.getItemListE(shop_num,startRow, endRow);
-		}
+		articleList = menuDAO.getItemListE(shop_num,startRow, endRow);
+		System.out.println("진행예정 경매 상품 개수 : " + count);
+		System.out.println("진행예정 경매 상품 리스트 사이즈 : " + articleList.size());
+		
 
 		model.addAttribute("articleList3", articleList);
+		model.addAttribute("count", count);
 		
 		return articleList;
 		
@@ -438,7 +440,18 @@ public class ShopServiceImpl implements ShopService {
 	}
 	
 	
-	
+	@Override
+	public List getContentImg(int shop_num,Model model) {
+		System.out.println(shop_num);
+		List<MenuDTO> list = menuDAO.getContentImg(shop_num);
+		int count1 = menuDAO.getContentImgCount(shop_num);
+		System.out.println("진행중인 경매 개수 : " + count1);
+		System.out.println("진행중인 경매 리스트 사이즈 : " + list.size());
+		
+		model.addAttribute("count1",count1);
+		
+		return list;
+	}
 	
 	
 	

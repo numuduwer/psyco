@@ -22,5 +22,6 @@ public interface CommonsService {
 
 	public ListData getShopNumLists(String pageNum, List shop_num) throws SQLException;
 	public ListData getbuyData(String pageNum,int member_num) throws SQLException;
-	public List<Object> getEntireList() throws JsonProcessingException;
+	
+	public List<Object> getEntireList(String menuDivision) throws JsonProcessingException;
 }

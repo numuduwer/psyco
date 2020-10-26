@@ -94,8 +94,8 @@
 	<c:if test="${category == 2}">
 		<h2 align="center"> QnA 페이지</h2>
 		<div class="ssss">
-		<button class="admin_dtn2_content"  onclick="window.location='/psyco/communityForm.com?category=1&grade=11&pageNum=${pageNum}'"> 글쓰기 </button> 
-		<button class="admin_dtn2_content" onclick="window.location='/psyco/communityMyArticle.com?category=1&grade=11&pageNum=${pageNum}'"> 내가 쓴 글  </button>
+		<button class="admin_dtn2_content"  onclick="window.location='/psyco/communityForm.com?category=2&grade=11&pageNum=${pageNum}'"> 글쓰기 </button> 
+		<button class="admin_dtn2_content" onclick="window.location='/psyco/communityMyArticle.com?category=2&grade=11&pageNum=${pageNum}'"> 내가 쓴 글  </button>
 		</div>
 		<div class="admin_content">
 		<table>
@@ -150,8 +150,8 @@
 	<c:if test="${category == 3}">
 		<h2 align="center"> 홍보 페이지 </h2>
 		<div class="ssss">
-		<button class="admin_dtn2_content"  onclick="window.location='/psyco/communityForm.com?category=1&grade=11&pageNum=${pageNum}'"> 글쓰기 </button> 
-		<button class="admin_dtn2_content" onclick="window.location='/psyco/communityMyArticle.com?category=1&grade=11&pageNum=${pageNum}'"> 내가 쓴 글  </button>
+		<button class="admin_dtn2_content"  onclick="window.location='/psyco/communityForm.com?category=3&grade=11&pageNum=${pageNum}'"> 글쓰기 </button> 
+		<button class="admin_dtn2_content" onclick="window.location='/psyco/communityMyArticle.com?category=3&grade=11&pageNum=${pageNum}'"> 내가 쓴 글  </button>
 		</div>
 		<div class="admin_content">
 		<br>
@@ -209,8 +209,8 @@
 	<c:if test="${category == 4}">
 		<h2 align="center"> 음식점 추천 페이지</h2>
 		<div class="ssss">
-		<button class="admin_dtn2_content"  onclick="window.location='/psyco/communityForm.com?category=1&grade=11&pageNum=${pageNum}'"> 글쓰기 </button> 
-		<button class="admin_dtn2_content" onclick="window.location='/psyco/communityMyArticle.com?category=1&grade=11&pageNum=${pageNum}'"> 내가 쓴 글  </button>
+		<button class="admin_dtn2_content"  onclick="window.location='/psyco/communityForm.com?category=4&grade=11&pageNum=${pageNum}'"> 글쓰기 </button> 
+		<button class="admin_dtn2_content" onclick="window.location='/psyco/communityMyArticle.com?category=4&grade=11&pageNum=${pageNum}'"> 내가 쓴 글  </button>
 		</div>
 		<div class="admin_content">
 		<br>

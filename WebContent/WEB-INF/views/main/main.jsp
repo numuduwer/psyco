@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,32 +12,44 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script type="text/javascript">
- $(document).ready(function(){
-		
-		 $.ajax({
-			url : "/psyco/main/getEnrollEvent.com",
-			type: "post",
-			dataType: "text",
-			success:function(result){
-				console.log("success 여부는   : " + result);
-				if(result == 'ok'){
-					alert(" 승인 처리되셨습니다. !  오른쪽 위  버튼을   확인해주세요 !");
+		 $(document).ready(function(){
+			
+			 $.ajax({
+				url : "/psyco/main/getEnrollEvent.com",
+				type: "post",
+				dataType: "text",
+				success:function(result){
+					console.log("success 여부는   : " + result);
+					if(result == 'ok'){
+						alert(" 승인 처리되셨습니다. !  오른쪽 위  버튼을   확인해주세요 !");
+					}
+					
+				},
+				error: function() {
+					console.log(' ajax  실패');
 				}
 				
-			},
-			error: function() {
-				console.log(' ajax  실패');
-			}
-			
-		 });
-		 
-	 }) 
+			 });
+			 
+		 })
 	
 	
+		/* $(document).ready(function(){
+			console.log("연결 ? ");
+			$.ajax({
+				url: "psyco/main/getEnrollEvent.com",
+				type: "post",
+				dataType:"json",
+				success: function(){
+					alert('사업자 가입에 승인처리되었다. 가게등록을 해보세요 .');
 
-		 
+				}
+			};	
+			
+		}) */
 		
-		$(document).ready(function(){
+		
+		/* $(document).ready(function(){
 			
 			$.ajax({
 				url: "/psyco/main/getListData.com",
@@ -58,7 +71,7 @@
 				}
 			});
 
-		})
+		}) */
 	
 		
 	
@@ -83,16 +96,17 @@
 
 	
 		function getItemList(sett) {
+			console.log(sett);
 			
 			$.ajax({
-				url: "/psyco/member/getItemList.com",
+				url: "/psyco/main/getItemList.com",
 				type: "post",
-				data: sett,
+				data: {sett : sett},
 				success: function(data) {
-					console.log(data);
+					console.log("data는 : " + data);
 				},
 				error: function() {
-					alert('ajax 실패!');
+					console.log('ajax 실패!');
 				}
 				
 			});
@@ -117,9 +131,9 @@
     <!-- 경매 카테고리 -->
     <section id="category">
         <ul>
-        	<li><a href="/psyco/main/main.com">전체 메뉴</a></li>
-            <li><a href="/psyco/main/main.com?num='1'">1인 메뉴</a></li>
-            <li><a href="/psyco/main/main.com?num='2'">세트 메뉴</a></li>
+        	<li><a href="/psyco/main/main.com?menuDivision=0">전체 메뉴</a></li>
+            <li><a href="/psyco/main/main.com?menuDivision=1">1인 메뉴</a></li>
+            <li><a href="/psyco/main/main.com?menuDivision=2">세트 메뉴</a></li>
         </ul>
         
     </section>
@@ -133,43 +147,91 @@
         		<div class="card_content">
         			<h3 id="shop_name"><a href="/psyco/shop/shopDetail.com?shop_num=${item.itemList.shop_num}">${item.itemList.shop_name}</a></h3>
         			<h2 id="item_name"><a href="/psyco/shop/itemDetail.com?item_num=${item.itemList.item_num}&current_price=${item.current_price}&discount_price=${item.discount_price}&discount_rate=${item.discount_rate}">${item.itemList.item_name}</a></h2>
-        			<ul>
-        				<li>시작 시간</li>
-        				<li>${fn:substring(item.itemList.startDate,0,16)}</li>
-        			</ul>
-        			<ul>
-        				<li>종료 시간</li>
-        				<li>${fn:substring(item.itemList.endDate,0,16)}</li>
-        			</ul>
-        			<ul>
-        				<li>자동 할인시간</li>
-        				<li><fmt:parseNumber var="discount_cycle" value="${item.itemList.discount_cycle / 60}" integerOnly="true"/>${discount_cycle} 분</li>
-        			</ul>
-        			<ul>
-        				<li>시작 가격</li>
-        				<li>${item.itemList.maxPrice}</li>
-        			</ul>
-        			<ul>
-        				<li>종료 가격</li>
-        				<li>${item.itemList.minPrice}</li>
-        			</ul>
-        			<ul class="sale">
-        				<li class="sale_item"><fmt:formatNumber var="discount_rate" value="${item.discount_rate}" type="percent" pattern=".0" />${discount_rate} %</li>
-        				<li>${item.discount_price}원 할인</li>
-        			</ul>
-        			<ul class="price">
-	       				<c:choose>
-	       					<c:when test="${item.progress_status == 1}">
-	       						<li>종료된 경매입니다.</li>
-	       					</c:when>
-	       					<c:when test="${item.progress_status == 0}">
-	       						<li>현재 가격</li>
-	       						<li>${item.current_price}원</li>
-	       						<li>남은 시간</li>
-	       						<li id="remainder_time${item.itemList.item_num}">${item.remainder_time}분</li>
-	       					</c:when>
-	       				</c:choose>
-        			</ul>
+        			<c:choose>
+        				<c:when test="${item.progress_status == 1 && item.selling_status == 4}">
+	       					<ul>
+		        				<li>시작 시간</li>
+		        				<li>${fn:substring(item.itemList.startDate,0,16)}</li>
+		        			</ul>
+		        			<ul>
+		        				<li>종료 시간</li>
+		        				<li>${fn:substring(item.itemList.endDate,0,16)}</li>
+		        			</ul>
+		        			<ul>
+		        				<li>자동 할인시간</li>
+		        				<li><fmt:parseNumber var="discount_cycle" value="${item.itemList.discount_cycle / 60}" integerOnly="true"/>${discount_cycle} 분</li>
+		        			</ul>
+		        			<ul>
+		        				<li>시작 가격</li>
+		        				<li>${item.itemList.maxPrice}</li>
+		        			</ul>
+		        			<ul>
+		        				<li>종료 가격</li>
+		        				<li>${item.itemList.minPrice}</li>
+		        			</ul>
+		        			<ul class="price">
+		        				<li>종료된 경매 입니다.</li>
+		        			</ul>
+	       				</c:when>
+        				<c:when test="${item.progress_status == 2 && item.selling_status == 1 }">
+        					<ul>
+		        				<li>시작 시간</li>
+		        				<li>${fn:substring(item.itemList.startDate,0,16)}</li>
+		        			</ul>
+		        			<ul>
+		        				<li>종료 시간</li>
+		        				<li>${fn:substring(item.itemList.endDate,0,16)}</li>
+		        			</ul>
+		        			<ul>
+		        				<li>자동 할인시간</li>
+		        				<li><fmt:parseNumber var="discount_cycle" value="${item.itemList.discount_cycle / 60}" integerOnly="true"/>${discount_cycle} 분</li>
+		        			</ul>
+		        			<ul>
+		        				<li>시작 가격</li>
+		        				<li>${item.itemList.maxPrice}</li>
+		        			</ul>
+		        			<ul>
+		        				<li>종료 가격</li>
+		        				<li>${item.itemList.minPrice}</li>
+		        			</ul>
+		        			<ul class="price">
+		        				<li>경매 시간 전입니다.</li>
+		        			</ul>
+        				</c:when>
+        				<c:when test="${item.progress_status == 0 && item.selling_status == 3}">
+		        			<ul>
+		        				<li>시작 시간</li>
+		        				<li>${fn:substring(item.itemList.startDate,0,16)}</li>
+		        			</ul>
+		        			<ul>
+		        				<li>종료 시간</li>
+		        				<li>${fn:substring(item.itemList.endDate,0,16)}</li>
+		        			</ul>
+		        			<ul>
+		        				<li>자동 할인시간</li>
+		        				<li><fmt:parseNumber var="discount_cycle" value="${item.itemList.discount_cycle / 60}" integerOnly="true"/>${discount_cycle} 분</li>
+		        			</ul>
+		        			<ul>
+		        				<li>시작 가격</li>
+		        				<li>${item.itemList.maxPrice}</li>
+		        			</ul>
+		        			<ul>
+		        				<li>종료 가격</li>
+		        				<li>${item.itemList.minPrice}</li>
+		        			</ul>
+		        			<ul class="sale">
+		        				<li class="sale_item"><fmt:formatNumber var="discount_rate" value="${item.discount_rate}" type="percent" pattern=".0" />${discount_rate} %</li>
+		        				<li>${item.discount_price}원 할인</li>
+		        			</ul>
+		        			<ul class="price">			
+		     					<li>현재 가격</li>
+		     					<li>${item.current_price}원</li>
+		     					<li>남은 시간</li>
+		     					<li id="remainder_time${item.itemList.item_num}">${item.remainder_time}분</li>
+		        			</ul>
+        				</c:when>
+        			</c:choose>
+        			
         		</div>
         	</div> 
         </c:forEach>

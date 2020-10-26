@@ -88,11 +88,11 @@ function onClickItemDelete(shopNum){
                        
                         <c:if test="${count1 > 0}">
 	                       <c:forEach var="article" items="${articleList1}">
-		                        <div id = "${article.shop_num}"} class="myPage_item_info">
+		                        <div id = "${article.shop_num}" class="myPage_item_info">
 			                     
 		                           <img alt="" src="/psyco/save//${article.shop_img}">
 		                            <ul>
-		                                <li><a href="shopDetail.com?shop_num=${article.shop_num }">가게 이름 : ${article.shop_name}</a></li>
+		                                <li><a href="menuList.com?shop_num=${article.shop_num }">가게 이름 : ${article.shop_name}</a></li>
 		                                <li>
 		                                    <span> 주소 : ${article.address}</span>
 		                                </li>
@@ -124,19 +124,22 @@ function onClickItemDelete(shopNum){
                                 <th>별점</th>
                                 <th>작성시간</th>
                             </tr>
-                         <c:if test="${count == 0}">
+                         <c:if test="${count2 == 0}">
 							<table>
 								<tr>
 									<td> 후기가 없습니다. </td>
 								</tr>
 							</table>
 						</c:if>
-                        <c:if test="${count > 0}">
-                         	<c:forEach var="article" items="${rarticleList}">
+
+             
+                        <c:if test="${count2 > 0}">
+                         	<c:forEach var="article" items="${articleList2}">
+
                          	
                             <tr>
-                                <td>${rnumber}
-                                	<c:set var="number" value="${number-1}"/>
+                                <td>${number2}
+                                	<c:set var="number" value="${number2-1}"/>
                                 </td>	
                                 <img alt="" src="/psyco/save//${article.review_img}">
                                 <td align="left">

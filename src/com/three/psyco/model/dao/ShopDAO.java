@@ -17,6 +17,6 @@ public interface ShopDAO {
 	public List getShopNumList(List shop_num,int startRow, int endRow)throws SQLException;
 	public int ShopNumcount(List shop_num)throws SQLException; 
 	public int deleteShop1(int member_num)throws SQLException;
-	public int getShopNum(int member_num)throws SQLException;
+	public List getShopNum(int member_num)throws SQLException;
 	
 }

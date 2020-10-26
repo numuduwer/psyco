@@ -99,9 +99,9 @@
 						pg: "html5_inicis",
 						payment_method: "card",					
 						//merchant_uid: 'psyco' + getToday() + '-' + ${article.item_num},	// 주문 번호, 한번 결제 완료된 주문번호는 다시 사용할 수 없는 듯
-						merchant_uid: 'psyco20201023-001285',
+						merchant_uid: 'psyco20201023-001293',
 						name: '${article.item_name}',
-						amount: getParam("current_price"),
+						amount: getParam("current_price") * document.getElementById('quantity').value,
 						buyer_email: result.email,
 						buyer_name: result.name,
 						buyer_tel: result.phone_Num,
@@ -210,36 +210,44 @@
                 </ul>
             </div>
             <div class="buy_price">
+                <c:if test="${article.selling_status == 3 && article.progress_status == 0}">  
                 <div class="start_price">
                     <ul>
                         <li>시작 가격</li>
                         <li>${article.maxPrice}</li>
-
                     </ul>
-                    <ul>
+                </div>
+                <div class="now_price">
+                	<ul>
                         <li class="nprice">시작가격</li>
                         <li class=price_percent>
                             <fmt:formatNumber var="discount_rate" value="${param.discount_rate}" type="percent" pattern=".0" />${discount_rate} %
                         </li>
-
-
                     </ul>
-                </div>
-                <div class="now_price">
                     <ul>
                         <li>현재 가격</li>
                         <li>${param.current_price}원</li>
                     </ul>
                 </div>
-                <div>
+                </c:if>
+                
+            </div>
+            <c:if test="${article.selling_status == 3 && article.progress_status == 0}">
+            	<div>
                 	<input type="text" name="quantity" id="quantity" value="1">
                 	<input type="button" value="-" onclick="javascript:change(-1)">
                 	<input type="button" value="+" onclick="javascript:change(1)">
                 </div>
-            </div>
-            <button class="buy_btn" onclick="javascript:payment(${sessionScope.memNum})">
-                <h2>구매하기</h2>
-            </button>
+            	<button class="buy_btn" onclick="javascript:payment(${sessionScope.memNum})">
+                	<h2>구매하기</h2>
+            	</button>
+            </c:if>
+            <c:if test="${article.selling_status == 4 && article.progress_status == 1}">
+            	<h2>품절된 상품 입니다.</h2>
+            </c:if>
+             <c:if test="${article.selling_status == 1 && article.progress_status == 2}">
+            	<h2>경매 시작 전입니다.</h2>
+            </c:if>
         </div>
 
     </section>
@@ -250,19 +258,24 @@
             <div class="ing_info">
                 <h2>이 가게에서 진행중인 경매</h2>
                 <div class="info_items">
+                <c:if test="${count1 == 0}">
+                	<h3>진행예정인 경매가 없습니다.</h3>
+                </c:if>
                 <c:forEach var="list" items="${itemImgList}">
-                <a href="/psyco/shop/itemDetail.com?item_num=${list.item_num}"></a>
-                    <img src="/psyco/save//" width=100>
-                      ${list.menu_img}
+                <a href="/psyco/shop/itemDetail.com?item_num=${list.item_num}&shop_num=${list.shop_num}"></a>
+                    <a href="/psyco/shop/itemDetail.com?item_num=${list.item_num}&shop_num=${list.shop_num}"><img src="/psyco/save//${list.menu_img}" width=100></a>
                 </c:forEach>
                 </div>
             </div>
             <div class="ing_info">
                 <h2>이 가게에서 진행예정 경매</h2>
                 <div class="info_items">
+                 <c:if test="${count == 0}">
+                	<h3>진행예정인 경매가 없습니다.</h3>
+                </c:if>
                 <c:forEach var="list2" items="${articleList3}">
-                    <img src="" alt="">
-                    ${list2.menu_img}
+                <a href="/psyco/shop/itemDetail.com?item_num=${list2.item_num}&shop_num=${list2.shop_num}"></a>
+                    <a href="/psyco/shop/itemDetail.com?item_num=${list2.item_num}&shop_num=${list2.shop_num}"><img src="/psyco/save//${list2.menu_img}" ></a>
                 </c:forEach>
                 </div>
             </div>
@@ -333,13 +346,13 @@
                             <h3>포장여부 :</h3>
                         </li>
                         <li>
-                        <c:if test="${shopInfo.takeout == '1'}">
-                        	<h3>가능</h3>		
-                        </c:if>
-                        <c:if test="${shopInfo.takeout == '0'}">
-                        	<h3>불가능</h3>
-                        </c:if>
-                            
+                            <c:if test="${shopInfo.takeout == '1'}">
+                                <h3>가능</h3>
+                            </c:if>
+                            <c:if test="${shopInfo.takeout == '0'}">
+                                <h3>불가능</h3>
+                            </c:if>
+
                         </li>
                     </ul>
                     <ul>
@@ -375,6 +388,7 @@
             </div>
         </div>
     </div>
+
      <script>
         const tabs = document.querySelectorAll("[data-tab-target]");
         const tabcon = document.querySelectorAll("[data-tab-content]");
@@ -390,7 +404,7 @@
         });
 
     </script>
-	
+
 		
 		
 	</body>
