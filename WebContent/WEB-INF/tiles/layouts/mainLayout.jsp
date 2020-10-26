@@ -21,25 +21,32 @@
 <body>
 	 <div id="top">
             <ul class="login_menu">
-                <li><a href="#">고객센터</a></li>
                 <c:if test="${sessionScope.memId == null}">
-                <li><a href="/psyco/member/loginForm.com">로그인</a></li>
-               	<li><a href="/psyco/member/signupSelect.com">회원가입</a></li>
+                	<li><a href="/psyco/member/loginForm.com">로그인</a></li>
+               		<li><a href="/psyco/member/signupSelect.com">회원가입</a></li>               	
                	</c:if>
+               	  	
                	
                	<c:if test="${sessionScope.memId != null}">
-               		<li><a href="/psyco/member/logout.com">로그아웃</a></li>
                		<li><c:out value="${sessionScope.memId}" /> 님 환영합니다.</li>
-               		<li><a href="/psyco/user/myPageList.com">마이페이지</a></li>
+               		<li><a href="/psyco/member/logout.com">로그아웃</a></li>             
 				</c:if>
-				 	<c:if test="${sessionScope.shopCheck != null}">
-               		  <li><a href="/psyco/shop/shopPageList.com?member_num=${sessionScope.memNum}">내 가게 관리가기</a></li>
-             		  <li><a href="/psyco/shop/shopPageList2.com">경매상품 올리기 </a></li>     		
-
-				</c:if>
-				
+			</ul>
+			<c:if test="${sessionScope.business == 2}">	
+			<ul class="shop_menu">
+                <li><a href="/psyco/shop/itemEnrollmentForm.com">경매등록</a></li>
+                <li><a href="/psyco/shop/shopPageList2.com?member_num=${sessionScope.memNum}">경매 현황</a></li>
+                 <li><a href="/psyco/shop/shopPageList.com?member_num=${sessionScope.memNum}">가게 관리</a></li>
             </ul>
+         	 </c:if>
         </div>
+       <c:if test="${sessionScope.business == 0}">
+         	<ul class="shop_signup">
+            	<li>사장님이세요?</li>
+            	<li><a href="/psyco/member/businessSignupForm.com">가게 등록하러가기</a></li>
+        	</ul>
+        </c:if>
+        
 
  	<tiles:insertAttribute name="tile_header" />  
    	<section>

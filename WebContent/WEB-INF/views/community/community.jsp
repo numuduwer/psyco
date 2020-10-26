@@ -8,32 +8,28 @@
 <title>커뮤니티 페이지</title>
 </head>
 <body>
-	<br />
-		<h1 align="center"> community </h1>	
-		
-		<table>
-			<tr>
-				<td>
-					<button onclick="window.location='/psyco/communityList.com?category=1'"> 자유게시판 </button> <br/>
-				</td>
-			</tr>
-			
-			<tr>
-				<td>
-					<button onclick="window.location='/psyco/communityList.com?category=2'"> QnA </button> 
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<button onclick="window.location='/psyco/communityList.com?category=3'"> 홍보 </button> <br/>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<button onclick="window.location='/psyco/communityList.com?category=4'"> 음식점추천 </button> <br/>
-				</td>
-			</tr>
-		</table>
+
+	 <!--  검색베너  & 신메뉴 , 랭킹미리보기 -->
+    <section id="banner_section">
+      
+        <div id="banner">
+            <img src="/psyco/resources/img/main/community.jpg" alt="">
+        </div>
+ 
+    </section>
+
+    <!-- 경매 상품 -->
+    <section class="item-section">
+        <div class="admin">
+            <ul class="admin_btn">
+                <li><a href="/psyco/communityList.com?category=1">자유게시판 </a></li>
+                <li><a href="/psyco/communityList.com?category=2">QnA</a></li>
+                <li><a href="/psyco/communityList.com?category=3">홍보</a></li>
+                <li><a href="/psyco/communityList.com?category=4">음식점추천</a></li>
+            </ul>
+         
+        </div>
+    </section>
 		
 	
 	

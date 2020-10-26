@@ -1,31 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Member 관리 페이지</title>
-
-
-<script>
-	
-	
-$("a").click(function(e){
-	event.stopPropagation();
-	
-});
-	
-</script>
-
-
-
+<title>Insert title here</title>
 </head>
 <body>
-
-
-
-	<!-- 경매 상품 -->
+	   <!-- 경매 상품 -->
     <section class="item-section">
         <div class="admin">
             <ul class="admin_btn2">
@@ -36,44 +20,58 @@ $("a").click(function(e){
             </ul>
         </div>
     </section>
-	
-	<c:if test="${count == 0}">
-		<h2>가게가 없어요.</h2>
-	
+	<%-- 게시글이 없을 때 --%>
+	<c:if test="${count == 0 }">
+		<table>
+			<tr>
+				<td>
+					게시글이 없습니다.
+				</td>
+			</tr>
+		</table>
 	</c:if>
-	<c:if test="${count > 0}">
-		<div class="admin_content2">
+	<c:if test="${count > 0 }">
+	<div class="admin_content2">
 		<br><br>
-		<h2> 가게  리스트  </h2>
+	<h2> 고객 문의 리스트   </h2>
 		<br>
 		<table>
 			<tr>
-			     <th>No.</th>
-			     <th>가게 명</th>
-			     <th>연락처</th>
-			     <th>주소 </th>
-			     <th>사업자 번호</th>
-			     <th>활동여부 </th>
-			     <th>삭제하기</th>
+				<th>No.</th>
+				<th>제  목</th>
+				<th>작성자</th>
+				<th>시  간</th>
+				<th>조회수</th>
+				<th>처리 여부  </th>
 			</tr>
-			
 			<c:forEach var="article" items="${articleList}">
-			<tr>
-				<td>${number} <c:set var="number" value="${number-1}" /> </td>
-				<td>${article.shop_name}</td>
-				<td>${article.shop_phone}</td>
-				<td>${article.address}</td>
-				<td>${article.license_number}</td>
-				<td>${article.status}</td>
-				<td>
-				<a class= "admin_delete" href="/psyco/super/sShopDelete.com?pageNum=${pageNum}&shop_num=${article.shop_num}">삭제</a>
+				<tr>
+					<td>${number} <c:set var="number" value="${number-1}" /> </td>				
+					<td align="left">
 					
-				</td>
-			
-			</tr>
-		</c:forEach>
-		</table><br><br><br>
-				<%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
+						<c:set var="wid" value="0"></c:set>
+						<c:if test="${article.re_level > 0}">
+							<c:set var="wid" value="${8 * article.re_level }"></c:set>
+							<img src="/psyco/resources/img/tabImg.PNG" width="${wid}" />
+							<img src="/psyco/resources/img/replyImg.png" width="11" />
+						</c:if>
+						<a href="/psyco/helpDetail.com?community_num=${article.community_num}&pageNum=${pageNum}">${article.subject}</a>
+					</td>
+					<td><a href="mailto:${article.writer}">${article.writer}</a></td>
+					<td><fmt:formatDate value="${article.reg}" type="both"/></td>
+					<td>${article.ref}</td>
+					<c:if test="${article.re_level > 0}">
+						<td class= "admin_delete">처리완료</td>	
+					</c:if>
+					<c:if test="${article.re_level == 0}">
+						<td >확인 중 </td>	
+					</c:if>
+				
+				</tr>
+			</c:forEach>
+		</table>
+	<br><br><br>
+		<%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
 	<div align="center">
 	<c:if test="${count > 0}">
 		<fmt:parseNumber var="res" value="${count / pageSize}"  integerOnly="true"/>
@@ -101,10 +99,8 @@ $("a").click(function(e){
 	</div>
 	<br>
 		</div>
-		
 	</c:if>
-	
-	
+
 	
 	
 </body>

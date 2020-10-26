@@ -111,4 +111,21 @@ public class MemberDAOImpl implements MemberDAO {
 		}
 	}
 
+	public MemberDTO getEnroll(String id) {
+		MemberDTO dto  = sqlSession.selectOne("member.getMemberData",id);
+		return dto;
+	}
+
+	public void upgradeEnroll(String id) {
+		sqlSession.update("member.upgradeEnroll",id);
+		
+	}
+
+	@Override
+	public int idChk(String id) throws SQLException {
+		int result=sqlSession.selectOne("member.idChk",id);
+		System.out.println("id3=="+id);
+		return result;
+	}
+
 }

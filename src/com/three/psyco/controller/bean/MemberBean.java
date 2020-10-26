@@ -20,6 +20,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -59,7 +61,6 @@ public class MemberBean {
 		System.out.println("member_id : "+member_Id );
 		System.out.println("pw : "+pw );
 		int count = memberService.loginCheck(member_Id, pw);
-		
 		model.addAttribute("count", count);
 		return "member/loginCheck";
 	}
@@ -100,6 +101,23 @@ public class MemberBean {
 	@RequestMapping("businessSignupForm.com")
 	public String businessSignupForm() {
 		return "member/businessSignupForm";
+	}
+	
+	//아이디 중복체크
+	@ResponseBody
+	@RequestMapping("idChk.com")
+	public ResponseEntity<String> idChk(String member_Id) throws Exception {
+		int check = memberService.idChk(member_Id);
+		System.out.println("id1=="+member_Id);
+		String result = "";
+		if(check ==1) {
+			result = "존재합니다 딴거쓰세요";
+		}else if(check ==0) {
+			result ="사용 가능합니다.";
+		}
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html;charset=UTF-8");
+		return  new ResponseEntity<String>(result,responseHeaders, HttpStatus.CREATED);
 	}
 	
 	@RequestMapping("signup.com")

@@ -245,10 +245,15 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public int insertMember(MemberDTO dto) {
+		int result = 0;
 		if (dto.getLicense_number() == "") {
 			dto.setLicense_number("0");
+			result = memberDAO.insertMember(dto);
+			result = 2;
+		}else {
+			result = memberDAO.insertMember(dto);
 		}
-		int result = memberDAO.insertMember(dto);
+		
 		return result;
 	}
 	
@@ -264,8 +269,10 @@ public class MemberServiceImpl implements MemberService {
 			if(dto.getBusiness_license() != 0 ) {
 				httpSession.setAttribute("shopCheck", dto.getBusiness_license());
 			}
+		
 			httpSession.setAttribute("memId", member_Id);
 			httpSession.setAttribute("memNum", dto.getMember_Num());
+			httpSession.setAttribute("business", dto.getBusiness_license());
 		}
 		return count;
 	}
@@ -445,6 +452,14 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println(dto.getStatus()+"1");
 		
 		memberDAO.insertMemberShop(dto);
+		
+	}
+
+	@Override
+	public int idChk(String id) throws SQLException {
+		int result = memberDAO.idChk(id);
+		System.out.println("id2=="+id);
+		return result;
 		
 	}
 }
