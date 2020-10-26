@@ -308,7 +308,7 @@ public class ShopBean {
 	@RequestMapping(value="itemEnrollmentPro.com")
 	@ResponseBody
 	public String itemEnrollmentPro(HttpServletRequest request, HttpServletResponse response, @RequestBody String jsonData) throws ParseException {
-		System.out.println(jsonData);
+		//System.out.println(jsonData);
 		
 		int result = shopService.itemEnrollmentPro(jsonData);
 		String result_str = "{\"result\":" + result + "}";

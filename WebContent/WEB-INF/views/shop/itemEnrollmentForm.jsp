@@ -87,7 +87,7 @@
 			<input type="date" name="startDate1" id="startDate1"> <input type="time" name="startDate2" id="startDate2">  <br>
 			<label for="endDate">경매 종료 일</label> <br>
 			<input type="date" name="endDate1" id="endDate1"> <input type="time" name="endDate2" id="endDate2"><br>
-			<label for="auction_unit">AUTION_UNIT(경매 단위 %)</label> <br>
+			<label for="auction_unit">AUTION_UNIT(경매 단위 - 가격)</label> <br>
 			<input type="text" name="aution_unit" id="auction_unit"> <br>
 			<label for="maxPrice">최대가격</label> <br>
 			<input type="text" name="maxPrice" id="maxPrice" readonly> <br>
@@ -95,9 +95,9 @@
 			<input type="text" name="minPrice" id="minPrice"> <br>
 			<label for="discount_cycle">할인 주기(시간)</label> <br>
 			<select id="discount_cycle" name="discount_cycle">
-				<option value="3000">5분</option>
-				<option value="6000">10분</option>
-				<option value="18000">30분</option>
+				<option value="300">5분</option>
+				<option value="600">10분</option>
+				<option value="1000">30분</option>
 			</select> <br>
 			<label for="sett">세트 여부</label> <br>
 			<input type="checkbox" id="sett" value="1">

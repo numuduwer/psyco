@@ -67,7 +67,14 @@ public class MainBean {
 		return "main/main";
 	}
 	
-	@RequestMapping(value="getListData.com", produces = "application/json")
+	@RequestMapping("getItemList.com")
+	public String getItemList() {
+		
+		
+		return "";
+	}
+	
+	@RequestMapping(value="getListData.com")
 	@ResponseBody
 	public List<Object> getListData() throws JsonProcessingException {
 		
