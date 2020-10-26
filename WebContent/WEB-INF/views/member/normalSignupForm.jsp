@@ -7,6 +7,7 @@
 	<meta charset="UTF-8">
 	<title>일반 회원가입</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<script type="text/javascript">
@@ -75,7 +76,21 @@
 				}
 			}).open();
 		}
-		
+
+		$(document).ready(function(){
+			$("#member_Id").change(function(){
+				id = $("#member_Id").val();
+				$.ajax({
+					type : "POST",
+					url : "/psyco/member/idChk.com",
+					data : {member_Id : member_Id},
+					success : function(data){
+						console.log(data);
+						$("#idCheckResult").val(data);	
+					}
+				});
+			});
+		});
 	</script>
 </head>
 <body>
@@ -88,15 +103,17 @@
 
 
         <div>
-            <form action="/psyco/member/signup.com" method="post" class="form">
+            <form action="/psyco/member/signup.com" method="post" class="form" id="regFrom">
                 <input class="form_input" type="hidden" name="license_number" value="${param.license_number}">
                 <div class=form_tab>
                     <label for="" class="form_title"> 아이디</label>
-                    <input class="form_input" type="text" name="member_Id" placeholder="아이디를 입력" />
+                    <input class="form_input" type="text" id="member_Id" name="member_Id" placeholder="아이디를 입력" />
+					<input type="text" id="idCheckResult" disabled/>
+			</tr>
                 </div>
                 <div class=form_tab>
                     <label for="" class="form_title"> 비밀번호</label>
-                    <input class="form_input" type="password" name="pw" placeholder="비밀번호를 입력" />
+                    <input class="form_input" type="password" name="pw" id ="pw" placeholder="비밀번호를 입력" />
                 </div>
                 <div class=form_tab>
                     <label for="" class="form_title"> 비밀번호 확인</label>

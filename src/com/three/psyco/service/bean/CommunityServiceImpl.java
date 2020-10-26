@@ -31,16 +31,19 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public void insertArticleSv(MultipartHttpServletRequest request, String pageNum, String grade, String category,Model model) throws SQLException {
 		
-		System.out.println("writer : " + request.getParameter("writer"));
+		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession session = servletRequestAttribute.getRequest().getSession();
+		String writer = (String) session.getAttribute("memId");
+		
 		CommunityDTO dto = new CommunityDTO();
 		String subject = request.getParameter("subject");
-		if(subject.equals("[답글]")) {
-			System.out.println("community_num : " + request.getParameter("community_num"));
+		if(subject.equals("[댓글]")) {
 			dto.setRef(Integer.parseInt(request.getParameter("community_num")));
+			dto.setCommunity_num(Integer.parseInt(request.getParameter("community_num")));
 			dto.setContent(request.getParameter("content"));
 			dto.setSubject(request.getParameter("subject"));
 			dto.setGrade("11");
-			dto.setWriter(request.getParameter("writer"));
+			dto.setWriter(writer);
 			dto.setCommunity_img(request.getParameter("writer"));
 			dto.setCategory(request.getParameter("category"));
 			commnuityDAO.insertArticle(dto);
@@ -61,13 +64,12 @@ public class CommunityServiceImpl implements CommunityService {
 					String newName1 = "ads"+date;
 					dto.setSubject(request.getParameter("subject"));
 					dto.setContent(request.getParameter("content"));
-					dto.setRef(Integer.parseInt(request.getParameter("community_num")));
 					if(request.getParameter("grade") == null) {
 						dto.setGrade("11");
 					}else {
 					dto.setGrade(request.getParameter("grade"));
 					}
-					dto.setWriter(request.getParameter("writer"));
+					dto.setWriter(writer);
 					if(Integer.parseInt(request.getParameter("category")) == 3 || Integer.parseInt(request.getParameter("category")) == 4) {
 						dto.setCommunity_img(newName);
 					}else if(Integer.parseInt(request.getParameter("category")) == 1 || Integer.parseInt(request.getParameter("category")) == 2 || Integer.parseInt(request.getParameter("category")) == 6) {
@@ -89,8 +91,7 @@ public class CommunityServiceImpl implements CommunityService {
 					dto.setSubject(request.getParameter("subject"));
 					dto.setContent(request.getParameter("content"));
 					dto.setGrade(request.getParameter("grade"));
-					dto.setWriter(request.getParameter("writer"));
-					dto.setRef(Integer.parseInt(request.getParameter("community_num")));
+					dto.setWriter(writer);
 					if(Integer.parseInt(request.getParameter("category")) == 3 || Integer.parseInt(request.getParameter("category")) == 4) {
 						dto.setCommunity_img(newName);
 					}else if(Integer.parseInt(request.getParameter("category")) == 1 || Integer.parseInt(request.getParameter("category")) == 2 || Integer.parseInt(request.getParameter("category")) == 2) {
@@ -104,9 +105,9 @@ public class CommunityServiceImpl implements CommunityService {
 		
 			commnuityDAO.insertArticle(dto);
 			model.addAttribute("category",category);
+			
+
 		}
-		int community_num = Integer.parseInt(request.getParameter("community_num"));
-		model.addAttribute("community_num",community_num);
 	}
 
 
@@ -121,6 +122,7 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public List getArticlesSv(int start, int end, String category) throws SQLException {
 		List articles = commnuityDAO.getArticles(start, end, category);
+		
 		return articles;
 	}
 	
@@ -137,6 +139,7 @@ public class CommunityServiceImpl implements CommunityService {
 	public CommunityDTO getArticleSv(int community_num) throws SQLException {
 		
 		CommunityDTO article = commnuityDAO.getArticle(community_num);
+		
 		
 		return article;
 	}
@@ -265,8 +268,7 @@ public class CommunityServiceImpl implements CommunityService {
 		
 		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		HttpSession session = servletRequestAttribute.getRequest().getSession();
-//		String writer = (String) session.getAttribute("memId");
-		String writer = "asd";
+		String writer = (String) session.getAttribute("memId");
 		
 		count = commnuityDAO.getMyAskCount(category,writer);
 		
@@ -331,6 +333,21 @@ public class CommunityServiceImpl implements CommunityService {
 		
 		int count = commnuityDAO.getMyAskCount(category, writer);
 		
+		return count;
+	}
+
+	
+	@Override
+	public List getArticleDabgle(int community_num,String category) throws SQLException {
+		
+		List list = commnuityDAO.getArticleDabgle(community_num,category);
+		return list;
+	}
+
+
+
+	public int DabgleCount(int community_num, String category) {
+		int count = commnuityDAO.DabgleCount(community_num,category);
 		return count;
 	}
 

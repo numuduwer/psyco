@@ -26,22 +26,18 @@
   	<!-- 사장님이 등록한 역경매 상품 전부 긁어오기. 0
   	0:임시저장,1:시작전,2:대기,3:판매중,4:판매종료   -->
   	<select id="itemOneCount" parameterType="hashmap" resultType="int">
-  		select count(*) from item where mem_num=#{id} and selling_status=#{selling}
+  		select count(*) from item where mem_num=#{mem_num} and selling_status=#{selling}
   	</select>
   	
-  	<select id="getMyItemList" parameterType="hashmap" resultType="ItemDTO">
+  	<select id="getMyItemList" parameterType="hashmap" resultType="JoinResultDTO">
   		<![CDATA[		
-		SELECT rownum rn, item.ITEM_NUM,item.ITEM_NAME,item.CONTENT,item.AMOUNT,item.STARTDATE,item.ENDDATE,item.DISCOUNT_CYCLE,item.SELLING_STATUS,
-		item.PROGRESS_STATUS,item.MAXPRICE,item.MINPRICE,item.AUCTION_UNIT,item.SETT,item.COMMENT1,item.MENU_NUM,item.mem_num,item.shop_num,menu.menu_img
-		FROM item item, menu menu
-		WHERE rownum >= #{startRow}
-		AND rownum <= #{endRow}
-		AND item.MEM_NUM = #{mem_num}
-		and item.selling_status = #{selling}
-		and menu.menu_num = item.menu_num
+		SELECT rownum r,ITEM.ITEM_NUM,item.SELLING_STATUS ,ITEM.ITEM_NAME, MENU.MENU_IMG, SHOP.SHOP_NUM, SHOP.SHOP_NAME, ITEM.AMOUNT, 
+		ITEM.STARTDATE, ITEM.ENDDATE, ITEM.DISCOUNT_CYCLE, ITEM.MAXPRICE, ITEM.MINPRICE, ITEM.AUCTION_UNIT
+		FROM ITEM INNER JOIN SHOP ON ITEM.SHOP_NUM = SHOP.SHOP_NUM INNER JOIN MENU ON ITEM.MENU_NUM = MENU.MENU_NUM 
+		WHERE item.SELLING_STATUS=#{selling} AND item.MEM_NUM = #{mem_num} and rownum >= #{startRow} and rownum <= #{endRow}
   		]]>
   	</select>
-  	
+  	<!-- WHERE item.SELLING_STATUS=#{selling} AND item.MEM_NUM = #{mem_num} and rownum >= #{startRow} and rownum <= #{endRow} -->
   	
   	<!-- 해당 역경매 상품 수정 -->
   	<update id="itemModifyAticle" parameterType="ItemDTO">
@@ -74,10 +70,26 @@
   	<select id="getEntireList" resultType="JoinResultDTO">
   		SELECT ITEM.ITEM_NUM, ITEM.ITEM_NAME, MENU.MENU_IMG, SHOP.SHOP_NUM, SHOP.SHOP_NAME, ITEM.AMOUNT, ITEM.STARTDATE, ITEM.ENDDATE, ITEM.DISCOUNT_CYCLE, ITEM.MAXPRICE, ITEM.MINPRICE, ITEM.AUCTION_UNIT FROM ITEM INNER JOIN SHOP ON ITEM.SHOP_NUM = SHOP.SHOP_NUM INNER JOIN MENU ON ITEM.MENU_NUM = MENU.MENU_NUM
   	</select>
+  	
+  	<select id="getOnePersonMenuList" resultType="JoinResultDTO">
+  		SELECT ITEM.ITEM_NUM, ITEM.ITEM_NAME, MENU.MENU_IMG, SHOP.SHOP_NUM, SHOP.SHOP_NAME, ITEM.AMOUNT, ITEM.STARTDATE, ITEM.ENDDATE, ITEM.DISCOUNT_CYCLE, ITEM.MAXPRICE, ITEM.MINPRICE, ITEM.AUCTION_UNIT FROM ITEM INNER JOIN SHOP ON ITEM.SHOP_NUM = SHOP.SHOP_NUM INNER JOIN MENU ON ITEM.MENU_NUM = MENU.MENU_NUM WHERE ITEM.SETT = 0
+  	</select>
+  	
+  	<select id="getSetMenuList" resultType="JoinResultDTO">
+  		SELECT ITEM.ITEM_NUM, ITEM.ITEM_NAME, MENU.MENU_IMG, SHOP.SHOP_NUM, SHOP.SHOP_NAME, ITEM.AMOUNT, ITEM.STARTDATE, ITEM.ENDDATE, ITEM.DISCOUNT_CYCLE, ITEM.MAXPRICE, ITEM.MINPRICE, ITEM.AUCTION_UNIT FROM ITEM INNER JOIN SHOP ON ITEM.SHOP_NUM = SHOP.SHOP_NUM INNER JOIN MENU ON ITEM.MENU_NUM = MENU.MENU_NUM WHERE ITEM.SETT = 1
+  	</select>
 
   	
-  	<update id="modifyStatus">
+  	<update id="modifyStatusIntoEnd">
   		update item set progress_status=1, selling_status=4 where item_num=#{item_num}
+  	</update>
+  	
+  	<update id="modifyStatusIntoBefore">
+  		update item set progress_status=2, selling_status=1 where item_num=#{item_num}
+  	</update>
+  	
+  	<update id="modifyStatusIntoProProceed">
+  		update item set progress_status=0, selling_status=3 where item_num=#{item_num}
   	</update>
   	
   	<update id="modifyAmountZero">
@@ -88,8 +100,10 @@
   		update item set amount=amount-#{amount} where item_num=#{item_num}
   	</update>
   	
-  	<select id="itemAmountCheck">
-  		select amount from item where item_num=${item_num}
+  	<select id="itemAmountCheck" resultType="int">
+  		select amount from item where item_num=#{item_num}
   	</select>
+  	
+  	
   	
   </mapper>

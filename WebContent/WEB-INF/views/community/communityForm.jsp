@@ -45,7 +45,7 @@
 				</c:if>
 				<c:if test="${community_num != null}">
 					<td>
-						<input type="radio" name="subject" value="[답글]" checked/>	답글		
+						<input type="radio" name="subject" value="[댓글]" checked/>	댓글		
 					</td>
 				</c:if>
 			</tr>
