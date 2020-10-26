@@ -76,23 +76,42 @@
 				}
 			}).open();
 		}
-
+		</script>
+		<script type="text/javascript">
 		$(document).ready(function(){
-			$("#member_Id").change(function(){
-				id = $("#member_Id").val();
-				$.ajax({
-					type : "POST",
-					url : "/psyco/member/idChk.com",
-					data : {member_Id : member_Id},
-					success : function(data){
-						console.log(data);
-						$("#idCheckResult").val(data);	
-					}
-				});
-			});
+			//아이디 중복체크
+			var ans = "";
+			var color = "";
+			$('#member_Id').blur(
+				function(){
+					var idCheck=$('#member_Id').val();
+					console.log(idCheck);
+					$.ajax({
+						url:'idChk.com?member_Id='+idCheck,
+						type:'get',
+						success:function(data){
+							console.log(data);
+							var color;
+							var ans;
+							if(data == 'fail'){
+								//이미있는 아이디
+								ans='이미있는 아이디입니다.';
+								color='red';
+							}else{
+								//사용 가능한 아이디
+								ans='회원가입 가능한 아이디입니다.';
+								color='blue';
+							}
+							$('#result').text(ans);
+							$('#result').css('color',color);
+						}
+					})	
+				}
+			);
 		});
-	</script>
+		</script>
 </head>
+
 <body>
 	<c:if test="${param.license_number != null}">
 		<div>
@@ -108,7 +127,8 @@
                 <div class=form_tab>
                     <label for="" class="form_title"> 아이디</label>
                     <input class="form_input" type="text" id="member_Id" name="member_Id" placeholder="아이디를 입력" />
-					<input type="text" id="idCheckResult" disabled/>
+					<span id="result" style="display: block; padding-left: 100px;"></span>
+
 			</tr>
                 </div>
                 <div class=form_tab>
