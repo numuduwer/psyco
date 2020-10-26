@@ -258,27 +258,31 @@
             <div class="ing_info">
                 <h2>이 가게에서 진행중인 경매</h2>
                 <div class="info_items">
-                    <img src="/img/item/one/1.jpg" alt="">
-                    <img src="/img/item/one/2.jpg" alt="">
-                    <img src="/img/item/one/3.jpg" alt="">
-                    <img src="/img/item/one/4.jpg" alt="">
+                <c:if test="${count1 == 0}">
+                	<h3>진행예정인 경매가 없습니다.</h3>
+                </c:if>
+                <c:forEach var="list" items="${itemImgList}">
+                <a href="/psyco/shop/itemDetail.com?item_num=${list.item_num}&shop_num=${list.shop_num}"></a>
+                    <a href="/psyco/shop/itemDetail.com?item_num=${list.item_num}&shop_num=${list.shop_num}"><img src="/psyco/save//${list.menu_img}" width=100></a>
+                </c:forEach>
                 </div>
             </div>
             <div class="ing_info">
                 <h2>이 가게에서 진행예정 경매</h2>
                 <div class="info_items">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
+                 <c:if test="${count == 0}">
+                	<h3>진행예정인 경매가 없습니다.</h3>
+                </c:if>
+                <c:forEach var="list2" items="${articleList3}">
+                <a href="/psyco/shop/itemDetail.com?item_num=${list2.item_num}&shop_num=${list2.shop_num}"></a>
+                    <a href="/psyco/shop/itemDetail.com?item_num=${list2.item_num}&shop_num=${list2.shop_num}"><img src="/psyco/save//${list2.menu_img}" ></a>
+                </c:forEach>
                 </div>
             </div>
         </div>
         <div class="shop_comment">
             <h2>사장님 오늘의 한마디</h2>
-            <h3>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis mollitia odio illum suscipit.
-                Laboriosam
-                qui temporibus,</h3>
+            <h3>${article.comment1}</h3>
         </div>
 
     </section>
@@ -342,13 +346,13 @@
                             <h3>포장여부 :</h3>
                         </li>
                         <li>
-                        <c:if test="${shopInfo.takeout == '1'}">
-                        	<h3>가능</h3>		
-                        </c:if>
-                        <c:if test="${shopInfo.takeout == '0'}">
-                        	<h3>불가능</h3>
-                        </c:if>
-                            
+                            <c:if test="${shopInfo.takeout == '1'}">
+                                <h3>가능</h3>
+                            </c:if>
+                            <c:if test="${shopInfo.takeout == '0'}">
+                                <h3>불가능</h3>
+                            </c:if>
+
                         </li>
                     </ul>
                     <ul>
@@ -366,7 +370,6 @@
         </div>
         <div id="tab3" data-tab-content class="items">
             <div class="tab3_item">
-                <h2>최근 리뷰</h2>
                 <table>
                     <tr>
                         <th>no.</th>
@@ -385,7 +388,8 @@
             </div>
         </div>
     </div>
-    <!-- <script>
+
+     <script>
         const tabs = document.querySelectorAll("[data-tab-target]");
         const tabcon = document.querySelectorAll("[data-tab-content]");
         tabs.forEach((tab) => {
@@ -400,7 +404,7 @@
         });
 
     </script>
-		 -->
+
 		
 		
 	</body>

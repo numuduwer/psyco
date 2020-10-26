@@ -22,15 +22,33 @@
  		delete from menu where menu_num =#{value}
  	</delete>
  	
+ 	 <select id="getContentListCount1" parameterType="hashmap" resultType="int" >
+ 		select count(*) from item where shop_num=#{shop_num} and selling_status=#{selling}
+ 	</select>
+ 	
+ 	
+ 	
+ 	<select id="getContentList1" parameterType="hashmap" resultType="JoinResultDTO">
+  		<![CDATA[		
+		SELECT rownum r,ITEM.ITEM_NUM,item.SELLING_STATUS ,ITEM.ITEM_NAME, MENU.MENU_IMG, SHOP.SHOP_NUM, SHOP.SHOP_NAME, ITEM.AMOUNT, 
+		ITEM.STARTDATE, ITEM.ENDDATE, ITEM.DISCOUNT_CYCLE, ITEM.MAXPRICE, ITEM.MINPRICE, ITEM.AUCTION_UNIT
+		FROM ITEM INNER JOIN SHOP ON ITEM.SHOP_NUM = SHOP.SHOP_NUM INNER JOIN MENU ON ITEM.MENU_NUM = MENU.MENU_NUM 
+		WHERE item.SELLING_STATUS=#{selling} AND item.shop_num=#{shop_num} and rownum >= 1 and rownum <= 4
+  		]]>
+  	</select>
+  	
+  	
+  	<select id="getContentListCount" parameterType="hashmap" resultType="int" >
+ 		select count(*) from item where shop_num=#{shop_num} and selling_status=#{selling}
+ 	</select>
 
  	<!-- 해당 음식 content 페이지에서 해당가게 이미지 리스트 뿌려주기 -->
-	<select id="getContentImgList" parameterType="int" resultType="menuDTO">
+	<select id="getContentList" parameterType="hashmap" resultType="JoinResultDTO">
 		<![CDATA[
-		SELECT rownum rn, menu_img 
-		FROM menu
-		WHERE rownum >= 1
-		AND rownum <= 4
-		AND shop_num = #{value}
+		SELECT rownum r,ITEM.ITEM_NUM,item.SELLING_STATUS ,ITEM.ITEM_NAME, MENU.MENU_IMG, SHOP.SHOP_NUM, SHOP.SHOP_NAME, ITEM.AMOUNT, 
+		ITEM.STARTDATE, ITEM.ENDDATE, ITEM.DISCOUNT_CYCLE, ITEM.MAXPRICE, ITEM.MINPRICE, ITEM.AUCTION_UNIT
+		FROM ITEM INNER JOIN SHOP ON ITEM.SHOP_NUM = SHOP.SHOP_NUM INNER JOIN MENU ON ITEM.MENU_NUM = MENU.MENU_NUM 
+		WHERE item.SELLING_STATUS=#{selling} AND item.shop_num = #{shop_num} and rownum >= 1 and rownum <= 4
   		]]>
 	</select>
 

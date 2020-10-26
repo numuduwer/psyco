@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -102,6 +105,10 @@ public class CommunityBean {
 	public String communityForm(CommunityDTO dto, HttpServletRequest request, Model model,String pageNum) {
 		
 		
+
+		
+		
+		
 		String community_num = request.getParameter("community_num");
 		String category = request.getParameter("category");
 		String grade = request.getParameter("grade");
@@ -136,17 +143,19 @@ public class CommunityBean {
 	public String communityDetail(String pageNum,int community_num, Model model,HttpServletRequest request) throws SQLException {
 		
 		
+		String category = request.getParameter("category");
 		
 		CommunityDTO article = communityService.getArticleSv(community_num);
+		List articleDabgle  = communityService.getArticleDabgle(community_num,category);
+		int DabgleCount = communityService.DabgleCount(community_num,category);
 		
-		
-		
-		String category = request.getParameter("category");
 		
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("community_num", community_num);
 		model.addAttribute("article", article);
 		model.addAttribute("category", category);
+		model.addAttribute("articleDabgle", articleDabgle);
+		model.addAttribute("DabgleCount", DabgleCount);
 		
 		
 		return "community/communityDetail.mm";
@@ -296,6 +305,8 @@ public class CommunityBean {
 	
 		@RequestMapping("communityMyArticle.com")
 		public String communityMyArticle(String pageNum, String category, Model model) throws SQLException {
+			
+			System.out.println("category :" + category);
 			
 			ListData list = communityService.getMyAskSv(pageNum,category);
 			commonsService.setListDataToModel(model,list);

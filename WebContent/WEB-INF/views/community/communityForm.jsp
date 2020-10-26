@@ -45,7 +45,7 @@
 				</c:if>
 				<c:if test="${community_num != null}">
 					<td>
-						<input type="radio" name="subject" value="[답글]" checked/>	답글		
+						<input type="radio" name="subject" value="[댓글]" checked/>	댓글		
 					</td>
 				</c:if>
 			</tr>
@@ -56,11 +56,12 @@
 			<c:if test="${category == 3 || category == 4}">
 			<tr>
 				<th>음식점 사진</th>
+			</tr>
 			<tr>
 		       	<th><img id="imgpreview" src="/psyco/save//${article.community_img}" width="100" height="100"></th>
 		       	<td><label>이미지 변경하기</label><input type="file" onchange="imagepreview(this);" name="img"/></td>
 			</tr>	
-			</tr>
+
 			</c:if>
 			<tr>
 				<td colspan="2">

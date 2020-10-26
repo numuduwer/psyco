@@ -266,6 +266,9 @@ public class MemberServiceImpl implements MemberService {
 			
 			ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 			HttpSession httpSession = servletRequestAttribute.getRequest().getSession();
+			if(dto.getBusiness_license() != 0 ) {
+				httpSession.setAttribute("shopCheck", dto.getBusiness_license());
+			}
 		
 			httpSession.setAttribute("memId", member_Id);
 			httpSession.setAttribute("memNum", dto.getMember_Num());
@@ -423,7 +426,9 @@ public class MemberServiceImpl implements MemberService {
 			String ext = orgName.substring(orgName.lastIndexOf('.'));
 			Long date=System.currentTimeMillis();
 			String newName=imgName+date+ext;
-			String imgPath = path+"\\"+newName;
+			String imgPath = path+"/"+newName;
+			System.out.println("--------- insertMember ----------");
+			System.out.println("imgPath : " + imgPath);
 			File file=new File(imgPath);
 			mf.transferTo(file);
 			dto.setShop_img(newName);
@@ -441,13 +446,31 @@ public class MemberServiceImpl implements MemberService {
 		dto.setlicense_number(license_number);
 		dto.setStatus(status);
 		
-		System.out.println(dto.getShop_img()+"1");
-		System.out.println(dto.getShop_name()+"1");
-		System.out.println(dto.getShop_num()+"1");
-		System.out.println(dto.getShop_phone()+"1");
-		System.out.println(dto.getStatus()+"1");
+		
+		System.out.println("-------- 정체가 뭐야 ");
+		System.out.println(dto.getShop_name());
+		System.out.println(dto.getShop_phone());
+		System.out.println(dto.getOperating_time());
+		System.out.println(dto.getAddress());
+		System.out.println(dto.getOrigin());
+		
+		System.out.println(dto.getApprove_status());
+		System.out.println(dto.getMember_num());
+		System.out.println(dto.getTakeout());
+		System.out.println(dto.getlicense_number());
+		System.out.println(dto.getStatus());
+		System.out.println("-------- 정체가 뭐야 ");
+		;
 		
 		memberDAO.insertMemberShop(dto);
+		
+	}
+
+	@Override
+	public int idChk(String id) throws SQLException {
+		int result = memberDAO.idChk(id);
+		System.out.println("id2=="+id);
+		return result;
 		
 	}
 }

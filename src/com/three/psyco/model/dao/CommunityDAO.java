@@ -54,6 +54,12 @@ public interface CommunityDAO {
 	public int getMyAskCount(String category, String writer) throws SQLException;
 
 	public List getMyAsk2(int start, int end, String category, String writer) throws SQLException;
+
+	public List getArticleDabgle(int community_num,String category);
+
+	public int DabgleCount(int community_num, String category);
+
+
 	
 	
 

@@ -29,15 +29,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.three.psyco.model.dto.ItemDTO;
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.MenuDTO;
 import com.three.psyco.model.dto.ShopDTO;
 import com.three.psyco.service.bean.CommonsServiceImpl;
+import com.three.psyco.service.bean.MainServiceImpl;
+
 import com.three.psyco.service.bean.MemberServiceImpl;
+
 import com.three.psyco.service.bean.ShopService;
 import com.three.psyco.service.bean.ShopServiceImpl;
 
@@ -54,6 +60,9 @@ public class ShopBean {
 	private MemberServiceImpl memberService = null;
 
 	public static String controllerName = "shopBean";
+	
+	@Autowired
+	private MainServiceImpl mainService = null;
 
 	
 	
@@ -130,7 +139,7 @@ public class ShopBean {
 		result = shopService.updateShopDataSV(dto);
 		model.addAttribute("result", result);
 		model.addAttribute("pageName", pageName);
-		return "shop/shopList";
+		return "shop/shopModifyPro";
 	}
 	
 	@RequestMapping(value="deleteShop.com", method = RequestMethod.POST)
@@ -148,6 +157,8 @@ public class ShopBean {
 	
 	@RequestMapping("MyMenuList.com")
 	public String MyMenuList(HttpSession session, Model model) throws SQLException {
+		System.out.println("------ mymenuList ----- ");
+		System.out.println("controller 잘 연결 ");
 		int member_Num = (int) session.getAttribute("memNum");
 		List<Integer> myShop_ShopNumList = commonsService.getMyShop_MemberNumList(member_Num);
 		List<MenuDTO> menuList = commonsService.getMyMenuListFromShopNum(myShop_ShopNumList);
@@ -230,16 +241,25 @@ public class ShopBean {
 	}
 	
 	
-	// buy페이지에서 만들어놓은 해당 구매 상품 정보 가져오는거 사용
+	
 	@RequestMapping("itemDetail.com")
-	public String itemDetail(int item_num,Model model,String pageNum) throws SQLException {
+	public String itemDetail(int item_num,Model model,String pageNum,int shop_num) throws SQLException {
 		if (pageNum == null) pageNum = "1";
 		
 		ItemDTO article = shopService.getItemOne(item_num, pageNum, model);
 		ShopDTO shopInfo = shopService.getShopDataSV(article.getShop_num());
 		
+		// 해당가게에서 진행중인 경매상품 리스트
+		List itemImgList = shopService.getContentImg(shop_num, model);
+		
+		// 해당가게 진행예정 경매상품 리스트
+		String pageName = "";
+		shopService.getItemList1(pageName,pageNum,shop_num,model);
+
+		
 		model.addAttribute("article", article);
 		model.addAttribute("shopInfo", shopInfo);
+		model.addAttribute("itemImgList", itemImgList);
 		
 		return "shop/itemDetail.mm";
 	}
@@ -333,6 +353,7 @@ public class ShopBean {
 		model.addAttribute("articleList1", data.getArticleList());
 		model.addAttribute("count1", data.getCount());
 		//---------------------------------------------review
+		System.out.println("------ shopPageLst member_num :" + member_num);
 		List<Integer> num=commonsService.getMyShop_MemberNumList(member_num);
 		System.out.println("num=="+num);
 
@@ -344,9 +365,9 @@ public class ShopBean {
 			model.addAttribute("currPage", rdata.getCurrPage());
 			model.addAttribute("startRow", rdata.getStartRow());
 			model.addAttribute("endRow", rdata.getEndRow());
-			model.addAttribute("rnumber", rdata.getNumber());
-			model.addAttribute("rarticleList", rdata.getArticleList());
-			model.addAttribute("count", rdata.getCount());
+			model.addAttribute("number2", rdata.getNumber());
+			model.addAttribute("rarticleLis2", rdata.getArticleList());
+			model.addAttribute("count2", rdata.getCount());
 		//-------------------------------------가게 삭제
 			System.out.println("member_id : "+member_Id );
 			System.out.println("pw : "+pw );
@@ -365,14 +386,21 @@ public class ShopBean {
 	}
 	
 	@RequestMapping("shopPageList2.com")
-	public String shopPageList2(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
+	public String shopPageList2(String pageName, String pageNum, HttpSession session, Model model) throws SQLException, JsonProcessingException {
 		
+//		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+//		HttpSession session = servletRequestAttribute.getRequest().getSession();
+//		String writer = (String) session.getAttribute("memId");
 		int id = 123;
-	
+//		
+//		System.out.println("itemList Controller id :" + id);
 		
-		System.out.println("itemList Controller id :" + id);
 		ListData data = shopService.getItemList(pageName,pageNum,id,model);
 		commonsService.setListDataToModel(model, data);
+		
+		List<Object> itemMapList = shopService.getMyEntireList(pageName,id);
+		model.addAttribute("itemMapList", itemMapList);
+		
 		
 		return "shop/shopPageList2";
 	}

@@ -20,6 +20,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -101,6 +103,23 @@ public class MemberBean {
 		return "member/businessSignupForm";
 	}
 	
+	//아이디 중복체크
+	@ResponseBody
+	@RequestMapping("idChk.com")
+	public ResponseEntity<String> idChk(String member_Id) throws Exception {
+		int check = memberService.idChk(member_Id);
+		System.out.println("id1=="+member_Id);
+		String result = "";
+		if(check ==1) {
+			result = "존재합니다 딴거쓰세요";
+		}else if(check ==0) {
+			result ="사용 가능합니다.";
+		}
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html;charset=UTF-8");
+		return  new ResponseEntity<String>(result,responseHeaders, HttpStatus.CREATED);
+	}
+	
 	@RequestMapping("signup.com")
 	public String insertMember(MemberDTO dto, Model model) {
 		int result = memberService.insertMember(dto);
@@ -151,22 +170,20 @@ public class MemberBean {
 	}
 
 	@RequestMapping("shopSignupPro.com")
-	public String shopSignPro(MultipartHttpServletRequest request,int member_num,Model model)throws SQLException {
+	public String shopSignPro(MultipartHttpServletRequest request,HttpSession session,int member_num,Model model)throws SQLException {
 	
 		String status ="0";
 		String approve_status="0";
 		String pageNum ="null";
+		
 		
 		try {
 			memberService.insertMemberShops(request,member_num,status,approve_status);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		int shop_num=shopService.getShopNums(member_num);
-		System.out.println("shop_num=="+shop_num);
-		model.addAttribute("shop_num", shop_num);
-		model.addAttribute("member_num", member_num);
-		return "member/menuSignupForm";
+		
+		return "shop/shopPageList";
 	}
 	
 	@RequestMapping("menuSignupPro.com")

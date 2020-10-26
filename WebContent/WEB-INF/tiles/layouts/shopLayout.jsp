@@ -19,7 +19,7 @@
 
 
 <body>
-		 <div id="top">
+		 	 <div id="top">
             <ul class="login_menu">
                 <c:if test="${sessionScope.memId == null}">
                 	<li><a href="/psyco/member/loginForm.com">로그인</a></li>
@@ -45,8 +45,7 @@
             	<li>사장님이세요?</li>
             	<li><a href="/psyco/member/businessSignupForm.com">가게 등록하러가기</a></li>
         	</ul>
-        </c:if>
-        
+        </c:if>        
 
  	<tiles:insertAttribute name="tile_header" />
  	<tiles:insertAttribute name="tile_shopHeader" />  

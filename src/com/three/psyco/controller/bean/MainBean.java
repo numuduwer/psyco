@@ -3,6 +3,7 @@ package com.three.psyco.controller.bean;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,11 +57,10 @@ public class MainBean {
 	private MainServiceImpl mainService = null;
 	
 	@Autowired
-	private ShopServiceImpl shopService = null;
-	
-	@Autowired
 	public static String controller = "mainBean";
 	
+	@Autowired
+	private ShopServiceImpl shopService = null;
 	
 	public Scheduler scheduler = null;
 	
@@ -70,8 +70,10 @@ public class MainBean {
 		if (menuDivision == null) menuDivision = "0";
 		
 		List<Object> itemMapList = commonsService.getEntireList(menuDivision);
+
 		model.addAttribute("itemMapList", itemMapList);
 		
+
 		return "main/main";
 	}
 	
@@ -194,20 +196,6 @@ public class MainBean {
 	
 	
 
-	// buy페이지에서 만들어놓은 해당 구매 상품 정보 가져오는거 사용
-	@RequestMapping("itemDetail.com")
-	public String itemDetail(int item_num,Model model,String pageNum) throws SQLException {
-		if (pageNum == null) pageNum = "1";
-		
-		System.out.println("item_num : " + item_num);
-		ItemDTO article = shopService.getItemOne(item_num, pageNum, model);
-		ShopDTO shopInfo = shopService.getShopDataSV(article.getShop_num());
-		
-		model.addAttribute("article", article);
-		model.addAttribute("shopInfo", shopInfo);
-		
-		return "shop/itemDetail";
-	}
 	
 	
 	

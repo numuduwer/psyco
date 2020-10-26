@@ -88,11 +88,11 @@ function onClickItemDelete(shopNum){
                        
                         <c:if test="${count1 > 0}">
 	                       <c:forEach var="article" items="${articleList1}">
-		                        <div id = "${article.shop_num}"} class="myPage_item_info">
+		                        <div id = "${article.shop_num}" class="myPage_item_info">
 			                     
-		                            <img src="/img/item/one/1.jpg" alt="">
+		                           <img alt="" src="/psyco/save//${article.shop_img}">
 		                            <ul>
-		                                <li><a href="shopDetail.com?shop_num=${article.shop_num }">가게 이름 : ${article.shop_name}</a></li>
+		                                <li><a href="menuList.com?shop_num=${article.shop_num }">가게 이름 : ${article.shop_name}</a></li>
 		                                <li>
 		                                    <span> 주소 : ${article.address}</span>
 		                                </li>
@@ -101,7 +101,7 @@ function onClickItemDelete(shopNum){
 		                                </li>
 		                            </ul>
 		                            <ul class="myPage_item_info_btnList">
-		                                <li><button class="shop_btn"><a href="shopModify.com?shop_num=${article.shop_num }">수정</a> </button></li>
+		                                <li><button class="shop_btn"><a href="shopModify.com?shop_num=${article.shop_num }&member_num=${article.member_num}">수정</a> </button></li>
 		                               	<li><button class="shop_btn"> <a href="javascript:onClickItemDelete('${article.shop_num}')" >삭제</a> </button></li>
 		                            </ul>
 		                        </div>
@@ -116,29 +116,32 @@ function onClickItemDelete(shopNum){
                 <!--   탭 2 내용-->
                 <div id="tab2" data-tab-content class="items">
                     <div class="userpage_tab2">
-                        <h2>가게리뷰 리스트</h2>
                         <table>
                             <tr>
                                 <th>no.</th>
+                                <th>이미지</th>
                                 <th>제목</th>
                                 <th>별점</th>
                                 <th>작성시간</th>
                             </tr>
-                         <c:if test="${count == 0}">
+                         <c:if test="${count2 == 0}">
 							<table>
 								<tr>
 									<td> 후기가 없습니다. </td>
 								</tr>
 							</table>
 						</c:if>
-                        <h2>리뷰 리스트</h2>
-                        <c:if test="${count > 0}">
-                         	<c:forEach var="article" items="${rarticleList}">
+
+             
+                        <c:if test="${count2 > 0}">
+                         	<c:forEach var="article" items="${articleList2}">
+
                          	
                             <tr>
-                                <td>${rnumber}
-                                	<c:set var="number" value="${number-1}"/>
+                                <td>${number2}
+                                	<c:set var="number" value="${number2-1}"/>
                                 </td>	
+                                <img alt="" src="/psyco/save//${article.review_img}">
                                 <td align="left">
 											<a href="/psyco/user/reviewDetail.com?review_num=${article.review_num}&pageNum=${pageNum}" >${article.shop_name}</a>
 								</td>
