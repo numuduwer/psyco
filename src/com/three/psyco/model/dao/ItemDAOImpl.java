@@ -182,14 +182,36 @@ public class ItemDAOImpl implements ItemDAO {
 	
 
 	@Override
-	public List<JoinResultDTO> getEntireList() {
-		List<JoinResultDTO> list = sqlSession.selectList("item.getEntireList");
+	public List<JoinResultDTO> getEntireList(String menuDivision) {
+		
+		List<JoinResultDTO> list = null;
+		
+		if (menuDivision.equals("0")) {
+			list = sqlSession.selectList("item.getEntireList");
+		} else if (menuDivision.equals("1")) {
+			list = sqlSession.selectList("item.getOnePersonMenuList", menuDivision);
+		} else if (menuDivision.equals("2")) {
+			list = sqlSession.selectList("item.getSetMenuList", menuDivision);
+		}
+		
 		return list;
 	}
 
 	@Override
-	public int modifyStatus(int item_num) {
-		int result = sqlSession.update("item.modifyStatus", item_num);
+	public int modifyStatusIntoEnd(int item_num) {
+		int result = sqlSession.update("item.modifyStatusIntoEnd", item_num);
+		return result;
+	}
+	
+	@Override
+	public int modifyStatusIntoBefore(int item_num) {
+		int result = sqlSession.update("item.modifyStatusIntoBefore", item_num);
+		return result;
+	}
+	
+	@Override
+	public int modifyStatusIntoProProceed(int item_num) {
+		int result = sqlSession.update("item.modifyStatusIntoProProceed", item_num);
 		return result;
 	}
 	

@@ -28,10 +28,14 @@ public interface ItemDAO {
 	
 	public int itemEnrollmentPro(ItemDTO dto) throws ParseException;
 	
-	public List<JoinResultDTO> getEntireList();
+	public List<JoinResultDTO> getEntireList(String menuDivision);
 
 	
-	public int modifyStatus(int item_num);
+	public int modifyStatusIntoEnd(int item_num);
+	
+	public int modifyStatusIntoBefore(int item_num);
+	
+	public int modifyStatusIntoProProceed(int item_num);
 	
 	public int modifyAmountZero(int item_num);
 
