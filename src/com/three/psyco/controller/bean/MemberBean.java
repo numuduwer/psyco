@@ -165,9 +165,9 @@ public class MemberBean {
 	
 	@RequestMapping("shopSignupForm.com")
 	public String shopSignupForm(String member_num, Model model,String license_number) {
-		System.out.println("member_num==!"+member_num);
+		MemberDTO dto = memberService.getMemberProfileFromNum(Integer.parseInt(member_num));
 		model.addAttribute("member_num", member_num);
-		model.addAttribute("license_number", license_number);
+		model.addAttribute("license_number", dto.getLicense_number());
 		return "member/shopSignupForm";
 	}
 
@@ -177,15 +177,21 @@ public class MemberBean {
 		String status ="0";
 		String approve_status="0";
 		String pageNum ="null";
-		
+		int result = 0;
 		
 		try {
-			memberService.insertMemberShops(request,member_num,status,approve_status);
+			result = memberService.insertMemberShops(request,member_num,status,approve_status);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return "shop/shopPageList";
+		
+		model.addAttribute("result", result);
+		System.out.println("여기");
+		System.out.println(Integer.toString(member_num));
+		model.addAttribute("member_num", Integer.toString(member_num)); 
+		
+		return "shop/shopEnrollmentCheck";
 	}
 	
 	@RequestMapping("menuSignupPro.com")
