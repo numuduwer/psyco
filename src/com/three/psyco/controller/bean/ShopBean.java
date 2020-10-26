@@ -29,15 +29,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.three.psyco.model.dto.ItemDTO;
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.MenuDTO;
 import com.three.psyco.model.dto.ShopDTO;
 import com.three.psyco.service.bean.CommonsServiceImpl;
-
 import com.three.psyco.service.bean.MainServiceImpl;
 
 import com.three.psyco.service.bean.MemberServiceImpl;
@@ -376,14 +378,20 @@ public class ShopBean {
 	}
 	
 	@RequestMapping("shopPageList2.com")
-	public String shopPageList2(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
+	public String shopPageList2(String pageName, String pageNum, HttpSession session, Model model) throws SQLException, JsonProcessingException {
 		
+//		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+//		HttpSession session = servletRequestAttribute.getRequest().getSession();
+//		String writer = (String) session.getAttribute("memId");
 		int id = 123;
-	
+//		
+//		System.out.println("itemList Controller id :" + id);
+//		ListData data = shopService.getItemList(pageName,pageNum,id,model);
+//		commonsService.setListDataToModel(model, data);
 		
-		System.out.println("itemList Controller id :" + id);
-		ListData data = shopService.getItemList(pageName,pageNum,id,model);
-		commonsService.setListDataToModel(model, data);
+		List<Object> itemMapList = shopService.getMyEntireList(pageName,id);
+		model.addAttribute("itemMapList", itemMapList);
+		
 		
 		return "shop/shopPageList2";
 	}

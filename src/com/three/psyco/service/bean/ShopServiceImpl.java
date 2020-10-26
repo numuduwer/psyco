@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -22,6 +24,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.three.psyco.model.dao.BuyDAOImpl;
@@ -29,6 +32,7 @@ import com.three.psyco.model.dao.ItemDAOImpl;
 import com.three.psyco.model.dao.MenuDAOImpl;
 import com.three.psyco.model.dao.ShopDAOImpl;
 import com.three.psyco.model.dto.ItemDTO;
+import com.three.psyco.model.dto.JoinResultDTO;
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.MenuDTO;
 import com.three.psyco.model.dto.ShopDTO;
@@ -66,6 +70,7 @@ public class ShopServiceImpl implements ShopService {
 	
 	@Override
 	public ListData getItemList(String pageName, String pageNum, int id,Model model) throws SQLException{
+		
 		// 디폴트 값 설정 
 		if(pageNum == null) {
 			pageNum = "1";
@@ -82,7 +87,6 @@ public class ShopServiceImpl implements ShopService {
 		
 		List articleList = null;
 		List articleListA = null;
-		List articleListB = null;
 		List articleListC = null;
 		List articleListD = null;
 		
@@ -94,10 +98,6 @@ public class ShopServiceImpl implements ShopService {
 		
 		// 0:임시저장,1:시작전,2:대기,3:판매중,4:판매종료
 		// 현재 해당가게 사장 아이템리스트    (DAO 에서 판매중인지 아닌지 처리)
-		count = itemDAO.count1(id);
-		if(count >0) {
-			articleList = itemDAO.getItemList(id,startRow, endRow);	
-		}
 		
 		//1
 		countA = itemDAO.countA(id);
@@ -105,11 +105,6 @@ public class ShopServiceImpl implements ShopService {
 			articleListA = itemDAO.getItemListA(id,startRow, endRow);	
 		}
 		
-		//2
-		countB = itemDAO.countB(id);
-		if(count >0) {
-			articleListB = itemDAO.getItemListB(id,startRow, endRow);	
-		}
 		
 		//3
 		countC = itemDAO.countC(id);
@@ -124,12 +119,10 @@ public class ShopServiceImpl implements ShopService {
 		}
 		
 		model.addAttribute("countA",countA);
-		model.addAttribute("countB",countB);
 		model.addAttribute("countC",countC);
 		model.addAttribute("countD",countD);
 		
 		model.addAttribute("articleListA",articleListA);
-		model.addAttribute("articleListB",articleListB);
 		model.addAttribute("articleListC",articleListC);
 		model.addAttribute("articleListD",articleListD);
 		
@@ -322,4 +315,118 @@ public class ShopServiceImpl implements ShopService {
 		return shop_num;
 	}
 
+	
+	
+	
+	
+	
+	
+	@Override
+	public List<Object> getMyEntireList(String pageNum,int id) throws JsonProcessingException {
+		
+		// 디폴트 값 설정 
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		// 페이징 처리 초기값
+		int pageSize = 10;
+		int currPage = Integer.parseInt(pageNum);	// 페이지 계산을 위해  형변환 
+		int startRow = (currPage-1) * pageSize +1;
+		int endRow = currPage * pageSize;
+		int number = 0;
+		
+		
+		List<JoinResultDTO> itemList = itemDAO.getMyEntireList(id,startRow,endRow);
+		
+		List<Map<String, Object>> itemMapList = new ArrayList<Map<String, Object>>();
+		
+		// 현재 시간
+		long date_now = System.currentTimeMillis();
+		
+		// 시간 계산
+		long current_hours = TimeUnit.MILLISECONDS.toHours(date_now);
+		long current_minuets = TimeUnit.MILLISECONDS.toMinutes(date_now);
+		long current_seconds = TimeUnit.MILLISECONDS.toSeconds(date_now);		
+		
+		for (int i = 0; i < itemList.size(); i++) {
+			JoinResultDTO dto = (JoinResultDTO) itemList.get(i);
+			Map<String, Object> itemMap = new HashMap<String, Object>();
+			
+			long item_StartTime_minuet = TimeUnit.MILLISECONDS.toMinutes(dto.getStartDate().getTime());
+			long item_endTime_minuet = TimeUnit.MILLISECONDS.toMinutes(dto.getEndDate().getTime());
+			
+			long time_difference = current_minuets - item_StartTime_minuet;		// 몇분 지났는지 알 수 있는 시간
+			long remainder_time = item_endTime_minuet - current_minuets;
+			long discount_cycle = dto.getDiscount_cycle() / 60;				// 할인 주기
+			long auction_unit = Long.parseLong(dto.getAuction_unit());			// 할인 단위
+			long discount_count = time_difference / discount_cycle;				// 할인 횟수
+			long discount_price = discount_count *  auction_unit;				// 할인 된 가격
+			
+			long current_price = Long.valueOf(dto.getMaxPrice()) - discount_price;	// 현재 가격
+			
+			if (current_price <= Long.valueOf(dto.getMinPrice())) {
+				current_price = Long.valueOf(dto.getMinPrice());
+				discount_price = dto.getMaxPrice() - current_price;
+			}
+			
+			double discount_rate = ((double)discount_price / Long.valueOf(dto.getMaxPrice())) * 100;		// 할인율
+			
+			int progress_status = 0;									// 진행 중 경매인지 종료 된 경매인지 확인할 수 있는 변수
+			if (item_endTime_minuet < current_minuets) {	// 경매 시간이 종료 되었으면
+				progress_status = itemDAO.modifyStatus(dto.getItem_num());
+			}
+			
+			if (dto.getAmount() == 0) {
+				itemDAO.modifyAmountZero(dto.getItem_num());
+			}
+
+			String jsonOfItemList = new ObjectMapper().writeValueAsString(dto);		// string으로 형 변환하면 timestamp -> long타입으로 바뀌는듯 (확인 결과 값 일치)
+			
+			itemMap.put("itemList", dto);
+			itemMap.put("discount_price", discount_price);
+			itemMap.put("current_price", current_price);
+			itemMap.put("discount_rate", discount_rate);
+			itemMap.put("progress_status", progress_status);
+			itemMap.put("remainder_time", remainder_time);
+			itemMapList.add(itemMap);
+		}
+		
+		JSONArray jsonArray = new JSONArray();
+		for (Map<String, Object> map : itemMapList) {
+			
+			
+			JSONObject jsonObject = new JSONObject();
+			for (Map.Entry<String, Object> entry : map.entrySet()) {
+				String key = entry.getKey();
+				Object value = entry.getValue();
+				jsonObject.put(key, value);
+			}
+			jsonArray.add(jsonObject);
+		}
+		return jsonArray;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

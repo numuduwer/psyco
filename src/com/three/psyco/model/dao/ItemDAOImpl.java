@@ -48,35 +48,9 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 	
 	
-	// 0:임시저장,1:시작전,2:대기,3:판매중,4:판매종료
+	// 1:시작전,3:판매중,4:판매종료
 	// 현재 해당가게 사장 아이템리스트    (DAO 에서 판매중인지 아닌지 처리)
-	@Override
-	public int count1(int id) throws SQLException {
-		String selling = "0";
-		
-		HashMap map = new HashMap();
-		map.put("id", id);
-		map.put("selling", selling);
-		
-		int count = sqlSession.selectOne("item.itemOneCount",map);
-		System.out.println("count : " + count);
-		
-		return count;
-	}
 	
-	@Override
-	public List getItemList(int id, int startRow, int endRow) {
-		String selling = "0";
-		HashMap map = new HashMap();
-		map.put("mem_num", id);
-		map.put("startRow", startRow);
-		map.put("endRow", endRow);
-		map.put("selling", selling);
-		
-		List list = sqlSession.selectList("item.getMyItemList",map);
-		
-		return list;
-	}
 	
 	/////////////////////////1
 	@Override
@@ -96,34 +70,6 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public List getItemListA(int id, int startRow, int endRow) {
 		String selling = "1";
-		HashMap map = new HashMap();
-		map.put("mem_num", id);
-		map.put("startRow", startRow);
-		map.put("endRow", endRow);
-		map.put("selling", selling);
-		
-		List list = sqlSession.selectList("item.getMyItemList",map);
-		
-		return list;
-	}
-	/////////////////////////////2
-	@Override
-	public int countB(int id) throws SQLException {
-		String selling = "2";
-		
-		HashMap map = new HashMap();
-		map.put("id", id);
-		map.put("selling", selling);
-		
-		int count = sqlSession.selectOne("item.itemOneCount",map);
-		System.out.println("count : " + count);
-		
-		return count;
-	}
-	
-	@Override
-	public List getItemListB(int id, int startRow, int endRow) {
-		String selling = "2";
 		HashMap map = new HashMap();
 		map.put("mem_num", id);
 		map.put("startRow", startRow);
@@ -190,23 +136,6 @@ public class ItemDAOImpl implements ItemDAO {
 		
 		return list;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -284,4 +213,19 @@ public class ItemDAOImpl implements ItemDAO {
 		System.out.println("item의 amount는 : " + amount);
 		return amount;
 	}
+
+
+	@Override
+	public List<JoinResultDTO> getMyEntireList(int id, int startRow, int endRow) {
+		String selling = "3";
+		HashMap map = new HashMap();
+		map.put("mem_num", id);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("selling", selling);
+		List<JoinResultDTO> list = sqlSession.selectList("item.getMyItemList",map);
+		System.out.println("size : " + list.size());
+		return list;
+	}
+
 }
