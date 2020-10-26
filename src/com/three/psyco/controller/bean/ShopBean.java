@@ -157,6 +157,8 @@ public class ShopBean {
 	
 	@RequestMapping("MyMenuList.com")
 	public String MyMenuList(HttpSession session, Model model) throws SQLException {
+		System.out.println("------ mymenuList ----- ");
+		System.out.println("controller 잘 연결 ");
 		int member_Num = (int) session.getAttribute("memNum");
 		List<Integer> myShop_ShopNumList = commonsService.getMyShop_MemberNumList(member_Num);
 		List<MenuDTO> menuList = commonsService.getMyMenuListFromShopNum(myShop_ShopNumList);
@@ -349,6 +351,7 @@ public class ShopBean {
 		model.addAttribute("articleList1", data.getArticleList());
 		model.addAttribute("count1", data.getCount());
 		//---------------------------------------------review
+		System.out.println("------ shopPageLst member_num :" + member_num);
 		List<Integer> num=commonsService.getMyShop_MemberNumList(member_num);
 		System.out.println("num=="+num);
 
@@ -360,9 +363,9 @@ public class ShopBean {
 			model.addAttribute("currPage", rdata.getCurrPage());
 			model.addAttribute("startRow", rdata.getStartRow());
 			model.addAttribute("endRow", rdata.getEndRow());
-			model.addAttribute("rnumber", rdata.getNumber());
-			model.addAttribute("rarticleList", rdata.getArticleList());
-			model.addAttribute("count", rdata.getCount());
+			model.addAttribute("number2", rdata.getNumber());
+			model.addAttribute("rarticleLis2", rdata.getArticleList());
+			model.addAttribute("count2", rdata.getCount());
 		//-------------------------------------가게 삭제
 			System.out.println("member_id : "+member_Id );
 			System.out.println("pw : "+pw );

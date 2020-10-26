@@ -11,7 +11,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script type="text/javascript">
-	 /* $(document).ready(function(){
+	  $(document).ready(function(){
+		
 		
 		 $.ajax({
 			url : "/psyco/main/getEnrollEvent.com",
@@ -21,6 +22,8 @@
 				console.log("success 여부는   : " + result);
 				if(result == 'ok'){
 					alert(" 승인 처리되셨습니다. !  오른쪽 위  버튼을   확인해주세요 !");
+					location.href="/psyco/main/main.com";
+					
 				}
 				
 			},
@@ -30,8 +33,8 @@
 			
 		 });
 		 
-	 }) */
-	
+	 }) 
+
 	
 		/* $(document).ready(function(){
 			console.log("연결 ? ");
@@ -130,15 +133,11 @@
     <!-- 경매 카테고리 -->
     <section id="category">
         <ul>
-<<<<<<< HEAD
-        	<li><a href="/psyco/main/main.com">전체 메뉴</a></li>
-            <li><a href="/psyco/main/main.com?num='1'">1인 메뉴</a></li>
-            <li><a href="/psyco/main/main.com?num='2'">세트 메뉴</a></li>
-=======
+
         	<li><a href="/psyco/main/main.com?menuDivision=0">전체 메뉴</a></li>
             <li><a href="/psyco/main/main.com?menuDivision=1">1인 메뉴</a></li>
             <li><a href="/psyco/main/main.com?menuDivision=2">세트 메뉴</a></li>
->>>>>>> 476a8521706c1cb8abb4387b2c1dd67d505db634
+
         </ul>
         
     </section>

@@ -245,7 +245,7 @@ section {
   display: flex;
   flex-direction: column;
   width: 20%;
-  height: 450px;
+  height: 530px;
   margin: 20px 0;
   border: solid 1px green;
 }
@@ -266,6 +266,10 @@ section {
 
 .card_content {
   padding: 4px 8px;
+}
+
+.card_content ul {
+  padding: 3px;
 }
 .card_content h2 {
   font-weight: var(--weight-semi-bold);
@@ -472,15 +476,18 @@ section .buy_info {
   color: var(--color-dark-grey);
 }
 /* 콘텐츠 텝스 정보*/
-
+/* 콘텐츠 텝스 정보*/
 .shopCotent_btn {
   display: flex;
   flex-direction: column;
 }
+
 .tabs {
   display: flex;
+
   justify-content: center;
 }
+
 .tabs .tab {
   font-size: 1rem;
   text-align: center;
@@ -488,19 +495,23 @@ section .buy_info {
   width: 320px;
   height: 50px;
   cursor: pointer;
-  background-color: rgb(243, 243, 243);
-  color: rgb(20, 19, 19);
+  background-color: #f3f3f3;
+  color: #141313;
   position: relative;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
   border: 1px solid black;
 }
+
 .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin: 0 auto;
   border: 1px solid black;
   width: 960px;
 }
+
 .items {
   width: 300px;
   display: none;
@@ -508,6 +519,7 @@ section .buy_info {
   background-color: #fff;
   position: relative;
 }
+
 .items::before {
   content: "";
   position: absolute;
@@ -515,21 +527,24 @@ section .buy_info {
   left: 0;
   width: 318px;
   height: 4px;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
 }
+
 .items:nth-child(2)::before {
   left: 320px;
   top: -4px;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
 }
+
 .items:nth-child(3)::before {
   left: 640px;
   top: -4px;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
 }
+
 .items.active {
   display: inline-block;
-  width: 100%l;
+  width: 100%;
 }
 
 #tab1 img {
@@ -540,8 +555,15 @@ section .buy_info {
 }
 
 .shopinfo_info {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
   justify-content: space-evenly;
 }
 
@@ -555,6 +577,7 @@ section .buy_info {
   padding: 28px 0;
   border-bottom: 1px solid var(--color-dark-grey);
 }
+
 #tab2 {
   width: 100%;
   padding: 28px 0;
@@ -585,6 +608,7 @@ section .buy_info {
   list-style: none;
   display: flex;
 }
+
 .tab2_item li {
   padding-right: 30px;
 }
@@ -603,6 +627,9 @@ section .buy_info {
   padding: 12px 40px;
   align-items: center;
 }
+
+
+
 /* 공용 */
 table {
   border-collapse: collapse;
@@ -911,3 +938,62 @@ th {
   padding: 0 15px;
 }
 /*# sourceMappingURL=style.css.map */
+
+
+
+xmain {
+  display: flex;
+  flex-direction: column;
+}
+.xtabs {
+  display: flex;
+}
+.xtabs .xtab {
+  font-size: 1rem;
+  text-align: center;
+  line-height: 30px;
+  width: 90px;
+  height: 30px;
+  cursor: pointer;
+  background-color: rgb(243, 243, 243);
+  color: rgb(20, 19, 19);
+  position: relative;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border: 2px solid black;
+}
+.xcontent {
+  border: 2px solid black;
+  width: 500px;
+  height: 500px;
+}
+.xitems {
+  width: 300px;
+  display: none;
+  padding: 10px;
+  background-color: #fff;
+  position: relative;
+}
+.xitems::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 90px;
+  height: 4px;
+  background-color: rgb(255, 255, 255);
+}
+.xitems:nth-child(2)::before {
+  left: 94px;
+  top: -4px;
+  background-color: rgb(255, 255, 255);
+}
+.xitems:nth-child(3)::before {
+  left: 188px;
+  top: -4px;
+  background-color: rgb(255, 255, 255);
+}
+.xitems.active {
+  display: inline-block;
+}
+

@@ -129,11 +129,7 @@ public class CommonsServiceImpl implements CommonsService {
 
 	public ListData getListData(String pageName, String pageNum, int memNum, String controller) throws SQLException{
 		// 디폴트 값 설정 
-		System.out.println("Commons Service 잘 연결 ");
-		System.out.println("C---------------------- ");
-		System.out.println("memNum : "+ memNum);
-		System.out.println("pageName : "+ pageName);
-		System.out.println("controller : "+ controller);
+
 		if(pageNum == null) {
 			pageNum = "1";
 		}
@@ -155,11 +151,11 @@ public class CommonsServiceImpl implements CommonsService {
 			count = shopDAO.count(pageName, memNum);
 		}
 		
-		System.out.println("count : "+ count);
+
 		if(count >0) {
 				articleList = shopDAO.getList(pageName, memNum,startRow, endRow);
 		}
-		System.out.println("size : " + articleList.size()  );
+		
 		
 		number = count - (currPage-1) * pageSize;
 
@@ -237,6 +233,8 @@ public class CommonsServiceImpl implements CommonsService {
 	
 	@Override
 	public List<Integer> getMyShop_MemberNumList(int member_Num) throws SQLException {
+		System.out.println("-------- service ----- review ---- ");
+		System.out.println("member_Num :" + member_Num );
 		List<Integer> myShop_ShopNumList = shopDAO.getMyShop_ShopNumList(member_Num);
 		return myShop_ShopNumList;
 	}
@@ -348,10 +346,7 @@ public class CommonsServiceImpl implements CommonsService {
 		int shop_num = 0;
 		
 		
-		for(int i = 0; i <list.size() ; i++) {
-			System.out.println("service list : " + list.get(i));
-			
-		}
+		
 		// 글 갯수 불러오기 
 		int	count = shopDAO.ShopNumcount(list);
 		if(count >0) {
