@@ -61,8 +61,7 @@
 
             <div class=form_tab>
                 <label for="" class="form_title">사업자 번호</label>
-                 <input type="text" name="license_number" />
-             <!--     <input type="text" name="license_number" value="${license_number}" readonly />-->
+                 <input type="text" name="license_number" value="${license_number}" readonly />
             </div>
 
             <ul class="form_btn_box">

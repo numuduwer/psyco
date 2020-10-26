@@ -102,13 +102,16 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	@Override
-	public void insertMemberShop(MemberShopDTO dto) throws SQLException {
+	public int insertMemberShop(MemberShopDTO dto) throws SQLException {
+		int result = 0;
 		if(dto.getTakeout() == null) {
 			dto.setTakeout("0");
-			sqlSession.insert("member.insertMemberShop",dto);	
+			result = sqlSession.insert("member.insertMemberShop",dto);	
 		}else {
-			sqlSession.insert("member.insertMemberShop",dto);	
+			result = sqlSession.insert("member.insertMemberShop",dto);	
 		}
+		System.out.println(result);
+		return result;
 	}
 
 	public MemberDTO getEnroll(String id) {
