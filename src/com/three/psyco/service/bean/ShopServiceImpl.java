@@ -188,7 +188,6 @@ public class ShopServiceImpl implements ShopService {
 		model.addAttribute("result",result);
 		model.addAttribute("item_num",item_num);
 		
-		
 		return result;
 	}
 	
@@ -309,7 +308,7 @@ public class ShopServiceImpl implements ShopService {
 		if (reduce_result == 1) {
 			int item_amount = itemDAO.itemAmountCheck(item_num);
 			if (item_amount == 0) {
-				itemDAO.modifyStatus(item_num);
+				itemDAO.modifyStatusIntoEnd(item_num);
 			}
 		}
 		
