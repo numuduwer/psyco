@@ -69,8 +69,11 @@ public class ShopServiceImpl implements ShopService {
 	}
 	
 	@Override
-	public ListData getItemList(String pageName, String pageNum, int id,Model model) throws SQLException{
+	public ListData getItemList(String pageName, String pageNum, Model model) throws SQLException{
+		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession httpSession = servletRequestAttribute.getRequest().getSession();
 		
+		int id = (Integer)httpSession.getAttribute("memNum");
 		// 디폴트 값 설정 
 		if(pageNum == null) {
 			pageNum = "1";

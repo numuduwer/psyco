@@ -6,10 +6,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
 	function goBack(){
 		window.history.back();
 	}
+		function imagepreview(input){
+		       if(input.files && input.files[0]){
+		           var filerd = new FileReader();
+		           filerd.onload=function(e){
+		               $('#imgpreview').attr('src', e.target.result);
+		           };
+		           filerd.readAsDataURL(input.files[0]);
+		       }
+		     }
+
 </script>
 <body>
 
@@ -53,15 +64,15 @@
                 <label for="" class="form_title">포장여부</label>
                 <input type="checkbox" name="takeout" value="1" />
             </div>
-
             <div class=form_tab>
-                <label for="" class="form_title">가게이미지</label>
-                <input type="file" name="shop_img" />
-            </div>
+		       	<label for="" class="form_title"><img id="imgpreview"  width="100" height="100">가게 이미지</label>
+		       	<input type="file" onchange="imagepreview(this);" name="shop_img"/>
+			</div>
 
             <div class=form_tab>
                 <label for="" class="form_title">사업자 번호</label>
-                 <input type="text" name="license_number" value="${license_number}" readonly />
+                 <input type="text" name="license_number" />
+             <!--     <input type="text" name="license_number" value="${license_number}" readonly />-->
             </div>
 
             <ul class="form_btn_box">

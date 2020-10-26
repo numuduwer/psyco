@@ -160,8 +160,10 @@ public class ShopBean {
 		System.out.println("------ mymenuList ----- ");
 		System.out.println("controller 잘 연결 ");
 		int member_Num = (int) session.getAttribute("memNum");
+		System.out.println("memNUm : " + member_Num);
 		List<Integer> myShop_ShopNumList = commonsService.getMyShop_MemberNumList(member_Num);
 		List<MenuDTO> menuList = commonsService.getMyMenuListFromShopNum(myShop_ShopNumList);
+		System.out.println("menuList :" + menuList.size());
 		model.addAttribute("menuList", menuList);
 		
 		return "shop/myMenuList";
@@ -231,11 +233,8 @@ public class ShopBean {
 	@RequestMapping("itemList.com")
 	public String itemList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
 		
-		int id = 123;
-		System.out.println(id);
-		
-		System.out.println("itemList Controller id :" + id);
-		ListData data = shopService.getItemList(pageName,pageNum,id,model);
+
+		ListData data = shopService.getItemList(pageName,pageNum,model);
 		commonsService.setListDataToModel(model, data);
 		return "shop/itemList";
 	}
@@ -386,19 +385,20 @@ public class ShopBean {
 	}
 	
 	@RequestMapping("shopPageList2.com")
-	public String shopPageList2(String pageName, String pageNum, HttpSession session, Model model) throws SQLException, JsonProcessingException {
+	public String shopPageList2(int member_num, String pageName, String pageNum, HttpSession session, Model model) throws SQLException, JsonProcessingException {
 		
-//		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-//		HttpSession session = servletRequestAttribute.getRequest().getSession();
-//		String writer = (String) session.getAttribute("memId");
-		int id = 123;
+		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		session = servletRequestAttribute.getRequest().getSession();
+		
+		int memNum = (Integer) session.getAttribute("memNum");
+		
 //		
-//		System.out.println("itemList Controller id :" + id);
+
 		
-		ListData data = shopService.getItemList(pageName,pageNum,id,model);
+		ListData data = shopService.getItemList(pageName,pageNum,model);
 		commonsService.setListDataToModel(model, data);
 		
-		List<Object> itemMapList = shopService.getMyEntireList(pageName,id);
+		List<Object> itemMapList = shopService.getMyEntireList(pageName,member_num);
 		model.addAttribute("itemMapList", itemMapList);
 		
 		

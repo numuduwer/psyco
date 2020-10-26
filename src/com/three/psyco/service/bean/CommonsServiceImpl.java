@@ -236,12 +236,14 @@ public class CommonsServiceImpl implements CommonsService {
 		System.out.println("-------- service ----- review ---- ");
 		System.out.println("member_Num :" + member_Num );
 		List<Integer> myShop_ShopNumList = shopDAO.getMyShop_ShopNumList(member_Num);
+		
 		return myShop_ShopNumList;
 	}
 	
 	@Override
 	public List<MenuDTO> getMyMenuListFromShopNum(List<Integer> myShop_ShopNumList) {
 		List<MenuDTO> menuList = menuDAO.getMyMenuListFromShopNum(myShop_ShopNumList);
+	
 		return menuList;
 		
 	}

@@ -50,15 +50,28 @@ function onClickItemDelete(menuNum){
 
 	<c:if test="${count == 0}">
 		<h2> 메뉴가 없어요.</h2>
-	<button onclick="window.location='/psyco/shop/menuModify.com?menu_num=${article.menu_num}'">수  정</button>
-	
+	<br><br>	
+
+		
+		<ul class="shop_menu2">
+			<li><a href="/psyco/member/menuSignupForm.com?shop_num=${param.shop_num}&member_num=${sessionScope.memNum}">가게 등록하기   </a></li>
+			<li> <a href="javascript:history.back();">돌아가기 </a>  </li>
+		</ul>
+			
 	</c:if>
 	<c:if test="${count > 0}">
 	   
 		<div class="admin_content2">
 		<br><br>	
-		<h2>메뉴 리스트  </h2>
-		<br>
+
+		
+		<ul class="shop_menu2">
+			<li><a href="/psyco/member/menuSignupForm.com?shop_num=${param.shop_num}&member_num=${sessionScope.memNum}">가게 등록하기   </a></li>
+			<li> <a href="javascript:history.back();">돌아가기 </a>  </li>
+		</ul>
+			
+			<br>
+	
 
                    
 		<table>

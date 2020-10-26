@@ -997,3 +997,8 @@ xmain {
   display: inline-block;
 }
 
+.main_menu_ul li {
+	color : red;
+}
+
+

@@ -21,6 +21,7 @@
 					console.log("success 여부는   : " + result);
 					if(result == 'ok'){
 						alert(" 승인 처리되셨습니다. !  오른쪽 위  버튼을   확인해주세요 !");
+						window.location.href = '/psyco/member/logout.com';
 					}
 					
 				},
@@ -142,9 +143,9 @@
         <div class="card-container">
         <c:forEach var="item" items="${itemMapList}">
         	<div class="card">
-        		<img src="/psyco/resources/${item.itemList.menu_img}" alt="" class="card_img">
+        		<img src="/psyco/save/${item.itemList.menu_img}" alt="" class="card_img">
         		<div class="card_content">
-        			<h3 id="shop_name"><a href="/psyco/shop/shopDetail.com?shop_num=${item.itemList.shop_num}">${item.itemList.shop_name}</a></h3>
+        			<h3 id="shop_name"><a href="">${item.itemList.shop_name}</a></h3>
         			<h2 id="item_name"><a href="/psyco/shop/itemDetail.com?item_num=${item.itemList.item_num}&current_price=${item.current_price}&discount_price=${item.discount_price}&discount_rate=${item.discount_rate}&shop_num=${item.itemList.shop_num}">${item.itemList.item_name}</a></h2>
         			<c:choose>
         				<c:when test="${item.progress_status == 1 && item.selling_status == 4}">
@@ -225,8 +226,7 @@
 		        			<ul class="price">			
 		     					<li>현재 가격</li>
 		     					<li>${item.current_price}원</li>
-		     					<li>남은 시간</li>
-		     					<li id="remainder_time${item.itemList.item_num}">${item.remainder_time}분</li>
+		   
 		        			</ul>
         				</c:when>
         			</c:choose>

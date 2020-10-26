@@ -924,10 +924,35 @@ footer {
 }
 
 
+
+
+
 .shop_menu li a {
   color: var(--color-white);
   font-weight: 500;
   font-size: var(--font-small);
+}
+
+
+
+.shop_menu2 {
+  display: flex;
+  list-style-type: none;
+  justify-content: space-between;
+}
+
+.shop_menu2 li {
+  margin: 0 10px;
+  padding: 5px 16px;
+  border: 1px solid var( --color-dark-blue);
+  background-color:var( --color-dark-blue);
+  border-radius: 5px;
+}
+
+.shop_menu2 li a {
+  color: var(--color-white);
+  font-weight: 500;
+  font-size: 12px;
 }
 
 

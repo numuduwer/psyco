@@ -10,7 +10,14 @@
 	
 </head>
 	<body>
-
+<!--  검색베너  & 신메뉴 , 랭킹미리보기 -->
+    <section id="banner_section">
+      
+        <div id="banner">
+            <img src="/psyco/resources/img/main/community.jpg" alt="">
+        </div>
+ 
+    </section>
 	<br/>
 <div class="admin_content">
 		<table align="center">

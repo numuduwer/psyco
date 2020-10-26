@@ -99,7 +99,7 @@
 						pg: "html5_inicis",
 						payment_method: "card",					
 						//merchant_uid: 'psyco' + getToday() + '-' + ${article.item_num},	// 주문 번호, 한번 결제 완료된 주문번호는 다시 사용할 수 없는 듯
-						merchant_uid: 'psyco20201023-001293',
+						merchant_uid: 'psyco20201023-001894',
 						name: '${article.item_name}',
 						amount: getParam("current_price") * document.getElementById('quantity').value,
 						buyer_email: result.email,

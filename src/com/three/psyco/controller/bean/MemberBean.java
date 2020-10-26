@@ -193,15 +193,28 @@ public class MemberBean {
 		
 		return "shop/shopEnrollmentCheck";
 	}
-	
-	@RequestMapping("menuSignupPro.com")
-	public String menuSignupPro(MultipartHttpServletRequest request,int shop_num,int member_num,Model model)throws SQLException {
-		
-		memberMenu.insertMemberMenus(request,shop_num);
+	@RequestMapping("menuSignupForm.com")
+	public String menuSignupForm(Model model , int member_num, int shop_num) {
+		System.out.println("menuSignupFOrm------");
+		System.out.println( "memNUm :" + member_num);
+		System.out.println("shopNum : " + shop_num);
 		
 		model.addAttribute("member_num", member_num);
 		model.addAttribute("shop_num", shop_num);
 		return "member/menuSignupForm";
+	}
+	
+	@RequestMapping("menuSignupPro.com")
+	public String menuSignupPro(MultipartHttpServletRequest request,int member_num, int shop_num, Model model)throws SQLException {
+		System.out.println("menuSignupPro ========");
+		System.out.println("shopNUm : " + shop_num);
+		System.out.println("member_num : " + member_num);
+		memberMenu.insertMemberMenus(request,shop_num);
+		
+		model.addAttribute("member_num", member_num);
+		model.addAttribute("shop_num", shop_num);
+		return "redirect: /psyco/shop/menuList.com"; 
+				
 	}
 	
 	@RequestMapping(value="getUserInfo.com")

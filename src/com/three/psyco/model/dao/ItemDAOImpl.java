@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -56,7 +58,7 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public int countA(int id) throws SQLException {
 		String selling = "1";
-		id = 1;
+	
 		HashMap map = new HashMap();
 		map.put("mem_num", id);
 		map.put("selling", selling);
@@ -69,7 +71,7 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public List getItemListA(int id, int startRow, int endRow) {
 		String selling = "1";
-		id = 1;
+
 		HashMap map = new HashMap();
 		map.put("mem_num", id);
 		map.put("startRow", startRow);
@@ -84,7 +86,7 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public int countC(int id) throws SQLException {
 		String selling = "3";
-		
+
 		HashMap map = new HashMap();
 		map.put("mem_num", id);
 		map.put("selling", selling);
@@ -98,6 +100,7 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public List getItemListC(int id, int startRow, int endRow) {
 		String selling = "3";
+
 		HashMap map = new HashMap();
 		map.put("mem_num", id);
 		map.put("startRow", startRow);
@@ -112,7 +115,7 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public int countD(int id) throws SQLException {
 		String selling = "4";
-		
+
 		HashMap map = new HashMap();
 		map.put("mem_num", id);
 		map.put("selling", selling);
@@ -127,6 +130,7 @@ public class ItemDAOImpl implements ItemDAO {
 	public List getItemListD(int id, int startRow, int endRow) {
 		String selling = "4";
 		HashMap map = new HashMap();
+
 		map.put("mem_num", id);
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);

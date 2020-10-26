@@ -127,7 +127,7 @@
     <!-- 경매 상품 -->
     <section class="item-section">
         <div class="card-container">
-            <c:forEach var="article" items="${articleList}">
+            <c:forEach var="article" items="${articleListD}">
             	<div class="card">
             		<img src="/psyco/resources/img/item/one/1.jpg" alt="" class="card_img">
             		<div class="card_content">
