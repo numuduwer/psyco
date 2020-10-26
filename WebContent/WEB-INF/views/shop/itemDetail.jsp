@@ -250,19 +250,24 @@
             <div class="ing_info">
                 <h2>이 가게에서 진행중인 경매</h2>
                 <div class="info_items">
+                <c:if test="${count1 == 0}">
+                	<h3>진행예정인 경매가 없습니다.</h3>
+                </c:if>
                 <c:forEach var="list" items="${itemImgList}">
-                <a href="/psyco/shop/itemDetail.com?item_num=${list.item_num}"></a>
-                    <img src="/psyco/save//" width=100>
-                      ${list.menu_img}
+                <a href="/psyco/shop/itemDetail.com?item_num=${list.item_num}&shop_num=${list.shop_num}"></a>
+                    <a href="/psyco/shop/itemDetail.com?item_num=${list.item_num}&shop_num=${list.shop_num}"><img src="/psyco/save//${list.menu_img}" width=100></a>
                 </c:forEach>
                 </div>
             </div>
             <div class="ing_info">
                 <h2>이 가게에서 진행예정 경매</h2>
                 <div class="info_items">
+                 <c:if test="${count == 0}">
+                	<h3>진행예정인 경매가 없습니다.</h3>
+                </c:if>
                 <c:forEach var="list2" items="${articleList3}">
-                    <img src="" alt="">
-                    ${list2.menu_img}
+                <a href="/psyco/shop/itemDetail.com?item_num=${list2.item_num}&shop_num=${list2.shop_num}"></a>
+                    <a href="/psyco/shop/itemDetail.com?item_num=${list2.item_num}&shop_num=${list2.shop_num}"><img src="/psyco/save//${list2.menu_img}" ></a>
                 </c:forEach>
                 </div>
             </div>

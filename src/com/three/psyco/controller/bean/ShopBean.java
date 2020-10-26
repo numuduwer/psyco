@@ -246,9 +246,11 @@ public class ShopBean {
 		
 		ItemDTO article = shopService.getItemOne(item_num, pageNum, model);
 		ShopDTO shopInfo = shopService.getShopDataSV(article.getShop_num());
-
-		List itemImgList = mainService.getContentImg(shop_num, model);
 		
+		// 해당가게에서 진행중인 경매상품 리스트
+		List itemImgList = shopService.getContentImg(shop_num, model);
+		
+		// 해당가게 진행예정 경매상품 리스트
 		String pageName = "";
 		shopService.getItemList1(pageName,pageNum,shop_num,model);
 

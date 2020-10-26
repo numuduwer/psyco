@@ -39,14 +39,13 @@ public class MainServiceImpl implements MainService{
 	}
 	
 	
-	@Override
-	public List getContentImg(int shop_num,Model model) {
-		System.out.println(shop_num);
-		List<MenuDTO> list = menuDAO.getContentImg(shop_num);
-		System.out.println("size : " + list.size());
-		
-		return list;
-	}
+
+
+
+	
+
+
+	
 
 
 	public String getEnroll(String id) {

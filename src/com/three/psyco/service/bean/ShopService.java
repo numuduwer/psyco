@@ -31,6 +31,7 @@ public interface ShopService {
 	public int paymentInsert(String data) throws ParseException;
 	public List<Object> getMyEntireList(String pageNum,int id) throws JsonProcessingException;
 	public List getItemList1(String pageName, String pageNum, int id, Model model) throws SQLException;
+	public List getContentImg(int shop_num, Model model);
 	
 	
 }

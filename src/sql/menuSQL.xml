@@ -22,8 +22,8 @@
  		delete from menu where menu_num =#{value}
  	</delete>
  	
- 	 <select id="getContentListCount" parameterType="hashmap" resultType="int" >
- 		select * from item where shop_num=#{shop_num} and selling_status=#{selling}
+ 	 <select id="getContentListCount1" parameterType="hashmap" resultType="int" >
+ 		select count(*) from item where shop_num=#{shop_num} and selling_status=#{selling}
  	</select>
  	
  	
@@ -38,6 +38,9 @@
   	</select>
   	
   	
+  	<select id="getContentListCount" parameterType="hashmap" resultType="int" >
+ 		select count(*) from item where shop_num=#{shop_num} and selling_status=#{selling}
+ 	</select>
 
  	<!-- 해당 음식 content 페이지에서 해당가게 이미지 리스트 뿌려주기 -->
 	<select id="getContentList" parameterType="hashmap" resultType="JoinResultDTO">

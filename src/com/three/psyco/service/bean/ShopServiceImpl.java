@@ -421,16 +421,17 @@ public class ShopServiceImpl implements ShopService {
 		int startRow = 1;
 		int endRow = 4;
 
-		
+		// 아이템 상태 1
 		List articleList = null;
 		
 		int count = menuDAO.getItemListCount(shop_num);
-		System.out.println("count : " + count);
-		if(count >0) {
-			articleList = menuDAO.getItemListE(shop_num,startRow, endRow);
-		}
+		articleList = menuDAO.getItemListE(shop_num,startRow, endRow);
+		System.out.println("진행예정 경매 상품 개수 : " + count);
+		System.out.println("진행예정 경매 상품 리스트 사이즈 : " + articleList.size());
+		
 
 		model.addAttribute("articleList3", articleList);
+		model.addAttribute("count", count);
 		
 		return articleList;
 		
@@ -438,7 +439,18 @@ public class ShopServiceImpl implements ShopService {
 	}
 	
 	
-	
+	@Override
+	public List getContentImg(int shop_num,Model model) {
+		System.out.println(shop_num);
+		List<MenuDTO> list = menuDAO.getContentImg(shop_num);
+		int count1 = menuDAO.getContentImgCount(shop_num);
+		System.out.println("진행중인 경매 개수 : " + count1);
+		System.out.println("진행중인 경매 리스트 사이즈 : " + list.size());
+		
+		model.addAttribute("count1",count1);
+		
+		return list;
+	}
 	
 	
 	
