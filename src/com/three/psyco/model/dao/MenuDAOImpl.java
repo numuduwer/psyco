@@ -46,6 +46,16 @@ public class MenuDAOImpl implements MenuDAO {
 		return list;
 	}
 	
+	public int getContentImgCount(int shop_num) {
+		String selling = "3";
+		HashMap map = new HashMap();
+		map.put("selling", selling);
+		map.put("shop_num", shop_num);
+		int count = sqlSession.selectOne("menu.getContentListCount",map);
+		
+		return count;
+	}
+	
 	@Override
 	public List getItemListE(int shop_num, int startRow, int endRow) {
 		String selling = "1";
@@ -67,7 +77,7 @@ public class MenuDAOImpl implements MenuDAO {
 		map.put("mem_num", shop_num);
 		map.put("selling", selling);
 		
-		int count = sqlSession.selectOne("menu.getContentListCount",map);
+		int count = sqlSession.selectOne("menu.getContentListCount1",map);
 		
 		return count;
 	}

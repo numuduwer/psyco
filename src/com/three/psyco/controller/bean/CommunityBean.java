@@ -306,6 +306,8 @@ public class CommunityBean {
 		@RequestMapping("communityMyArticle.com")
 		public String communityMyArticle(String pageNum, String category, Model model) throws SQLException {
 			
+			System.out.println("category :" + category);
+			
 			ListData list = communityService.getMyAskSv(pageNum,category);
 			commonsService.setListDataToModel(model,list);
 
