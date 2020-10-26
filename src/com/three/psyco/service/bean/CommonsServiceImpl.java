@@ -272,7 +272,7 @@ public class CommonsServiceImpl implements CommonsService {
 			
 			long time_difference = current_minuets - item_StartTime_minuet;		// 몇분 지났는지 알 수 있는 시간
 			long remainder_time = item_endTime_minuet - current_minuets;
-			long discount_cycle = dto.getDiscount_cycle() / 600;				// 할인 주기
+			long discount_cycle = dto.getDiscount_cycle() / 60;				// 할인 주기
 			long auction_unit = Long.parseLong(dto.getAuction_unit());			// 할인 단위
 			long discount_count = time_difference / discount_cycle;				// 할인 횟수
 			long discount_price = discount_count *  auction_unit;				// 할인 된 가격
