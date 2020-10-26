@@ -29,7 +29,7 @@ public interface MemberDAO {
 	
 	public int modifyNormalUserPro(MemberDTO dto);
 	
-	public void insertMemberShop(MemberShopDTO dto)throws SQLException;
+	public int insertMemberShop(MemberShopDTO dto)throws SQLException;
 	
 	public int idChk(String id)throws SQLException;
 }

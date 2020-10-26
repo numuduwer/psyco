@@ -44,7 +44,7 @@ public interface MemberService {
 	
 	public int modifyNormalUserPro(MemberDTO dto);
 	
-	public void insertMemberShops(MultipartHttpServletRequest request,int member_num,String status,String approve_status)throws SQLException;
+	public int insertMemberShops(MultipartHttpServletRequest request,int member_num,String status,String approve_status)throws SQLException;
 	
 	//아이디 중복 체크
 	public int idChk(String id)throws SQLException;

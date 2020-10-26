@@ -408,7 +408,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public void insertMemberShops(MultipartHttpServletRequest request,int member_num,String status,String approve_status) throws SQLException {
+	public int insertMemberShops(MultipartHttpServletRequest request,int member_num,String status,String approve_status) throws SQLException {
 		MemberShopDTO dto=new MemberShopDTO();
 		String shop_name=request.getParameter("shop_name");
 		String shop_phone=request.getParameter("shop_phone");
@@ -426,7 +426,7 @@ public class MemberServiceImpl implements MemberService {
 			String ext = orgName.substring(orgName.lastIndexOf('.'));
 			Long date=System.currentTimeMillis();
 			String newName=imgName+date+ext;
-			String imgPath = path+"/"+newName;
+			String imgPath = path+"\\"+newName;
 			System.out.println("--------- insertMember ----------");
 			System.out.println("imgPath : " + imgPath);
 			File file=new File(imgPath);
@@ -462,8 +462,8 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println("-------- 정체가 뭐야 ");
 		;
 		
-		memberDAO.insertMemberShop(dto);
-		
+		int result = memberDAO.insertMemberShop(dto);
+		return result;
 	}
 
 	@Override

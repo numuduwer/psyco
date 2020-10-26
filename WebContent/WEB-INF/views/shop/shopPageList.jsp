@@ -12,34 +12,34 @@
 <script>
 	
 	
-function onClickItemDelete(shopNum){
+	function onClickItemDelete(shopNum){
+		
+		var msg = confirm("삭제하시겠습니까? ");
+		if(msg == true){
+			var apiURL = '/psyco/shop/deleteShop.com';
+			console.log(apiURL);
 	
-	var msg = confirm("삭제하시겠습니까? ");
-	if(msg == true){
-		var apiURL = '/psyco/shop/deleteShop.com';
-		console.log(apiURL);
+			$.ajax({
+		        type: 'POST',
+		        url: apiURL,
+				data: {shop_num : shopNum},
+				success:function (shop_num) {
+					var myobj = document.getElementById(shopNum);
+					myobj.remove();
+		        },
+		        error: function (error) {
+		            alert('data error');
+		        }
+		    });	
+		}else{
+			alert('삭제 취소하셨습니다, ')
+		}
+	
+	}	
 
-		$.ajax({
-	        type: 'POST',
-	        url: apiURL,
-			data: {shop_num : shopNum},
-			success:function (shop_num) {
-				var myobj = document.getElementById(shopNum);
-				myobj.remove();
-	        },
-	        error: function (error) {
-	            alert('data error');
-	        }
-	    });	
-	}else{
-		alert('삭제 취소하셨습니다, ')
-	}
-	
-	
-
-}	
 </script>
 <body>
+
     <!--  기능  타이틀 -->
     <div class="myPage_mainTitle">
         <h1>사장님 마이페이지</h1>
