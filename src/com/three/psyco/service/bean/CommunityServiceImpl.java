@@ -35,6 +35,7 @@ public class CommunityServiceImpl implements CommunityService {
 		HttpSession session = servletRequestAttribute.getRequest().getSession();
 		String writer = (String) session.getAttribute("memId");
 		
+		
 		CommunityDTO dto = new CommunityDTO();
 		String subject = request.getParameter("subject");
 		if(subject.equals("[댓글]")) {
