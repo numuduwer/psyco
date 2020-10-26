@@ -37,7 +37,7 @@
     <div class="content_shopItem">
         <div id="tab1" data-tab-content class="items2 active">
             <div class="ltem2_shopItembox">
-                	<c:forEach var="item" items="${itemMapList}">
+                	<c:forEach var="article" items="${articleListC}">
                	<div class="content_shopItem_listBox">
 	                    <div class="shopItem_img">
 	                        <img src="/img/item/one/1.jpg" alt="">
@@ -46,7 +46,7 @@
 	                        <li>
 	                            시작시간 : ${article.startDate}
 	                        </li>
-	                        <li>종료시간 : ${article.endDate}</li>
+	                        <li>종료시간zz : ${article.endDate}</li>
 	                    </ul>
 	                    <ul>
 	                        <li>
