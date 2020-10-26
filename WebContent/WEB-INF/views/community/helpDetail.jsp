@@ -9,32 +9,29 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<br />
-	<h1 align="center">Detail</h1>
-	<table>
-	<c:if test="${pageNum == 2}">
-			<button onclick="window.location='/psyco/user/myPageList2.com'">마이페이지 돌아가기</button>
-	</c:if>
+
+
+	<br /><br /><br /><br /><br /><br /><br />
+
+		<div class="admin_content2">
+	<table align="center">
+			
 		<tr>
-			<td width="80" align="center">제 목</td>
+			<th width="80">제 목</th>
+			<td colspan="20" align="center" > ${article.subject}  </td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center"> ${article.subject} </td>
+			<th>작성 내용</th>
+			<td colspan="2"align="center" height="300">${article.content}   </td>
 		</tr>
 		<tr>
-			<td align="center">작성 내용</td>
-		</tr>
-		<tr>
-			<td colspan="2" align="center" height="300">${article.content}   </td>
-		</tr>
-		<tr>
-			<td colspan="50"> posted by <a href="mailto:${article.writer}">${article.writer}</a> at ${article.reg} </td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<button onclick="window.location.href='/psyco/help.com?category=5'">문의 리스트 돌아가기</button>
+			<td colspan="2" > 
+				<button class="admin_dtn2_content2" onclick="window.location.href='/psyco/help.com?category=5'"> 답글 달기  </button>
+				<button class="admin_dtn2_content2" onclick="window.location.href='/psyco/help.com?category=5'">리스트로 </button>
 			</td>
 		</tr>
+		
 	</table>
+	</div>
 </body>
 </html>

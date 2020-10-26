@@ -42,7 +42,7 @@
 			
 			<tr>
 				<th>댓글</th>
-				<td colspan="2"align="center" height="300">${article.content}   </td>
+				<td colspan="2"align="center" height="30">${article.content}   </td>
 			</tr>
 			
 			<tr>
@@ -56,7 +56,7 @@
 					<button class="admin_dtn2_content"  onclick="window.location='/psyco/communityModifyForm.com?&community_num=${community_num}&pageNum=${pageNum}&category=${category}'">수 정</button>
 				</c:if>
 					<button class="admin_dtn2_content" onclick="window.location='/psyco/communityDeleteForm.com?community_num=${community_num}&pageNum=${pageNum}&category=${category}'">삭 제</button>
-			</c:if>
+				</c:if>
 					<button class="admin_dtn2_content" onclick="window.location='/psyco/communityForm.com?community_num=${community_num}&ref=${article.ref}&re_step=${article.re_step}&re_level=${article.re_level}&category=${category}'">답 글 작성 </button>
 					<button class="admin_dtn2_content" onclick="window.location='/psyco/communityList.com?pageNum=1&category=${category}'">리스트로 </button>
 				 </td>

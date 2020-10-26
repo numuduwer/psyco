@@ -54,8 +54,8 @@ function onClickItemDelete(memberNum){
             <ul class="admin_btn2">
                 <li><a href="/psyco/super/memberList.com">회원관리</a></li>
                 <li><a href="/psyco/super/shopEnrollList.com">서비스 등록 현황</a></li>
-                <li><a href="/psyco/communityList.com?category=3">가게관리</a></li>
-                <li><a href="/psyco/communityList.com?category=4">문의하기 관리</a></li>
+                <li><a href="/psyco/super/shopList.com">가게관리</a></li>
+                <li><a href="/psyco/help.com">문의하기 관리</a></li>
             </ul>
         
          

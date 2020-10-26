@@ -11,7 +11,8 @@
   	<select id="getMemberProfile" parameterType="String" resultType="memberDTO">
   		select * from member where email=#{value}
   	</select>
-  	
+ 
+ 
   	<select id="getMemberProfileFromId" parameterType="string" resultType="memberDTO">
   		select * from member where member_Id=#{member_Id}
   	</select>
@@ -57,4 +58,14 @@
   	<insert id="insertMemberShop" parameterType="MemberShopDTO">
   		insert into shop values(shop_seq.nextval,#{shop_name},#{shop_phone},#{operating_time},#{address},#{origin},#{takeout},#{shop_img},#{license_number},sysdate,sysdate,#{status},#{approve_status},#{member_num})
   	</insert>
+  	
+  	
+  	
+  	 <select id="getMemberData" parameterType="String" resultType="memberDTO">
+  		select * from member where member_id =#{value}
+  	</select>
+  	<update id="upgradeEnroll" parameterType="String">
+  		update member set business_license = 2 where member_Id = #{value}
+  	</update>
+  	
   </mapper>
