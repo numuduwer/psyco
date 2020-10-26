@@ -75,7 +75,31 @@
 				}
 			}).open();
 		}
+				var idChkVal = $("#idChk").val();
+				if(idChkVal == "N"){
+					alert("중복확인 버튼을 눌러주세요.");
+				}else if(idChkVal == "Y"){
+					$("#regForm").submit();
+				}
+			});
+		})
 		
+		function fn_idChk(){
+			$.ajax({
+				url : "/member/idChk",
+				type : "post",
+				dataType : "json",
+				data : {"member_Id" : $("#member_Id").val()},
+				success : function(data){
+					if(data == 1){
+						alert("중복된 아이디입니다.");
+					}else if(data == 0){
+						$("#idChk").attr("value", "Y");
+						alert("사용가능한 아이디입니다.");
+					}
+				}
+			})
+		}
 	</script>
 </head>
 <body>
@@ -88,11 +112,12 @@
 
 
         <div>
-            <form action="/psyco/member/signup.com" method="post" class="form">
+            <form action="/psyco/member/signup.com" method="post" class="form" id="regFrom">
                 <input class="form_input" type="hidden" name="license_number" value="${param.license_number}">
                 <div class=form_tab>
                     <label for="" class="form_title"> 아이디</label>
                     <input class="form_input" type="text" name="member_Id" placeholder="아이디를 입력" />
+                    <button class="idChk" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button>
                 </div>
                 <div class=form_tab>
                     <label for="" class="form_title"> 비밀번호</label>

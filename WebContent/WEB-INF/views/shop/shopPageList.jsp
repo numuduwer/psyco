@@ -88,7 +88,7 @@ function onClickItemDelete(shopNum){
                         <h2>가게 리스트</h2>
                         <c:if test="${count > 0}">
 	                       <c:forEach var="article" items="${articleList}">
-		                        <div id = "${article.shop_num}"} class="myPage_item_info">
+		                        <div id = "${article.shop_num}" class="myPage_item_info">
 			                     
 		                            <img src="/img/item/one/1.jpg" alt="">
 		                            <ul>
