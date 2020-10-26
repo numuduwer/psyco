@@ -11,26 +11,26 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 	<script type="text/javascript">
-	 /* $(document).ready(function(){
-		
-		 $.ajax({
-			url : "/psyco/main/getEnrollEvent.com",
-			type: "post",
-			dataType: "text",
-			success:function(result){
-				console.log("success 여부는   : " + result);
-				if(result == 'ok'){
-					alert(" 승인 처리되셨습니다. !  오른쪽 위  버튼을   확인해주세요 !");
+		 $(document).ready(function(){
+			
+			 $.ajax({
+				url : "/psyco/main/getEnrollEvent.com",
+				type: "post",
+				dataType: "text",
+				success:function(result){
+					console.log("success 여부는   : " + result);
+					if(result == 'ok'){
+						alert(" 승인 처리되셨습니다. !  오른쪽 위  버튼을   확인해주세요 !");
+					}
+					
+				},
+				error: function() {
+					console.log(' ajax  실패');
 				}
 				
-			},
-			error: function() {
-				console.log(' ajax  실패');
-			}
-			
-		 });
-		 
-	 }) */
+			 });
+			 
+		 })
 	
 	
 		/* $(document).ready(function(){
@@ -229,7 +229,6 @@
 		     					<li id="remainder_time${item.itemList.item_num}">${item.remainder_time}분</li>
 		        			</ul>
         				</c:when>
-        			
         			</c:choose>
         			
         		</div>

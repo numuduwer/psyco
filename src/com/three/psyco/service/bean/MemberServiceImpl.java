@@ -284,7 +284,6 @@ public class MemberServiceImpl implements MemberService {
 		
 		// 파싱
 		try {
-			
 			xmlRaw = xmlRaw.replace("{parameter}", license_number);
 			
 			String res = sendPost(PostUrl, xmlRaw);

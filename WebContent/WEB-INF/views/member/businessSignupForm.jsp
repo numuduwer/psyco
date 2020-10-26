@@ -56,9 +56,9 @@
     </div>
     <form class="form_box">
         <div class="group">
-            <input class="form_input2" type="text" name="text1" id="text1"> - <input class="form_input2" type="text"
+            <input class="form_input2" type="text" name="text1" id="text1" pattern="[0-9]+"> - <input class="form_input2" type="text" pattern="[0-9]+"
                 name="text2" id="text2">
-            - <input class="form_input2" type="text" name="text3" id="text3">
+            - <input class="form_input2" type="text" name="text3" id="text3" pattern="[0-9]+">
             <input type="button" value="사업자 중복확인" id="checkBtn">
             <br />
             <span id="chkMsg"></span>
