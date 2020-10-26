@@ -90,4 +90,12 @@
 		 )A )B where r >=#{start} and r <=#{end}
 	]]>
 	</select>
+	<delete id="deleteShop1" parameterType="hashMap">
+		delete from shop where member_num=#{member_num}
+	</delete>
+	
+	<select id="getShopNum" parameterType="int" resultType="int">
+		select shop_num from shop where member_num=#{value}
+	</select>
+	
  </mapper>

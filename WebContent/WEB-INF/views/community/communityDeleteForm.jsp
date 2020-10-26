@@ -7,23 +7,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<h1 align="center"> delete </h1>
+		<br><br><br><br><br><br><br><br><br><br><br><br>
+		<h2 align="center"> 삭제하시겠습니까? </h2>
 		<form action="/psyco/communityDeletePro.com?pageNum=${pageNum}" method="post">
 		<input type="hidden" name="community_num" value="${community_num}"/>
 		<input type="hidden" name="category" value="${category}"/>
-			<table>
-				<tr>
-					<td>삭제를 원하시면 삭제버튼을 눌러주세요.</td>	
-				</tr>
-				<tr>
-					<td><input type="submit" value="삭제"/></td>	
-					<td><input type="button" value="삭제취소" onclick="window.location='/psyco/communityDetail.com?pageNum=${pageNum}&category=${category}'"/></td>
-				</tr>
-			
-			</table>
+		
+				<br><br><br>
+				
+					<input  class="form_btn" type="submit" value="삭제"/>
+					<input  class="form_btn" type="button" value="삭제취소" onclick='history.back(-1);'/>
+				
 			
 		
 		
 		</form>
+		<br><br><br><br><br><br><br><br><br><br><br><br>
 </body>
 </html>

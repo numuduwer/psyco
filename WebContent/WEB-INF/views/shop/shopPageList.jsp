@@ -8,6 +8,37 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	
+	
+function onClickItemDelete(shopNum){
+	
+	var msg = confirm("삭제하시겠습니까? ");
+	if(msg == true){
+		var apiURL = '/psyco/shop/deleteShop.com';
+		console.log(apiURL);
+
+		$.ajax({
+	        type: 'POST',
+	        url: apiURL,
+			data: {shop_num : shopNum},
+			success:function (shop_num) {
+				var myobj = document.getElementById(shopNum);
+				myobj.remove();
+	        },
+	        error: function (error) {
+	            alert('data error');
+	        }
+	    });	
+	}else{
+		alert('삭제 취소하셨습니다, ')
+	}
+	
+	
+
+}	
+</script>
 <body>
     <!--  기능  타이틀 -->
     <div class="myPage_mainTitle">
@@ -39,26 +70,29 @@
 
             <div class="content">
                 <!--   탭 1 내용-->
+                
                 <div id="tab1" data-tab-content class="items active">
                     <div class="userZZimpage_tab1">
                         <ul class="zzim_reg">
-                            <li><input type="checkbox" name="" id=""> 전체선택</li>
-                            <li><a href="">선택 삭제</a> </li>
+                        <a href="/psyco/member/shopSignupForm.com?member_num=${member_num}">가게등록</a>
+                        
+                    
                         </ul>
                         <c:if test="${count == 0}">
 							<table>
 								<tr>
-									<td> 후기가 없습니다. </td>
+									<td> 가게가 등록되어있지 않습니다. </td>
 								</tr>
 							</table>
 						</c:if>
                         <h2>가게 리스트</h2>
                         <c:if test="${count > 0}">
 	                       <c:forEach var="article" items="${articleList}">
-		                        <div class="myPage_item_info">
+		                        <div id = "${article.shop_num}"} class="myPage_item_info">
+			                     
 		                            <img src="/img/item/one/1.jpg" alt="">
 		                            <ul>
-		                                <li><a href="">가게 이름 : ${article.shop_name}</a></li>
+		                                <li><a href="shopDetail.com?shop_num=${article.shop_num }">가게 이름 : ${article.shop_name}</a></li>
 		                                <li>
 		                                    <span> 주소 : ${article.address}</span>
 		                                </li>
@@ -67,8 +101,8 @@
 		                                </li>
 		                            </ul>
 		                            <ul class="myPage_item_info_btnList">
-		                                <li><button class="shop_btn"><a href="psyco/shop/shopModify.com">수정</a> </button></li>
-		                                <li><button class="shop_btn"><a href="psyco/shop/deleteShop.com">삭제</a> </button></li>
+		                                <li><button class="shop_btn"><a href="shopModify.com?shop_num=${article.shop_num }">수정</a> </button></li>
+		                               	<li><button class="shop_btn"> <a href="javascript:onClickItemDelete('${article.shop_num}')" >삭제${article.shop_num}</a> </button></li>
 		                            </ul>
 		                        </div>
                         </c:forEach>
@@ -123,16 +157,16 @@
                         <form action="" class="form">
                             <div class=form_tab>
                                 <label for="" class="form_title"> 아이디</label>
-                                <input type="text" class="form_input" />
+                                <input type="text" class="form_input" name="member_Id" />
                             </div>
                             <div class=form_tab>
                                 <label for="" class="form_title"> 패스워드</label>
-                                <input type="text" class="form_input" />
+                                <input type="text" class="form_input" name="pw" />
                             </div>
 
 
                             <div class=form_tab>
-                                <input type="button" class="form_btn" value="제출" />
+                                <input type="submit" class="form_btn" value="제출" />
                                 <input type="button" class="form_btn" value="뒤로" />
                             </div>
                         </form>

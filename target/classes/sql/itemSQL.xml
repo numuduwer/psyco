@@ -85,4 +85,12 @@
   		update item set amount=0 where item_num=#{item_num}
   	</update>
   	
+  	<update id="reduceItemCount" parameterType="hashmap">
+  		update item set amount=amount-#{amount} where item_num=#{item_num}
+  	</update>
+  	
+  	<select id="itemAmountCheck">
+  		select amount from item where item_num=${item_num}
+  	</select>
+  	
   </mapper>

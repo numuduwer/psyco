@@ -84,6 +84,8 @@ public class CommonsServiceImpl implements CommonsService {
 		if(pageName == null) {
 			pageName = "sMemberList";
 		}
+		
+		System.out.println("------- Service -----");
 		System.out.println("list pageName :" + pageName);
 		System.out.println("list pageNum :" + pageNum);
 		
@@ -99,13 +101,16 @@ public class CommonsServiceImpl implements CommonsService {
 		
 		// 글 갯수 불러오기 
 		int count =  superService.getCountSV(pageName);
-		System.out.println("list Test count :" + count);
+		System.out.println("count :" + count);
+		
+		
 		
 		// 글 있으면 전부 가져오기
 		if(count >0) {
 			articleList = superService.getListSV(pageName, startRow, endRow);	
 		}
 		
+
 		number = count - (currPage-1) * pageSize;
 
 		ListData data = new ListData();
@@ -268,10 +273,10 @@ public class CommonsServiceImpl implements CommonsService {
 			long discount_price = discount_count *  auction_unit;				// 할인 된 가격
 			
 			long current_price = Long.valueOf(dto.getMaxPrice()) - discount_price;	// 현재 가격
-			//long discount_rate = (Long.valueOf(dto.getMaxPrice()) - discount_price) / Long.valueOf(dto.getMaxPrice());	// 할인율
 			
 			if (current_price <= Long.valueOf(dto.getMinPrice())) {
 				current_price = Long.valueOf(dto.getMinPrice());
+				discount_price = dto.getMaxPrice() - current_price;
 			}
 			
 			double discount_rate = ((double)discount_price / Long.valueOf(dto.getMaxPrice())) * 100;		// 할인율
@@ -286,7 +291,6 @@ public class CommonsServiceImpl implements CommonsService {
 			}
 
 			String jsonOfItemList = new ObjectMapper().writeValueAsString(dto);		// string으로 형 변환하면 timestamp -> long타입으로 바뀌는듯 (확인 결과 값 일치)
-			System.out.println(jsonOfItemList);
 			
 			itemMap.put("itemList", dto);
 			itemMap.put("discount_price", discount_price);

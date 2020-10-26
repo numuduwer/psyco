@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -50,6 +51,12 @@ public class BuyDAOImpl implements BuyDAO {
 		return list;
 	}
 	
-	
+	@Override
+	public int paymentInsert(Map<String, Object> map) {
+		System.out.println(map);
+		
+		int result = sqlSession.insert("buy.paymentInsert", map);
+		return result;
+	}
 
 }

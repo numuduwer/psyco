@@ -54,13 +54,14 @@ public class MainBean {
 	public static String controller = "mainBean";
 	
 	@Autowired
-	private ShopServiceImpl shopService=null;
+	private ShopServiceImpl shopService = null;
 	
 	public Scheduler scheduler = null;
 	
 	@RequestMapping("main.com")
 	public String main(Model model,String pageNum, String pageName, HttpSession session) throws SQLException, JsonProcessingException {
 		
+
 
 
 		//List<JoinResultDTO> itemList = commonsService.getEntireList();
@@ -74,9 +75,7 @@ public class MainBean {
 
 		List<Object> itemMapList = commonsService.getEntireList();
 		model.addAttribute("itemMapList", itemMapList);
-		System.out.println(itemMapList);
 		
-
 
 		return "main/main";
 	}
@@ -91,6 +90,19 @@ public class MainBean {
 		System.out.println(jsonString);	
 		return jsonArray;
 
+	}
+	
+	@RequestMapping(value="getEnrollEvent.com")
+	@ResponseBody
+	public String getEnrollEvent(HttpSession session) {
+		String id = (String)session.getAttribute("memId");
+		String result_str = "no";
+		if(id != null) {
+			result_str = mainService.getEnroll(id);
+		}else {
+			result_str = "noLogin";
+		}
+		return result_str;
 	}
 	
 

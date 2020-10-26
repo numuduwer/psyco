@@ -22,6 +22,7 @@
 						이 함수를 정의할 때 넣는 인자에는 우편번호 검색 결과 목록에서 사용자가 클릭한 주소 정보가 들어가게 됨
 				*/
 				oncomplete: function(data) {
+					console.log(data);
 					// 팝업에서 검색결과 항목을 클릭했을 때 실행할 코드를 작성하는 부분
 					
 					// 도로명 주소의 노출 규칙에 따라 주소를 표시
@@ -68,8 +69,8 @@
 						guideTextBox.innerHTML = '(예상 지번 주소 :' + expJibunAddr + ')';
 						guideTextBox.style.display = 'block';
 					} else {
-						guideTextBox.innerHTML = '';
-						guideTextBox.style.display = 'none';
+						//guideTextBox.innerHTML = '';
+						//guideTextBox.style.display = 'none';
 					}
 				}
 			}).open();
@@ -143,15 +144,18 @@
                     <input class="form_input" type="text" id="roadAddress" placeholder="도로명주소">
                 </div>
                 <div class=form_tab>
-                    <label for="" class="form_title">싱세주소</label>
+
+                    <label for="" class="form_title">추가주소</label>
+                    <input class="form_input" type="text" id="extraAddress" placeholder="추가주소">
+                </div>
+                <div class=form_tab>
+                    <label for="" class="form_title">상세주소</label>
                     <input class="form_input" type="text" id="detailAddress" placeholder="상세주소">
                 </div>
 
-
-
                 <div class=form_tab>
-                    <input type="submit" value="가입" class="form_btn" />
                     <input type="button" value="취소" onclick="history.go(-1) " class="form_btn" />
+                    <input type="submit" value="가입" class="form_btn" />
                 </div>
 
             </form>

@@ -3,8 +3,11 @@ package com.three.psyco.controller.bean;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -20,8 +23,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.three.psyco.model.dto.BuyDTO;
+import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.MemberDTO;
+import com.three.psyco.service.bean.CommonsServiceImpl;
 import com.three.psyco.service.bean.MemberServiceImpl;
+import com.three.psyco.service.bean.MemberShopMenuServiceImpl;
+import com.three.psyco.service.bean.ShopServiceImpl;
 
 @Controller
 @RequestMapping("member")
@@ -29,7 +39,16 @@ public class MemberBean {
 	
 	@Autowired
 	private MemberServiceImpl memberService;
+	
+	@Autowired 
+	private ShopServiceImpl shopService;
+	
+	@Autowired
+	private CommonsServiceImpl commonsService;
 
+	@Autowired
+	private MemberShopMenuServiceImpl memberMenu=null;
+	
 	@RequestMapping("loginForm.com")
 	public String loginForm() {
 		return "member/loginForm";
@@ -40,7 +59,6 @@ public class MemberBean {
 		System.out.println("member_id : "+member_Id );
 		System.out.println("pw : "+pw );
 		int count = memberService.loginCheck(member_Id, pw);
-		
 		model.addAttribute("count", count);
 		return "member/loginCheck";
 	}
@@ -125,23 +143,64 @@ public class MemberBean {
 	}
 	
 	@RequestMapping("shopSignupForm.com")
-	public String shopSignupForm(String license_number, Model model) {
+	public String shopSignupForm(String member_num, Model model,String license_number) {
+		System.out.println("member_num==!"+member_num);
+		model.addAttribute("member_num", member_num);
 		model.addAttribute("license_number", license_number);
 		return "member/shopSignupForm";
 	}
 
 	@RequestMapping("shopSignupPro.com")
-	public String shopSignPro(MultipartHttpServletRequest request,int member_num) {
-	
+	public String shopSignPro(MultipartHttpServletRequest request,int member_num,Model model)throws SQLException {
 	
 		String status ="0";
 		String approve_status="0";
+		String pageNum ="null";
 		
 		try {
 			memberService.insertMemberShops(request,member_num,status,approve_status);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		int shop_num=shopService.getShopNums(member_num);
+		System.out.println("shop_num=="+shop_num);
+		model.addAttribute("shop_num", shop_num);
+		model.addAttribute("member_num", member_num);
 		return "member/menuSignupForm";
+	}
+	
+	@RequestMapping("menuSignupPro.com")
+	public String menuSignupPro(MultipartHttpServletRequest request,int shop_num,int member_num,Model model)throws SQLException {
+		
+		memberMenu.insertMemberMenus(request,shop_num);
+		
+		model.addAttribute("member_num", member_num);
+		model.addAttribute("shop_num", shop_num);
+		return "member/menuSignupForm";
+	}
+	
+	@RequestMapping(value="getUserInfo.com")
+	@ResponseBody
+	public ResponseEntity<String> getUserInfo(HttpServletRequest request) throws JsonProcessingException {
+		
+		int member_Num = Integer.parseInt(request.getParameter("mem_num"));
+		MemberDTO dto = memberService.getMemberProfileFromNum(member_Num);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonString = mapper.writeValueAsString(dto);
+		
+		HttpHeaders resHeaders = new HttpHeaders();
+		resHeaders.add("content-Type", "application/json;charset=UTF-8");
+		
+		return new ResponseEntity<String>(jsonString, resHeaders, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping("paymentInsert.com")
+	public String paymentInsert(String abc) {
+		
+		
+		
+		System.out.println(abc);
+		return "";
 	}
 }

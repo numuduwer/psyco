@@ -108,7 +108,10 @@
             <h2>사장님 오늘의 한마디</h2>
             <h3>${idto.content}</h3>
             <h3>${item}</h3>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3878a3669d0faa8d40f0e0c919f3c4c3368e1ad6
         </div>
 
     </section>

@@ -51,6 +51,7 @@ public interface ItemDAO {
 	public int countD(int id) throws SQLException;	
 	public List getItemListD(int id, int startRow, int endRow);
 
+	public int reduceItemCount(int item_num, int amount);
 
-
+	public int itemAmountCheck(int item_num);
 }
