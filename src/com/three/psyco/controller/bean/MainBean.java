@@ -206,10 +206,4 @@ public class MainBean {
 		
 		return "shop/itemDetail";
 	}
-	
-	
-	
-	
-	
-
 }
