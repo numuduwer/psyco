@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,8 +44,8 @@
 	
 	<script>
 		function licenseNumber(){
+		
 			
-			console.log(${sessionScope.memId});
 			var license_number = document.getElementById("text1").value + "-" + document.getElementById("text2").value + "-" + document.getElementById("text3").value;
 			
 			window.location.href='/psyco/member/normalSignupForm.com?license_number=' + license_number;
@@ -70,9 +72,13 @@
                 <li>
                     <input class=form_btn2 type="button" id="nextBtn" value="뒤로가기" onClick="history.go(-1);" >
                 </li>
-                <li>
+                
+                 <c:if test="${sessionScope.memId == null}">
+                  <li>
                     <input class=form_btn2 type="button" id="nextBtn" value="다음으로" onclick="licenseNumber()">
                 </li>
+               	</c:if>
+                
             </ul>
 
         </div>
