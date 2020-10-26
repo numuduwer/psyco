@@ -170,22 +170,20 @@ public class MemberBean {
 	}
 
 	@RequestMapping("shopSignupPro.com")
-	public String shopSignPro(MultipartHttpServletRequest request,int member_num,Model model)throws SQLException {
+	public String shopSignPro(MultipartHttpServletRequest request,HttpSession session,int member_num,Model model)throws SQLException {
 	
 		String status ="0";
 		String approve_status="0";
 		String pageNum ="null";
+		
 		
 		try {
 			memberService.insertMemberShops(request,member_num,status,approve_status);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		int shop_num=shopService.getShopNums(member_num);
-		System.out.println("shop_num=="+shop_num);
-		model.addAttribute("shop_num", shop_num);
-		model.addAttribute("member_num", member_num);
-		return "member/menuSignupForm";
+		
+		return "shop/shopPageList";
 	}
 	
 	@RequestMapping("menuSignupPro.com")

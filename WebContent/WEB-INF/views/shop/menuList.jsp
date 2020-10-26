@@ -50,6 +50,7 @@ function onClickItemDelete(menuNum){
 
 	<c:if test="${count == 0}">
 		<h2> 메뉴가 없어요.</h2>
+	<button onclick="window.location='/psyco/shop/menuModify.com?menu_num=${article.menu_num}'">수  정</button>
 	
 	</c:if>
 	<c:if test="${count > 0}">

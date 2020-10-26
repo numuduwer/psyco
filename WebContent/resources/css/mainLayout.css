@@ -245,7 +245,7 @@ section {
   display: flex;
   flex-direction: column;
   width: 20%;
-  height: 450px;
+  height: 530px;
   margin: 20px 0;
   border: solid 1px green;
 }
@@ -266,6 +266,10 @@ section {
 
 .card_content {
   padding: 4px 8px;
+}
+
+.card_content ul {
+  padding: 3px;
 }
 .card_content h2 {
   font-weight: var(--weight-semi-bold);

@@ -22,6 +22,8 @@
 				console.log("success 여부는   : " + result);
 				if(result == 'ok'){
 					alert(" 승인 처리되셨습니다. !  오른쪽 위  버튼을   확인해주세요 !");
+					location.href="/psyco/main/main.com";
+					
 				}
 				
 			},
@@ -131,15 +133,11 @@
     <!-- 경매 카테고리 -->
     <section id="category">
         <ul>
-<<<<<<< HEAD
-        	<li><a href="/psyco/main/main.com">전체 메뉴</a></li>
-            <li><a href="/psyco/main/main.com?num='1'">1인 메뉴</a></li>
-            <li><a href="/psyco/main/main.com?num='2'">세트 메뉴</a></li>
-=======
+
         	<li><a href="/psyco/main/main.com?menuDivision=0">전체 메뉴</a></li>
             <li><a href="/psyco/main/main.com?menuDivision=1">1인 메뉴</a></li>
             <li><a href="/psyco/main/main.com?menuDivision=2">세트 메뉴</a></li>
->>>>>>> 476a8521706c1cb8abb4387b2c1dd67d505db634
+
         </ul>
         
     </section>

@@ -127,8 +127,10 @@ public class ShopDAOImpl implements ShopDAO {
 
 
 	@Override
-	public int getShopNum(int member_num) throws SQLException {
-		int shop_num=sqlSession.selectOne("shop.getShopNum",member_num);
+	public List getShopNum(int member_num) throws SQLException {
+		System.out.println("member_num :" + member_num);
+		List shop_num=sqlSession.selectList("shop.getShopNum",member_num);
+	
 		System.out.println("shop_num===="+shop_num);
 		return shop_num;
 	}

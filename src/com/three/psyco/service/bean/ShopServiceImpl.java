@@ -319,8 +319,10 @@ public class ShopServiceImpl implements ShopService {
 	}
 
 	@Override
-	public int getShopNums(int member_num) throws SQLException {
-		int shop_num=shopDAO.getShopNum(member_num);
+	public List getShopNums(int member_num) throws SQLException {
+		System.out.println(member_num);
+		List shop_num=shopDAO.getShopNum(member_num);
+		System.out.println("shop_num :" + shop_num);
 		return shop_num;
 	}
 
@@ -382,7 +384,7 @@ public class ShopServiceImpl implements ShopService {
 			
 			int progress_status = 0;									// 진행 중 경매인지 종료 된 경매인지 확인할 수 있는 변수
 			if (item_endTime_minuet < current_minuets) {	// 경매 시간이 종료 되었으면
-				progress_status = itemDAO.modifyStatus(dto.getItem_num());
+				//sprogress_status = itemDAO.modifyStatus(dto.getItem_num());
 			}
 			
 			if (dto.getAmount() == 0) {
