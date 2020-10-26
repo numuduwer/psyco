@@ -43,7 +43,7 @@
 	</script>
 </head>
 <body>
-	<div>
+	<div class="myMenuList">
 		<table border="1">
 			<tr>
 				<td>사진</td>

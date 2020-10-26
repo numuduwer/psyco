@@ -64,21 +64,22 @@
 	</script>
 </head>
 <body>
-	<form name="frm">
+	<form name="frm" align = "center">
 		<div id="wrap">
+		<br><br><br><br>
 			<!-- 
 				넘어가는 값 : item_name, content, amount, startDate, endDate, discount_cycle, maxPrice, minPrice, aution_unit, sett, comment, menu_num
 				sett, menu_num 은 menu 테이블의 레코드 값 가져와서 히든으로 넘겨주자.
 			 -->
 			<label for="item_name">TITLE</label> <br>
-			<input type="text" name="item_name" id="item_name"> <br>
+			<input type="text" name="item_name" id="item_name"> <br> <br>
 			<label for="content">CONTENT(경매 내용)</label> <br>
-			<textarea rows="15" cols="25" name="content" id="content"></textarea> <br>
+			<textarea rows="15" cols="25" name="content" id="content"></textarea> <br> <br>
 			<label for="menu_name">MENU</label>
 			<input type="button" id="btn1" value="메뉴선택" onclick="javascript:selectMenu(${sessionScope.memNum})"><br>
-			<input type="text" id="menu_name" readonly> <br>
+			<input type="text" id="menu_name" readonly> <br> <br>
 			<label for="menu_price">PRICE</label> <br>
-			<input type="text" id="menu_price" readonly> <br>
+			<input type="text" id="menu_price" readonly> <br> <br>
 			<label for="menu_content">MENU_EXPLAIN</label> <br>
 			<textarea rows="10" cols="20" id="menu_content"></textarea> <br>
 			<label for="amount">AMOUNT</label> <br>

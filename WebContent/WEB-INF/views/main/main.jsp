@@ -145,7 +145,7 @@
         		<img src="/psyco/resources/${item.itemList.menu_img}" alt="" class="card_img">
         		<div class="card_content">
         			<h3 id="shop_name"><a href="/psyco/shop/shopDetail.com?shop_num=${item.itemList.shop_num}">${item.itemList.shop_name}</a></h3>
-        			<h2 id="item_name"><a href="/psyco/shop/itemDetail.com?item_num=${item.itemList.item_num}&current_price=${item.current_price}&discount_price=${item.discount_price}&discount_rate=${item.discount_rate}">${item.itemList.item_name}</a></h2>
+        			<h2 id="item_name"><a href="/psyco/shop/itemDetail.com?item_num=${item.itemList.item_num}&current_price=${item.current_price}&discount_price=${item.discount_price}&discount_rate=${item.discount_rate}&shop_num=${item.itemList.shop_num}">${item.itemList.item_name}</a></h2>
         			<c:choose>
         				<c:when test="${item.progress_status == 1 && item.selling_status == 4}">
 	       					<ul>
