@@ -333,10 +333,10 @@ footer {
 
 .myPage_item_info {
   border: solid 1px var(--color-dark-white);
-  height: 150px;
   display: flex;
   align-items: center;
-  padding: 0 12px;
+  padding: 8px 12px;
+  justify-content :space-around;
 }
 .myPage_item_info img {
   width: 120px;
@@ -347,7 +347,7 @@ footer {
   list-style: none;
   display: flex;
   flex-direction: column;
-  padding: 0 24px;
+
 }
 .myPage_item_info li {
   padding: 7px 0;
@@ -368,7 +368,7 @@ footer {
 }
 
 .myPage_item_info button {
-  margin-left: 310px;
+ 
   padding: 8px 20px;
   border: 1px solid var(--color-dark-blue);
   background-color: var(--color-white);

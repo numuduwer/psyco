@@ -22,6 +22,7 @@
 				if(result == 'ok'){
 					alert(" 승인 처리되셨습니다. !  오른쪽 위  버튼을   확인해주세요 !");
 				}
+				
 			},
 			error: function() {
 				console.log(' ajax  실패');

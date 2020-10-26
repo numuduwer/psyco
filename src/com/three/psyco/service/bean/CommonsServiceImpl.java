@@ -127,12 +127,17 @@ public class CommonsServiceImpl implements CommonsService {
 	}
 	
 
-	public ListData getListData(String pageName, String pageNum, int shop_num, String controller) throws SQLException{
+	public ListData getListData(String pageName, String pageNum, int memNum, String controller) throws SQLException{
 		// 디폴트 값 설정 
 		System.out.println("Commons Service 잘 연결 ");
+		System.out.println("C---------------------- ");
+		System.out.println("memNum : "+ memNum);
+		System.out.println("pageName : "+ pageName);
+		System.out.println("controller : "+ controller);
 		if(pageNum == null) {
 			pageNum = "1";
 		}
+	
 
 		// 페이징 처리 초기값
 		int pageSize = 10;
@@ -147,12 +152,14 @@ public class CommonsServiceImpl implements CommonsService {
 		
 		// 글 갯수 불러오기 
 		if(controller.equals("shopBean")) {
-			count = shopDAO.count(pageName, shop_num);
-		}
-		if(count >0) {
-				articleList = shopDAO.getList(pageName, shop_num,startRow, endRow);
+			count = shopDAO.count(pageName, memNum);
 		}
 		
+		System.out.println("count : "+ count);
+		if(count >0) {
+				articleList = shopDAO.getList(pageName, memNum,startRow, endRow);
+		}
+		System.out.println("size : " + articleList.size()  );
 		
 		number = count - (currPage-1) * pageSize;
 

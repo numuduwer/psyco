@@ -322,15 +322,16 @@ public class ShopBean {
 	public String shopPageList(int member_num,String pageNum,Model model,String pw,String member_Id )throws SQLException {
 		String pageName="shopList";
 		String controller="shopBean";
+		
 		ListData data=commonsService.getListData(pageName, pageNum, member_num, controller);
-		model.addAttribute("pageNum", data.getPageNum());
+		model.addAttribute("pageNum1", data.getPageNum());
 		model.addAttribute("pageSize", data.getPageSize());
 		model.addAttribute("currPage", data.getCurrPage());
 		model.addAttribute("startRow", data.getStartRow());
 		model.addAttribute("endRow", data.getEndRow());
 		model.addAttribute("number", data.getNumber());
-		model.addAttribute("articleList", data.getArticleList());
-		model.addAttribute("count", data.getCount());
+		model.addAttribute("articleList1", data.getArticleList());
+		model.addAttribute("count1", data.getCount());
 		//---------------------------------------------review
 		List<Integer> num=commonsService.getMyShop_MemberNumList(member_num);
 		System.out.println("num=="+num);
