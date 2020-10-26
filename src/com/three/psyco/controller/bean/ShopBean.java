@@ -139,7 +139,7 @@ public class ShopBean {
 		result = shopService.updateShopDataSV(dto);
 		model.addAttribute("result", result);
 		model.addAttribute("pageName", pageName);
-		return "shop/shopList";
+		return "shop/shopModifyPro";
 	}
 	
 	@RequestMapping(value="deleteShop.com", method = RequestMethod.POST)
@@ -324,7 +324,7 @@ public class ShopBean {
 	@RequestMapping(value="itemEnrollmentPro.com")
 	@ResponseBody
 	public String itemEnrollmentPro(HttpServletRequest request, HttpServletResponse response, @RequestBody String jsonData) throws ParseException {
-		System.out.println(jsonData);
+		//System.out.println(jsonData);
 		
 		int result = shopService.itemEnrollmentPro(jsonData);
 		String result_str = "{\"result\":" + result + "}";
@@ -338,15 +338,16 @@ public class ShopBean {
 	public String shopPageList(int member_num,String pageNum,Model model,String pw,String member_Id )throws SQLException {
 		String pageName="shopList";
 		String controller="shopBean";
+		
 		ListData data=commonsService.getListData(pageName, pageNum, member_num, controller);
-		model.addAttribute("pageNum", data.getPageNum());
+		model.addAttribute("pageNum1", data.getPageNum());
 		model.addAttribute("pageSize", data.getPageSize());
 		model.addAttribute("currPage", data.getCurrPage());
 		model.addAttribute("startRow", data.getStartRow());
 		model.addAttribute("endRow", data.getEndRow());
 		model.addAttribute("number", data.getNumber());
-		model.addAttribute("articleList", data.getArticleList());
-		model.addAttribute("count", data.getCount());
+		model.addAttribute("articleList1", data.getArticleList());
+		model.addAttribute("count1", data.getCount());
 		//---------------------------------------------review
 		List<Integer> num=commonsService.getMyShop_MemberNumList(member_num);
 		System.out.println("num=="+num);

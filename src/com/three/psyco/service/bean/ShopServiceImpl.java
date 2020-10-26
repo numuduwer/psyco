@@ -247,7 +247,9 @@ public class ShopServiceImpl implements ShopService {
 		dto.setContent((String)jSONObject.get("content"));
 		dto.setAmount(Integer.valueOf((String)jSONObject.get("amount")));
 		dto.setStartDate(Timestamp.valueOf((String)jSONObject.get("startDate")));
+		System.out.println(dto.getStartDate());
 		dto.setEndDate(Timestamp.valueOf((String)jSONObject.get("endDate")));
+		System.out.println(dto.getEndDate());
 		dto.setDiscount_cycle(Integer.valueOf((String)jSONObject.get("discount_cycle")));
 		dto.setMaxPrice(Integer.valueOf((String)jSONObject.get("maxPrice")));
 		dto.setMinPrice(Integer.valueOf((String)jSONObject.get("minPrice")));

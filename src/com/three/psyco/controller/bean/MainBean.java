@@ -72,6 +72,7 @@ public class MainBean {
 		//System.out.println("itemList의 사이즈 : " + itemList.size());
 		//model.addAttribute("itemList", itemList);
 
+		int id=(int)session.getAttribute("memNum");
 
 		List<Object> itemMapList = commonsService.getEntireList();
 		model.addAttribute("itemMapList", itemMapList);
@@ -80,7 +81,14 @@ public class MainBean {
 		return "main/main";
 	}
 	
-	@RequestMapping(value="getListData.com", produces = "application/json")
+	@RequestMapping("getItemList.com")
+	public String getItemList() {
+		
+		
+		return "";
+	}
+	
+	@RequestMapping(value="getListData.com")
 	@ResponseBody
 	public List<Object> getListData() throws JsonProcessingException {
 		

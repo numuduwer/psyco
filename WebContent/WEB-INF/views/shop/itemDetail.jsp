@@ -357,7 +357,6 @@
         </div>
         <div id="tab3" data-tab-content class="items">
             <div class="tab3_item">
-                <h2>최근 리뷰</h2>
                 <table>
                     <tr>
                         <th>no.</th>
@@ -376,7 +375,7 @@
             </div>
         </div>
     </div>
-    <!-- <script>
+     <script>
         const tabs = document.querySelectorAll("[data-tab-target]");
         const tabcon = document.querySelectorAll("[data-tab-content]");
         tabs.forEach((tab) => {
@@ -391,7 +390,7 @@
         });
 
     </script>
-		 -->
+	
 		
 		
 	</body>

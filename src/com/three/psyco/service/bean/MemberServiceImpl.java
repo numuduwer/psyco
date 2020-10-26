@@ -266,6 +266,9 @@ public class MemberServiceImpl implements MemberService {
 			
 			ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 			HttpSession httpSession = servletRequestAttribute.getRequest().getSession();
+			if(dto.getBusiness_license() != 0 ) {
+				httpSession.setAttribute("shopCheck", dto.getBusiness_license());
+			}
 		
 			httpSession.setAttribute("memId", member_Id);
 			httpSession.setAttribute("memNum", dto.getMember_Num());
@@ -449,6 +452,14 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println(dto.getStatus()+"1");
 		
 		memberDAO.insertMemberShop(dto);
+		
+	}
+
+	@Override
+	public int idChk(String id) throws SQLException {
+		int result = memberDAO.idChk(id);
+		System.out.println("id2=="+id);
+		return result;
 		
 	}
 }
