@@ -129,9 +129,9 @@
     <!-- 경매 카테고리 -->
     <section id="category">
         <ul>
-        	<li><a href="">전체 메뉴</a></li>
-            <li><a href="">1인 메뉴</a></li>
-            <li><a href="">세트 메뉴</a></li>
+        	<li><a href="/psyco/main/main.com">전체 메뉴</a></li>
+            <li><a href="/psyco/main/main.com?num='1'">1인 메뉴</a></li>
+            <li><a href="/psyco/main/main.com?num='2'">세트 메뉴</a></li>
         </ul>
         
     </section>

@@ -130,7 +130,7 @@ public class ShopBean {
 		result = shopService.updateShopDataSV(dto);
 		model.addAttribute("result", result);
 		model.addAttribute("pageName", pageName);
-		return "shop/shopList";
+		return "shop/shopModifyPro";
 	}
 	
 	@RequestMapping(value="deleteShop.com", method = RequestMethod.POST)

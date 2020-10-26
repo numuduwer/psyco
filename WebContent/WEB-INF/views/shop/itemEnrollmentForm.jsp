@@ -99,9 +99,7 @@
 				<option value="600">10분</option>
 				<option value="1000">30분</option>
 			</select> <br>
-			<label for="sett">세트 여부</label> <br>
-			<input type="checkbox" id="sett" value="1">
-			
+			<label for="sett">세트 여부<input type="checkbox" id="sett" value="1"></label> <br>		
 			<img alt="이미지를 삽입해주세요" src="" id="menu_img"> <br>
 			<input type="button" value="저장" onclick="javascript:enrollment(this.form);">
 			

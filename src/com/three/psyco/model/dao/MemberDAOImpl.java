@@ -121,4 +121,11 @@ public class MemberDAOImpl implements MemberDAO {
 		
 	}
 
+	@Override
+	public int idChk(String id) throws SQLException {
+		int result=sqlSession.selectOne("member.idChk",id);
+		System.out.println("id3=="+id);
+		return result;
+	}
+
 }
