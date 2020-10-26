@@ -127,12 +127,17 @@ public class CommonsServiceImpl implements CommonsService {
 	}
 	
 
-	public ListData getListData(String pageName, String pageNum, int shop_num, String controller) throws SQLException{
+	public ListData getListData(String pageName, String pageNum, int memNum, String controller) throws SQLException{
 		// 디폴트 값 설정 
 		System.out.println("Commons Service 잘 연결 ");
+		System.out.println("C---------------------- ");
+		System.out.println("memNum : "+ memNum);
+		System.out.println("pageName : "+ pageName);
+		System.out.println("controller : "+ controller);
 		if(pageNum == null) {
 			pageNum = "1";
 		}
+	
 
 		// 페이징 처리 초기값
 		int pageSize = 10;
@@ -147,12 +152,14 @@ public class CommonsServiceImpl implements CommonsService {
 		
 		// 글 갯수 불러오기 
 		if(controller.equals("shopBean")) {
-			count = shopDAO.count(pageName, shop_num);
-		}
-		if(count >0) {
-				articleList = shopDAO.getList(pageName, shop_num,startRow, endRow);
+			count = shopDAO.count(pageName, memNum);
 		}
 		
+		System.out.println("count : "+ count);
+		if(count >0) {
+				articleList = shopDAO.getList(pageName, memNum,startRow, endRow);
+		}
+		System.out.println("size : " + articleList.size()  );
 		
 		number = count - (currPage-1) * pageSize;
 
@@ -267,7 +274,7 @@ public class CommonsServiceImpl implements CommonsService {
 			
 			long time_difference = current_minuets - item_StartTime_minuet;		// 몇분 지났는지 알 수 있는 시간
 			long remainder_time = item_endTime_minuet - current_minuets;
-			long discount_cycle = dto.getDiscount_cycle() / 600;				// 할인 주기
+			long discount_cycle = dto.getDiscount_cycle() / 60;				// 할인 주기
 			long auction_unit = Long.parseLong(dto.getAuction_unit());			// 할인 단위
 			long discount_count = time_difference / discount_cycle;				// 할인 횟수
 			long discount_price = discount_count *  auction_unit;				// 할인 된 가격

@@ -11,13 +11,13 @@
 	<c:if test="${result == 1}">
 		<script type="text/javascript">
 			alert('수정 성공 .');
-			window.location.href='/psyco/shop/shopList.com';
+			window.location.href='/psyco/shop/shopPageList.com?member_num=${sessionScope.memNum}';
 		</script>
 	</c:if>
 	<c:if test="${result != 1}">
 		<script type="text/javascript">
 			alert('오류 발생');
-			window.location.href='/psyco/shop/shopList.com';
+			window.location.href='/psyco/shop/shopPageList.com?member_num=${sessionScope.memNum}';
 		</script>
 	</c:if>
 </body>

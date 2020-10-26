@@ -59,15 +59,22 @@ public class MainBean {
 	public Scheduler scheduler = null;
 	
 	@RequestMapping("main.com")
-	public String main(Model model,String pageNum, String pageName, HttpSession session) throws SQLException, JsonProcessingException {
-		
+	public String main(Model model,String pageNum, String pageName, HttpSession session,String num) throws SQLException, JsonProcessingException {
+		int id=(int)session.getAttribute("memNum");
 		List<Object> itemMapList = commonsService.getEntireList();
 		model.addAttribute("itemMapList", itemMapList);
 		
 		return "main/main";
 	}
 	
-	@RequestMapping(value="getListData.com", produces = "application/json")
+	@RequestMapping("getItemList.com")
+	public String getItemList() {
+		
+		
+		return "";
+	}
+	
+	@RequestMapping(value="getListData.com")
 	@ResponseBody
 	public List<Object> getListData() throws JsonProcessingException {
 		
