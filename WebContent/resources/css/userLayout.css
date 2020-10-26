@@ -459,16 +459,7 @@ th {
 
   
 
-#tab1 {
-  border: 1px solid var(--color-light-grey);
-}
-#tab2 {
-  border: 1px solid var(--color-light-grey);
-}
-#tab3 {
-  border: 1px solid var(--color-light-grey);
-}
-  
+
 /* 찜 리스트 */
 .zzim_reg {
   display: flex;

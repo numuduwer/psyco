@@ -334,13 +334,13 @@
                             <h3>포장여부 :</h3>
                         </li>
                         <li>
-                        <c:if test="${shopInfo.takeout == '1'}">
-                        	<h3>가능</h3>		
-                        </c:if>
-                        <c:if test="${shopInfo.takeout == '0'}">
-                        	<h3>불가능</h3>
-                        </c:if>
-                            
+                            <c:if test="${shopInfo.takeout == '1'}">
+                                <h3>가능</h3>
+                            </c:if>
+                            <c:if test="${shopInfo.takeout == '0'}">
+                                <h3>불가능</h3>
+                            </c:if>
+
                         </li>
                     </ul>
                     <ul>
@@ -377,7 +377,8 @@
             </div>
         </div>
     </div>
-    <!-- <script>
+   
+     <script>
         const tabs = document.querySelectorAll("[data-tab-target]");
         const tabcon = document.querySelectorAll("[data-tab-content]");
         tabs.forEach((tab) => {
@@ -392,7 +393,7 @@
         });
 
     </script>
-		 -->
+
 		
 		
 	</body>
