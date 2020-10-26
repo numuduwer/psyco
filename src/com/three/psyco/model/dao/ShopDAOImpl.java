@@ -78,7 +78,7 @@ public class ShopDAOImpl implements ShopDAO {
 	
 	@Override
 	public List<Integer> getMyShop_ShopNumList(int member_Num) throws SQLException {
-		List<Integer> myShop_ShopNumList = sqlSession.selectList("shop.getShopNumCount", member_Num);
+		List<Integer> myShop_ShopNumList = sqlSession.selectList("shop.getMyShop_ShopNumList", member_Num);
 		return myShop_ShopNumList;
 	}
 

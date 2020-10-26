@@ -68,11 +68,8 @@ public class MainBean {
 	public String main(String menuDivision, HttpServletRequest request, Model model) throws SQLException, JsonProcessingException {
 		
 		if (menuDivision == null) menuDivision = "0";
-		
 		List<Object> itemMapList = commonsService.getEntireList(menuDivision);
-
 		model.addAttribute("itemMapList", itemMapList);
-		
 
 		return "main/main";
 	}

@@ -252,7 +252,6 @@ public class CommonsServiceImpl implements CommonsService {
 	@Override
 	public List<Object> getEntireList(String menuDivision) throws JsonProcessingException {
 		List<JoinResultDTO> itemList = itemDAO.getEntireList(menuDivision);
-		
 		List<Map<String, Object>> itemMapList = new ArrayList<Map<String, Object>>();
 		
 		// 현재 시간
@@ -261,25 +260,25 @@ public class CommonsServiceImpl implements CommonsService {
 		// 시간 계산
 		long current_hours = TimeUnit.MILLISECONDS.toHours(date_now);
 		long current_minuets = TimeUnit.MILLISECONDS.toMinutes(date_now);
-		long current_seconds = TimeUnit.MILLISECONDS.toSeconds(date_now);		
+		long current_seconds = TimeUnit.MILLISECONDS.toSeconds(date_now);
 		
 		for (int i = 0; i < itemList.size(); i++) {
 			JoinResultDTO dto = (JoinResultDTO) itemList.get(i);
 			Map<String, Object> itemMap = new HashMap<String, Object>();
 			
-			long item_StartTime_minuet = TimeUnit.MILLISECONDS.toMinutes(dto.getStartDate().getTime());
-			long item_endTime_minuet = TimeUnit.MILLISECONDS.toMinutes(dto.getEndDate().getTime());
+			long item_StartTime_minuet = TimeUnit.MILLISECONDS.toMinutes(dto.getStartDate().getTime());		// 계산을 위해 startDate(Timestamp) long 타입으로 형 변환
+			long item_endTime_minuet = TimeUnit.MILLISECONDS.toMinutes(dto.getEndDate().getTime());			// endDate(Timestamp) long 타입으로 형 변환
 			
-			long time_difference = current_minuets - item_StartTime_minuet;		// 몇분 지났는지 알 수 있는 시간
-			long remainder_time = item_endTime_minuet - current_minuets;
-			long discount_cycle = dto.getDiscount_cycle() / 60;					// 할인 주기
-			long auction_unit = Long.parseLong(dto.getAuction_unit());			// 할인 단위
-			long discount_count = time_difference / discount_cycle;				// 할인 횟수
-			long discount_price = discount_count *  auction_unit;				// 할인 된 가격
+			long time_difference = current_minuets - item_StartTime_minuet;			// 몇분 지났는지 알 수 있는 시간
+			long remainder_time = item_endTime_minuet - current_minuets;			// 남은 시간
+			long discount_cycle = dto.getDiscount_cycle() / 60;						// 할인 주기
+			long auction_unit = Long.parseLong(dto.getAuction_unit());				// 할인 단위
+			long discount_count = time_difference / discount_cycle;					// 할인 횟수
+			long discount_price = discount_count *  auction_unit;					// 할인 된 가격
 			
 			long current_price = Long.valueOf(dto.getMaxPrice()) - discount_price;	// 현재 가격
 			
-			if (current_price <= Long.valueOf(dto.getMinPrice())) {
+			if (current_price <= Long.valueOf(dto.getMinPrice())) {					// 할인 된 가격이 최저가 보다 낮으면 가격을 최저가로 설정
 				current_price = Long.valueOf(dto.getMinPrice());
 				discount_price = dto.getMaxPrice() - current_price;
 			}
@@ -287,7 +286,7 @@ public class CommonsServiceImpl implements CommonsService {
 			double discount_rate = ((double)discount_price / Long.valueOf(dto.getMaxPrice())) * 100;		// 할인율
 			
 			int progress_status = 0;														// 진행 중 경매인지 종료 된 경매인지 확인할 수 있는 변수
-			int selling_status = 0;
+			int selling_status = 0;															// 경매의 상태를 확인할 수 있는 변수
 			
 			if (item_endTime_minuet < current_minuets || dto.getAmount() == 0) {				// 경매 시간이 종료 되었으면  
 				itemDAO.modifyStatusIntoEnd(dto.getItem_num());									// selling_status=4 (판매종료), progress_status=1 (종료)
@@ -302,7 +301,8 @@ public class CommonsServiceImpl implements CommonsService {
 				selling_status = 3;
 			}
 			
-			String jsonOfItemList = new ObjectMapper().writeValueAsString(dto);		// string으로 형 변환하면 timestamp -> long타입으로 바뀌는듯 (확인 결과 값 일치)
+			String jsonOfItemList = new ObjectMapper().writeValueAsString(dto);		// ObjectMapper를 이용하여 dto -> String으로 변환
+																					// string으로 형 변환하면 timestamp -> long타입으로 바뀌는듯 (확인 결과 값 일치)
 			
 			itemMap.put("itemList", dto);
 			itemMap.put("discount_price", discount_price);
@@ -311,22 +311,20 @@ public class CommonsServiceImpl implements CommonsService {
 			itemMap.put("progress_status", progress_status);
 			itemMap.put("selling_status", selling_status);
 			itemMap.put("remainder_time", remainder_time);
-			itemMapList.add(itemMap);
+			itemMapList.add(itemMap);												// 경매 (Map)를 List에 담아서 리턴.
 		}
 		
 		JSONArray jsonArray = new JSONArray();
-		for (Map<String, Object> map : itemMapList) {
-			
-			
-			JSONObject jsonObject = new JSONObject();
-			for (Map.Entry<String, Object> entry : map.entrySet()) {
-				String key = entry.getKey();
+		for (Map<String, Object> map : itemMapList) {								// itemMapList를 for문으로 
+			JSONObject jsonObject = new JSONObject();								// map을 하나씩 꺼내어
+			for (Map.Entry<String, Object> entry : map.entrySet()) {				// entrySet 으로
+				String key = entry.getKey();										// key, value 꺼내서 jsonObject 형태로 넣어줌.
 				Object value = entry.getValue();
 				jsonObject.put(key, value);
 			}
-			jsonArray.add(jsonObject);
+			jsonArray.add(jsonObject);												// jsonObject 를 jsonArray 에 담아서
 		}
-		return jsonArray;
+		return jsonArray;															// 리턴
 	}
 
 	@Override

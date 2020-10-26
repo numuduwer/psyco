@@ -26,7 +26,8 @@
 					success : function(data){
 						alert(data.status);
 						if (data.status == "부가가치세 일반과세자 입니다.") {
-							$("#nextBtn").prop('disabled', false);
+							$("#nextBtn").prop('disabled', false).css("color", "skyblue");
+							
 						} else {
 							$("#nextBtn").prop('disabled', true);
 						}
@@ -70,12 +71,12 @@
 
             <ul class="form_btn_box">
                 <li>
-                    <input class=form_btn2 type="button" id="nextBtn" value="뒤로가기" onClick="history.go(-1);" >
+                    <input class=form_btn2 type="button" value="뒤로가기" onClick="history.go(-1);" >
                 </li>
                 
                  <c:if test="${sessionScope.memId == null}">
                   <li>
-                    <input class=form_btn2 type="button" id="nextBtn" value="다음으로" onclick="licenseNumber()">
+                    <input class=form_btn2 type="button" id="nextBtn" value="다음으로" onclick="licenseNumber()" disabled>
                 </li>
                	</c:if>
                 

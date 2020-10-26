@@ -193,7 +193,6 @@ public class ItemDAOImpl implements ItemDAO {
 		} else if (menuDivision.equals("2")) {
 			list = sqlSession.selectList("item.getSetMenuList", menuDivision);
 		}
-		
 		return list;
 	}
 

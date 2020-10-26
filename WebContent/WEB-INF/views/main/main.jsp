@@ -10,6 +10,8 @@
 	<title>main</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=bsd4urkj6r"></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=bsd4urkj6r&submodules=geocoder"></script>
 	<script type="text/javascript">
 		 $(document).ready(function(){
 			
@@ -27,71 +29,8 @@
 				error: function() {
 					console.log(' ajax  실패');
 				}
-				
 			 });
-			 
 		 })
-	
-	
-		/* $(document).ready(function(){
-			console.log("연결 ? ");
-			$.ajax({
-				url: "psyco/main/getEnrollEvent.com",
-				type: "post",
-				dataType:"json",
-				success: function(){
-					alert('사업자 가입에 승인처리되었다. 가게등록을 해보세요 .');
-
-				}
-			};	
-			
-		}) */
-		
-		
-		/* $(document).ready(function(){
-			
-			$.ajax({
-				url: "/psyco/main/getListData.com",
-				type: "post",
-				dataType: "json",
-				success: function(result) {
-					console.log(result);
-					var array = new Array(result);
-					for (var i in array[0]) {
-						
-						var item = JSON.parse(array[0][i].itemList);
-						var progress_status;
-						
-					}
-
-				},
-				error: function() {
-					console.log('ajax 실패');
-				}
-			});
-
-		}) */
-	
-		
-	
-
-	/* 	$('#btn1').on('click', function(){
-		    var form = {
-		            name: "jamong",
-		            age: 23
-		    }
-		    $.ajax({
-		        url: "/psyco/main.com",
-		        type: "POST",
-		        data: form,
-		        success: function(data){
-		            $('#result').text(data);
-		        },
-		        error: function(){
-		            alert("simpleWithObject err");
-		        }
-		    });
-		}); */
 
 	
 		function getItemList(sett) {
@@ -111,6 +50,89 @@
 			});
 		}
 		
+	 function mapCreate(latitude, longitude) {
+			var mapOptions = {
+					center: new naver.maps.LatLng(latitude, longitude),
+					zoom: 10,
+					mapTypeId: naver.maps.MapTypeId.NORMAL
+			}
+			
+			var map = new naver.maps.Map('map', mapOptions);
+			return map;
+		}
+		
+		function onSuccessGeolocation(position) {
+		    var location = new naver.maps.LatLng(position.coords.latitude,
+		                                         position.coords.longitude);
+		    
+		    console.log("latitude :" + position.coords.latitude);
+		    console.log("longitude: " + position.coords.longitude);
+			
+		    var infowindow = new naver.maps.InfoWindow();
+	
+		    infowindow.setContent('<div style="padding:20px;">' + 'geolocation.getCurrentPosition() 위치' + '</div>');
+	
+		    console.log('Coordinates: ' + location.toString());
+		    
+		    reverseGeocode(position.coords.latitude, position.coords.longitude);
+		     
+		}
+	
+		function onErrorGeolocation() {
+		    var center = map.getCenter();
+	
+		    infowindow.setContent('<div style="padding:20px;">' +
+		        '<h5 style="margin-bottom:5px;color:#f00;">Geolocation failed!</h5>'+ "latitude: "+ center.lat() +"<br />longitude: "+ center.lng() +'</div>');
+	
+		    infowindow.open(map, center);
+		}
+		
+		function geocode() {
+			var query = { query : $("#address").val() };
+			console.log(query);
+			
+			naver.maps.Service.geocode(query, function(status, response) {
+				if (status !== naver.maps.Service.Status.OK) {
+					return alert('Something wrong!');
+				}
+				
+				var v2 = response.v2,
+					addresses = v2.addresses;
+				
+				console.log(addresses);
+				
+				var latitude = addresses[0].y,		// ex : 37.5438733
+					longitude = addresses[0].x;		// ex : 127.0681978
+				
+			});
+		}
+		
+		function reverseGeocode(latitude, longitude) {
+			naver.maps.Service.reverseGeocode({
+		        coords: new naver.maps.LatLng(latitude, longitude),
+		    }, function(status, response) {
+		        if (status !== naver.maps.Service.Status.OK) {
+		            return alert('Something wrong!');
+		        }
+
+		        var result = response.v2, // 검색 결과의 컨테이너
+		            items = result.results, // 검색 결과의 배열
+		            address = result.address; // 검색 결과로 만든 주소
+
+		        document.getElementById('address').value = address.jibunAddress;
+		    });
+		}
+		
+		function locationSetting() {
+			if (navigator.geolocation) {
+				console.log(navigator.geolocation);
+				navigator.geolocation.getCurrentPosition(onSuccessGeolocation, onErrorGeolocation);
+			} else {
+				var center = map.getCenter();
+		        infowindow.setContent('<div style="padding:20px;"><h5 style="margin-bottom:5px;color:#f00;">Geolocation not supported</h5></div>');
+		        infowindow.open(map, center);
+			}
+		}
 		
 	</script>
 </head>
@@ -118,13 +140,17 @@
 
 <body>
 
-
     <!--  검색베너  & 신메뉴 , 랭킹미리보기 -->
     <section id="banner_section">
       
         <div id="banner">
             <img src="/psyco/resources/img/main/banner.png" alt="">
         </div>
+	    <div>
+			<input type="button" value="현재 위치 설정" onclick="javascript:locationSetting();"/>
+			<input type="text" name="address" id="address">
+			<input type="button" value="검색" onclick="javascript:geocode();">
+		</div>
  
     </section>
     <!-- 경매 카테고리 -->
@@ -235,275 +261,7 @@
         	</div> 
         </c:forEach>
         </div>
-        
-            <!-- <div class="card">
-                <img src="/psyco/resources/img/item/one/1.jpg" alt="" class="card_img">
-                <div class="card_content">
-                    <h3>김밥천국</h3>
-                    <h2>제육덮밥</h2>
-                    <ul>
-                        <li>시작일</li>
-                        <li>2010.10.18</li>
-                    </ul>
-                    <ul>
-                        <li>자동 할인시간 </li>
-                        <li>30분</li>
-                    </ul>
-                    <ul>
-                        <li>시작 가격</li>
-                        <li>5000원</li>
-                    </ul>
-
-                    <ul class="sale">
-                        <li class="sale_item">8% &darr;</li>
-                        <li>(현재 400원 할인)</li>
-                    </ul>
-                    <ul class="price">
-                        <li>
-                            현재가격
-                        </li>
-                        <li class="price_data">
-                            4000원
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-            <div class="card">
-                <img src="/psyco/resources/img/item/one/2.jpg" alt="" class="card_img">
-                <div class="card_content">
-                    <h3>김밥천국</h3>
-                    <h2>제육덮밥</h2>
-                    <ul>
-                        <li>시작일</li>
-                        <li>2010.10.18</li>
-                    </ul>
-                    <ul>
-                        <li>자동 할인시간 </li>
-                        <li>30분</li>
-                    </ul>
-                    <ul>
-                        <li>시작 가격</li>
-                        <li>5000원</li>
-                    </ul>
-
-                    <ul class="sale">
-                        <li class="sale_item">8% &darr;</li>
-                        <li>(현재 400원 할인)</li>
-                    </ul>
-                    <ul class="price">
-                        <li>
-                            현재가격
-                        </li>
-                        <li class="price_data">
-                            4000원
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-            <div class="card">
-                <img src="/psyco/resources/img/item/one/3.jpg" alt="" class="card_img">
-                <div class="card_content">
-                    <h3>김밥천국</h3>
-                    <h2>제육덮밥</h2>
-                    <ul>
-                        <li>시작일</li>
-                        <li>2010.10.18</li>
-                    </ul>
-                    <ul>
-                        <li>자동 할인시간 </li>
-                        <li>30분</li>
-                    </ul>
-                    <ul>
-                        <li>시작 가격</li>
-                        <li>5000원</li>
-                    </ul>
-
-                    <ul class="sale">
-                        <li class="sale_item">8% &darr;</li>
-                        <li>(현재 400원 할인)</li>
-                    </ul>
-                    <ul class="price">
-                        <li>
-                            현재가격
-                        </li>
-                        <li class="price_data">
-                            4000원
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-            <div class="card">
-                <img src="/psyco/resources/img/item/one/4.jpg" alt="" class="card_img">
-                <div class="card_content">
-                    <h3>김밥천국</h3>
-                    <h2>제육덮밥</h2>
-                    <ul>
-                        <li>시작일</li>
-                        <li>2010.10.18</li>
-                    </ul>
-                    <ul>
-                        <li>자동 할인시간 </li>
-                        <li>30분</li>
-                    </ul>
-                    <ul>
-                        <li>시작 가격</li>
-                        <li>5000원</li>
-                    </ul>
-
-                    <ul class="sale">
-                        <li class="sale_item">8% &darr;</li>
-                        <li>(현재 400원 할인)</li>
-                    </ul>
-                    <ul class="price">
-                        <li>
-                            현재가격
-                        </li>
-                        <li class="price_data">
-                            4000원
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-            <div class="card">
-                <img src="/psyco/resources/img/item/one/5.png" alt="" class="card_img">
-                <div class="card_content">
-                    <h3>김밥천국</h3>
-                    <h2>제육덮밥</h2>
-                    <ul>
-                        <li>시작일</li>
-                        <li>2010.10.18</li>
-                    </ul>
-                    <ul>
-                        <li>자동 할인시간 </li>
-                        <li>30분</li>
-                    </ul>
-                    <ul>
-                        <li>시작 가격</li>
-                        <li>5000원</li>
-                    </ul>
-
-                    <ul class="sale">
-                        <li class="sale_item">8% &darr;</li>
-                        <li>(현재 400원 할인)</li>
-                    </ul>
-                    <ul class="price">
-                        <li>
-                            현재가격
-                        </li>
-                        <li class="price_data">
-                            4000원
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-            <div class="card">
-                <img src="/psyco/resources/img/item/one/6.jpg" alt="" class="card_img">
-                <div class="card_content">
-                    <h3>김밥천국</h3>
-                    <h2>제육덮밥</h2>
-                    <ul>
-                        <li>시작일</li>
-                        <li>2010.10.18</li>
-                    </ul>
-                    <ul>
-                        <li>자동 할인시간 </li>
-                        <li>30분</li>
-                    </ul>
-                    <ul>
-                        <li>시작 가격</li>
-                        <li>5000원</li>
-                    </ul>
-
-                    <ul class="sale">
-                        <li class="sale_item">8% &darr;</li>
-                        <li>(현재 400원 할인)</li>
-                    </ul>
-                    <ul class="price">
-                        <li>
-                            현재가격
-                        </li>
-                        <li class="price_data">
-                            4000원
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-            <div class="card">
-                <img src="/psyco/resources/img/item/one/7.jpg" alt="" class="card_img">
-                <div class="card_content">
-                    <h3>김밥천국</h3>
-                    <h2>제육덮밥</h2>
-                    <ul>
-                        <li>시작일</li>
-                        <li>2010.10.18</li>
-                    </ul>
-                    <ul>
-                        <li>자동 할인시간 </li>
-                        <li>30분</li>
-                    </ul>
-                    <ul>
-                        <li>시작 가격</li>
-                        <li>5000원</li>
-                    </ul>
-
-                    <ul class="sale">
-                        <li class="sale_item">8% &darr;</li>
-                        <li>(현재 400원 할인)</li>
-                    </ul>
-                    <ul class="price">
-                        <li>
-                            현재가격
-                        </li>
-                        <li class="price_data">
-                            4000원
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-            <div class="card">
-                <img src="/psyco/resources/img/item/one/8.jpg" alt="" class="card_img">
-                <div class="card_content">
-                    <h3>김밥천국</h3>
-                    <h2>제육덮밥</h2>
-                    <ul>
-                        <li>시작일</li>
-                        <li>2010.10.18</li>
-                    </ul>
-                    <ul>
-                        <li>자동 할인시간 </li>
-                        <li>30분</li>
-                    </ul>
-                    <ul>
-                        <li>시작 가격</li>
-                        <li>5000원</li>
-                    </ul>
-
-                    <ul class="sale">
-                        <li class="sale_item">8% &darr;</li>
-                        <li>(현재 400원 할인)</li>
-                    </ul>
-                    <ul class="price">
-                        <li>
-                            현재가격
-                        </li>
-                        <li class="price_data">
-                            4000원
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-
-
-        </div> -->
-
+   
     </section>
 
 </body>

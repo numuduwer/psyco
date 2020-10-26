@@ -185,10 +185,7 @@ public class MemberBean {
 			e.printStackTrace();
 		}
 		
-		
 		model.addAttribute("result", result);
-		System.out.println("여기");
-		System.out.println(Integer.toString(member_num));
 		model.addAttribute("member_num", Integer.toString(member_num)); 
 		
 		return "shop/shopEnrollmentCheck";
