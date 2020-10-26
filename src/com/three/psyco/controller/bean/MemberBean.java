@@ -1,6 +1,7 @@
 package com.three.psyco.controller.bean;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -105,19 +107,19 @@ public class MemberBean {
 	
 	//아이디 중복체크
 	@ResponseBody
-	@RequestMapping("idChk.com")
-	public ResponseEntity<String> idChk(String member_Id) throws Exception {
-		int check = memberService.idChk(member_Id);
-		System.out.println("id1=="+member_Id);
-		String result = "";
-		if(check ==1) {
-			result = "존재합니다 딴거쓰세요";
-		}else if(check ==0) {
-			result ="사용 가능합니다.";
-		}
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html;charset=UTF-8");
-		return  new ResponseEntity<String>(result,responseHeaders, HttpStatus.CREATED);
+	@RequestMapping(value ="idChk", method=RequestMethod.GET)
+	public String idChk(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("Ajax====IDcheck중입니다.");
+		String result="";
+        String member_Id = request.getParameter("member_Id");
+        int check = memberService.idChk(member_Id);
+        if(check == 1) {
+        	result="fail";
+        }else {
+        	result="success";
+        }
+        
+		return  result;
 	}
 	
 	@RequestMapping("signup.com")
