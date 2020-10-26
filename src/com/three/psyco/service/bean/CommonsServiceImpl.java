@@ -252,8 +252,8 @@ public class CommonsServiceImpl implements CommonsService {
 
 
 	@Override
-	public List<Object> getEntireList() throws JsonProcessingException {
-		List<JoinResultDTO> itemList = itemDAO.getEntireList();
+	public List<Object> getEntireList(String menuDivision) throws JsonProcessingException {
+		List<JoinResultDTO> itemList = itemDAO.getEntireList(menuDivision);
 		
 		List<Map<String, Object>> itemMapList = new ArrayList<Map<String, Object>>();
 		
@@ -274,7 +274,7 @@ public class CommonsServiceImpl implements CommonsService {
 			
 			long time_difference = current_minuets - item_StartTime_minuet;		// 몇분 지났는지 알 수 있는 시간
 			long remainder_time = item_endTime_minuet - current_minuets;
-			long discount_cycle = dto.getDiscount_cycle() / 60;				// 할인 주기
+			long discount_cycle = dto.getDiscount_cycle() / 60;					// 할인 주기
 			long auction_unit = Long.parseLong(dto.getAuction_unit());			// 할인 단위
 			long discount_count = time_difference / discount_cycle;				// 할인 횟수
 			long discount_price = discount_count *  auction_unit;				// 할인 된 가격
@@ -288,15 +288,22 @@ public class CommonsServiceImpl implements CommonsService {
 			
 			double discount_rate = ((double)discount_price / Long.valueOf(dto.getMaxPrice())) * 100;		// 할인율
 			
-			int progress_status = 0;									// 진행 중 경매인지 종료 된 경매인지 확인할 수 있는 변수
-			if (item_endTime_minuet < current_minuets) {	// 경매 시간이 종료 되었으면
-				progress_status = itemDAO.modifyStatus(dto.getItem_num());
+			int progress_status = 0;														// 진행 중 경매인지 종료 된 경매인지 확인할 수 있는 변수
+			int selling_status = 0;
+			
+			if (item_endTime_minuet < current_minuets || dto.getAmount() == 0) {				// 경매 시간이 종료 되었으면  
+				itemDAO.modifyStatusIntoEnd(dto.getItem_num());									// selling_status=4 (판매종료), progress_status=1 (종료)
+				progress_status = 1;
+				selling_status = 4;
+			} else if (item_StartTime_minuet > current_minuets) {								// 경매 시작 시간이 되지 않을 시(진행중이 아닐 시)
+				itemDAO.modifyStatusIntoBefore(dto.getItem_num());								// selling_status=1 (시작전), progress_tatus=2 (판매 대기)
+				progress_status = 2;
+				selling_status = 1;
+			} else if (item_StartTime_minuet <= current_minuets && item_endTime_minuet >= current_minuets) {	// 경매 중일 시
+				itemDAO.modifyStatusIntoProProceed(dto.getItem_num());											// selling_status=3 (판매중), progress_status=0 (판매중)
+				selling_status = 3;
 			}
 			
-			if (dto.getAmount() == 0) {
-				itemDAO.modifyAmountZero(dto.getItem_num());
-			}
-
 			String jsonOfItemList = new ObjectMapper().writeValueAsString(dto);		// string으로 형 변환하면 timestamp -> long타입으로 바뀌는듯 (확인 결과 값 일치)
 			
 			itemMap.put("itemList", dto);
@@ -304,6 +311,7 @@ public class CommonsServiceImpl implements CommonsService {
 			itemMap.put("current_price", current_price);
 			itemMap.put("discount_rate", discount_rate);
 			itemMap.put("progress_status", progress_status);
+			itemMap.put("selling_status", selling_status);
 			itemMap.put("remainder_time", remainder_time);
 			itemMapList.add(itemMap);
 		}

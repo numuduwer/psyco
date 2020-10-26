@@ -70,10 +70,26 @@
   	<select id="getEntireList" resultType="JoinResultDTO">
   		SELECT ITEM.ITEM_NUM, ITEM.ITEM_NAME, MENU.MENU_IMG, SHOP.SHOP_NUM, SHOP.SHOP_NAME, ITEM.AMOUNT, ITEM.STARTDATE, ITEM.ENDDATE, ITEM.DISCOUNT_CYCLE, ITEM.MAXPRICE, ITEM.MINPRICE, ITEM.AUCTION_UNIT FROM ITEM INNER JOIN SHOP ON ITEM.SHOP_NUM = SHOP.SHOP_NUM INNER JOIN MENU ON ITEM.MENU_NUM = MENU.MENU_NUM
   	</select>
+  	
+  	<select id="getOnePersonMenuList" resultType="JoinResultDTO">
+  		SELECT ITEM.ITEM_NUM, ITEM.ITEM_NAME, MENU.MENU_IMG, SHOP.SHOP_NUM, SHOP.SHOP_NAME, ITEM.AMOUNT, ITEM.STARTDATE, ITEM.ENDDATE, ITEM.DISCOUNT_CYCLE, ITEM.MAXPRICE, ITEM.MINPRICE, ITEM.AUCTION_UNIT FROM ITEM INNER JOIN SHOP ON ITEM.SHOP_NUM = SHOP.SHOP_NUM INNER JOIN MENU ON ITEM.MENU_NUM = MENU.MENU_NUM WHERE ITEM.SETT = 0
+  	</select>
+  	
+  	<select id="getSetMenuList" resultType="JoinResultDTO">
+  		SELECT ITEM.ITEM_NUM, ITEM.ITEM_NAME, MENU.MENU_IMG, SHOP.SHOP_NUM, SHOP.SHOP_NAME, ITEM.AMOUNT, ITEM.STARTDATE, ITEM.ENDDATE, ITEM.DISCOUNT_CYCLE, ITEM.MAXPRICE, ITEM.MINPRICE, ITEM.AUCTION_UNIT FROM ITEM INNER JOIN SHOP ON ITEM.SHOP_NUM = SHOP.SHOP_NUM INNER JOIN MENU ON ITEM.MENU_NUM = MENU.MENU_NUM WHERE ITEM.SETT = 1
+  	</select>
 
   	
-  	<update id="modifyStatus">
+  	<update id="modifyStatusIntoEnd">
   		update item set progress_status=1, selling_status=4 where item_num=#{item_num}
+  	</update>
+  	
+  	<update id="modifyStatusIntoBefore">
+  		update item set progress_status=2, selling_status=1 where item_num=#{item_num}
+  	</update>
+  	
+  	<update id="modifyStatusIntoProProceed">
+  		update item set progress_status=0, selling_status=3 where item_num=#{item_num}
   	</update>
   	
   	<update id="modifyAmountZero">
@@ -84,8 +100,10 @@
   		update item set amount=amount-#{amount} where item_num=#{item_num}
   	</update>
   	
-  	<select id="itemAmountCheck">
-  		select amount from item where item_num=${item_num}
+  	<select id="itemAmountCheck" resultType="int">
+  		select amount from item where item_num=#{item_num}
   	</select>
+  	
+  	
   	
   </mapper>
