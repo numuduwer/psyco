@@ -10,4 +10,6 @@ public interface MenuDAO {
 	public List<MenuDTO> getMyMenuListFromShopNum(List<Integer> myShop_ShopNumList);
 	
 	public MenuDTO getMenuInfoFromMenuNum(int menu_num) throws SQLException;
+
+	public List getItemListE(int shop_num, int startRow, int endRow);
 }

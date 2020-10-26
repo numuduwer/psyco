@@ -8,6 +8,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.three.psyco.model.dto.ItemDTO;
 import com.three.psyco.model.dto.ListData;
 import com.three.psyco.model.dto.MenuDTO;
@@ -28,4 +29,8 @@ public interface ShopService {
 	public int itemEnrollmentPro(String jsonData) throws ParseException;
 	public int getShopNums(int member_num) throws SQLException;
 	public int paymentInsert(String data) throws ParseException;
+	public List<Object> getMyEntireList(String pageNum,int id) throws JsonProcessingException;
+	public List getItemList1(String pageName, String pageNum, int id, Model model) throws SQLException;
+	
+	
 }

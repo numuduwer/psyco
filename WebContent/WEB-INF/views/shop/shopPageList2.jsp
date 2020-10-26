@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,6 @@
             <h2 class="myPage_subTitle">내 가게 관리하기 </h2>
         </div>
     </div>
-
 
 
     <!--  기능  타이틀 -->
@@ -37,52 +37,41 @@
     <div class="content_shopItem">
         <div id="tab1" data-tab-content class="items2 active">
             <div class="ltem2_shopItembox">
-                	<c:forEach var="article" items="${articleListC}">
-               	<div class="content_shopItem_listBox">
+            <c:forEach var="item" items="${itemMapList}">
+               	<div class="content_shopItem_listBox">            	
 	                    <div class="shopItem_img">
-	                        <img src="/img/item/one/1.jpg" alt="">
+	                        <img src="${item.itemList.menu_img}" >
 	                    </div>
 	                    <ul>
 	                        <li>
-	                            시작시간 : ${article.startDate}
+	                            <h3 class="content_shopItem_title"><a href="">상품 명 : ${item.itemList.item_name}</a></h3>
 	                        </li>
-	                        <li>종료시간 : ${article.endDate}</li>
+	                        <li> 수량 : ${item.itemList.amount}</li>
 	                    </ul>
 	                    <ul>
 	                        <li>
-	                            <h3 class="content_shopItem_title"><a href="">상품 명 : ${article.item_name}</a></h3>
+	                            시작시간 : ${item.itemList.startDate}
 	                        </li>
-	                        <li> 수량 : ${aritlce.amount}</li>
+	                        <li>종료시간 : ${item.itemList.endDate}</li>
 	                    </ul>
+	                    <ul>
+	        				<li>자동 할인시간</li>
+	        				<li><fmt:parseNumber var="discount_cycle" value="${item.itemList.discount_cycle / 60}" integerOnly="true"/>${discount_cycle} 분</li>
+        				</ul>
+        				<ul>
+	        				<li>시작 가격</li>
+	        				<li>${item.itemList.maxPrice}</li>
+        				</ul>
+	        			<ul class="sale">
+	        				<li class="sale_item"><fmt:formatNumber var="discount_rate" value="${item.discount_rate}" type="percent" pattern=".0" />${discount_rate} %</li>
+	        				<li>${item.discount_price}원 할인</li>
+	        			</ul>
 	                    <ul class="content_shopItem_btn">
 	                        <li><a href="">수정</a></li>
 	                        <li><a href="">삭제</a></li>
-	
-	                    </ul>
+	                    </ul>            
                 </div>
-	                </c:forEach>
-                <div class="content_shopItem_listBox">
-                    <div class="shopItem_img">
-                        <img src="/img/item/one/1.jpg" alt="">
-                    </div>
-                    <ul>
-                        <li>
-                            시작시간 :
-                        </li>
-                        <li>종료시간 : </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <h3 class="content_shopItem_title"><a href="">상품 명</a></h3>
-                        </li>
-                        <li> 수량 : </li>
-                    </ul>
-                    <ul class="content_shopItem_btn">
-                        <li><a href="">수정</a></li>
-                        <li><a href="">삭제</a></li>
-
-                    </ul>
-                </div>
+             </c:forEach>
                 <%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
 	<div align="center">
 	<c:if test="${count > 0}">
@@ -112,143 +101,59 @@
         </div>
         <div id="tab2" data-tab-content class="items2">
             <div class="ltem2_shopItembox">
+             <c:forEach var="item" items="${articleListA}">
                 <div class="content_shopItem_listBox">
                     <div class="shopItem_img">
-                        <img src="/img/item/one/1.jpg" alt="">
+                        <img src="${itme.menu_img}" alt="">
                     </div>
                     <ul>
                         <li>
-                            시작시간 :
+                            시작시간 : ${item.startDate}
                         </li>
-                        <li>종료시간 : </li>
+                        <li>종료시간 : ${item.endDate}</li>
                     </ul>
                     <ul>
                         <li>
-                            <h3 class="content_shopItem_title"><a href="">상품 명</a></h3>
+                            <h3 class="content_shopItem_title"><a href="">상품 명 :${item.item_name} </a></h3>
                         </li>
-                        <li> 수량 : </li>
+                        <li> 수량 : ${item.amount}</li>
                     </ul>
                     <ul class="content_shopItem_btn">
                         <li><a href="">수정</a></li>
                         <li><a href="">삭제</a></li>
 
                     </ul>
-                </div>
-                <div class="content_shopItem_listBox">
-                    <div class="shopItem_img">
-                        <img src="/img/item/one/1.jpg" alt="">
-                    </div>
-                    <ul>
-                        <li>
-                            시작시간 :
-                        </li>
-                        <li>종료시간 : </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <h3 class="content_shopItem_title"><a href="">상품 명</a></h3>
-                        </li>
-                        <li> 수량 : </li>
-                    </ul>
-                    <ul class="content_shopItem_btn">
-                        <li><a href="">수정</a></li>
-                        <li><a href="">삭제</a></li>
-
-                    </ul>
-                </div>
-                <div class="content_shopItem_listBox">
-                    <div class="shopItem_img">
-                        <img src="/img/item/one/1.jpg" alt="">
-                    </div>
-                    <ul>
-                        <li>
-                            시작시간 :
-                        </li>
-                        <li>종료시간 : </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <h3 class="content_shopItem_title"><a href="">상품 명</a></h3>
-                        </li>
-                        <li> 수량 : </li>
-                    </ul>
-                    <ul class="content_shopItem_btn">
-                        <li><a href="">수정</a></li>
-                        <li><a href="">삭제</a></li>
-
-                    </ul>
-                </div>
-
+                </div>  
+             </c:forEach>
             </div>
         </div>
         <div id="tab3" data-tab-content class="items2">
             <div class="ltem2_shopItembox">
+      		<c:forEach var="item" items="${articleListD}">
                 <div class="content_shopItem_listBox">
                     <div class="shopItem_img">
-                        <img src="/img/item/one/1.jpg" alt="">
+                        <img src="${itme.menu_img}" alt="">
                     </div>
                     <ul>
                         <li>
-                            시작시간 :
+                            시작시간 : ${item.startDate}
                         </li>
-                        <li>종료시간 : </li>
+                        <li>종료시간 : ${item.endDate}</li>
                     </ul>
                     <ul>
                         <li>
-                            <h3 class="content_shopItem_title"><a href="">상품 명</a></h3>
+                            <h3 class="content_shopItem_title"><a href="">상품 명 :${item.item_name} </a></h3>
                         </li>
-                        <li> 수량 : </li>
+                        <li> 수량 : ${item.amount}</li>
                     </ul>
                     <ul class="content_shopItem_btn">
                         <li><a href="">수정</a></li>
                         <li><a href="">삭제</a></li>
 
                     </ul>
-                </div>
-                <div class="content_shopItem_listBox">
-                    <div class="shopItem_img">
-                        <img src="/img/item/one/1.jpg" alt="">
-                    </div>
-                    <ul>
-                        <li>
-                            시작시간 :
-                        </li>
-                        <li>종료시간 : </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <h3 class="content_shopItem_title"><a href="">상품 명</a></h3>
-                        </li>
-                        <li> 수량 : </li>
-                    </ul>
-                    <ul class="content_shopItem_btn">
-                        <li><a href="">수정</a></li>
-                        <li><a href="">삭제</a></li>
-
-                    </ul>
-                </div>
-                <div class="content_shopItem_listBox">
-                    <div class="shopItem_img">
-                        <img src="/img/item/one/1.jpg" alt="">
-                    </div>
-                    <ul>
-                        <li>
-                            시작시간 :
-                        </li>
-                        <li>종료시간 : </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <h3 class="content_shopItem_title"><a href="">상품 명</a></h3>
-                        </li>
-                        <li> 수량 : </li>
-                    </ul>
-                    <ul class="content_shopItem_btn">
-                        <li><a href="">수정</a></li>
-                        <li><a href="">삭제</a></li>
-
-                    </ul>
-                </div>
+                </div>  
+             </c:forEach>
+              
 	<%-- 게시판 목록 페이지 번호 뷰어 설정 --%>
 		<div align="center">
 		<c:if test="${count > 0}">
