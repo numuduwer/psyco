@@ -51,4 +51,6 @@ public interface ItemDAO {
 	public int itemAmountCheck(int item_num);
 
 	public List<JoinResultDTO> getMyEntireList(int id, int startRow, int endRow);
+
+	
 }

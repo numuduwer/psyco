@@ -92,7 +92,6 @@ public class ShopServiceImpl implements ShopService {
 		
 		int count = 0;
 		int countA = 0;
-		int countB = 0;
 		int countC = 0;
 		int countD = 0;
 		
@@ -101,20 +100,29 @@ public class ShopServiceImpl implements ShopService {
 		
 		//1
 		countA = itemDAO.countA(id);
-		if(count >0) {
+		System.out.println("countA : " + countA);
+		if(countA >0) {
 			articleListA = itemDAO.getItemListA(id,startRow, endRow);	
 		}
 		
 		
 		//3
 		countC = itemDAO.countC(id);
-		if(count >0) {
+		if(countC >0) {
 			articleListC = itemDAO.getItemListC(id,startRow, endRow);	
 		}
 		
 		//4
 		countD = itemDAO.countD(id);
-		if(count >0) {
+		if(countD >0) {
+			articleListD = itemDAO.getItemListD(id,startRow, endRow);	
+		}
+		
+		int shop_num = id;
+		
+		// 가게에서 진행예
+		countD = itemDAO.countD(shop_num);
+		if(countD >0) {
 			articleListD = itemDAO.getItemListD(id,startRow, endRow);	
 		}
 		
@@ -404,6 +412,27 @@ public class ShopServiceImpl implements ShopService {
 			jsonArray.add(jsonObject);
 		}
 		return jsonArray;
+	}
+
+	@Override
+	public List getItemList1(String pageName, String pageNum, int shop_num, Model model) throws SQLException {
+		int startRow = 1;
+		int endRow = 4;
+
+		
+		List articleList = null;
+		
+		int count = menuDAO.getItemListCount(shop_num);
+		System.out.println("count : " + count);
+		if(count >0) {
+			articleList = menuDAO.getItemListE(shop_num,startRow, endRow);
+		}
+
+		model.addAttribute("articleList3", articleList);
+		
+		return articleList;
+		
+		
 	}
 	
 	

@@ -260,10 +260,10 @@
             <div class="ing_info">
                 <h2>이 가게에서 진행예정 경매</h2>
                 <div class="info_items">
+                <c:forEach var="list2" items="${articleList3}">
                     <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
-                    <img src="" alt="">
+                    ${list2.menu_img}
+                </c:forEach>
                 </div>
             </div>
         </div>

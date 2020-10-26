@@ -56,13 +56,12 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public int countA(int id) throws SQLException {
 		String selling = "1";
-		
+		id = 1;
 		HashMap map = new HashMap();
-		map.put("id", id);
+		map.put("mem_num", id);
 		map.put("selling", selling);
 		
 		int count = sqlSession.selectOne("item.itemOneCount",map);
-		System.out.println("count : " + count);
 		
 		return count;
 	}
@@ -70,6 +69,7 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public List getItemListA(int id, int startRow, int endRow) {
 		String selling = "1";
+		id = 1;
 		HashMap map = new HashMap();
 		map.put("mem_num", id);
 		map.put("startRow", startRow);
@@ -77,7 +77,7 @@ public class ItemDAOImpl implements ItemDAO {
 		map.put("selling", selling);
 		
 		List list = sqlSession.selectList("item.getMyItemList",map);
-		
+		System.out.println("a : " + list.size());
 		return list;
 	}
 	/////////////////////////////////3
@@ -86,13 +86,13 @@ public class ItemDAOImpl implements ItemDAO {
 		String selling = "3";
 		
 		HashMap map = new HashMap();
-		map.put("id", id);
+		map.put("mem_num", id);
 		map.put("selling", selling);
 		
-		int count = sqlSession.selectOne("item.itemOneCount",map);
-		System.out.println("count : " + count);
+		int countC = sqlSession.selectOne("item.itemOneCount",map);
+		System.out.println("countC : " + countC);
 		
-		return count;
+		return countC;
 	}
 	
 	@Override
@@ -114,13 +114,13 @@ public class ItemDAOImpl implements ItemDAO {
 		String selling = "4";
 		
 		HashMap map = new HashMap();
-		map.put("id", id);
+		map.put("mem_num", id);
 		map.put("selling", selling);
 		
-		int count = sqlSession.selectOne("item.itemOneCount",map);
-		System.out.println("count : " + count);
+		int countD = sqlSession.selectOne("item.itemOneCount",map);
+		System.out.println("countD : " + countD);
 		
-		return count;
+		return countD;
 	}
 	
 	@Override
@@ -136,6 +136,8 @@ public class ItemDAOImpl implements ItemDAO {
 		
 		return list;
 	}
+	
+
 	
 	
 	
