@@ -63,9 +63,9 @@ public class UserBean {
 
 	//buy 부분
 	@RequestMapping("myPageList.com")// int member_num 나중에 넣어야함
-	public String myPageList(String pageNum,Model model)throws SQLException {
+	public String myPageList(HttpSession session, String pageNum,Model model)throws SQLException {
 	
-			int member_num=91;
+			int member_num= Integer.parseInt(session.getAttribute("memNum").toString());
 			System.out.println("member_num1=="+member_num);
 			ListData data =commonsService.getbuyData(pageNum, member_num); 
 			model.addAttribute("pageNum",  data.getPageNum());

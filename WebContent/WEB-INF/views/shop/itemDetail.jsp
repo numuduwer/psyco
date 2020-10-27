@@ -299,37 +299,38 @@
             </div>
         </div>
     </div>
-    <div class="content">
+   <div class="content">
         <div id="tab1" data-tab-content class="items active">
             <div class="tab1_item">
-                <img src="/img/item/one/1.jpg" alt="">
-                <div class="shopinfo_info">
-                    <h2>제육볶음</h2>
-                    <h3>멘트??</h3>
-                    <p>5000원</p>
-                </div>
+            	<table>
+		            <c:forEach var="article" items="${articleList}">
+		            	<tr>
+			            	<td>
+				                <img src="/img/item/one/1.jpg" alt="">
+				                <div class="shopinfo_info">
+				                    <h2>${article.menu_name }</h2>
+				                    <h3>${article.content}</h3>
+				                    <p>${article.price}</p>
+				                </div>
+			                </td>
+		                </tr>
+		            </c:forEach>
+                </table>
             </div>
-            <div class="tab1_item">
-                <img src="/img/item/one/1.jpg" alt="">
-                <div class="shopinfo_info">
-                    <h2>제육볶음</h2>
-                    <h3>멘트??</h3>
-                    <p>5000원</p>
-                </div>
-            </div>
+
 
         </div>
         <div id="tab2" data-tab-content class="items">
             <div class="tab2_item">
                 <img src="/img/item/one/1.jpg" alt="">
                 <div class="shopinfo_info">
-                    <h2>${shopInfo.shop_name}</h2>
+                    <h2>${sdto.shop_name}</h2>
                     <ul>
                         <li>
                             <h3>전화번호 :</h3>
                         </li>
                         <li>
-                            <h3>${shopInfo.shop_phone}</h3>
+                            <h3> ${sdto.shop_phone}</h3>
                         </li>
                     </ul>
 
@@ -338,7 +339,7 @@
                             <h3>영업시간 :</h3>
                         </li>
                         <li>
-                            <h3>${shopInfo.operating_time}</h3>
+                            <h3> ${sdto.operating_time}</h3>
                         </li>
                     </ul>
                     <ul>
@@ -346,13 +347,7 @@
                             <h3>포장여부 :</h3>
                         </li>
                         <li>
-                            <c:if test="${shopInfo.takeout == '1'}">
-                                <h3>가능</h3>
-                            </c:if>
-                            <c:if test="${shopInfo.takeout == '0'}">
-                                <h3>불가능</h3>
-                            </c:if>
-
+                            <h3> ${sdto.takeout}</h3>
                         </li>
                     </ul>
                     <ul>
@@ -360,7 +355,7 @@
                             <h3>주소 :</h3>
                         </li>
                         <li>
-                            <h3>${shopInfo.address}</h3>
+                            <h3> ${sdto.address}</h3>
                         </li>
                     </ul>
 
@@ -370,19 +365,33 @@
         </div>
         <div id="tab3" data-tab-content class="items">
             <div class="tab3_item">
+            	<c:if test="${rcount == 0}">
+					<table>
+						<tr>
+							<td> 후기가 없습니다. </td>
+						</tr>
+					</table>
+				</c:if>
+                <h2>최근 리뷰</h2>
                 <table>
                     <tr>
                         <th>no.</th>
-                        <th>제목</th>
+                        <th>작성자</th>
                         <th>별점</th>
                         <th>작성시간</th>
+                        <th>내용</th>
                     </tr>
+                    <c:forEach var="article" items="${rarticleList}">
                     <tr>
-                        <td>1</td>
-                        <td>테스트 제목</td>
-                        <td>별은 몇개</td>
-                        <td>테스트 작성시간 </td>
+                    	<td>${rnumber}
+							<c:set var="number" value="${rnumber-1}" />
+						</td>
+                        <td>${article.writer}</td>
+                        <td>${article.grade}</td>
+                        <td>${article.reg } </td>
+                        <td>${article.content } </td>
                     </tr>
+                    </c:forEach>
                 </table>
 
             </div>

@@ -231,8 +231,7 @@ public class ShopBean {
 	@RequestMapping("itemList.com")
 	public String itemList(String pageName, String pageNum, HttpSession session, Model model) throws SQLException {
 		
-		int id = 123;
-		System.out.println(id);
+		int id=(int)session.getAttribute("memNum");
 		
 		System.out.println("itemList Controller id :" + id);
 		ListData data = shopService.getItemList(pageName,pageNum,id,model);
@@ -260,6 +259,38 @@ public class ShopBean {
 		model.addAttribute("article", article);
 		model.addAttribute("shopInfo", shopInfo);
 		model.addAttribute("itemImgList", itemImgList);
+		//-------------------------------------------------------------------------
+		ItemDTO idto=shopService.getItemOne(item_num,pageNum, model);
+		pageName="menuList";
+		String controller ="shopBean";
+		ListData data=commonsService.getListData(pageName, pageNum, idto.getShop_num(), controller);
+		pageName="reviewList";
+		controller ="shopBean";
+		ListData rdata=commonsService.getListData(pageName, pageNum, idto.getShop_num(), controller);
+		ShopDTO sdto=shopService.getShopDataSV(idto.getShop_num());
+		//---------------------------------item
+		model.addAttribute("idto", idto);
+		//----------------------------shop
+		model.addAttribute("sdto", sdto);
+		//--------------------------menu
+		model.addAttribute("pageNum", data.getPageNum());
+		model.addAttribute("pageSize", data.getPageSize());
+		model.addAttribute("currPage", data.getCurrPage());
+		model.addAttribute("startRow", data.getStartRow());
+		model.addAttribute("endRow", data.getEndRow());
+		model.addAttribute("number", data.getNumber());
+		model.addAttribute("articleList", data.getArticleList());
+		model.addAttribute("count", data.getCount());
+		//---------------------------------------------review
+		model.addAttribute("pageNum", rdata.getPageNum());
+		model.addAttribute("pageSize", rdata.getPageSize());
+		model.addAttribute("currPage", rdata.getCurrPage());
+		model.addAttribute("startRow", rdata.getStartRow());
+		model.addAttribute("endRow", rdata.getEndRow());
+		model.addAttribute("rnumber", rdata.getNumber());
+		model.addAttribute("rarticleList", rdata.getArticleList());
+		model.addAttribute("rcount", rdata.getCount());
+		System.out.println("data.rdata.getArticleList()()=="+rdata.getArticleList());
 		
 		return "shop/itemDetail.mm";
 	}
