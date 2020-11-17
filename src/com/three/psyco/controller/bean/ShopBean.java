@@ -213,7 +213,7 @@ public class ShopBean {
 		}
 		
 		result = shopService.updateMenuDataSV(dto);
-		model.addAttribute("shopNum", dto.getShop_num());
+		model.addAttribute("shop_num", dto.getShop_num());
 		model.addAttribute("result", result);
 		return "shop/menuModifyPro";
 	}
@@ -248,6 +248,11 @@ public class ShopBean {
 		ItemDTO article = shopService.getItemOne(item_num, pageNum, model);
 		ShopDTO shopInfo = shopService.getShopDataSV(article.getShop_num());
 		
+		int menu_num = article.getMem_num();
+		MenuDTO menu = shopService.getMenuDataSV(menu_num);
+		System.out.println("menu_num:" + menu_num);
+		System.out.println(menu.getMenu_img());
+		
 		// 해당가게에서 진행중인 경매상품 리스트
 		List itemImgList = shopService.getContentImg(shop_num, model);
 		
@@ -259,6 +264,40 @@ public class ShopBean {
 		model.addAttribute("article", article);
 		model.addAttribute("shopInfo", shopInfo);
 		model.addAttribute("itemImgList", itemImgList);
+		model.addAttribute("menu_img", menu.getMenu_img());
+		
+		//---------------------------
+		ItemDTO idto=shopService.getItemOne(item_num,pageNum, model);
+		pageName="menuList";
+		String controller ="shopBean";
+		ListData data=commonsService.getListData(pageName, pageNum, idto.getShop_num(), controller);
+		pageName="reviewList";
+		controller ="shopBean";
+		ListData rdata=commonsService.getListData(pageName, pageNum, idto.getShop_num(), controller);
+		ShopDTO sdto=shopService.getShopDataSV(idto.getShop_num());
+		//---------------------------------item
+		model.addAttribute("idto", idto);
+		//----------------------------shop
+		model.addAttribute("sdto", sdto);
+		//--------------------------menu
+		model.addAttribute("pageNum", data.getPageNum());
+		model.addAttribute("pageSize", data.getPageSize());
+		model.addAttribute("currPage", data.getCurrPage());
+		model.addAttribute("startRow", data.getStartRow());
+		model.addAttribute("endRow", data.getEndRow());
+		model.addAttribute("number", data.getNumber());
+		model.addAttribute("articleList", data.getArticleList());
+		model.addAttribute("count", data.getCount());
+		//---------------------------------------------review
+		model.addAttribute("pageNum", rdata.getPageNum());
+		model.addAttribute("pageSize", rdata.getPageSize());
+		model.addAttribute("currPage", rdata.getCurrPage());
+		model.addAttribute("startRow", rdata.getStartRow());
+		model.addAttribute("endRow", rdata.getEndRow());
+		model.addAttribute("rnumber", rdata.getNumber());
+		model.addAttribute("rarticleList", rdata.getArticleList());
+		model.addAttribute("rcount", rdata.getCount());
+		System.out.println("data.rdata.getArticleList()()=="+rdata.getArticleList());
 		
 		return "shop/itemDetail.mm";
 	}

@@ -74,7 +74,7 @@
 		                        <li><a href="">주문 상세보기 >></a> </li>
 		                    </ul>
 		                    <div class="myPage_item_info">
-		                    	<img src="/img/item/one/1.jpg" alt="">
+		                    	<img src="/psyco/save/${article.menu_img}" alt="">
 		                        <ul>
 		                           <li><a href="psyco/main/content.com?item_num=${article.item_num}&shop_num=${article.shop_num}&pageNum=${pageNum}">${article.item_name}</a></li>
 		                           <li> 할인률 ${article.discount_rate}%</li>

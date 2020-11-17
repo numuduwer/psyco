@@ -98,8 +98,8 @@
 					IMP.request_pay({ // param
 						pg: "html5_inicis",
 						payment_method: "card",					
-						//merchant_uid: 'psyco' + getToday() + '-' + ${article.item_num},	// 주문 번호, 한번 결제 완료된 주문번호는 다시 사용할 수 없는 듯
-						merchant_uid: 'psyco20201023-001894',
+						merchant_uid: 'psyco' + getToday() + '-' + Math.floor(Math.random() * 1000) +1,	// 주문 번호, 한번 결제 완료된 주문번호는 다시 사용할 수 없는 듯
+						//'merchant_uid: 'psyco20201023-001894',
 						name: '${article.item_name}',
 						amount: getParam("current_price") * document.getElementById('quantity').value,
 						buyer_email: result.email,
@@ -133,6 +133,7 @@
 								success: function(result){
 									if (result == '1') {
 										alert('결제가 완료 되었습니다.');
+										window.location.href='/psyco/user/myPageList.com';
 									} else {
 										result == '오류 발생';
 									}
@@ -168,8 +169,8 @@
 
 
 	<section id="buy_info">
-        <div class="buy_img">
-            <img src="/psyco/resources/img/item/one/1.jpg" alt="" class="card_img">
+        <div class="buy_img">	
+            <img src="/psyco/save/${menu_img}" alt="" class="card_img">
             <div class="map" id="map"></div>
         </div>
         <div class="buy_content">
@@ -196,7 +197,7 @@
                 </ul>
                 <ul>
                     <li>할인 주기</li>
-                    <li>${article.discount_cycle}</li>
+                    <li>${article.discount_cycle / 60} 분</li>
                 </ul>
                 <ul>
                     <li>경매 단위</li>
@@ -233,7 +234,7 @@
                 
             </div>
             <c:if test="${article.selling_status == 3 && article.progress_status == 0}">
-            	<div>
+            	<div class = "qq">
                 	<input type="text" name="quantity" id="quantity" value="1">
                 	<input type="button" value="-" onclick="javascript:change(-1)">
                 	<input type="button" value="+" onclick="javascript:change(1)">
@@ -302,18 +303,18 @@
     <div class="content">
         <div id="tab1" data-tab-content class="items active">
             <div class="tab1_item">
-                <img src="/img/item/one/1.jpg" alt="">
+                <img src="/psyco/resources/img/main/1.jpg" alt="">
                 <div class="shopinfo_info">
-                    <h2>제육볶음</h2>
-                    <h3>멘트??</h3>
+                    <h2>달팽이 모둠</h2>
+                    <h3>맛있는 술안주 </h3>
                     <p>5000원</p>
                 </div>
             </div>
             <div class="tab1_item">
-                <img src="/img/item/one/1.jpg" alt="">
+                <img src="/psyco/resources/img/main/2.jpg" alt="">
                 <div class="shopinfo_info">
-                    <h2>제육볶음</h2>
-                    <h3>멘트??</h3>
+                    <h2>달팽이 된장찌개 </h2>
+                    <h3>든든한 국밥 </h3>
                     <p>5000원</p>
                 </div>
             </div>
@@ -321,7 +322,7 @@
         </div>
         <div id="tab2" data-tab-content class="items">
             <div class="tab2_item">
-                <img src="/img/item/one/1.jpg" alt="">
+                <img src="/psyco/resources/img/main/3.jpg" alt="">
                 <div class="shopinfo_info">
                     <h2>${shopInfo.shop_name}</h2>
                     <ul>

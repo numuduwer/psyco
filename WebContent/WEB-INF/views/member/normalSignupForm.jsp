@@ -113,91 +113,188 @@
 </head>
 
 <body>
-	<c:if test="${param.license_number != null}">
-		<div>
-			사업자 번호 : <c:out value="${param.license_number}"></c:out>
-		</div>
-	</c:if>
-	<div class="form_box">
-
-
-        <div>
-            <form action="/psyco/member/signup.com" method="post" class="form" id="regFrom">
-                <input class="form_input" type="hidden" name="license_number" value="${param.license_number}">
-                <div class=form_tab>
-                    <label for="" class="form_title"> 아이디</label>
-                    <input class="form_input" type="text" id="member_Id" name="member_Id" placeholder="아이디를 입력" />
-					<span id="result" style="display: block; padding-left: 100px;"></span>
-
-			</tr>
-                </div>
-                <div class=form_tab>
-                    <label for="" class="form_title"> 비밀번호</label>
-                    <input class="form_input" type="password" name="pw" id ="pw" placeholder="비밀번호를 입력" />
-                </div>
-                <div class=form_tab>
-                    <label for="" class="form_title"> 비밀번호 확인</label>
-                    <input class="form_input" type="password" name="pw_confirm" placeholder="비밀번호 재입력" />
-                </div>
-
-                <div class=form_tab>
-                    <label for="" class="form_title">이름</label>
-                    <input class="form_input" type="text" name="name" placeholder="이름 입력" />
-                </div>
-                <div class=form_tab>
-                    <label for="" class="form_title">생년월일</label>
-                    <input class="form_input" type="date" name="birth" />
-                </div>
-                <div class=form_tab>
-                    <label for="" class="form_title">핸드폰</label>
-                    <input class="form_input" type="text" name="phoneNum" placeholder="번호 입력" />
-                </div>
-                <div class="form_male_tab">
-                    <label for="male">남성</label>
-                    <input class="form_checkbox" type="radio" name="gender" id="male" value="M" />
-                    <label for="female">여성</label>
-                    <input class="form_checkbox" type="radio" name="gender" id="female" value="F" />
-                </div>
-                <div class=form_tab>
-                    <label for="" class="form_title">닉네임</label>
-                    <input class="form_input" type="text" name="nickname" placeholder="닉네임(활동 이름) 입력" />
-                </div>
-                <div class=form_tab>
-                    <label for="" class="form_title">E-mail</label>
-                    <input class="form_input" type="text" name="email" placeholder="이메일 입력" />
-                </div>
-
-                <div class=form_tab>
-                    <input class="form_input" type="text" id="postcode" placeholder="우편번호">
-                    <input class="form_postbtn" type="button" id="btn1" onclick="execDaumPostCode()" value="우편번호 찾기">
-                </div>
-
-                <div class=form_tab>
-                    <label for="" class="form_title">지번주소</label>
-                    <input class="form_input" type="text" id="jibunAddress" placeholder="지번주소">
-                </div>
-                <div class=form_tab>
-                    <label for="" class="form_title">도로명주소</label>
-                    <input class="form_input" type="text" id="roadAddress" placeholder="도로명주소">
-                </div>
-                <div class=form_tab>
-
-                    <label for="" class="form_title">추가주소</label>
-                    <input class="form_input" type="text" id="extraAddress" placeholder="추가주소">
-                </div>
-                <div class=form_tab>
-                    <label for="" class="form_title">상세주소</label>
-                    <input class="form_input" type="text" id="detailAddress" placeholder="상세주소">
-                </div>
-
-                <div class=form_tab>
-                    <input type="button" value="취소" onclick="history.go(-1) " class="form_btn" />
-                    <input type="submit" value="가입" class="form_btn" />
-                </div>
-
-            </form>
+    
+       <div class="myPage_mainTitle">
+        <h1>회원정보 입력 </h1>
+        <ul class="shignupStep">
+            <li>
+                <div class="shignupStep_box">1. 가입유형 선택</div>
+            </li>
+            <li>
+                <div class="shignupStep_box">2. 사업자등록 확인</div>
+            </li>
+            <li>
+                <div class="shignupStep_box_on">3. 회원정보</div>
+            </li>
+            <li>
+                <div class="shignupStep_box">4. 가게정보</div>
+            </li>
+        </ul>
+        <div class="myPage_userTitle">
+            <h3 class="myPage_subTitle"> 3. 회원정보</h3>
         </div>
     </div>
+       
+         <div class="form_box2">
+        <form action="/psyco/member/signup.com" method="post" >
+         <input class="form_input" type="hidden" name="license_number" value="${param.license_number}">
+            <div class="form_newBox">
+                <div class="form_newBox_title">
+                   	아이디 
+                </div>
+                <div class="form_newBox_content">
+                    <input class="form_newBox_input" type="text" id="member_Id" name="member_Id" placeholder="아이디를 입력" />
+                    <span id="result" style="display: block; padding-left: 100px;"></span>
+                </div>
+            </div>
+            
+            
+            <div class="form_newBox">
+                <div class="form_newBox_title">
+                   	비밀번호 
+                </div>
+                <div class="form_newBox_content">
+                    <input class="form_newBox_input" type="password" name="pw" id ="pw" placeholder="비밀번호를 입력" />
+             		<span>※ 띄어쓰기 없이 특수문자까지 가능합니다. </span>
+                </div>
+            </div>
+            
+            <div class="form_newBox">
+                <div class="form_newBox_title">
+                    비밀번호 확인
+                </div>
+                <div class="form_newBox_content">
+                <input class="form_newBox_input" type="password" name="pw_confirm" placeholder="비밀번호 재입력" />
+                </div>
+            </div>
+            
+
+            <div class="form_newBox">
+                <div class="form_newBox_title">
+                    성명
+                </div>
+                <div class="form_newBox_content">
+                    <input class="form_newBox_input" type="text" name="name"  />
+                    <span>※ 공백없이 입력하세요</span>
+                </div>
+            </div>
+            
+            <div class="form_newBox">
+                <div class="form_newBox_title">
+                    생년월일 
+                </div>
+                <div class="form_newBox_content">
+                    <input class="form_newBox_input" type="date" name="birth" />
+                </div>
+            </div>
+            
+            
+            <div class="form_newBox">
+                <div class="form_newBox_title">
+                    휴대전화 
+                </div>
+                <div class="form_newBox_content">
+                    <input class="form_newBox_input" type="text" name="phoneNum" />
+                    <span>※ 필수로 입력하세요</span>
+                </div>
+            </div>
+            
+            
+            <div class="form_newBox">
+                <div class="form_newBox_title">
+                    성별 
+                </div>  
+                
+                 <div class="form_newBox_content3">
+                    <span >남성</span>
+                    <input class="checkbox2" type="radio" name="gender" id="male" value="M" />
+                    <span >여성</span>
+                    <input class="checkbox2" type="radio" name="gender" id="female" value="F" />
+                  </div>
+            </div>
+             	
+            
+            <div class="form_newBox">
+                <div class="form_newBox_title">
+                    닉네임 
+                </div>
+                <div class="form_newBox_content">
+                    <input class="form_newBox_input" type="text" name="nickname" />
+                    <span>※ 공백없이 입력하세요</span>
+                </div>
+            </div>
+            
+            <div class="form_newBox">
+                <div class="form_newBox_title">
+                    이메일
+                </div>
+                <div class="form_newBox_content">
+                    <input class="form_newBox_input" type="text" name="email" />
+                    <span>※ 비밀번호 찾기 및 전형결과 알림에 사용되오니, 반드시 자주 사용하는 메일 주소를 입력해주세요.</span>
+                </div>
+            </div>
+            
+     
+            
+              
+            <div class="form_newBox">
+                <div class="form_newBox_title">
+                    우편번호 
+                </div>
+                <div class="form_newBox_content">
+             
+                     <input class="form_input" type="text" id="postcode" >
+                    <input class="form_newBox_input" type="button" id="btn1" onclick="execDaumPostCode()" value="우편번호 찾기">
+             
+                </div>
+            </div>
+            
+            
+             <div class="form_newBox">
+                <div class="form_newBox_title">
+                    지번주소
+                </div>
+                <div class="form_newBox_content">
+               	 <input class="form_newBox_input" type="text" id="jibunAddress">
+                </div>
+            </div>
+            
+            
+             <div class="form_newBox">
+                <div class="form_newBox_title">
+                    도로명주소
+                </div>
+                <div class="form_newBox_content">
+              	 	<input class="form_inform_newBox_inputput" type="text" id="roadAddress">
+                </div>
+            </div>
+            
+            
+            <div class="form_newBox">
+                <div class="form_newBox_title">
+                    상세주소 
+                </div>
+                <div class="form_newBox_content">
+              	  <input class="form_newBox_input" type="text" id="extraAddress" >
+                 
+                </div>
+            </div>
+            
+            <br><br>
+            <div class="form_newBox_content2">
+            <input type="button" value="취소" onclick="history.go(-1) " class="form_btn" />
+                    <input type="submit" value="가입" class="form_btn" />
+            
+            </div>
+              	    
+            
+           
 	
+
+        </form>
+  
+    </div>
+
+
 </body>
 </html>

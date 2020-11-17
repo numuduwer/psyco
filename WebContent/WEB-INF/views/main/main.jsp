@@ -141,7 +141,8 @@
     <!-- 경매 상품 -->
     <section class="item-section">
         <div class="card-container">
-        <c:forEach var="item" items="${itemMapList}">
+         <c:forEach var="item" items="${itemMapList}">
+      
         	<div class="card">
         		<img src="/psyco/save/${item.itemList.menu_img}" alt="" class="card_img">
         		<div class="card_content">

@@ -233,6 +233,8 @@ section {
 
 /* 콘텐츠3  역경매 카드   */
 
+
+
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -325,7 +327,6 @@ section {
   width: 50%;
   height: 1000px;
 
-  border-right: solid 1px red;
 }
 .buy_img .card_img {
   margin: 0 auto;
@@ -333,10 +334,11 @@ section {
   height: 450px;
 }
 .map {
-  background-color: var(--color-black);
-  margin: 0 auto;
-  width: 450px;
-  height: 450px;
+      margin: 0 auto;
+    width: 420px;
+    height: 450px;
+    border: 0.5px solid var(--color-light-white);
+    margin-top: 10px;
 }
 
 /*  콘텐츠2. 오른쪽 (상품 정보)*/
@@ -466,10 +468,13 @@ section .buy_info {
 }
 
 .shop_comment {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 24px 12px;
+      border: 1px solid;
+    width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 12px;
+    margin: 10px;
 }
 
 .shop_comment h2 {
@@ -904,6 +909,7 @@ th {
   font-size: 12px;
   border: none;
   border-radius: 4px;
+  margin : 10px;
 }
 
 .admin_dtn2_content2 {
@@ -914,10 +920,12 @@ th {
   font-size: 12px;
   border: none;
   border-radius: 4px;
+  
 }
 .ssss{
-	display : flex;
-	 justify-content: space-around;
+	display: flex;
+	justify-content: flex-end;
+    padding: 10px;
 }
 
 .shop_signup {
@@ -1002,3 +1010,81 @@ xmain {
 }
 
 
+.qq{
+	display: flex;
+    justify-content: center;
+    margin: 30px;
+}
+
+
+/* 공용 */
+
+
+.nContent {
+  display: flex;
+  justify-content: center;
+}
+.table_title {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--color-dark-grey);
+}
+.table_title span {
+  margin: auto 0;
+  color: var(--color-light-grey);
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 13px;
+}
+
+.table_title h3 {
+  font-weight: 650;
+  font-size: 18px;
+}
+.table_box {
+  width: 500px;
+}
+.ntable {
+  margin: 10px;
+}
+.table_box td {
+  padding: 8px;
+  border-bottom: 1px solid var(--color-dark-white);
+
+    
+}
+.table_time {
+	color: var(--color-light-grey);
+	font-size: 15px;
+	
+}
+
+.table_detail{
+	text-align : left;
+}
+
+.ntable2 {
+  width: 800px;
+}
+
+.table_box2 {
+  width: 800px;
+}
+.table_box2 td {
+  padding: 8px;
+  border-bottom: 1px solid var(--color-dark-white);
+  color : var(--color-dark-grey);
+}
+
+.table_box_title {
+  font-weight: 750;
+  text-align: center;
+
+  padding: 10px;
+}
+
+/*수선 */
+
+
+	

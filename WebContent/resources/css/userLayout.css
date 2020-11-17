@@ -292,17 +292,18 @@ footer {
   position: absolute;
   top: -4px;
   left: 0;
-  width: 280px;
+  width: 266px;
   height: 4px;
   background-color: rgb(255, 255, 255);
 }
 .items:nth-child(2)::before {
-  left: 250px;
+  left: 268px;
+  width: 265px;
   top: -4px;
   background-color: rgb(255, 255, 255);
 }
 .items:nth-child(3)::before {
-  left: 518px;
+  left: 535px;
   top: -4px;
   background-color: rgb(255, 255, 255);
 }
@@ -500,6 +501,19 @@ th {
   align-items: center;
 }
 
+
+.form_box3 {
+  margin: 0 auto;
+  width: 800px;
+  height: 500px;
+  border: 2px solid var(--color-light-white);
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .form {
   width: 600px;
   height: 100vh;
@@ -525,7 +539,7 @@ th {
 
 .form_tab {
   padding: 20px 0;
-  border-bottom: 0.5px solid var(--color-dark-white);
+ 
 }
 .form_btn {
   width: 120px;
@@ -536,8 +550,20 @@ th {
   font-size: 20px;
   padding: 5px;
   color: var(--color-light-white);
+  margin : 15px;
+}
+.checkbox2{
+	width : 12px;
+	height: 12px;
+	margin : 3px  8px;
 }
 
+.form_newBox_content3{
+	    width: 300px;
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+}
 /* 마이페이지 사이드 메뉴 기능 */
 
 ul > li {
@@ -555,7 +581,7 @@ ul > li {
 }
 .mypage_menu2 {
   display: flex;
-  justify-content: center;
+
 
   align-content: center;
   font-size: 20px;
@@ -823,7 +849,7 @@ footer {
 
 .form_tab {
   padding: 20px 0;
-  border-bottom: 0.5px solid var(--color-dark-white);
+
 }
 .form_btn {
   width: 120px;
@@ -970,3 +996,169 @@ footer {
 	margin : 100px;
 	
 }
+
+.qq{
+	display : flex;
+}
+
+
+/* 공용 */
+
+.nContent {
+  display: flex;
+  justify-content: center;
+}
+.table_title {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--color-dark-grey);
+}
+.table_title span {
+  margin: auto 0;
+  color: var(--color-light-grey);
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 13px;
+}
+
+.table_title h3 {
+  font-weight: 650;
+  font-size: 18px;
+}
+.table_box {
+  width: 500px;
+}
+.ntable {
+  margin: 10px;
+}
+.table_box td {
+  padding: 8px;
+  border-bottom: 1px solid var(--color-dark-white);
+  color : var(--color-dark-grey);
+}
+.table_time {
+	color: var(--color-light-grey);
+	font-size: 14px;
+}
+
+
+/* 회원가입 헤더 */
+
+.shignupStep {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.shignupStep li {
+  font-size: 13px;
+}
+.shignupStep_box {
+  width: 200px;
+  height: 50px;
+  border: 1px solid var(--color-light-white);
+  line-height: 4;
+  padding: 0 8px;
+  background-color: #f7f7f7;
+}
+
+.shignupStep_box_on {
+  width: 200px;
+  height: 50px;
+  border: 1px solid var(--color-light-white);
+  line-height: 4;
+  padding: 0 8px;
+  background-color: var(--color-dark-blue);
+  color: #f7f7f7;
+}
+
+.myPage_subTitle {
+  font-size: 24px;
+  font-weight: 550;
+}
+
+
+/* 회원가입 폼 */
+
+.form_box2 {
+  margin: 0 auto;
+  width: 800px;
+  height: 100%;
+  border: 2px solid var(--color-light-white);
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.form_newBox_content2{
+	display : flex ;
+	 justify-content: center;
+	 margin :  10px 10px;
+}
+
+.form_newBox {
+  width: 730px;
+  margin-left: 30px;
+  display: flex;
+  border-bottom: 1px solid var(--color-dark-white);
+}
+.form_newBox_title {
+  width: 230px;
+  height: 100px;
+  text-align: left;
+  line-height: 4;
+  padding: 0 50px;
+  color: var(--color-light-grey);
+}
+.form_newBox_content {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 15px 30px;
+}
+
+.form_newBox_content input {
+  width: 310px;
+  height: 40px;
+  border: 1.5px solid var(--color-dark-white);
+}
+
+.form_newBox_content span {
+  margin-top: 10px;
+  color: var(--color-light-grey);
+  font-size: 14px;
+}
+
+
+/* 사업자? 일반? */
+.select_tab2 {
+  margin: 10px;
+  width: 230px;
+  height: 230px;
+
+  border-radius: 200px;
+  border: 2px solid var(--color-light-white);
+  font-size: 26px;
+  padding: 5px;
+}
+
+.select_tab2:hover {
+  margin: 10px;
+  width: 230px;
+  height: 230px;
+  background-color: var(--color-dark-blue);
+  border-radius: 200px;
+  border: 2px solid var(--color-light-white);
+  color: var(--color-white);
+  font-size: 26px;
+  padding: 5px;
+}
+.select_btn_step {
+  display: flex;
+  justify-content: space-around;
+}
+
+
+
+/* input form */
+

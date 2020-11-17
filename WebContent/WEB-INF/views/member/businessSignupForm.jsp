@@ -55,11 +55,27 @@
 	 <!--  기능  타이틀 -->
     <div class="myPage_mainTitle">
         <h1>사업자 등록 확인 </h1>
+        
+            <ul class="shignupStep">
+            <li>
+                <div class="shignupStep_box">1. 가입유형 선택</div>
+            </li>
+            <li>
+                <div class="shignupStep_box_on">2. 사업자등록 확인</div>
+            </li>
+            <li>
+                <div class="shignupStep_box">3. 회원정보</div>
+            </li>
+            <li>
+                <div class="shignupStep_box">4. 가게정보</div>
+            </li>
+        </ul>
         <div class="myPage_userTitle">
-            <h2 class="myPage_subTitle"> 가게 사업자 번호를 인증해주세요 </h2>
+            <h3 class="myPage_subTitle"> 2. 사업자등록 확인 </h3>
         </div>
+      
     </div>
-    <form class="form_box">
+    <form class="form_box3">
         <div class="group">
             <input class="form_input2" type="text" name="text1" id="text1" pattern="[0-9]+"> - <input class="form_input2" type="text" pattern="[0-9]+"
                 name="text2" id="text2">
@@ -72,12 +88,11 @@
                 <li>
                     <input class=form_btn2 type="button" id="nextBtn" value="뒤로가기" onClick="history.go(-1);" >
                 </li>
-                
-                 <c:if test="${sessionScope.memId == null}">
+             
                   <li>
                     <input class=form_btn2 type="button" id="nextBtn" value="다음으로" onclick="licenseNumber()">
                 </li>
-               	</c:if>
+
                 
             </ul>
 

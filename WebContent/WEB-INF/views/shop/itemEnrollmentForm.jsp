@@ -53,7 +53,7 @@
 				success: function(result) {
 					console.log(result);
 					alert('등록 되었습니다.');
-					window.location.href='/psyco/shop/itemList.com';
+					window.location.href='/psyco/main/main.com';
 				},
 				error: function() {
 					
@@ -73,18 +73,18 @@
 			 -->
 			<label for="item_name">TITLE</label> <br>
 			<input type="text" name="item_name" id="item_name"> <br> <br>
-			<label for="content">CONTENT(경매 내용)</label> <br>
-			<textarea rows="15" cols="25" name="content" id="content"></textarea> <br> <br>
-			<label for="menu_name">MENU</label>
+			<label for="content">CONTENT(경매 내용)</label> <br> <br>
+			<textarea rows="15" cols="25" name="content" id="content"></textarea> <br> <br> <br>
+			<label for="menu_name">MENU</label> <br>
 			<input type="button" id="btn1" value="메뉴선택" onclick="javascript:selectMenu(${sessionScope.memNum})"><br>
-			<input type="text" id="menu_name" readonly> <br> <br>
-			<label for="menu_price">PRICE</label> <br>
-			<input type="text" id="menu_price" readonly> <br> <br>
-			<label for="menu_content">MENU_EXPLAIN</label> <br>
-			<textarea rows="10" cols="20" id="menu_content"></textarea> <br>
-			<label for="amount">AMOUNT</label> <br>
+			<input type="text" id="menu_name" readonly> <br> <br> <br>
+			<label for="menu_price">PRICE</label> <br> <br>
+			<input type="text" id="menu_price" readonly> <br> <br> <br>
+			<label for="menu_content">MENU_EXPLAIN</label> <br> <br>
+			<textarea rows="10" cols="20" id="menu_content"></textarea> <br> <br>
+			<label for="amount">AMOUNT</label> <br> <br>
 			<input type="text" name="amount" id="amount"> <br>
-			<label for="startDate">경매 시작 일</label> <br>
+			<label for="startDate">경매 시작 일</label> <br> <br>
 			<input type="date" name="startDate1" id="startDate1"> <input type="time" name="startDate2" id="startDate2">  <br>
 			<label for="endDate">경매 종료 일</label> <br>
 			<input type="date" name="endDate1" id="endDate1"> <input type="time" name="endDate2" id="endDate2"><br>
@@ -101,7 +101,7 @@
 				<option value="1000">30분</option>
 			</select> <br>
 			<label for="sett">세트 여부<input type="checkbox" id="sett" value="1"></label> <br>		
-			<img alt="이미지를 삽입해주세요" src="" id="menu_img"> <br>
+
 			<input type="button" value="저장" onclick="javascript:enrollment(this.form);">
 			
 			<input type="hidden" id="menu_num" value="">

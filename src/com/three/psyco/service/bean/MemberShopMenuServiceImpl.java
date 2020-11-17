@@ -42,6 +42,7 @@ public class MemberShopMenuServiceImpl implements MemberShopMenuService {
 				Long date=System.currentTimeMillis();
 				String newName=imgName+date+ext;
 				String imgPath = path+"/"+newName;
+				System.out.println("Menu 등록 : " + newName);
 				File file=new File(imgPath);
 				mf.transferTo(file);
 				dto.setMenu_img(newName);

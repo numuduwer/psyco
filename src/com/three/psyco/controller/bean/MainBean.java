@@ -184,17 +184,29 @@ public class MainBean {
 	
 		return "main/content";
 	}
+//	
+//	@RequestMapping("endContent.com")
+//	public String endContent(Model model, String pageNum) throws SQLException {
+//		String pageName = "endContent";
+//		//ListData data = shopService.getItemList(pageName, pageNum, model);
+//		ListData data = commonsService.getListData(pageName,pageNum,controllerName);
+//		commonsService.setListDataToModel(model, data);
+//		System.out.println("endContent : " + data.getPageSize());
+//		return "main/endContent";
+//	}
 	
 	@RequestMapping("endContent.com")
-	public String endContent(Model model, String pageNum) throws SQLException {
-		String pageName = "endContent";
-		//ListData data2 = shopService.getItemList(pageName, pageNum, model);
-		ListData data = commonsService.getListData(pageName,pageNum,controllerName);
-		commonsService.setListDataToModel(model, data);
+	public String endContent(String menuDivision, HttpServletRequest request, Model model) throws SQLException, JsonProcessingException {
+		
+		if (menuDivision == null) menuDivision = "0";
+		
+		List<Object> itemMapList = commonsService.getEntireList(menuDivision);
+
+		model.addAttribute("itemMapList", itemMapList);
+		
+
 		return "main/endContent";
 	}
-	
-	
 	
 
 

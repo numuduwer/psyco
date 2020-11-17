@@ -54,7 +54,7 @@ function onClickItemDelete(menuNum){
 
 		
 		<ul class="shop_menu2">
-			<li><a href="/psyco/member/menuSignupForm.com?shop_num=${param.shop_num}&member_num=${sessionScope.memNum}">가게 등록하기   </a></li>
+			<li><a href="/psyco/member/menuSignupForm.com?shop_num=${param.shop_num}&member_num=${sessionScope.memNum}">메뉴  등록하기   </a></li>
 			<li> <a href="javascript:history.back();">돌아가기 </a>  </li>
 		</ul>
 			
@@ -66,7 +66,7 @@ function onClickItemDelete(menuNum){
 
 		
 		<ul class="shop_menu2">
-			<li><a href="/psyco/member/menuSignupForm.com?shop_num=${param.shop_num}&member_num=${sessionScope.memNum}">가게 등록하기   </a></li>
+				<li><a href="/psyco/member/menuSignupForm.com?shop_num=${param.shop_num}&member_num=${sessionScope.memNum}">메뉴  등록하기   </a></li>
 			<li> <a href="javascript:history.back();">돌아가기 </a>  </li>
 		</ul>
 			
