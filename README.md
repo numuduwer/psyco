@@ -6,8 +6,6 @@
 2. [info](#info)
 2. [Technologies](#Technologies)
 3. [Features](#Features)
-
-
 ## 개요 
 배민 쿠폰,쿠팡 외식상품권등 E-커머스를 통한 음식할인 쿠폰에 대한 관심이 커지고 있다. 그러나 기존 E-커머스플랫폼은 대형프렌차이즈에 기준이 맞춰져 있다.     
 소상공인들도 기준을 맞추고  E-커머스 플랫폼의 차별점을 두기위해 역경매 방식을 적용시킨 음식쿠폰판매 플랫폼을 기획하였다. 
@@ -33,6 +31,9 @@
 - 1.naver API (login, maps) 
 - 2.결제 API 
 - 3.ajax, jquery사용한 비동기처리 , 유효성검사 
+
+
+<img src="https://user-images.githubusercontent.com/33523029/99492247-8e1a4000-29b0-11eb-84a5-e395eeab72a3.png" width="400" height="400">
 
 
 ## Features
