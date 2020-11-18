@@ -57,13 +57,21 @@ E-커머스 플랫폼의 차별점을 두기위해 역경매 방식을 적용시
  - [가입 3단계]id 중복확인시 ajax,jquery사용 비동기로 중복여부확인 
  - [가입 3단계] Daum API 사용 주소검색 기능 구현
 
-<p align="center">
-<img src="https://user-images.githubusercontent.com/33523029/99492247-8e1a4000-29b0-11eb-84a5-e395eeab72a3.png" width="350" height="400">
-<img src="https://user-images.githubusercontent.com/33523029/99492814-945cec00-29b1-11eb-9e6c-a4c23f4f446a.png" width="350" height="400">
+ 
+#### [가입 1단계, 2단계]
+<hr/>
+
+<p align="left">
+<img src="https://user-images.githubusercontent.com/33523029/99492247-8e1a4000-29b0-11eb-84a5-e395eeab72a3.png" width="300" height="300">
+<img src="https://user-images.githubusercontent.com/33523029/99492814-945cec00-29b1-11eb-9e6c-a4c23f4f446a.png" width="300" height="300">
 </p>
-<p align="center">
-<img src="https://user-images.githubusercontent.com/33523029/99492967-c5d5b780-29b1-11eb-8036-556cf6d6f6b8.png" width="350" height="400">
-<img src="https://user-images.githubusercontent.com/33523029/99493002-d25a1000-29b1-11eb-885c-3294b3d68f19.png" width="350" height="400">
+
+
+#### [가입 3단계, 4단계]
+<hr/>
+<p align="left">
+<img src="https://user-images.githubusercontent.com/33523029/99492967-c5d5b780-29b1-11eb-8036-556cf6d6f6b8.png" width="300" height="300">
+<img src="https://user-images.githubusercontent.com/33523029/99493002-d25a1000-29b1-11eb-885c-3294b3d68f19.png" width="300" height="300">
 <p/>
 
 
