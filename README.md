@@ -59,23 +59,25 @@ E-커머스 플랫폼의 차별점을 두기위해 역경매 방식을 적용시
 
  
 ##### [가입 1단계, 2단계]
-<hr/>
+
 
 <p align="left">
 <img src="https://user-images.githubusercontent.com/33523029/99492247-8e1a4000-29b0-11eb-84a5-e395eeab72a3.png" width="300" height="300">
 <img src="https://user-images.githubusercontent.com/33523029/99492814-945cec00-29b1-11eb-9e6c-a4c23f4f446a.png" width="300" height="300">
 </p>
 
+<hr/>
+
 
 ##### [가입 3단계, 4단계]
-<hr/>
+
 <p align="left">
 <img src="https://user-images.githubusercontent.com/33523029/99492967-c5d5b780-29b1-11eb-8036-556cf6d6f6b8.png" width="300" height="300">
 <img src="https://user-images.githubusercontent.com/33523029/99493002-d25a1000-29b1-11eb-885c-3294b3d68f19.png" width="300" height="300">
 <img src="https://user-images.githubusercontent.com/33523029/99508756-50c1ac80-29c8-11eb-8b51-97cc1497b5d1.png" width="300" height="300">
 <p/>
 
-
+<hr/>
 
 ### 상품상세페이지
  - flex를 통한 배치 , tab메뉴를 구현해 하단의 가게정보 확인
@@ -85,14 +87,14 @@ E-커머스 플랫폼의 차별점을 두기위해 역경매 방식을 적용시
 
 
 ##### [음식정보, 가게정보, ]
-<hr/>
+
 <p align="left">
 <img src="https://user-images.githubusercontent.com/33523029/99505382-1bb35b00-29c4-11eb-895a-404fd88963c2.png" width="300" height="300">
 <img src="https://user-images.githubusercontent.com/33523029/99505505-42719180-29c4-11eb-9460-5823975dc451.png" width="300" height="300">
 <img src="https://user-images.githubusercontent.com/33523029/99505542-4dc4bd00-29c4-11eb-9fa6-9370608ee2c3.png" width="300" height="300">
 <p/>
 
-
+<hr/>
 
 ### 커뮤니티 페이지 (4종류의 커뮤니티 페이지)
  - 자유게시판 
@@ -101,13 +103,14 @@ E-커머스 플랫폼의 차별점을 두기위해 역경매 방식을 적용시
  - 경매 팁 게시판 
  
  ##### [커뮤니티 페이지]
-<hr/>
+
 <p align="left">
 <img src="https://user-images.githubusercontent.com/33523029/99508948-836ba500-29c8-11eb-85f3-04bf7dba7369.png" width="300" height="300">
 <img src="https://user-images.githubusercontent.com/33523029/99508952-849cd200-29c8-11eb-96a0-808f6b8e338d.png" width="300" height="300">
-
 <p/>
- 
+
+<hr/>
+
 ### 관리자 페이지 
 - 회원관리
 - 가게사업자 관리 
