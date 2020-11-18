@@ -46,9 +46,13 @@ E-커머스 플랫폼의 차별점을 두기위해 역경매 방식을 적용시
  - 겸매 상품 실시간 DATA(할인율,현재가격 등) 페이지 요청마다 갱신되도록 구현
  - 로그인 중 가게신청여부가 수락되면 이벤트 발생하는 기능
  - 경매 상품 누르면 상품상세페이지(가게페이지)로 이동 
+ - 관리자로 로그인시 관리자페이지 버튼 생성 
+ 
+ 
 
 ### 로그인 / 회원가입 페이지 (가입은 총 4단계)  
- - Oauth2.0로 Naver API 호출 소셜 로그인 구현 
+ - Oauth2.0로 Naver API 호출 소셜 로그인 구현
+ - session사용 자동 로그인 기능  
  - [가입 2단계]사업자 등록번호 조회하도록 공공API사용 
  - [가입 3단계]id 중복확인시 ajax,jquery사용 비동기로 중복여부확인 
  - [가입 3단계] Daum API 사용 주소검색 기능 구현
@@ -63,11 +67,23 @@ E-커머스 플랫폼의 차별점을 두기위해 역경매 방식을 적용시
 <p/>
 
 
+
 ### 상품상세페이지
  - flex를 통한 배치 , tab메뉴를 구현해 하단의 가게정보 확인
  - Naver API를 통한 매장위치 정보 구현 
  - join을 통해 가게table, 메뉴table,상품table 의 데이터를 합쳐서 호출 
  - 결제시 실제 결제 하도록 API사용
+ 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/33523029/99505382-1bb35b00-29c4-11eb-895a-404fd88963c2.png" width="400" height="500">
+ <img src="https://user-images.githubusercontent.com/33523029/99505505-42719180-29c4-11eb-9460-5823975dc451.png" width="400" height="500">
+<p/>
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/33523029/99505542-4dc4bd00-29c4-11eb-9fa6-9370608ee2c3.png" width="400" height="500">
+<p/>
+
+
 ### 커뮤니티 페이지 (4종류의 커뮤니티 페이지)
  - 자유게시판 
  - 상품추천 게시판
@@ -80,5 +96,5 @@ E-커머스 플랫폼의 차별점을 두기위해 역경매 방식을 적용시
 - 커뮤니티관리
 - 리뷰관리 
 
- 
+
  
