@@ -49,8 +49,15 @@ E-커머스 플랫폼의 차별점을 두기위해 역경매 방식을 적용시
  3. 회원가입 정보    
  4. 가게 등록     
 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/33523029/99492247-8e1a4000-29b0-11eb-84a5-e395eeab72a3.png" width="400" height="400" padding="10px">
+<img src="https://user-images.githubusercontent.com/33523029/99492814-945cec00-29b1-11eb-9e6c-a4c23f4f446a.png" width="400" height="400" padding="10px">
+</p>
+<p align="center">
+<img src="https://user-images.githubusercontent.com/33523029/99492967-c5d5b780-29b1-11eb-8036-556cf6d6f6b8.png" width="400" height="400"  padding="10px">
+<img src="https://user-images.githubusercontent.com/33523029/99493002-d25a1000-29b1-11eb-885c-3294b3d68f19.png" width="400" height="400"  padding="10px">
+<p/>
 
-<img src="https://user-images.githubusercontent.com/33523029/99492247-8e1a4000-29b0-11eb-84a5-e395eeab72a3.png" width="400" height="400">
 
 ### 메인페이지 
  - 실시간으로 경매page 데이터 떨어뜨림 
