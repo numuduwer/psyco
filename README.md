@@ -9,9 +9,9 @@ E-커머스 플랫폼의 차별점을 두기위해 역경매 방식을 적용시
  
 
 ## 목차 
-1. [info](#info)
-2. [Technologies](#Technologies)
-3. [Features](#Features)
+- [info](#info)
+- [Technologies](#Technologies)
+- [Features](#Features)
 
 
 ## info
