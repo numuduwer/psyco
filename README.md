@@ -32,10 +32,10 @@ E-커머스 플랫폼의 차별점을 두기위해 역경매 방식을 적용시
 - Front-End : tiles, javascript, ajax, jquery
 
 ### 사용된 기능 
-- 1.naver API (login, maps), 다음 API(주소검색)
-- 2.결제 API , 사업자 등록번호 조회 API
-- 3.ajax, jquery사용한 비동기처리, 유효성검사 
-- 4.tiles 레이아웃 관리 
+- naver API (login, maps), 다음 API(주소검색)
+- 결제 API , 사업자 등록번호 조회 API
+- ajax, jquery사용한 비동기처리, 유효성검사 
+- tiles 레이아웃 관리 
 
 
 
@@ -43,11 +43,11 @@ E-커머스 플랫폼의 차별점을 두기위해 역경매 방식을 적용시
 
 ### 로그인 / 회원가입 페이지 
  - auth, 네이버 로그인구현 
- - 회원가입은 4단계로 구분하였다. 
- 1.가입유형 (일반 사용자 or 가게사업자)
- 2.사업자등록번호 확인 
- 3.회원가입 정보 
- 4.가게 등록  
+ - 회원가입은 4단계로 구분하였다.    
+ 1. 가입유형 (일반 사용자 or 가게사업자)   
+ 2. 사업자등록번호 확인    
+ 3. 회원가입 정보    
+ 4. 가게 등록     
 
 
 <img src="https://user-images.githubusercontent.com/33523029/99492247-8e1a4000-29b0-11eb-84a5-e395eeab72a3.png" width="400" height="400">
