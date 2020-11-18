@@ -29,8 +29,8 @@ public class UserServiceImpl implements UserService{
 		
 		ServletRequestAttributes servletRequestAttribute = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		HttpSession session = servletRequestAttribute.getRequest().getSession();
-//		String writer = (String) session.getAttribute("memId");
-		String writer = "asd";
+		String writer = (String) session.getAttribute("memId");
+
 		
 		List myHelpList = null;
 		List myHelpList2 = null;

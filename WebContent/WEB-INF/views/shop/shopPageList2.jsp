@@ -40,7 +40,7 @@
             <c:forEach var="item" items="${itemMapList}">
                	<div class="content_shopItem_listBox">            	
 	                    <div class="shopItem_img">
-	                        <img src="${item.itemList.menu_img}" >
+	                        <img src="/psyco/save/${item.itemList.menu_img}" >
 	                    </div>
 	                    <ul>
 	                        <li>
@@ -104,7 +104,7 @@
              <c:forEach var="item" items="${articleListA}">
                 <div class="content_shopItem_listBox">
                     <div class="shopItem_img">
-                        <img src="${itme.menu_img}" alt="">
+                        <img src="/psyco/save/${item.menu_img}" alt="">
                     </div>
                     <ul>
                         <li>
@@ -132,7 +132,7 @@
       		<c:forEach var="item" items="${articleListD}">
                 <div class="content_shopItem_listBox">
                     <div class="shopItem_img">
-                        <img src="${itme.menu_img}" alt="">
+                        <img src="/psyco/save/${item.menu_img}" alt="">
                     </div>
                     <ul>
                         <li>

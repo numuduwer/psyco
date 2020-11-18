@@ -7,6 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!--  검색베너  & 신메뉴 , 랭킹미리보기 -->
+    <section id="banner_section">
+      
+        <div id="banner">
+            <img src="/psyco/resources/img/main/community.jpg" alt="">
+        </div>
+ 
+    </section>
 		<br><br><br><br><br><br><br><br><br><br><br><br>
 		<h2 align="center"> 삭제하시겠습니까? </h2>
 		<form action="/psyco/communityDeletePro.com?pageNum=${pageNum}" method="post">

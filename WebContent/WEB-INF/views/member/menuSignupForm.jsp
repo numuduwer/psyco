@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title>Menu Form</title>
 </head>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript"></script>
 <script>
 	function goBack(){ 
@@ -33,6 +34,19 @@
 			}
 		}); 
 	}
+	
+
+			function imagepreview(input){
+			       if(input.files && input.files[0]){
+			           var filerd = new FileReader();
+			           filerd.onload=function(e){
+			               $('#imgpreview').attr('src', e.target.result);
+			           };
+			           filerd.readAsDataURL(input.files[0]);
+			       }
+			     }
+
+	
 </script>
 <body>
 
@@ -52,10 +66,11 @@
                 <label for="" class="form_title"> 메뉴 이름</label>
                 <input class="form_input" type="text" name="menu_name" />
             </div>
+            
             <div class=form_tab>
-                <label for="" class="form_title"> 메뉴 사진</label>
-                <input class="form_input" type="file" name="menu_img" />
-            </div>
+		       	<label for="" class="form_title"><img id="imgpreview"  width="100" height="100">메뉴 사진</label>
+		       	<input class="form_input" type="file" onchange="imagepreview(this);" name="menu_img"/>
+			</div>
 
             <div class=form_tab>
                 <label for="" class="form_title">메뉴 가격</label>
@@ -88,9 +103,7 @@
                 <li>
                     <input class=form_btn2 type="submit" id="nextBtn" value="등록하기"/>
                 </li>
-                <li>
-                    <input class=form_btn2 type="button" id="nextBtn" value="완료하기" onclick="location.href='/psyco/shop/shopPageList.com?member_num=${member_num}&shop_num=${shop_num}'" >
-                </li>
+               
             </ul>
 
             </form>

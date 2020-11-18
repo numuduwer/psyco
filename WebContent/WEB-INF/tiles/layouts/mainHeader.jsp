@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
 	<div id="logo">
 		<h1><a href="/psyco/main/main.com"> 오늘 뭐먹지 ?</a> </h1>
@@ -17,15 +20,14 @@
 		<li><a href="/psyco/community.com">
 			<h2>커뮤니티 </h2>
 		</a></li>
-		<li><a href="/psyco/help.com?category=5&grade=11&pageNum=1">
+		<li><a href="#">
 			<h2>고객센터 </h2>
 		</a></li>
-		
+		<c:if test="${sessionScope.memId == 'admin'}">
 		<li><a href="/psyco/super/memberList.com">
 			<h2>관리자 페이지 </h2>
 		</a></li>
-
-		
+	</c:if>
 		
 	</ul>
  </nav>

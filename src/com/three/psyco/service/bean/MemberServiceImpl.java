@@ -426,7 +426,7 @@ public class MemberServiceImpl implements MemberService {
 			String ext = orgName.substring(orgName.lastIndexOf('.'));
 			Long date=System.currentTimeMillis();
 			String newName=imgName+date+ext;
-			String imgPath = path+"\\"+newName;
+			String imgPath = path+"/"+newName;
 			System.out.println("--------- insertMember ----------");
 			System.out.println("imgPath : " + imgPath);
 			File file=new File(imgPath);

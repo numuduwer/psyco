@@ -10,7 +10,14 @@
 	
 </head>
 	<body>
-
+<!--  검색베너  & 신메뉴 , 랭킹미리보기 -->
+    <section id="banner_section">
+      
+        <div id="banner">
+            <img src="/psyco/resources/img/main/community.jpg" alt="">
+        </div>
+ 
+    </section>
 	<br/>
 <div class="admin_content">
 		<table align="center">
@@ -54,7 +61,7 @@
 			<tr>
 				<td colspan="2" > 
 				
-			<c:if test="${sessionScope.memId != article.writer }">
+			<c:if test="${sessionScope.memId == article.writer }">
 				<c:if test="${category == 1 || category == 2 || category == 6}">
 					<button class="admin_dtn2_content" onclick="window.location='/psyco/communityModifyForm1.com?&community_num=${community_num}&pageNum=${pageNum}&category=${category}'">수 정</button>
 				</c:if>

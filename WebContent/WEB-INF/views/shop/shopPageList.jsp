@@ -141,7 +141,7 @@
                                 <td>${number2}
                                 	<c:set var="number" value="${number2-1}"/>
                                 </td>	
-                                <img alt="" src="/psyco/save//${article.review_img}">
+                                <img alt="" src="/psyco/save/${article.review_img}">
                                 <td align="left">
 											<a href="/psyco/user/reviewDetail.com?review_num=${article.review_num}&pageNum=${pageNum}" >${article.shop_name}</a>
 								</td>

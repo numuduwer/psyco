@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
@@ -40,15 +42,12 @@ public interface ItemDAO {
 	public int modifyAmountZero(int item_num);
 
 	
-	public int countA(int id) throws SQLException;
-	public List getItemListA(int id, int startRow, int endRow);
+
 	
-		
-	public int countC(int id) throws SQLException;
-	public List getItemListC(int id, int startRow, int endRow);
 	
-	public int countD(int id) throws SQLException;	
-	public List getItemListD(int id, int startRow, int endRow);
+
+	
+	
 
 	public int reduceItemCount(int item_num, int amount);
 
@@ -56,5 +55,15 @@ public interface ItemDAO {
 
 	public List<JoinResultDTO> getMyEntireList(int id, int startRow, int endRow);
 
+	public int countA(int id) throws SQLException;
+	public List getItemListA(int id, int startRow, int endRow);
+
+	public int countC(int id) throws SQLException;
+	public List getItemListC(int id, int startRow, int endRow);
+
+	public int countD(int id) throws SQLException;
+	public List getItemListD(int id, int startRow, int endRow);
+
+	
 	
 }

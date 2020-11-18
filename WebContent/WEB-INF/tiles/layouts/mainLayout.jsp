@@ -28,8 +28,10 @@
                	  	
                	
                	<c:if test="${sessionScope.memId != null}">
-               		<li><c:out value="${sessionScope.memId}" /> 님 환영합니다.${sessionScope.business}</li>
-               		<li><a href="/psyco/member/logout.com">로그아웃</a></li>             
+          
+               		<li><c:out value="${sessionScope.memId}" /> 님 환영합니다.</li>
+               		<li><a href="/psyco/member/logout.com">로그아웃</a></li>
+               		<li><a href="/psyco/user/myPageList.com">마이페이지</a></li>             
 				</c:if>
 			</ul>
 			<c:if test="${sessionScope.business == 2}">	
